@@ -8,11 +8,22 @@ import { locales, defaultLocale } from './lib/i18n';
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   
+  // Admin routes: require auth cookie (verify in API/routes)
+  if (pathname.startsWith('/admin')) {
+    if (pathname === '/admin/login') {
+      return NextResponse.next();
+    }
+    const token = request.cookies.get('admin-token')?.value;
+    if (!token) {
+      return NextResponse.redirect(new URL('/admin/login', request.url));
+    }
+    return NextResponse.next();
+  }
+
   // Skip middleware for static files, API routes, and admin
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
-    pathname.startsWith('/admin') ||
     pathname.startsWith('/uploads') ||
     pathname.match(/\.(ico|png|jpg|jpeg|svg|css|js)$/)
   ) {

@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import ReactMarkdown from 'react-markdown';
 import { Locale } from '@/lib/types';
 import { Button, Badge, Icon, Card, CardHeader, CardTitle, CardDescription } from '@/components/ui';
 import { promises as fs } from 'fs';
@@ -19,16 +20,17 @@ interface BlogContentBlock {
 
 interface BlogPostData {
   slug: string;
-  type: 'article' | 'video';
+  type?: 'article' | 'video';
   title: string;
-  excerpt: string;
-  image: string;
+  excerpt?: string;
+  image?: string;
   category: string;
   author: string;
   publishDate: string;
-  readTime: string;
-  tags: string[];
-  content: BlogContentBlock[];
+  readTime?: string;
+  tags?: string[];
+  content?: BlogContentBlock[];
+  contentMarkdown?: string;
   videoUrl?: string;
   relatedPosts?: string[];
 }
@@ -73,7 +75,9 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
   
   return {
     title: `${post.title} - Dr. Huang Clinic Blog`,
-    description: post.excerpt,
+    description:
+      post.excerpt ||
+      (post.contentMarkdown ? post.contentMarkdown.slice(0, 160) : ''),
   };
 }
 
@@ -92,6 +96,13 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   const relatedPosts = post.relatedPosts 
     ? allPosts.filter((p: any) => post.relatedPosts?.includes(p.slug)).slice(0, 3)
     : allPosts.filter((p: any) => p.category === post.category && p.slug !== post.slug).slice(0, 3);
+  const postType = post.type || 'article';
+
+  const normalizeMarkdown = (text: string) =>
+    text
+      .replace(/\r\n/g, '\n')
+      .replace(/([^\n])\n-\s+/g, '$1\n\n- ')
+      .replace(/([^\n])\n\*\s+/g, '$1\n\n- ');
 
   return (
     <main className="min-h-screen">
@@ -129,7 +140,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
             {/* Category & Type */}
             <div className="flex items-center gap-3 mb-6">
               <Badge variant="secondary">{post.category}</Badge>
-              {post.type === 'video' && (
+              {postType === 'video' && (
                 <Badge variant="primary">
                   <Icon name="Video" size="sm" className="mr-1" />
                   Video
@@ -160,10 +171,12 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                 </span>
               </div>
               <span>•</span>
-              <div className="flex items-center gap-2">
-                <Icon name="Clock" size="sm" />
-                <span>{post.readTime}</span>
-              </div>
+              {post.readTime && (
+                <div className="flex items-center gap-2">
+                  <Icon name="Clock" size="sm" />
+                  <span>{post.readTime}</span>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -186,7 +199,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
               </div>
             )}
             {/* Video Embed (if video type) */}
-            {post.type === 'video' && post.videoUrl && (
+            {postType === 'video' && post.videoUrl && (
               <div className="mb-12">
                 <div className="relative aspect-video bg-gray-900 rounded-xl overflow-hidden">
                   {/* Placeholder for video embed */}
@@ -199,70 +212,95 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
             )}
 
             {/* Article Content */}
-            <div className="prose prose-lg max-w-none">
-              {post.content.map((block, index) => {
-                switch (block.type) {
-                  case 'paragraph':
-                    return (
-                      <p key={index} className="text-gray-700 leading-relaxed mb-6">
-                        {block.text}
-                      </p>
-                    );
+            <div className="prose max-w-none">
+              {post.contentMarkdown ? (
+                <ReactMarkdown
+                  components={{
+                    h1: (props) => (
+                      <h1 className="text-3xl font-bold text-gray-900 mt-10 mb-4" {...props} />
+                    ),
+                    h2: (props) => (
+                      <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4" {...props} />
+                    ),
+                    h3: (props) => (
+                      <h3 className="text-xl font-semibold text-gray-900 mt-6 mb-3" {...props} />
+                    ),
+                    p: (props) => (
+                      <p className="text-gray-700 leading-relaxed mb-5" {...props} />
+                    ),
+                    ul: (props) => <ul className="list-disc pl-6 mb-5" {...props} />,
+                    ol: (props) => <ol className="list-decimal pl-6 mb-5" {...props} />,
+                    li: (props) => <li className="mb-2" {...props} />,
+                  }}
+                >
+                  {normalizeMarkdown(post.contentMarkdown)}
+                </ReactMarkdown>
+              ) : (
+                post.content?.map((block, index) => {
+                  switch (block.type) {
+                    case 'paragraph':
+                      return (
+                        <p key={index} className="text-gray-700 leading-relaxed mb-6">
+                          {block.text}
+                        </p>
+                      );
 
-                  case 'heading':
-                    const HeadingTag = `h${block.level}` as keyof JSX.IntrinsicElements;
-                    const headingClasses = {
-                      2: 'text-3xl font-bold text-gray-900 mt-12 mb-6',
-                      3: 'text-2xl font-bold text-gray-900 mt-8 mb-4',
-                      4: 'text-xl font-semibold text-gray-900 mt-6 mb-3',
-                    }[block.level || 2];
-                    
-                    return (
-                      <HeadingTag key={index} className={headingClasses}>
-                        {block.text}
-                      </HeadingTag>
-                    );
+                    case 'heading': {
+                      const HeadingTag = `h${block.level}` as keyof JSX.IntrinsicElements;
+                      const headingClasses = {
+                        2: 'text-3xl font-bold text-gray-900 mt-12 mb-6',
+                        3: 'text-2xl font-bold text-gray-900 mt-8 mb-4',
+                        4: 'text-xl font-semibold text-gray-900 mt-6 mb-3',
+                      }[block.level || 2];
+                      
+                      return (
+                        <HeadingTag key={index} className={headingClasses}>
+                          {block.text}
+                        </HeadingTag>
+                      );
+                    }
 
-                  case 'list':
-                    return (
-                      <ul key={index} className="space-y-3 my-6 ml-6">
-                        {block.items?.map((item, itemIndex) => (
-                          <li key={itemIndex} className="flex items-start gap-3">
-                            <Icon name="Check" className="text-primary mt-1 flex-shrink-0" size="sm" />
-                            <span className="text-gray-700">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    );
+                    case 'list':
+                      return (
+                        <ul key={index} className="space-y-3 my-6 ml-6">
+                          {block.items?.map((item, itemIndex) => (
+                            <li key={itemIndex} className="flex items-start gap-3">
+                              <Icon name="Check" className="text-primary mt-1 flex-shrink-0" size="sm" />
+                              <span className="text-gray-700">{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      );
 
-                  case 'quote':
-                    return (
-                      <blockquote key={index} className="border-l-4 border-primary bg-gradient-to-r from-primary/5 to-transparent pl-6 py-4 my-8 italic text-gray-700">
-                        {block.text}
-                      </blockquote>
-                    );
+                    case 'quote':
+                      return (
+                        <blockquote key={index} className="border-l-4 border-primary bg-gradient-to-r from-primary/5 to-transparent pl-6 py-4 my-8 italic text-gray-700">
+                          {block.text}
+                        </blockquote>
+                      );
 
-                  case 'image':
-                    return (
-                      <figure key={index} className="my-8">
-                        <div className="relative aspect-video bg-gray-100 rounded-lg overflow-hidden">
-                          {/* Placeholder - replace with actual image */}
-                          <div className="w-full h-full flex items-center justify-center">
-                            <Icon name="Image" size="xl" className="text-gray-300" />
+                    case 'image':
+                      return (
+                        <figure key={index} className="my-8">
+                          <div className="relative aspect-video bg-gray-100 rounded-lg overflow-hidden">
+                            {/* Placeholder - replace with actual image */}
+                            <div className="w-full h-full flex items-center justify-center">
+                              <Icon name="Image" size="xl" className="text-gray-300" />
+                            </div>
                           </div>
-                        </div>
-                        {block.caption && (
-                          <figcaption className="text-sm text-gray-500 mt-3 text-center">
-                            {block.caption}
-                          </figcaption>
-                        )}
-                      </figure>
-                    );
+                          {block.caption && (
+                            <figcaption className="text-sm text-gray-500 mt-3 text-center">
+                              {block.caption}
+                            </figcaption>
+                          )}
+                        </figure>
+                      );
 
-                  default:
-                    return null;
-                }
-              })}
+                    default:
+                      return null;
+                  }
+                })
+              )}
             </div>
 
             {/* Tags */}

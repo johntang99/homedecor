@@ -2,7 +2,7 @@
   "hero": {
     "title": "Patient Success Stories",
     "subtitle": "Real cases, real results - see how Traditional Chinese Medicine has transformed lives",
-    "backgroundImage": "/uploads/dr-huang-clinic/case-studies/hero-bg.jpg"
+    "backgroundImage": "/uploads/dr-huang-clinic/home/hero-bg.jpg"
   },
   "introduction": {
     "text": "These case studies represent real patients who have experienced significant health improvements through our TCM treatments. All names have been changed to protect patient privacy, but the stories and outcomes are genuine.",
@@ -44,473 +44,49 @@
     {
       "id": "chronic-back-pain-jennifer",
       "category": "pain-management",
-      "featured": true,
-      "patient": {
-        "name": "Jennifer M.",
-        "age": 42,
-        "occupation": "Teacher",
-        "anonymous": true
-      },
       "condition": "Chronic Lower Back Pain",
-      "duration": "8 years",
-      "image": "/uploads/dr-huang-clinic/case-studies/back-pain.jpg",
+      "image": "/uploads/dr-huang-clinic/case-studies/chronic-pain.jpg",
       "beforeImage": "https://images.unsplash.com/photo-1554574004-b5ed96682e9b?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0",
       "afterImage": "https://images.unsplash.com/photo-1768507423533-b87b62769758?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0",
-      "summary": "After 8 years of debilitating back pain and unsuccessful conventional treatments, Jennifer found lasting relief through acupuncture and herbal medicine.",
-      "background": "Jennifer, a 42-year-old elementary school teacher, came to our clinic after suffering from chronic lower back pain for eight years. The pain began after lifting heavy boxes at school and progressively worsened over time. She had tried physical therapy, chiropractic care, pain medications, and even epidural injections, but nothing provided lasting relief. The pain was affecting her ability to work, exercise, and enjoy time with her family.",
-      "symptoms": [
-        "Constant dull ache in lower back",
-        "Sharp pain when bending or lifting",
-        "Pain radiating down right leg",
-        "Difficulty standing for long periods",
-        "Muscle spasms",
-        "Sleep disruption due to pain"
-      ],
-      "tcmDiagnosis": "Kidney Yang deficiency with Blood stagnation in the lower back channels. The chronic pain had created blockages in the Bladder and Governing Vessel meridians.",
-      "treatmentPlan": {
-        "phase1": {
-          "title": "Acute Phase (Weeks 1-4)",
-          "frequency": "Twice weekly acupuncture",
-          "focus": "Pain relief and improving circulation",
-          "methods": [
-            "Acupuncture focusing on local and distal points",
-            "Cupping therapy to release muscle tension",
-            "Herbal formula to warm Kidney Yang and move Blood",
-            "Gua sha on tight back muscles"
-          ]
-        },
-        "phase2": {
-          "title": "Strengthening Phase (Weeks 5-12)",
-          "frequency": "Weekly acupuncture",
-          "focus": "Building strength and preventing recurrence",
-          "methods": [
-            "Continued acupuncture",
-            "Modified herbal formula to tonify Kidney",
-            "Moxibustion to strengthen lower back",
-            "Core strengthening exercises",
-            "Dietary recommendations"
-          ]
-        },
-        "phase3": {
-          "title": "Maintenance Phase (Months 4-6)",
-          "frequency": "Bi-weekly, then monthly",
-          "focus": "Maintaining improvements and long-term wellness",
-          "methods": [
-            "Maintenance acupuncture sessions",
-            "Seasonal herbal adjustments",
-            "Lifestyle modifications",
-            "Self-care techniques"
-          ]
-        }
-      },
-      "outcomes": [
-        {
-          "week": 2,
-          "improvement": "30% pain reduction, better sleep"
-        },
-        {
-          "week": 4,
-          "improvement": "50% pain reduction, reduced muscle spasms"
-        },
-        {
-          "week": 8,
-          "improvement": "70% pain reduction, returned to exercise"
-        },
-        {
-          "week": 12,
-          "improvement": "85% pain reduction, minimal limitations"
-        },
-        {
-          "week": 24,
-          "improvement": "90-95% improved, occasional mild discomfort only"
-        }
-      ],
-      "testimonial": "After years of pain and trying everything, I was skeptical about acupuncture. But Dr. Huang's treatment changed my life. I'm now pain-free most days and back to hiking and playing with my kids. I wish I had tried this years ago!",
-      "followUp": "Jennifer continues to come for maintenance treatments every 4-6 weeks and reports sustained improvements. She has been able to discontinue all pain medications."
+      "summary": "After 8 years of debilitating back pain and unsuccessful conventional treatments, **Jennifer** found lasting relief through acupuncture and herbal medicine.\n\n- Patient presented with persistent lower back pain that had been affecting her daily activities for over 5 years. \n- The pain was worse in the morning and after prolonged sitting or standing. She had tried physical therapy and pain medications with minimal long-term relief."
     },
     {
       "id": "fertility-success-lisa",
       "category": "womens-health",
-      "featured": true,
-      "patient": {
-        "name": "Lisa & Tom K.",
-        "age": 35,
-        "occupation": "Marketing Manager",
-        "anonymous": true
-      },
       "condition": "Infertility (Unexplained)",
-      "duration": "3 years trying to conceive",
       "image": "/uploads/dr-huang-clinic/case-studies/fertility.jpg",
       "summary": "After 3 years of unsuccessful attempts to conceive and one failed IVF cycle, Lisa achieved natural pregnancy through TCM treatment.",
-      "background": "Lisa, 35, and her husband Tom had been trying to conceive for three years. Medical tests showed no clear issues - Lisa's hormones were 'normal,' ovulation was occurring, and Tom's sperm parameters were adequate. They underwent one IVF cycle that resulted in a chemical pregnancy. Emotionally and financially exhausted, they decided to try TCM before attempting another IVF cycle.",
-      "symptoms": [
-        "Irregular menstrual cycles (28-40 days)",
-        "Painful periods with clots",
-        "Short luteal phase",
-        "Cold hands and feet",
-        "Low energy",
-        "Anxiety and stress",
-        "Difficulty sleeping before periods"
-      ],
-      "tcmDiagnosis": "Kidney Yang deficiency with Liver Qi stagnation and Blood stasis. Cold in the uterus affecting implantation. High stress was further impairing reproductive function.",
-      "treatmentPlan": {
-        "phase1": {
-          "title": "Cycle Regulation (Months 1-2)",
-          "frequency": "Weekly acupuncture",
-          "focus": "Regulating menstrual cycles and reducing stress",
-          "methods": [
-            "Acupuncture timed to menstrual cycle phases",
-            "Herbal formula to warm Kidney Yang",
-            "Stress reduction techniques",
-            "Dietary modifications to warm the body",
-            "Sleep hygiene improvements"
-          ]
-        },
-        "phase2": {
-          "title": "Optimization (Months 3-5)",
-          "frequency": "Weekly acupuncture, increased to twice weekly mid-cycle",
-          "focus": "Optimizing fertility and supporting conception",
-          "methods": [
-            "Phase-specific acupuncture protocols",
-            "Modified herbal formulas for follicular and luteal phases",
-            "Moxibustion to warm uterus",
-            "Abdominal massage",
-            "Couple's lifestyle counseling"
-          ]
-        }
-      },
-      "outcomes": [
-        {
-          "month": 1,
-          "improvement": "Cycle length regulated to 30-32 days"
-        },
-        {
-          "month": 2,
-          "improvement": "Less painful periods, improved energy"
-        },
-        {
-          "month": 3,
-          "improvement": "Basal body temperature showing better patterns"
-        },
-        {
-          "month": 4,
-          "improvement": "Luteal phase extended to 13 days, feeling calmer"
-        },
-        {
-          "month": 5,
-          "improvement": "Positive pregnancy test!"
-        }
-      ],
-      "testimonial": "We were skeptical but desperate. Dr. Huang gave us hope and a plan. Not only did I get pregnant naturally, but I felt healthier overall. The acupuncture helped with my stress and anxiety too. We now have a beautiful baby girl!",
-      "followUp": "Lisa conceived naturally in her 5th month of treatment. She continued acupuncture throughout her pregnancy for support and delivered a healthy baby girl at full term. She returned postpartum for recovery support."
+      "afterImage": "/uploads/dr-huang-clinic/gallery/treatment-room-2.jpg"
     },
     {
       "id": "anxiety-depression-robert",
       "category": "mental-health",
-      "featured": true,
-      "patient": {
-        "name": "Robert T.",
-        "age": 38,
-        "occupation": "Software Developer",
-        "anonymous": true
-      },
       "condition": "Anxiety & Depression",
-      "duration": "5 years",
-      "image": "/uploads/dr-huang-clinic/case-studies/anxiety.jpg",
+      "image": "/uploads/dr-huang-clinic/case-studies/migraine.jpg",
       "beforeImage": "https://images.unsplash.com/photo-1554574004-b5ed96682e9b?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0",
       "afterImage": "https://images.unsplash.com/photo-1513097847644-f00cfe868607?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0",
-      "summary": "Robert overcame debilitating anxiety and depression through TCM, reducing his reliance on medication and regaining quality of life.",
-      "background": "Robert, a 38-year-old software developer, had struggled with anxiety and depression for five years. He was on two medications (SSRI and anti-anxiety medication) but still experienced daily symptoms that affected his work performance and relationships. Side effects from medications included weight gain, low libido, and emotional numbness. He wanted a more natural approach but was afraid to discontinue his medications.",
-      "symptoms": [
-        "Constant worry and racing thoughts",
-        "Panic attacks 2-3 times per week",
-        "Insomnia (difficulty falling and staying asleep)",
-        "Low mood and lack of motivation",
-        "Digestive issues (stress-related IBS)",
-        "Muscle tension, especially neck and shoulders",
-        "Fatigue despite sleeping"
-      ],
-      "tcmDiagnosis": "Heart and Kidney Yin deficiency with Liver Qi stagnation and Shen (spirit) disturbance. The deficiency pattern was creating heat, further agitating the mind and emotions.",
-      "treatmentPlan": {
-        "phase1": {
-          "title": "Stabilization (Weeks 1-6)",
-          "frequency": "Twice weekly acupuncture",
-          "focus": "Calming the mind and improving sleep",
-          "methods": [
-            "Acupuncture focusing on Shen-calming points",
-            "Herbal formula to nourish Yin and calm Shen",
-            "Breathing exercises and meditation guidance",
-            "Dietary recommendations to support Yin",
-            "Sleep hygiene protocol"
-          ],
-          "note": "Continued current medications with psychiatrist's supervision"
-        },
-        "phase2": {
-          "title": "Improvement (Weeks 7-16)",
-          "frequency": "Weekly acupuncture",
-          "focus": "Reducing symptoms and building resilience",
-          "methods": [
-            "Continued acupuncture treatment",
-            "Adjusted herbal formula to tonify Kidney and Heart",
-            "Tui Na massage for muscle tension",
-            "Stress management techniques",
-            "Regular exercise routine"
-          ],
-          "note": "Began tapering medication under psychiatrist's care"
-        },
-        "phase3": {
-          "title": "Maintenance (Months 5-8)",
-          "frequency": "Bi-weekly acupuncture",
-          "focus": "Sustaining improvements and preventing relapse",
-          "methods": [
-            "Maintenance acupuncture",
-            "Modified herbal formula as needed",
-            "Continued self-care practices",
-            "Lifestyle balance"
-          ],
-          "note": "Successfully discontinued one medication, reduced dosage of second"
-        }
-      },
-      "outcomes": [
-        {
-          "week": 3,
-          "improvement": "Sleeping better, fewer racing thoughts"
-        },
-        {
-          "week": 6,
-          "improvement": "Panic attacks reduced to 1 per week, digestive issues improving"
-        },
-        {
-          "week": 12,
-          "improvement": "No panic attacks for 3 weeks, mood significantly better"
-        },
-        {
-          "week": 20,
-          "improvement": "Off one medication completely, reduced second by 50%"
-        },
-        {
-          "week": 32,
-          "improvement": "Minimal symptoms, managing stress effectively, feeling like myself again"
-        }
-      ],
-      "testimonial": "I was skeptical that needles could help with anxiety and depression, but I was desperate. Dr. Huang's holistic approach - the acupuncture, herbs, lifestyle changes - gave me tools I never had before. I feel emotions again (not numb from meds) and I can manage stress naturally. It's been life-changing.",
-      "followUp": "Robert continues maintenance acupuncture monthly and takes a low-dose herbal formula during high-stress periods. He has been able to reduce his medication to a minimal dose under his psychiatrist's guidance and reports the best quality of life he's had in years."
+      "summary": "Robert overcame debilitating anxiety and depression through TCM, reducing his reliance on medication and regaining quality of life."
     },
     {
       "id": "ibs-sarah",
       "category": "digestive",
-      "featured": false,
-      "patient": {
-        "name": "Sarah L.",
-        "age": 29,
-        "occupation": "Graphic Designer",
-        "anonymous": true
-      },
       "condition": "Irritable Bowel Syndrome (IBS)",
-      "duration": "7 years",
-      "image": "/uploads/dr-huang-clinic/case-studies/digestive.jpg",
-      "summary": "Sarah found relief from severe IBS symptoms that had limited her life for years through targeted TCM treatment.",
-      "background": "Sarah had been diagnosed with IBS at age 22. She experienced daily bloating, alternating constipation and diarrhea, abdominal pain, and extreme food sensitivities. Medical tests ruled out celiac disease and IBD. She was managing symptoms with restrictive diets and medications but still had frequent flare-ups that affected her work and social life.",
-      "symptoms": [
-        "Daily bloating and gas",
-        "Alternating constipation and diarrhea",
-        "Cramping after meals",
-        "Food sensitivities (especially dairy, gluten, raw vegetables)",
-        "Anxiety about eating in public",
-        "Fatigue",
-        "Symptoms worsened by stress"
-      ],
-      "tcmDiagnosis": "Spleen Qi deficiency with Liver Qi stagnation invading Spleen. Dampness accumulation in the digestive system. Stress and irregular eating habits were exacerbating the condition.",
-      "treatmentPlan": {
-        "phase1": {
-          "title": "Initial Treatment (Weeks 1-8)",
-          "frequency": "Weekly acupuncture",
-          "focus": "Strengthening Spleen and regulating bowel function",
-          "methods": [
-            "Acupuncture to tonify Spleen and regulate Liver",
-            "Herbal formula to strengthen digestion and resolve Dampness",
-            "Dietary therapy with easy-to-digest foods",
-            "Stress reduction techniques",
-            "Abdominal massage instruction"
-          ]
-        },
-        "phase2": {
-          "title": "Stabilization (Weeks 9-16)",
-          "frequency": "Bi-weekly acupuncture",
-          "focus": "Expanding diet and preventing flare-ups",
-          "methods": [
-            "Continued acupuncture",
-            "Adjusted herbal formula",
-            "Gradual food reintroduction protocol",
-            "Lifestyle counseling",
-            "Trigger identification"
-          ]
-        }
-      },
-      "outcomes": [
-        {
-          "week": 4,
-          "improvement": "Bloating reduced by 40%, more regular bowel movements"
-        },
-        {
-          "week": 8,
-          "improvement": "60% symptom improvement, able to eat more foods"
-        },
-        {
-          "week": 12,
-          "improvement": "70% improvement, rare flare-ups only with major stress"
-        },
-        {
-          "week": 16,
-          "improvement": "80% improved, expanded diet significantly, living normally"
-        }
-      ],
-      "testimonial": "For years I planned my life around bathrooms and safe foods. TCM gave me my life back. I can eat out with friends, travel without fear, and actually enjoy food again. The difference is incredible.",
-      "followUp": "Sarah comes in monthly for maintenance and takes herbs during particularly stressful periods. She has successfully expanded her diet and rarely experiences severe symptoms."
+      "image": "/uploads/dr-huang-clinic/case-studies/chronic-pain.jpg",
+      "summary": "Sarah found relief from severe IBS symptoms that had limited her life for years through targeted TCM treatment."
     },
     {
       "id": "migraines-michael",
       "category": "pain-management",
-      "featured": false,
-      "patient": {
-        "name": "Michael D.",
-        "age": 45,
-        "occupation": "Accountant",
-        "anonymous": true
-      },
       "condition": "Chronic Migraines",
-      "duration": "15 years",
-      "image": "/uploads/dr-huang-clinic/case-studies/migraines.jpg",
-      "summary": "After 15 years of debilitating migraines, Michael reduced frequency and severity by 85% through acupuncture and herbal medicine.",
-      "background": "Michael suffered from migraines 3-4 times per month, each lasting 1-3 days. He was on daily preventive medication and used rescue medication for attacks, but migraines still occurred regularly. The pain was so severe he often had to leave work and spend days in a dark room. He had tried various medications, diets, and therapies with limited success.",
-      "symptoms": [
-        "Severe one-sided head pain",
-        "Nausea and vomiting",
-        "Light and sound sensitivity",
-        "Visual aura before attacks",
-        "Neck and shoulder tension",
-        "Attacks triggered by stress, weather changes, certain foods"
-      ],
-      "tcmDiagnosis": "Liver Yang rising with Blood deficiency. Gallbladder channel blockage. Long-standing Qi and Blood stagnation in head and neck. Stress and irregular sleep were triggering attacks.",
-      "treatmentPlan": {
-        "phase1": {
-          "title": "Acute Treatment (Months 1-3)",
-          "frequency": "Weekly acupuncture, additional session during migraine attacks if possible",
-          "focus": "Reducing frequency and severity of attacks",
-          "methods": [
-            "Acupuncture to subdue Liver Yang and regulate Qi",
-            "Herbal formula to nourish Blood and calm Liver",
-            "Gua sha on neck and shoulders",
-            "Trigger identification and avoidance",
-            "Sleep schedule regulation"
-          ]
-        },
-        "phase2": {
-          "title": "Prevention (Months 4-6)",
-          "frequency": "Weekly, then bi-weekly",
-          "focus": "Building resilience and preventing attacks",
-          "methods": [
-            "Preventive acupuncture protocols",
-            "Tonic herbal formula",
-            "Stress management",
-            "Dietary modifications",
-            "Self-acupressure techniques for early symptoms"
-          ]
-        }
-      },
-      "outcomes": [
-        {
-          "month": 1,
-          "improvement": "Migraines reduced to 2-3 per month, less severe"
-        },
-        {
-          "month": 2,
-          "improvement": "1-2 migraines per month, shorter duration"
-        },
-        {
-          "month": 3,
-          "improvement": "1 migraine in the month, much milder"
-        },
-        {
-          "month": 6,
-          "improvement": "0-1 mild migraines per month, able to function during attacks"
-        }
-      ],
-      "testimonial": "Migraines have ruled my life for 15 years. Dr. Huang's treatment has been more effective than anything else I've tried. I've reduced my medication and can actually make plans without fear of a migraine ruining them.",
-      "followUp": "Michael continues bi-weekly treatments during high-stress tax season and monthly maintenance the rest of the year. He has been able to reduce his preventive medication dosage under his neurologist's supervision."
+      "image": "/uploads/dr-huang-clinic/case-studies/migraine.jpg",
+      "summary": "After 15 years of debilitating migraines, Michael reduced frequency and severity by 85% through acupuncture and herbal medicine."
     },
     {
       "id": "menopause-patricia",
       "category": "womens-health",
-      "featured": false,
-      "patient": {
-        "name": "Patricia H.",
-        "age": 52,
-        "occupation": "Nurse",
-        "anonymous": true
-      },
       "condition": "Menopause Symptoms",
-      "duration": "2 years",
-      "image": "/uploads/dr-huang-clinic/case-studies/menopause.jpg",
-      "summary": "Patricia eliminated severe hot flashes and night sweats and improved sleep and mood through TCM treatment.",
-      "background": "Patricia entered menopause at age 50 and experienced severe symptoms that affected her work as a nurse. She had 10-15 hot flashes daily, woke 4-5 times nightly with drenching sweats, felt irritable and anxious, and was exhausted. She couldn't take hormone replacement therapy due to a family history of breast cancer.",
-      "symptoms": [
-        "10-15 hot flashes daily",
-        "Severe night sweats (changing clothes/sheets)",
-        "Insomnia",
-        "Mood swings and irritability",
-        "Vaginal dryness",
-        "Low libido",
-        "Brain fog",
-        "Weight gain"
-      ],
-      "tcmDiagnosis": "Kidney Yin deficiency with Empty Heat rising. Heart and Kidney not communicating, leading to sleep and emotional issues. Liver Qi stagnation contributing to irritability.",
-      "treatmentPlan": {
-        "phase1": {
-          "title": "Symptom Relief (Weeks 1-8)",
-          "frequency": "Twice weekly acupuncture initially, then weekly",
-          "focus": "Reducing hot flashes and improving sleep",
-          "methods": [
-            "Acupuncture to nourish Yin and clear Heat",
-            "Herbal formula specifically for menopausal symptoms",
-            "Dietary therapy with Yin-nourishing foods",
-            "Sleep hygiene improvements",
-            "Stress reduction"
-          ]
-        },
-        "phase2": {
-          "title": "Balancing (Weeks 9-20)",
-          "frequency": "Weekly, then bi-weekly",
-          "focus": "Harmonizing Yin and Yang, emotional balance",
-          "methods": [
-            "Continued acupuncture",
-            "Modified herbal formula",
-            "Exercise recommendations",
-            "Relationship counseling suggestions",
-            "Self-care practices"
-          ]
-        }
-      },
-      "outcomes": [
-        {
-          "week": 2,
-          "improvement": "Hot flashes reduced to 7-8 daily, sleeping slightly better"
-        },
-        {
-          "week": 4,
-          "improvement": "Hot flashes down to 4-5 daily, night sweats less severe"
-        },
-        {
-          "week": 8,
-          "improvement": "2-3 mild hot flashes daily, sleeping through night most nights"
-        },
-        {
-          "week": 16,
-          "improvement": "1-2 mild hot flashes daily, mood stable, feeling like myself"
-        }
-      ],
-      "testimonial": "I was miserable and couldn't take hormones. Acupuncture and herbs gave me relief when I thought I'd just have to suffer. I'm sleeping, I'm not constantly sweating, and my family says I'm much nicer to be around!",
-      "followUp": "Patricia continues weekly treatments and plans to space them out further as symptoms continue to improve. She reports feeling better than she has in two years."
+      "image": "/uploads/dr-huang-clinic/case-studies/fertility.jpg",
+      "summary": "Patricia eliminated severe hot flashes and night sweats and improved sleep and mood through TCM treatment."
     }
   ],
   "statistics": {

@@ -433,3 +433,44 @@ export interface ContactPage {
     visible: boolean;
   };
 }
+
+// ============================================
+// ADMIN DASHBOARD TYPES
+// ============================================
+
+export interface User {
+  id: string;
+  email: string;
+  name: string;
+  role: 'super_admin' | 'site_admin' | 'editor' | 'viewer';
+  sites: string[];
+  avatar?: string;
+  createdAt: string;
+  lastLoginAt: string;
+}
+
+export interface Session {
+  user: User;
+  expiresAt: string;
+  token: string;
+}
+
+export interface ImageMetadata {
+  id: string;
+  siteId: string;
+  filename: string;
+  path: string;
+  url: string;
+  thumbnailUrl?: string;
+  webpUrl?: string;
+  category: string;
+  alt: string;
+  title?: string;
+  width: number;
+  height: number;
+  size: number;
+  mimeType: string;
+  uploadedBy: string;
+  uploadedAt: string;
+  usedIn: string[];
+}

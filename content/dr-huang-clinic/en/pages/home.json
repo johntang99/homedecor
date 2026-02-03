@@ -12,8 +12,8 @@
   "hero": {
     "variant": "split-photo-right",
     "image": "/uploads/dr-huang-clinic/home/hero-bg.jpg",
-    "clinicName": "Dr Huang Clinic",
-    "tagline": "Traditional Chinese Medicine & Acupuncture",
+    "clinicName": "Welcome to Dr Huang Clinic",
+    "tagline": "Traditional Chinese Medicine, Acupuncture, and More",
     "description": "Experience the healing power of Traditional Chinese Medicine. Our holistic approach combines acupuncture, herbal medicine, and time-tested therapies to restore balance and promote natural healing.",
     "primaryCta": {
       "text": "Book Appointment",
@@ -140,7 +140,12 @@
         "title": "Back Pain",
         "category": "Pain Management",
         "description": "Whether acute or chronic, acupuncture and TCM therapies provide effective relief without drugs or surgery",
-        "symptoms": ["Lower back pain", "Upper back stiffness", "Sciatica", "Herniated disc pain"],
+        "symptoms": [
+          "Lower back pain",
+          "Upper back stiffness",
+          "Sciatica",
+          "Herniated disc pain"
+        ],
         "link": "/en/conditions#back-pain"
       },
       {
@@ -150,7 +155,12 @@
         "title": "Headaches & Migraines",
         "category": "Pain Management",
         "description": "Effective treatment for tension headaches, migraines, and chronic head pain without medication",
-        "symptoms": ["Recurring headaches", "Migraine attacks", "Tension in temples", "Light sensitivity"],
+        "symptoms": [
+          "Recurring headaches",
+          "Migraine attacks",
+          "Tension in temples",
+          "Light sensitivity"
+        ],
         "link": "/en/conditions#headaches-migraines"
       },
       {
@@ -160,7 +170,12 @@
         "title": "Anxiety & Panic Disorders",
         "category": "Mental & Emotional Health",
         "description": "Natural, drug-free support for anxiety, panic attacks, and general nervousness",
-        "symptoms": ["Excessive worry", "Racing thoughts", "Panic attacks", "Restlessness"],
+        "symptoms": [
+          "Excessive worry",
+          "Racing thoughts",
+          "Panic attacks",
+          "Restlessness"
+        ],
         "link": "/en/conditions#anxiety"
       },
       {
@@ -170,7 +185,12 @@
         "title": "IBS & Digestive Issues",
         "category": "Digestive Health",
         "description": "Effective relief for IBS, bloating, gas, and digestive discomfort",
-        "symptoms": ["Abdominal pain", "Bloating", "Constipation or diarrhea", "Gas"],
+        "symptoms": [
+          "Abdominal pain",
+          "Bloating",
+          "Constipation or diarrhea",
+          "Gas"
+        ],
         "link": "/en/conditions#ibs"
       }
     ],
@@ -254,7 +274,7 @@
       {
         "slug": "acupuncture-science",
         "type": "article",
-        "image": "/uploads/dr-huang-clinic/blog/acupuncture-science.jpg",
+        "image": "/uploads/dr-huang-clinic/blog/acupuncture-pain.jpg",
         "category": "Acupuncture",
         "readTime": "8 min read",
         "title": "The Science Behind Acupuncture: How It Works",
@@ -263,7 +283,7 @@
       {
         "slug": "herbal-medicine-101",
         "type": "article",
-        "image": "/uploads/dr-huang-clinic/blog/herbs.jpg",
+        "image": "/uploads/dr-huang-clinic/blog/herbal-medicine.jpg",
         "category": "Herbal Medicine",
         "readTime": "6 min read",
         "title": "Chinese Herbal Medicine 101",
@@ -272,7 +292,7 @@
       {
         "slug": "first-visit-video",
         "type": "video",
-        "image": "/uploads/dr-huang-clinic/blog/first-visit.jpg",
+        "image": "/uploads/dr-huang-clinic/blog/digestive-health.jpg",
         "category": "Patient Education",
         "readTime": "5 min watch",
         "title": "What to Expect at Your First Acupuncture Visit",
@@ -290,17 +310,17 @@
     "subtitle": "See our welcoming, peaceful treatment environment",
     "images": [
       {
-        "src": "/uploads/dr-huang-clinic/gallery/reception.jpg",
+        "src": "/uploads/dr-huang-clinic/gallery/reception-area.jpg",
         "alt": "Clinic reception area",
         "label": "Reception Area"
       },
       {
-        "src": "/uploads/dr-huang-clinic/gallery/treatment-room.jpg",
+        "src": "/uploads/dr-huang-clinic/gallery/treatment-room-1.jpg",
         "alt": "Treatment room",
         "label": "Treatment Room"
       },
       {
-        "src": "/uploads/dr-huang-clinic/gallery/herbs.jpg",
+        "src": "/uploads/dr-huang-clinic/gallery/herbal-pharmacy.jpg",
         "alt": "Herbal pharmacy",
         "label": "Herbal Pharmacy"
       },
@@ -361,19 +381,19 @@
     "features": [
       {
         "icon": "Award",
-        "image": "/uploads/dr-huang-clinic/why-choose-us/expert-practitioner.jpg",
+        "image": "/uploads/dr-huang-clinic/home/why-tcm.jpg",
         "title": "Expert Practitioner",
         "description": "Over 15 years of experience with advanced TCM training and certifications"
       },
       {
         "icon": "Heart",
-        "image": "/uploads/dr-huang-clinic/why-choose-us/personalized-care.jpg",
+        "image": "/uploads/dr-huang-clinic/home/welcome-section.jpg",
         "title": "Personalized Care",
         "description": "Every treatment is tailored to your unique needs and health goals"
       },
       {
         "icon": "Users",
-        "image": "/uploads/dr-huang-clinic/why-choose-us/proven-results.jpg",
+        "image": "/uploads/dr-huang-clinic/home/testimonials-bg.jpg",
         "title": "Proven Results",
         "description": "Thousands of satisfied patients and a 95% satisfaction rate"
       }

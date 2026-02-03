@@ -2,7 +2,7 @@
   "hero": {
     "title": "患者成功案例",
     "subtitle": "真实案例，真实结果 - 了解传统中医如何改变生活",
-    "backgroundImage": "/uploads/dr-huang-clinic/case-studies/hero-bg.jpg"
+    "backgroundImage": "/uploads/dr-huang-clinic/home/hero-bg.jpg"
   },
   "introduction": {
     "text": "这些案例代表通过我们的中医治疗经历显著健康改善的真实患者。所有姓名都已更改以保护患者隐私，但故事和结果是真实的。",
@@ -44,257 +44,27 @@
     {
       "id": "chronic-back-pain-jennifer",
       "category": "pain-management",
-      "featured": true,
-      "patient": {
-        "name": "Jennifer M.",
-        "age": 42,
-        "occupation": "教师",
-        "anonymous": true
-      },
       "condition": "慢性下背部疼痛",
-      "duration": "8年",
-      "image": "/uploads/dr-huang-clinic/case-studies/back-pain.jpg",
+      "image": "/uploads/dr-huang-clinic/case-studies/chronic-pain.jpg",
       "beforeImage": "https://images.unsplash.com/photo-1554574004-b5ed96682e9b?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0",
       "afterImage": "https://images.unsplash.com/photo-1768507423533-b87b62769758?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0",
-      "summary": "经过8年的衰弱性背痛和不成功的常规治疗后，Jennifer通过针灸和中药找到了持久的缓解。",
-      "background": "42岁的小学教师Jennifer在遭受慢性下背部疼痛八年后来到我们的诊所。疼痛始于在学校搬运重箱子后，随着时间的推移逐渐恶化。她尝试过物理治疗、脊椎按摩、止痛药，甚至硬膜外注射，但都没有提供持久的缓解。疼痛影响了她工作、锻炼和与家人共度时光的能力。",
-      "symptoms": [
-        "下背部持续钝痛",
-        "弯腰或举重时剧痛",
-        "疼痛放射到右腿",
-        "长时间站立困难",
-        "肌肉痉挛",
-        "疼痛导致睡眠中断"
-      ],
-      "tcmDiagnosis": "肾阳虚伴下背部经络血瘀。慢性疼痛在膀胱经和督脉中造成阻塞。",
-      "treatmentPlan": {
-        "phase1": {
-          "title": "急性期（第1-4周）",
-          "frequency": "每周两次针灸",
-          "focus": "缓解疼痛和改善循环",
-          "methods": [
-            "针灸专注于局部和远端穴位",
-            "拔罐疗法释放肌肉紧张",
-            "中药配方温肾阳和活血",
-            "紧张背部肌肉刮痧"
-          ]
-        },
-        "phase2": {
-          "title": "增强期（第5-12周）",
-          "frequency": "每周针灸",
-          "focus": "建立力量和预防复发",
-          "methods": [
-            "继续针灸",
-            "改良中药配方补肾",
-            "艾灸增强下背部",
-            "核心增强练习",
-            "饮食建议"
-          ]
-        },
-        "phase3": {
-          "title": "维护期（第4-6个月）",
-          "frequency": "两周一次，然后每月一次",
-          "focus": "保持改善和长期健康",
-          "methods": [
-            "维护针灸疗程",
-            "季节性中药调整",
-            "生活方式调整",
-            "自我护理技巧"
-          ]
-        }
-      },
-      "outcomes": [
-        {
-          "week": 2,
-          "improvement": "疼痛减轻30%，睡眠改善"
-        },
-        {
-          "week": 4,
-          "improvement": "疼痛减轻50%，肌肉痉挛减少"
-        },
-        {
-          "week": 8,
-          "improvement": "疼痛减轻70%，恢复锻炼"
-        },
-        {
-          "week": 12,
-          "improvement": "疼痛减轻85%，限制最小"
-        },
-        {
-          "week": 24,
-          "improvement": "改善90-95%，偶尔轻微不适"
-        }
-      ],
-      "testimonial": "经过多年的疼痛和尝试一切，我对针灸持怀疑态度。但黄医生的治疗改变了我的生活。我现在大多数日子都没有疼痛，并恢复了远足和与孩子们玩耍。我希望我多年前就尝试了这个！",
-      "followUp": "Jennifer继续每4-6周进行维护治疗，并报告持续改善。她已经能够停止所有止痛药。"
+      "summary": "经过8年的衰弱性背痛和不成功的常规治疗后，Jennifer通过针灸和中药找到了持久的缓解。"
     },
     {
       "id": "fertility-success-lisa",
       "category": "womens-health",
-      "featured": true,
-      "patient": {
-        "name": "Lisa & Tom K.",
-        "age": 35,
-        "occupation": "营销经理",
-        "anonymous": true
-      },
       "condition": "不孕症（不明原因）",
-      "duration": "尝试怀孕3年",
       "image": "/uploads/dr-huang-clinic/case-studies/fertility.jpg",
-      "summary": "经过3年不成功的尝试和一次失败的试管婴儿周期后，Lisa通过中医治疗实现了自然怀孕。",
-      "background": "35岁的Lisa和她的丈夫Tom一直在尝试怀孕三年。医学测试显示没有明显问题——Lisa的荷尔蒙'正常'，排卵正在发生，Tom的精子参数足够。他们进行了一次试管婴儿周期，导致生化妊娠。在情感和经济上精疲力竭后，他们决定在尝试另一个试管婴儿周期之前尝试中医。",
-      "symptoms": [
-        "月经周期不规律（28-40天）",
-        "痛经伴血块",
-        "黄体期短",
-        "手脚冰冷",
-        "低能量",
-        "焦虑和压力",
-        "经期前难以入睡"
-      ],
-      "tcmDiagnosis": "肾阳虚伴肝气郁结和血瘀。子宫寒影响着床。高压力进一步损害生殖功能。",
-      "treatmentPlan": {
-        "phase1": {
-          "title": "周期调节（第1-2个月）",
-          "frequency": "每周针灸",
-          "focus": "调节月经周期和减轻压力",
-          "methods": [
-            "根据月经周期阶段定时针灸",
-            "中药配方温肾阳",
-            "减压技巧",
-            "饮食调整以温暖身体",
-            "睡眠卫生改善"
-          ]
-        },
-        "phase2": {
-          "title": "优化（第3-5个月）",
-          "frequency": "每周针灸，周期中期增加到每周两次",
-          "focus": "优化生育力和支持受孕",
-          "methods": [
-            "特定阶段针灸方案",
-            "卵泡期和黄体期改良中药配方",
-            "艾灸温暖子宫",
-            "腹部按摩",
-            "夫妇生活方式咨询"
-          ]
-        }
-      },
-      "outcomes": [
-        {
-          "month": 1,
-          "improvement": "周期长度调节为30-32天"
-        },
-        {
-          "month": 2,
-          "improvement": "经期疼痛减轻，能量改善"
-        },
-        {
-          "month": 3,
-          "improvement": "基础体温显示更好的模式"
-        },
-        {
-          "month": 4,
-          "improvement": "黄体期延长至13天，感觉更平静"
-        },
-        {
-          "month": 5,
-          "improvement": "妊娠测试阳性！"
-        }
-      ],
-      "testimonial": "我们持怀疑态度但绝望。黄医生给了我们希望和计划。我不仅自然怀孕了，而且整体感觉更健康。针灸也帮助我缓解了压力和焦虑。我们现在有了一个美丽的女婴！",
-      "followUp": "Lisa在治疗的第5个月自然受孕。她在整个怀孕期间继续针灸以获得支持，并在足月分娩了一个健康的女婴。她在产后返回进行恢复支持。"
+      "summary": "经过3年不成功的尝试和一次失败的试管婴儿周期后，Lisa通过中医治疗实现了自然怀孕。"
     },
     {
       "id": "anxiety-depression-robert",
       "category": "mental-health",
-      "featured": true,
-      "patient": {
-        "name": "Robert T.",
-        "age": 38,
-        "occupation": "软件开发人员",
-        "anonymous": true
-      },
       "condition": "焦虑和抑郁",
-      "duration": "5年",
-      "image": "/uploads/dr-huang-clinic/case-studies/anxiety.jpg",
+      "image": "/uploads/dr-huang-clinic/case-studies/migraine.jpg",
       "beforeImage": "https://images.unsplash.com/photo-1554574004-b5ed96682e9b?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0",
       "afterImage": "https://images.unsplash.com/photo-1513097847644-f00cfe868607?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0",
-      "summary": "Robert通过中医克服了衰弱的焦虑和抑郁，减少了对药物的依赖并重获生活质量。",
-      "background": "38岁的软件开发人员Robert与焦虑和抑郁斗争了五年。他服用两种药物（SSRI和抗焦虑药物），但仍然每天经历影响他工作表现和人际关系的症状。药物的副作用包括体重增加、性欲低下和情感麻木。他想要一种更自然的方法，但害怕停止服药。",
-      "symptoms": [
-        "持续担忧和思绪飞驰",
-        "每周2-3次恐慌发作",
-        "失眠（难以入睡和保持睡眠）",
-        "情绪低落和缺乏动力",
-        "消化问题（压力相关的IBS）",
-        "肌肉紧张，尤其是颈部和肩部",
-        "尽管睡眠仍感疲劳"
-      ],
-      "tcmDiagnosis": "心肾阴虚伴肝气郁结和神不安。虚弱证型产生热，进一步扰动心神和情绪。",
-      "treatmentPlan": {
-        "phase1": {
-          "title": "稳定期（第1-6周）",
-          "frequency": "每周两次针灸",
-          "focus": "安神和改善睡眠",
-          "methods": [
-            "针灸专注于安神穴位",
-            "中药配方滋阴安神",
-            "呼吸练习和冥想指导",
-            "饮食建议以支持阴",
-            "睡眠卫生方案"
-          ],
-          "note": "在精神科医生监督下继续当前药物"
-        },
-        "phase2": {
-          "title": "改善期（第7-16周）",
-          "frequency": "每周针灸",
-          "focus": "减少症状和建立韧性",
-          "methods": [
-            "继续针灸治疗",
-            "调整中药配方补心肾",
-            "推拿按摩肌肉紧张",
-            "压力管理技巧",
-            "定期锻炼常规"
-          ],
-          "note": "在精神科医生护理下开始减药"
-        },
-        "phase3": {
-          "title": "维护期（第5-8个月）",
-          "frequency": "两周一次针灸",
-          "focus": "维持改善和预防复发",
-          "methods": [
-            "维护针灸",
-            "根据需要改良中药配方",
-            "继续自我护理实践",
-            "生活方式平衡"
-          ],
-          "note": "成功停止一种药物，减少第二种的剂量"
-        }
-      },
-      "outcomes": [
-        {
-          "week": 3,
-          "improvement": "睡眠改善，思绪飞驰减少"
-        },
-        {
-          "week": 6,
-          "improvement": "恐慌发作减少到每周1次，消化问题改善"
-        },
-        {
-          "week": 12,
-          "improvement": "3周没有恐慌发作，情绪显著改善"
-        },
-        {
-          "week": 20,
-          "improvement": "完全停止一种药物，第二种减少50%"
-        },
-        {
-          "week": 32,
-          "improvement": "症状最小，有效管理压力，感觉像自己了"
-        }
-      ],
-      "testimonial": "我对针头能帮助焦虑和抑郁持怀疑态度，但我很绝望。黄医生的整体方法——针灸、中药、生活方式改变——给了我以前从未有过的工具。我再次感受到情绪（不再因药物而麻木），我可以自然地管理压力。这改变了生活。",
-      "followUp": "Robert每月继续维护针灸，并在高压力期服用低剂量中药配方。在他的精神科医生指导下，他已经能够将药物减少到最小剂量，并报告多年来最好的生活质量。"
+      "summary": "Robert通过中医克服了衰弱的焦虑和抑郁，减少了对药物的依赖并重获生活质量。"
     }
   ],
   "statistics": {

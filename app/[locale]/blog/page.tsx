@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { loadPageContent } from '@/lib/content';
-import { BlogPost, Locale } from '@/lib/types';
+import { loadAllItems, loadPageContent } from '@/lib/content';
+import { Locale } from '@/lib/types';
 import { Button, Badge, Card, CardHeader, CardTitle, CardDescription, CardContent, Icon } from '@/components/ui';
 
 interface BlogPageData {
@@ -20,8 +20,6 @@ interface BlogPageData {
     name: string;
     slug: string;
   }>;
-  featuredPost: BlogPost;
-  posts: BlogPost[];
   cta: {
     title: string;
     description: string;
@@ -34,6 +32,19 @@ interface BlogPageData {
       link: string;
     };
   };
+}
+
+interface BlogListItem {
+  slug: string;
+  title: string;
+  excerpt?: string;
+  image?: string;
+  category?: string;
+  author?: string;
+  publishDate?: string;
+  readTime?: string;
+  type?: 'article' | 'video';
+  featured?: boolean;
 }
 
 interface BlogPageProps {
@@ -63,23 +74,30 @@ export default async function BlogPage({ params, searchParams }: BlogPageProps) 
   const currentPage = parseInt(searchParams?.page || '1');
   const postsPerPage = 9;
   
-  // Load page content
+  // Load page content + posts list
   const content = await loadPageContent<BlogPageData>('blog', locale);
+  const posts = await loadAllItems<BlogListItem>('dr-huang-clinic', locale, 'blog');
   
   if (!content) {
     notFound();
   }
 
-  const { hero, introduction, categories, featuredPost, posts, cta } = content;
+  const { hero, introduction, categories, cta } = content;
+  const sortedPosts = [...posts].sort((a, b) =>
+    (b.publishDate || '').localeCompare(a.publishDate || '')
+  );
+  const featuredPost = sortedPosts.find((post) => post.featured) || sortedPosts[0];
   const featuredImage = featuredPost?.image
-    || posts.find((post) => post.slug === featuredPost?.slug)?.image
-    || posts[0]?.image
+    || sortedPosts.find((post) => post.image)?.image
     || '/uploads/dr-huang-clinic/blog/acupuncture-pain.jpg';
 
   // Filter posts by category
+  const listPosts = featuredPost
+    ? sortedPosts.filter((post) => post.slug !== featuredPost.slug)
+    : sortedPosts;
   const filteredPosts = selectedCategory === 'all' 
-    ? posts 
-    : posts.filter(post => post.category === selectedCategory);
+    ? listPosts 
+    : listPosts.filter(post => post.category === selectedCategory);
 
   // Pagination
   const totalPosts = filteredPosts.length;
@@ -171,7 +189,7 @@ export default async function BlogPage({ params, searchParams }: BlogPageProps) 
                       />
                       
                       {/* Video Badge */}
-                      {featuredPost.type === 'video' && (
+                      {(featuredPost.type || 'article') === 'video' && (
                         <div className="absolute inset-0 flex items-center justify-center">
                           <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform">
                             <Icon name="Play" className="text-primary ml-1" size="lg" />
@@ -186,7 +204,9 @@ export default async function BlogPage({ params, searchParams }: BlogPageProps) 
                         <Badge variant="secondary">
                           {categories.find(cat => cat.id === featuredPost.category)?.name}
                         </Badge>
-                        <span className="text-sm text-gray-500">{featuredPost.readTime}</span>
+                        {featuredPost.readTime && (
+                          <span className="text-sm text-gray-500">{featuredPost.readTime}</span>
+                        )}
                         <span className="text-sm text-gray-500">•</span>
                         <span className="text-sm text-gray-500">
                           {featuredPost.publishDate ? new Date(featuredPost.publishDate).toLocaleDateString('en-US', { 
@@ -201,15 +221,19 @@ export default async function BlogPage({ params, searchParams }: BlogPageProps) 
                         {featuredPost.title}
                       </h3>
 
-                      <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                        {featuredPost.excerpt}
-                      </p>
+                      {featuredPost.excerpt && (
+                        <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                          {featuredPost.excerpt}
+                        </p>
+                      )}
 
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <Icon name="User" size="sm" className="text-gray-400" />
-                          <span className="text-sm text-gray-600">{featuredPost.author}</span>
-                        </div>
+                        {featuredPost.author && (
+                          <div className="flex items-center gap-2">
+                            <Icon name="User" size="sm" className="text-gray-400" />
+                            <span className="text-sm text-gray-600">{featuredPost.author}</span>
+                          </div>
+                        )}
                         <div className="flex items-center gap-2 text-primary font-semibold group-hover:gap-3 transition-all">
                           Read More
                           <Icon name="ArrowRight" size="sm" />
@@ -270,7 +294,7 @@ export default async function BlogPage({ params, searchParams }: BlogPageProps) 
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
                           <Icon 
-                            name={post.type === 'video' ? 'Video' : 'FileText'} 
+                            name={(post.type || 'article') === 'video' ? 'Video' : 'FileText'} 
                             size="lg" 
                             className="text-primary/30" 
                           />
@@ -278,7 +302,7 @@ export default async function BlogPage({ params, searchParams }: BlogPageProps) 
                       )}
 
                       {/* Video Play Button */}
-                      {post.type === 'video' && (
+                      {(post.type || 'article') === 'video' && (
                         <div className="absolute inset-0 flex items-center justify-center">
                           <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform">
                             <Icon name="Play" className="text-primary ml-0.5" />
@@ -295,16 +319,20 @@ export default async function BlogPage({ params, searchParams }: BlogPageProps) 
                     </div>
 
                     <CardHeader>
-                      <div className="flex items-center gap-2 text-sm text-gray-500 mb-3">
-                        <Icon name="Clock" size="sm" />
-                        {post.readTime}
-                      </div>
+                      {post.readTime && (
+                        <div className="flex items-center gap-2 text-sm text-gray-500 mb-3">
+                          <Icon name="Clock" size="sm" />
+                          {post.readTime}
+                        </div>
+                      )}
                       <CardTitle className="text-lg group-hover:text-primary transition-colors line-clamp-2">
                         {post.title}
                       </CardTitle>
-                      <CardDescription className="line-clamp-3">
-                        {post.excerpt}
-                      </CardDescription>
+                      {post.excerpt && (
+                        <CardDescription className="line-clamp-3">
+                          {post.excerpt}
+                        </CardDescription>
+                      )}
                     </CardHeader>
 
                     <CardContent>

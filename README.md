@@ -3,10 +3,10 @@
 # stop dev
 lsof -ti:3003 | xargs kill -9
 
-# clear Next cache
+pkill -f "next dev"
+
 rm -rf .next
 
-# start fresh dev
 npm run dev
 
 1, 
@@ -18,7 +18,11 @@ git commit -m "Fix bugs"
 git push origin main
 
 3, Then: Vercel deployment
-curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_tak5sLc4NHb0IAoM5hxc9umPvix9/3W7jbMsvvv
+curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_TWzpWZczAkIWaSOO8X2kvV5LnFsA/zENRbBnJ1z
+
+
+
+Admin Default: admin@example.com / admin123
 
 
 

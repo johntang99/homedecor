@@ -23,6 +23,12 @@ export async function getSites(): Promise<SiteConfig[]> {
   }
 }
 
+async function saveSites(sites: SiteConfig[]): Promise<void> {
+  await fs.promises.mkdir(CONTENT_DIR, { recursive: true });
+  const payload = { sites };
+  await fs.promises.writeFile(SITES_CONFIG_PATH, JSON.stringify(payload, null, 2));
+}
+
 /**
  * Get a single site by ID
  */
@@ -53,6 +59,28 @@ export async function getSiteByDomain(domain: string): Promise<SiteConfig | null
 export async function siteExists(siteId: string): Promise<boolean> {
   const site = await getSiteById(siteId);
   return site !== null;
+}
+
+/**
+ * Update a site by ID
+ */
+export async function updateSite(
+  siteId: string,
+  updates: Partial<SiteConfig>
+): Promise<SiteConfig | null> {
+  const sites = await getSites();
+  const index = sites.findIndex((site) => site.id === siteId);
+  if (index === -1) return null;
+
+  const updated: SiteConfig = {
+    ...sites[index],
+    ...updates,
+    updatedAt: new Date().toISOString(),
+  };
+
+  sites[index] = updated;
+  await saveSites(sites);
+  return updated;
 }
 
 /**

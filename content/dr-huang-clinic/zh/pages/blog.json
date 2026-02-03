@@ -76,7 +76,7 @@
     {
       "slug": "chinese-herbs-101",
       "type": "article",
-      "image": "/uploads/dr-huang-clinic/blog/herbs-101.jpg",
+      "image": "/uploads/dr-huang-clinic/blog/herbal-medicine.jpg",
       "category": "herbal-medicine",
       "readTime": "8分钟阅读",
       "title": "中药101：了解定制配方",
@@ -90,7 +90,7 @@
     {
       "slug": "first-acupuncture-visit-video",
       "type": "video",
-      "image": "/uploads/dr-huang-clinic/blog/first-visit-thumb.jpg",
+      "image": "/uploads/dr-huang-clinic/blog/digestive-health.jpg",
       "category": "patient-education",
       "readTime": "6分钟观看",
       "title": "首次针灸访问期间会发生什么",
@@ -105,7 +105,7 @@
     {
       "slug": "anxiety-depression-tcm-approach",
       "type": "article",
-      "image": "/uploads/dr-huang-clinic/blog/mental-health.jpg",
+      "image": "/uploads/dr-huang-clinic/blog/stress-management.jpg",
       "category": "conditions",
       "readTime": "10分钟阅读",
       "title": "用传统中医治疗焦虑和抑郁",
@@ -119,7 +119,7 @@
     {
       "slug": "spring-liver-detox",
       "type": "article",
-      "image": "/uploads/dr-huang-clinic/blog/spring-detox.jpg",
+      "image": "/uploads/dr-huang-clinic/blog/spring-health.jpg",
       "category": "seasonal",
       "readTime": "7分钟阅读",
       "title": "春季肝脏排毒：中医更新提示",
@@ -133,7 +133,7 @@
     {
       "slug": "fertility-acupuncture-guide",
       "type": "article",
-      "image": "/uploads/dr-huang-clinic/blog/fertility.jpg",
+      "image": "/uploads/dr-huang-clinic/blog/immune-system.jpg",
       "category": "conditions",
       "readTime": "15分钟阅读",
       "title": "生育针灸完整指南",

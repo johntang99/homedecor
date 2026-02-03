@@ -254,7 +254,7 @@
       {
         "slug": "acupuncture-science",
         "type": "article",
-        "image": "/uploads/dr-huang-clinic/blog/acupuncture-science.jpg",
+        "image": "/uploads/dr-huang-clinic/blog/acupuncture-pain.jpg",
         "category": "针灸",
         "readTime": "8分钟阅读",
         "title": "针灸背后的科学：它如何工作",
@@ -263,7 +263,7 @@
       {
         "slug": "herbal-medicine-101",
         "type": "article",
-        "image": "/uploads/dr-huang-clinic/blog/herbs.jpg",
+        "image": "/uploads/dr-huang-clinic/blog/herbal-medicine.jpg",
         "category": "中药",
         "readTime": "6分钟阅读",
         "title": "中药101",
@@ -272,7 +272,7 @@
       {
         "slug": "first-visit-video",
         "type": "video",
-        "image": "/uploads/dr-huang-clinic/blog/first-visit.jpg",
+        "image": "/uploads/dr-huang-clinic/blog/digestive-health.jpg",
         "category": "患者教育",
         "readTime": "5分钟观看",
         "title": "首次针灸就诊的期待",
@@ -290,17 +290,17 @@
     "subtitle": "查看我们温馨、宁静的治疗环境",
     "images": [
       {
-        "src": "/uploads/dr-huang-clinic/gallery/reception.jpg",
+        "src": "/uploads/dr-huang-clinic/gallery/reception-area.jpg",
         "alt": "诊所接待区",
         "label": "接待区"
       },
       {
-        "src": "/uploads/dr-huang-clinic/gallery/treatment-room.jpg",
+        "src": "/uploads/dr-huang-clinic/gallery/treatment-room-1.jpg",
         "alt": "治疗室",
         "label": "治疗室"
       },
       {
-        "src": "/uploads/dr-huang-clinic/gallery/herbs.jpg",
+        "src": "/uploads/dr-huang-clinic/gallery/herbal-pharmacy.jpg",
         "alt": "中药房",
         "label": "中药房"
       },
@@ -361,19 +361,19 @@
     "features": [
       {
         "icon": "Award",
-        "image": "/uploads/dr-huang-clinic/why-choose-us/expert-practitioner.jpg",
+        "image": "/uploads/dr-huang-clinic/home/why-tcm.jpg",
         "title": "专业医师",
         "description": "拥有15年以上经验和高级中医培训及认证"
       },
       {
         "icon": "Heart",
-        "image": "/uploads/dr-huang-clinic/why-choose-us/personalized-care.jpg",
+        "image": "/uploads/dr-huang-clinic/home/welcome-section.jpg",
         "title": "个性化护理",
         "description": "每次治疗都根据您的独特需求和健康目标量身定制"
       },
       {
         "icon": "Users",
-        "image": "/uploads/dr-huang-clinic/why-choose-us/proven-results.jpg",
+        "image": "/uploads/dr-huang-clinic/home/testimonials-bg.jpg",
         "title": "经过验证的结果",
         "description": "数千名满意的患者和95%的满意度"
       }

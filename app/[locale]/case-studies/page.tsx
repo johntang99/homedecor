@@ -1,35 +1,19 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
 import { loadPageContent } from '@/lib/content';
 import { Locale } from '@/lib/types';
 import { Badge, Card, Icon, Tabs, Button } from '@/components/ui';
 
 interface CaseStudy {
   id: string;
-  title?: string;
   category: string;
-  featured?: boolean;
-  patient: {
-    name: string;
-    age: number;
-    occupation?: string;
-    anonymous?: boolean;
-    gender?: string;
-  };
-  condition?: string;
-  duration: string;
+  condition: string;
   image?: string;
   beforeImage?: string;
   afterImage?: string;
   summary: string;
-  background?: string;
-  symptoms: string[];
-  tcmDiagnosis?: string;
-  treatmentPlan?: Record<string, { methods?: string[]; title?: string; frequency?: string; focus?: string; note?: string }>;
-  outcomes: Array<{ week?: number; month?: number; improvement: string }>;
-  testimonial?: string;
-  followUp?: string;
 }
 
 interface CaseStudiesPageData {
@@ -119,21 +103,11 @@ export default async function CaseStudiesPage({ params }: CaseStudiesPageProps) 
     return caseStudies.filter((study) => study.category === categoryId);
   };
 
-  const getTreatmentMethods = (study: CaseStudy) => {
-    if (!study.treatmentPlan) {
-      return [];
-    }
-    const methods = Object.values(study.treatmentPlan).flatMap((phase) => phase.methods ?? []);
-    return Array.from(new Set(methods));
-  };
-
-  const getOutcomeText = (study: CaseStudy) => {
-    if (!study.outcomes || study.outcomes.length === 0) {
-      return '';
-    }
-    const lastOutcome = study.outcomes[study.outcomes.length - 1];
-    return lastOutcome.improvement;
-  };
+  const normalizeMarkdown = (text: string) =>
+    text
+      .replace(/\r\n/g, '\n')
+      .replace(/([^\n])\n-\s+/g, '$1\n\n- ')
+      .replace(/([^\n])\n\*\s+/g, '$1\n\n- ');
 
   return (
     <main className="min-h-screen">
@@ -210,14 +184,12 @@ export default async function CaseStudiesPage({ params }: CaseStudiesPageProps) 
                   <div className="pt-8">
                     <div className="grid lg:grid-cols-2 gap-6">
                       {caseStudiesByCategory(category.id).map((study, index) => {
-                        const caseTitle = study.title || study.condition || study.summary;
+                        const caseTitle = study.condition || study.summary;
                         const categoryName = categories.find(cat => cat.id === study.category)?.name;
                         const afterImage = study.afterImage || study.image;
                         const beforeImage = study.beforeImage;
                         const hasBeforeAndAfter = Boolean(beforeImage && afterImage);
-                        const overviewText = study.background || study.summary;
-                        const treatmentMethods = getTreatmentMethods(study);
-                        const outcomeText = getOutcomeText(study);
+                        const overviewText = study.summary;
 
                         return (
                           <Card key={study.id} variant="default" hover padding="none" className="h-full overflow-hidden border border-gray-200 shadow-sm">
@@ -233,11 +205,6 @@ export default async function CaseStudiesPage({ params }: CaseStudiesPageProps) 
                               <h3 className="text-subheading font-bold text-gray-900 mb-1">
                                 {caseTitle}
                               </h3>
-                              {study.condition && (
-                                <p className="text-sm text-gray-600">
-                                  {study.condition}
-                                </p>
-                              )}
                             </div>
 
                             <div className={hasBeforeAndAfter ? 'grid grid-cols-2 gap-2 p-4 bg-gray-50' : 'p-4 bg-gray-50'}>
@@ -277,9 +244,21 @@ export default async function CaseStudiesPage({ params }: CaseStudiesPageProps) 
                                 <h4 className="text-sm font-semibold text-gray-900 mb-2">
                                   {locale === 'en' ? 'Description' : '描述'}
                                 </h4>
-                                <p className="text-sm text-gray-700 leading-relaxed">
-                                  {overviewText}
-                                </p>
+                                <div className="prose prose-sm max-w-none text-gray-700">
+                                  <ReactMarkdown
+                                    components={{
+                                      ul: (props) => (
+                                        <ul className="list-disc pl-5" {...props} />
+                                      ),
+                                      ol: (props) => (
+                                        <ol className="list-decimal pl-5" {...props} />
+                                      ),
+                                      li: (props) => <li className="mb-1" {...props} />,
+                                    }}
+                                  >
+                                    {normalizeMarkdown(overviewText)}
+                                  </ReactMarkdown>
+                                </div>
                               </div>
                             </div>
                           </Card>

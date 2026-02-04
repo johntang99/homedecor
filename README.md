@@ -18,8 +18,7 @@ git commit -m "Fix bugs"
 git push origin main
 
 3, Then: Vercel deployment
-curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_TWzpWZczAkIWaSOO8X2kvV5LnFsA/zENRbBnJ1z
-
+curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_djRlq5PsWfKq75nViJDtyg3gzsBH/nWJg1rsYkt
 
 
 Admin Default: admin@example.com / admin123

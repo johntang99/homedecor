@@ -3,7 +3,7 @@
     {
       "id": "dr-huang-clinic",
       "name": "Dr Huang Clinic",
-      "domain": "localhost:3003",
+      "domain": "drhuangclinic.com",
       "enabled": true,
       "defaultLocale": "en",
       "supportedLocales": [
@@ -11,7 +11,7 @@
         "zh"
       ],
       "createdAt": "2025-01-15T00:00:00Z",
-      "updatedAt": "2026-02-02T21:30:18.223Z"
+      "updatedAt": "2026-02-04T06:45:02.741Z"
     }
   ]
 }

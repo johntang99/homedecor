@@ -1,5 +1,6 @@
 {
   "hero": {
+    "variant": "centered",
     "title": "Conditions We Treat",
     "subtitle": "Traditional Chinese Medicine offers natural, effective solutions for a wide range of health concerns",
     "backgroundImage": "/uploads/dr-huang-clinic/conditions/hero-bg.jpg"
@@ -522,6 +523,7 @@
     }
   ],
   "cta": {
+    "variant": "centered",
     "title": "Not Sure If We Can Help?",
     "description": "Schedule a free consultation to discuss your specific health concerns",
     "primaryCta": {

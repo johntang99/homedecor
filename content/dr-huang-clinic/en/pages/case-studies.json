@@ -1,5 +1,6 @@
 {
   "hero": {
+    "variant": "centered",
     "title": "Patient Success Stories",
     "subtitle": "Real cases, real results - see how Traditional Chinese Medicine has transformed lives",
     "backgroundImage": "/uploads/dr-huang-clinic/home/hero-bg.jpg"
@@ -90,6 +91,7 @@
     }
   ],
   "statistics": {
+    "variant": "grid-2x2",
     "title": "Our Track Record",
     "stats": [
       {
@@ -115,6 +117,7 @@
     ]
   },
   "cta": {
+    "variant": "centered",
     "title": "Could TCM Help You?",
     "description": "Schedule a consultation to discuss your specific health concerns and create a personalized treatment plan",
     "primaryCta": {

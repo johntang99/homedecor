@@ -62,6 +62,7 @@ export interface SiteInfo {
   email: string;
   addressMapUrl?: string;
   social?: SocialMedia;
+  headerVariant?: 'default' | 'centered' | 'transparent' | 'stacked';
 }
 
 export interface BusinessHours {
@@ -125,6 +126,7 @@ export interface Testimonial {
 }
 
 export interface TestimonialsSection {
+  variant?: 'carousel' | 'grid' | 'masonry' | 'slider-vertical' | 'featured-single';
   badge: string;
   title: string;
   subtitle: string;
@@ -144,8 +146,11 @@ export interface Step {
 }
 
 export interface HowItWorksSection {
+  variant?: 'horizontal' | 'vertical' | 'cards' | 'vertical-image-right';
   title: string;
   subtitle: string;
+  image?: string;
+  imageAlt?: string;
   steps: Step[];
 }
 
@@ -164,6 +169,7 @@ export interface Condition {
 }
 
 export interface ConditionsSection {
+  variant?: 'grid-cards' | 'categories-tabs' | 'list-detailed' | 'icon-grid';
   title: string;
   subtitle: string;
   conditions: Condition[];
@@ -188,6 +194,7 @@ export interface Service {
 }
 
 export interface ServicesSection {
+  variant?: 'grid-cards' | 'featured-large' | 'list-horizontal' | 'accordion' | 'tabs';
   badge: string;
   title: string;
   subtitle: string;
@@ -217,6 +224,7 @@ export interface BlogPost {
 }
 
 export interface BlogSection {
+  variant?: 'cards-grid' | 'featured-side' | 'list-detailed' | 'carousel';
   badge: string;
   title: string;
   subtitle: string;
@@ -237,6 +245,7 @@ export interface GalleryImage {
 }
 
 export interface GallerySection {
+  variant?: 'grid-masonry' | 'grid-uniform' | 'carousel' | 'lightbox-grid';
   badge: string;
   title: string;
   subtitle: string;
@@ -277,6 +286,7 @@ export interface WhyChooseUsSection {
 }
 
 export interface CTASection {
+  variant?: 'centered' | 'split' | 'banner' | 'card-elevated';
   title: string;
   subtitle: string;
   primaryCta: {
@@ -321,6 +331,14 @@ export interface HomePage {
     badge: {
       text: string;
       visible: boolean;
+    };
+  };
+  menu?: {
+    variant?: 'default' | 'centered' | 'transparent' | 'stacked';
+    items: NavigationLink[];
+    cta?: {
+      text: string;
+      link: string;
     };
   };
   hero: HeroSection;
@@ -388,6 +406,7 @@ export interface PricingPackage {
 
 export interface ContactPage {
   hero: {
+    variant?: 'centered' | 'split-photo-right' | 'split-photo-left' | 'overlap' | 'photo-background' | 'video-background' | 'gallery-background';
     title: string;
     subtitle: string;
   };
@@ -413,6 +432,7 @@ export interface ContactPage {
     note?: string;
   };
   form: {
+    variant?: 'single-column' | 'two-column' | 'multi-step' | 'modal' | 'inline-minimal';
     title: string;
     subtitle: string;
     reasonOptions: string[];

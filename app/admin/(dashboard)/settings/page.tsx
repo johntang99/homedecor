@@ -1,10 +1,5 @@
-import { AdminPlaceholder } from '@/components/admin/AdminPlaceholder';
+import { AccountSettings } from '@/components/admin/AccountSettings';
 
 export default function AdminSettingsPage() {
-  return (
-    <AdminPlaceholder
-      title="Settings"
-      description="Configure global dashboard settings and integrations."
-    />
-  );
+  return <AccountSettings />;
 }

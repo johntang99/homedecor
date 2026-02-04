@@ -1,10 +1,10 @@
-import { AdminPlaceholder } from '@/components/admin/AdminPlaceholder';
+import { TemplatesLibrary } from '@/components/admin/TemplatesLibrary';
+import { CONTENT_TEMPLATES } from '@/lib/admin/templates';
+import { getSites } from '@/lib/sites';
 
-export default function AdminComponentsPage() {
+export default async function AdminComponentsPage() {
+  const sites = await getSites();
   return (
-    <AdminPlaceholder
-      title="Components"
-      description="Manage reusable sections, variants, and design tokens."
-    />
+    <TemplatesLibrary sites={sites} templates={CONTENT_TEMPLATES} />
   );
 }

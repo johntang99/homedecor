@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { loadPageContent, loadSiteInfo } from '@/lib/content';
+import { getRequestSiteId, loadPageContent, loadSiteInfo } from '@/lib/content';
 import { Locale, SiteInfo } from '@/lib/types';
 import { Button, Badge, Card, CardHeader, CardTitle, CardDescription, CardContent, Icon } from '@/components/ui';
 import { CheckCircle2, MapPin, Clock } from 'lucide-react';
@@ -126,9 +126,10 @@ export default async function AboutPage({ params }: AboutPageProps) {
   const { locale } = params;
   
   // Load page content
-  const content = await loadPageContent<AboutPageData>('about', locale);
-  const contactContent = await loadPageContent<ContactPageData>('contact', locale);
-  const siteInfo = await loadSiteInfo('dr-huang-clinic', locale) as SiteInfo | null;
+  const siteId = await getRequestSiteId();
+  const content = await loadPageContent<AboutPageData>('about', locale, siteId);
+  const contactContent = await loadPageContent<ContactPageData>('contact', locale, siteId);
+  const siteInfo = await loadSiteInfo(siteId, locale) as SiteInfo | null;
   
   if (!content) {
     notFound();

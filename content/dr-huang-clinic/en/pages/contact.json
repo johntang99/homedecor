@@ -1,5 +1,6 @@
 {
   "hero": {
+    "variant": "centered",
     "title": "Get in Touch",
     "subtitle": "We're here to answer your questions and help you begin your healing journey",
     "backgroundImage": "/uploads/dr-huang-clinic/contact/hero-bg.jpg"
@@ -85,6 +86,7 @@
     "note": "Last appointment starts 1 hour before closing. Please call ahead for same-day appointments."
   },
   "form": {
+    "variant": "single-column",
     "title": "Send Us a Message",
     "subtitle": "Fill out the form below and we'll get back to you as soon as possible",
     "fields": {

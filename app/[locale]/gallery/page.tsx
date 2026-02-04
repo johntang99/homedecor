@@ -2,7 +2,7 @@
  import Image from 'next/image';
  import Link from 'next/link';
  import { notFound } from 'next/navigation';
- import { loadPageContent, loadSiteInfo } from '@/lib/content';
+import { getRequestSiteId, loadPageContent, loadSiteInfo } from '@/lib/content';
 import { Locale, SiteInfo } from '@/lib/types';
  
  import GalleryGrid, { GalleryCategory, GalleryImage } from '@/components/gallery/GalleryGrid';
@@ -67,9 +67,10 @@ import { Locale, SiteInfo } from '@/lib/types';
  export default async function GalleryPage({ params }: GalleryPageProps) {
    const { locale } = params;
  
-   const content = await loadPageContent<GalleryPageData>('gallery', locale);
-   const contactContent = await loadPageContent<ContactPageData>('contact', locale);
-  const siteInfo = await loadSiteInfo('dr-huang-clinic', locale) as SiteInfo | null;
+  const siteId = await getRequestSiteId();
+  const content = await loadPageContent<GalleryPageData>('gallery', locale, siteId);
+  const contactContent = await loadPageContent<ContactPageData>('contact', locale, siteId);
+  const siteInfo = await loadSiteInfo(siteId, locale) as SiteInfo | null;
  
    if (!content) {
      notFound();

@@ -1,5 +1,6 @@
 {
   "hero": {
+    "variant": "centered",
     "title": "Visit Our Clinic",
     "subtitle": "Take a virtual tour of our peaceful, welcoming healing space",
     "backgroundImage": "/uploads/dr-huang-clinic/gallery/hero-bg.jpg"
@@ -324,6 +325,7 @@
     "description": "We're working on a full virtual tour so you can explore our clinic from the comfort of your home."
   },
   "cta": {
+    "variant": "centered",
     "title": "Ready to Visit in Person?",
     "description": "Schedule your appointment and experience our welcoming environment firsthand",
     "primaryCta": {

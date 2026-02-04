@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { loadAllItems, loadPageContent } from '@/lib/content';
+import { getRequestSiteId, loadAllItems, loadPageContent } from '@/lib/content';
 import { Locale } from '@/lib/types';
 import { Button, Badge, Card, CardHeader, CardTitle, CardDescription, CardContent, Icon } from '@/components/ui';
 
@@ -76,7 +76,8 @@ export default async function BlogPage({ params, searchParams }: BlogPageProps) 
   
   // Load page content + posts list
   const content = await loadPageContent<BlogPageData>('blog', locale);
-  const posts = await loadAllItems<BlogListItem>('dr-huang-clinic', locale, 'blog');
+  const siteId = await getRequestSiteId();
+  const posts = await loadAllItems<BlogListItem>(siteId, locale, 'blog');
   
   if (!content) {
     notFound();
@@ -87,9 +88,10 @@ export default async function BlogPage({ params, searchParams }: BlogPageProps) 
     (b.publishDate || '').localeCompare(a.publishDate || '')
   );
   const featuredPost = sortedPosts.find((post) => post.featured) || sortedPosts[0];
-  const featuredImage = featuredPost?.image
-    || sortedPosts.find((post) => post.image)?.image
-    || '/uploads/dr-huang-clinic/blog/acupuncture-pain.jpg';
+  const featuredImage =
+    featuredPost?.image ||
+    sortedPosts.find((post) => post.image)?.image ||
+    `/uploads/${siteId}/blog/acupuncture-pain.jpg`;
 
   // Filter posts by category
   const listPosts = featuredPost

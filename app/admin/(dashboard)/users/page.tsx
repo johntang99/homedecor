@@ -1,10 +1,9 @@
-import { AdminPlaceholder } from '@/components/admin/AdminPlaceholder';
+import { UsersManager } from '@/components/admin/UsersManager';
+import { getSites } from '@/lib/sites';
 
-export default function AdminUsersPage() {
+export default async function AdminUsersPage() {
+  const sites = await getSites();
   return (
-    <AdminPlaceholder
-      title="Users"
-      description="Invite team members and manage roles and permissions."
-    />
+    <UsersManager sites={sites} />
   );
 }

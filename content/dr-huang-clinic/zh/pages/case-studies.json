@@ -1,5 +1,6 @@
 {
   "hero": {
+    "variant": "centered",
     "title": "患者成功案例",
     "subtitle": "真实案例，真实结果 - 了解传统中医如何改变生活",
     "backgroundImage": "/uploads/dr-huang-clinic/home/hero-bg.jpg"
@@ -68,6 +69,7 @@
     }
   ],
   "statistics": {
+    "variant": "grid-2x2",
     "title": "我们的记录",
     "stats": [
       {
@@ -93,6 +95,7 @@
     ]
   },
   "cta": {
+    "variant": "centered",
     "title": "中医能帮助您吗？",
     "description": "安排咨询以讨论您的具体健康问题并创建个性化治疗计划",
     "primaryCta": {

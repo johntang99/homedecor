@@ -3,10 +3,27 @@
 // ============================================
 
 import { Locale } from './types';
+import { headers } from 'next/headers';
+import { getSiteByHost } from './sites';
 import fs from 'fs';
 import path from 'path';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content');
+
+async function resolveSiteId(siteId?: string): Promise<string> {
+  if (siteId) return siteId;
+  try {
+    const host = headers().get('host');
+    const site = await getSiteByHost(host);
+    return site?.id || 'dr-huang-clinic';
+  } catch (error) {
+    return 'dr-huang-clinic';
+  }
+}
+
+export async function getRequestSiteId(): Promise<string> {
+  return resolveSiteId();
+}
 
 /**
  * Generic function to load JSON content
@@ -39,9 +56,10 @@ export async function loadContent<T>(
 export async function loadPageContent<T>(
   pageName: string,
   locale: Locale,
-  siteId: string = 'dr-huang-clinic'
+  siteId?: string
 ): Promise<T | null> {
-  return loadContent<T>(siteId, locale, `pages/${pageName}.json`);
+  const resolvedSiteId = await resolveSiteId(siteId);
+  return loadContent<T>(resolvedSiteId, locale, `pages/${pageName}.json`);
 }
 
 /**
@@ -81,12 +99,13 @@ export async function loadTheme(siteId: string) {
  * Load all items from a directory (e.g., blog posts, services)
  */
 export async function loadAllItems<T>(
-  siteId: string,
+  siteId: string | undefined,
   locale: Locale,
   directory: string
 ): Promise<T[]> {
   try {
-    const dirPath = path.join(CONTENT_DIR, siteId, locale, directory);
+    const resolvedSiteId = await resolveSiteId(siteId);
+    const dirPath = path.join(CONTENT_DIR, resolvedSiteId, locale, directory);
     
     if (!fs.existsSync(dirPath)) {
       return [];
@@ -114,12 +133,13 @@ export async function loadAllItems<T>(
  * Load single item by slug
  */
 export async function loadItemBySlug<T>(
-  siteId: string,
+  siteId: string | undefined,
   locale: Locale,
   directory: string,
   slug: string
 ): Promise<T | null> {
-  return loadContent<T>(siteId, locale, `${directory}/${slug}.json`);
+  const resolvedSiteId = await resolveSiteId(siteId);
+  return loadContent<T>(resolvedSiteId, locale, `${directory}/${slug}.json`);
 }
 
 /**

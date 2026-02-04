@@ -1,5 +1,6 @@
 {
   "hero": {
+    "variant": "centered",
     "title": "参观我们的诊所",
     "subtitle": "虚拟参观我们宁静、温馨的治疗空间",
     "backgroundImage": "/uploads/dr-huang-clinic/gallery/hero-bg.jpg"
@@ -99,6 +100,7 @@
     "description": "我们正在制作完整的虚拟参观，以便您可以在家中舒适地探索我们的诊所。"
   },
   "cta": {
+    "variant": "centered",
     "title": "准备亲自参观？",
     "description": "安排您的预约，亲身体验我们温馨的环境",
     "primaryCta": {

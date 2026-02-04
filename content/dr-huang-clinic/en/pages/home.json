@@ -9,6 +9,24 @@
       "visible": true
     }
   },
+  "menu": {
+    "variant": "transparent",
+    "items": [
+      { "text": "Home", "url": "/en" },
+      { "text": "Services", "url": "/en/services" },
+      { "text": "Conditions", "url": "/en/conditions" },
+      { "text": "About", "url": "/en/about" },
+      { "text": "Case Studies", "url": "/en/case-studies" },
+      { "text": "Gallery", "url": "/en/gallery" },
+      { "text": "New Visit", "url": "/en/new-patients" },
+      { "text": "Blog", "url": "/en/blog" },
+      { "text": "Contact", "url": "/en/contact" }
+    ],
+    "cta": {
+      "text": "Book Online",
+      "link": "/en/contact"
+    }
+  },
   "hero": {
     "variant": "split-photo-right",
     "image": "/uploads/dr-huang-clinic/home/hero-bg.jpg",
@@ -77,6 +95,7 @@
     ]
   },
   "testimonials": {
+    "variant": "grid",
     "badge": "PATIENT SUCCESS STORIES",
     "title": "Real Results from Real People",
     "subtitle": "Hear from our patients about their healing journey",
@@ -108,6 +127,9 @@
   "howItWorks": {
     "title": "How Chinese Medicine Works",
     "subtitle": "A holistic approach to healing",
+    "variant": "vertical-image-right",
+    "image": "/uploads/dr-huang-clinic/home/welcome-section.jpg",
+    "imageAlt": "Patient care at Dr. Huang Clinic",
     "steps": [
       {
         "number": 1,
@@ -130,6 +152,7 @@
     ]
   },
   "conditions": {
+    "variant": "grid-cards",
     "title": "Conditions We Treat",
     "subtitle": "Traditional Chinese Medicine can help with a wide range of health concerns",
     "conditions": [
@@ -267,6 +290,7 @@
     }
   },
   "blog": {
+    "variant": "cards-grid",
     "badge": "LEARN & EXPLORE",
     "title": "Latest from Our Blog & Media",
     "subtitle": "Educational resources about TCM and wellness",
@@ -305,6 +329,7 @@
     }
   },
   "gallery": {
+    "variant": "grid-uniform",
     "badge": "VISIT OUR CLINIC",
     "title": "Take a Virtual Tour",
     "subtitle": "See our welcoming, peaceful treatment environment",
@@ -400,6 +425,7 @@
     ]
   },
   "cta": {
+    "variant": "centered",
     "title": "Ready to Begin Your Healing Journey?",
     "subtitle": "Take the first step towards natural wellness today",
     "primaryCta": {

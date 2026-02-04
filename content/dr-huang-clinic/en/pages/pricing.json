@@ -1,5 +1,6 @@
 {
   "hero": {
+    "variant": "centered",
     "title": "Transparent Pricing",
     "subtitle": "Affordable, high-quality Traditional Chinese Medicine care with flexible payment options",
     "backgroundImage": "/uploads/dr-huang-clinic/pricing/hero-bg.jpg"
@@ -262,6 +263,7 @@
     ]
   },
   "cta": {
+    "variant": "centered",
     "title": "Ready to Get Started?",
     "description": "Book your initial consultation and take the first step toward better health",
     "primaryCta": {

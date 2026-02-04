@@ -13,6 +13,7 @@ interface ContentFileItem {
   label: string;
   path: string;
   scope: 'locale' | 'site';
+  publishDate?: string;
 }
 
 interface ContentEditorProps {
@@ -83,6 +84,11 @@ export function ContentEditor({
       let nextFiles: ContentFileItem[] = payload.files || [];
       if (fileFilter === 'blog') {
         nextFiles = nextFiles.filter((file) => file.path.startsWith('blog/'));
+        nextFiles = [...nextFiles].sort((a, b) =>
+          (b.publishDate || '').localeCompare(a.publishDate || '')
+        );
+      } else {
+        nextFiles = nextFiles.filter((file) => !file.path.startsWith('blog/'));
       }
       setFiles(nextFiles);
       if (preferredPath) {
@@ -162,7 +168,10 @@ export function ContentEditor({
   };
 
   const handleCreate = async () => {
-    const slug = window.prompt('New page slug (example: faq)');
+    const isBlog = fileFilter === 'blog';
+    const slug = window.prompt(
+      isBlog ? 'New blog slug (example: my-post)' : 'New page slug (example: faq)'
+    );
     if (!slug) return;
     const templateId =
       window.prompt(
@@ -178,6 +187,7 @@ export function ContentEditor({
         action: 'create',
         slug,
         templateId,
+        targetDir: isBlog ? 'blog' : 'pages',
       }),
     });
 
@@ -193,7 +203,12 @@ export function ContentEditor({
 
   const handleDuplicate = async () => {
     if (!activeFile) return;
-    const slug = window.prompt('Duplicate page slug (example: faq-copy)');
+    const isBlog = activeFile.path.startsWith('blog/');
+    const slug = window.prompt(
+      isBlog
+        ? 'Duplicate blog slug (example: my-post-copy)'
+        : 'Duplicate page slug (example: faq-copy)'
+    );
     if (!slug) return;
     const response = await fetch('/api/admin/content/file', {
       method: 'POST',
@@ -204,6 +219,7 @@ export function ContentEditor({
         action: 'duplicate',
         path: activeFile.path,
         slug,
+        targetDir: isBlog ? 'blog' : 'pages',
       }),
     });
 
@@ -227,6 +243,24 @@ export function ContentEditor({
     } catch (error) {
       setStatus('Invalid JSON. Unable to format.');
     }
+  };
+
+  const handleDelete = async () => {
+    if (!activeFile) return;
+    const confirmed = window.confirm(`Delete ${activeFile.path}? This cannot be undone.`);
+    if (!confirmed) return;
+    const response = await fetch(
+      `/api/admin/content/file?siteId=${siteId}&locale=${locale}&path=${encodeURIComponent(
+        activeFile.path
+      )}`,
+      { method: 'DELETE' }
+    );
+    if (!response.ok) {
+      const payload = await response.json();
+      setStatus(payload.message || 'Delete failed');
+      return;
+    }
+    await loadFiles();
   };
 
   const getPreviewPath = () => {
@@ -345,6 +379,14 @@ export function ContentEditor({
                 >
                   <div className="font-medium">{file.label}</div>
                   <div className="text-xs opacity-70">{file.path}</div>
+                  {fileFilter === 'blog' && file.publishDate && (
+                    <div className="text-[11px] text-gray-500 mt-1">
+                      {new Date(file.publishDate).toLocaleDateString(
+                        locale === 'zh' ? 'zh-CN' : 'en-US',
+                        { year: 'numeric', month: 'short', day: 'numeric' }
+                      )}
+                    </div>
+                  )}
                 </button>
               ))}
               {files.length === 0 && (
@@ -379,7 +421,7 @@ export function ContentEditor({
             onClick={handleCreate}
             className="px-3 py-2 rounded-lg border border-gray-200 text-xs text-gray-700 hover:bg-gray-50"
           >
-            New Page
+            {fileFilter === 'blog' ? 'New Post' : 'New Page'}
           </button>
           <button
             type="button"
@@ -397,6 +439,17 @@ export function ContentEditor({
           >
             Format
           </button>
+          {activeFile &&
+            (activeFile.path.startsWith('pages/') ||
+              activeFile.path.startsWith('blog/')) && (
+              <button
+                type="button"
+                onClick={handleDelete}
+                className="px-3 py-2 rounded-lg border border-red-200 text-xs text-red-600 hover:bg-red-50"
+              >
+                Delete
+              </button>
+            )}
           <Button onClick={handleSave} disabled={!activeFile}>
             Save
           </Button>

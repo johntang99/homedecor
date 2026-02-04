@@ -1,5 +1,6 @@
 {
   "hero": {
+    "variant": "centered",
     "title": "透明定价",
     "subtitle": "价格实惠、高质量的传统中医护理，灵活的付款选项",
     "backgroundImage": "/uploads/dr-huang-clinic/pricing/hero-bg.jpg"
@@ -222,6 +223,7 @@
     ]
   },
   "cta": {
+    "variant": "centered",
     "title": "准备开始？",
     "description": "预约您的初次咨询，迈出通往更好健康的第一步",
     "primaryCta": {

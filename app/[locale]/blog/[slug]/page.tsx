@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import { Locale } from '@/lib/types';
+import { getRequestSiteId } from '@/lib/content';
 import { Button, Badge, Icon, Card, CardHeader, CardTitle, CardDescription } from '@/components/ui';
 import { promises as fs } from 'fs';
 import path from 'path';
@@ -42,9 +43,13 @@ interface BlogDetailPageProps {
   };
 }
 
-async function loadBlogPost(slug: string, locale: Locale): Promise<BlogPostData | null> {
+async function loadBlogPost(
+  siteId: string,
+  slug: string,
+  locale: Locale
+): Promise<BlogPostData | null> {
   try {
-    const filePath = path.join(process.cwd(), 'content', 'dr-huang-clinic', locale, 'blog', `${slug}.json`);
+    const filePath = path.join(process.cwd(), 'content', siteId, locale, 'blog', `${slug}.json`);
     const fileContents = await fs.readFile(filePath, 'utf8');
     return JSON.parse(fileContents);
   } catch (error) {
@@ -52,9 +57,9 @@ async function loadBlogPost(slug: string, locale: Locale): Promise<BlogPostData 
   }
 }
 
-async function loadBlogList(locale: Locale) {
+async function loadBlogList(siteId: string, locale: Locale) {
   try {
-    const filePath = path.join(process.cwd(), 'content', 'dr-huang-clinic', locale, 'pages', 'blog.json');
+    const filePath = path.join(process.cwd(), 'content', siteId, locale, 'pages', 'blog.json');
     const fileContents = await fs.readFile(filePath, 'utf8');
     const data = JSON.parse(fileContents);
     return data.posts || [];
@@ -65,7 +70,8 @@ async function loadBlogList(locale: Locale) {
 
 export async function generateMetadata({ params }: BlogDetailPageProps): Promise<Metadata> {
   const { locale, slug } = params;
-  const post = await loadBlogPost(slug, locale);
+  const siteId = await getRequestSiteId();
+  const post = await loadBlogPost(siteId, slug, locale);
   
   if (!post) {
     return {
@@ -83,16 +89,17 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
 
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   const { locale, slug } = params;
+  const siteId = await getRequestSiteId();
   
   // Load post content
-  const post = await loadBlogPost(slug, locale);
+  const post = await loadBlogPost(siteId, slug, locale);
   
   if (!post) {
     notFound();
   }
 
   // Load all posts for related posts
-  const allPosts = await loadBlogList(locale);
+  const allPosts = await loadBlogList(siteId, locale);
   const relatedPosts = post.relatedPosts 
     ? allPosts.filter((p: any) => post.relatedPosts?.includes(p.slug)).slice(0, 3)
     : allPosts.filter((p: any) => p.category === post.category && p.slug !== post.slug).slice(0, 3);

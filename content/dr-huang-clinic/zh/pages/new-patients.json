@@ -1,5 +1,6 @@
 {
   "hero": {
+    "variant": "centered",
     "title": "欢迎新患者",
     "subtitle": "首次访问黄医生诊所前您需要了解的一切",
     "backgroundImage": "/uploads/dr-huang-clinic/new-patients/hero-bg.jpg"
@@ -229,6 +230,7 @@
     ]
   },
   "cta": {
+    "variant": "centered",
     "title": "准备开始？",
     "description": "安排您的初次咨询，迈出通往自然健康的第一步",
     "primaryCta": {

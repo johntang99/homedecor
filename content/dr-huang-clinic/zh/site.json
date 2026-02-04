@@ -14,5 +14,6 @@
     "instagram": "https://instagram.com/",
     "youtube": "https://youtube.com/",
     "wechat": "https://wechat.com/"
-  }
+  },
+  "headerVariant": "stacked"
 }

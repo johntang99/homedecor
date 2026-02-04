@@ -7,7 +7,9 @@ export interface HowItWorksSectionProps {
   title: string;
   subtitle?: string;
   steps: Step[];
-  variant?: 'horizontal' | 'vertical' | 'cards';
+  variant?: 'horizontal' | 'vertical' | 'cards' | 'vertical-image-right';
+  image?: string;
+  imageAlt?: string;
   className?: string;
 }
 
@@ -17,6 +19,8 @@ export default function HowItWorksSection({
   subtitle,
   steps,
   variant = 'horizontal',
+  image,
+  imageAlt,
   className,
 }: HowItWorksSectionProps) {
   return (
@@ -46,6 +50,10 @@ export default function HowItWorksSection({
         
         {variant === 'cards' && (
           <HowItWorksCards steps={steps} />
+        )}
+
+        {variant === 'vertical-image-right' && (
+          <HowItWorksVerticalImage steps={steps} image={image} imageAlt={imageAlt} />
         )}
       </div>
     </section>
@@ -146,6 +154,31 @@ function HowItWorksCards({ steps }: { steps: Step[] }) {
           </CardContent>
         </Card>
       ))}
+    </div>
+  );
+}
+
+function HowItWorksVerticalImage({
+  steps,
+  image,
+  imageAlt,
+}: {
+  steps: Step[];
+  image?: string;
+  imageAlt?: string;
+}) {
+  return (
+    <div className="grid lg:grid-cols-2 gap-10 items-start">
+      <div>
+        <HowItWorksVertical steps={steps} />
+      </div>
+      <div className="relative aspect-square rounded-2xl overflow-hidden bg-gray-100 shadow-lg">
+        {image ? (
+          <img src={image} alt={imageAlt || 'How it works'} className="h-full w-full object-cover" />
+        ) : (
+          <div className="h-full w-full bg-gradient-to-br from-primary/10 to-primary/5" />
+        )}
+      </div>
     </div>
   );
 }

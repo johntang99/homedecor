@@ -50,7 +50,10 @@ export async function getDefaultSite(): Promise<SiteConfig | null> {
  */
 export async function getSiteByDomain(domain: string): Promise<SiteConfig | null> {
   const sites = await getSites();
-  return sites.find(site => site.domain === domain) || null;
+  const normalized = normalizeHost(domain);
+  return (
+    sites.find((site) => normalizeHost(site.domain || '') === normalized) || null
+  );
 }
 
 /**
@@ -95,4 +98,13 @@ export function getSiteContentPath(siteId: string): string {
  */
 export function getSiteUploadPath(siteId: string): string {
   return path.join(process.cwd(), 'public', 'uploads', siteId);
+}
+
+export function normalizeHost(host: string): string {
+  return host.replace(/:\d+$/, '').replace(/^www\./, '').toLowerCase();
+}
+
+export async function getSiteByHost(host?: string | null): Promise<SiteConfig | null> {
+  if (!host) return null;
+  return getSiteByDomain(host);
 }

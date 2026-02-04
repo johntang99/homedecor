@@ -6,6 +6,7 @@ export interface ContentFileItem {
   label: string;
   path: string;
   scope: 'locale' | 'site';
+  publishDate?: string;
 }
 
 const CONTENT_DIR = path.join(process.cwd(), 'content');
@@ -43,17 +44,31 @@ export async function listContentFiles(
   const blogDir = path.join(CONTENT_DIR, siteId, locale, 'blog');
   try {
     const files = await fs.readdir(blogDir);
-    files
-      .filter((file) => file.endsWith('.json'))
-      .forEach((file) => {
-        const slug = file.replace('.json', '');
-        items.push({
-          id: `blog-${slug}`,
-          label: `Blog Post: ${titleCase(slug)}`,
-          path: `blog/${file}`,
-          scope: 'locale',
-        });
-      });
+    await Promise.all(
+      files
+        .filter((file) => file.endsWith('.json'))
+        .map(async (file) => {
+          const slug = file.replace('.json', '');
+          let title = '';
+          let publishDate = '';
+          try {
+            const raw = await fs.readFile(path.join(blogDir, file), 'utf-8');
+            const parsed = JSON.parse(raw);
+            title = typeof parsed.title === 'string' ? parsed.title : '';
+            publishDate =
+              typeof parsed.publishDate === 'string' ? parsed.publishDate : '';
+          } catch (error) {
+            // ignore parse errors
+          }
+          items.push({
+            id: `blog-${slug}`,
+            label: `Blog Post: ${title || titleCase(slug)}`,
+            path: `blog/${file}`,
+            scope: 'locale',
+            publishDate: publishDate || undefined,
+          });
+        })
+    );
   } catch (error) {
     // ignore missing blog directory
   }

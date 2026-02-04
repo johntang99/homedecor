@@ -1,10 +1,10 @@
-import { AdminPlaceholder } from '@/components/admin/AdminPlaceholder';
+import { MediaManager } from '@/components/admin/MediaManager';
+import { getSites } from '@/lib/sites';
 
-export default function AdminMediaPage() {
+export default async function AdminMediaPage() {
+  const sites = await getSites();
+  const selectedSiteId = sites[0]?.id || '';
   return (
-    <AdminPlaceholder
-      title="Media"
-      description="Upload, optimize, and organize images for each clinic."
-    />
+    <MediaManager sites={sites} selectedSiteId={selectedSiteId} />
   );
 }

@@ -1,5 +1,6 @@
 {
   "hero": {
+    "variant": "centered",
     "title": "Meet Dr. Huang",
     "subtitle": "Dedicated to Your Health & Wellness Through Traditional Chinese Medicine",
     "description": "Committed to healing through time-tested wisdom and personalized care.",
@@ -185,6 +186,7 @@
     "environment": "Our clinic provides a peaceful, welcoming environment designed to promote relaxation and healing. From the moment you enter, you'll feel the difference - calming colors, comfortable treatment rooms, and a warm, friendly atmosphere that puts patients at ease."
   },
   "cta": {
+    "variant": "centered",
     "title": "Ready to Start Your Healing Journey?",
     "description": "Schedule your initial consultation to discuss your health goals and discover how TCM can help you feel your best.",
     "primaryCta": {

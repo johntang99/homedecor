@@ -1,5 +1,6 @@
 {
   "hero": {
+    "variant": "centered",
     "title": "治疗病症",
     "subtitle": "传统中医为各种健康问题提供自然、有效的解决方案",
     "backgroundImage": "/uploads/dr-huang-clinic/conditions/hero-bg.jpg"
@@ -528,6 +529,7 @@
     }
   ],
   "cta": {
+    "variant": "centered",
     "title": "不确定我们能否帮助您？",
     "description": "安排免费咨询以讨论您的具体健康问题",
     "primaryCta": {

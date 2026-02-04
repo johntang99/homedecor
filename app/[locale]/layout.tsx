@@ -1,8 +1,9 @@
 import { notFound } from 'next/navigation';
+import { headers } from 'next/headers';
 import { locales, type Locale } from '@/lib/i18n';
-import { getDefaultSite } from '@/lib/sites';
-import { loadTheme, loadSiteInfo } from '@/lib/content';
-import type { SiteInfo } from '@/lib/types';
+import { getDefaultSite, getSiteByHost } from '@/lib/sites';
+import { loadPageContent, loadTheme, loadSiteInfo } from '@/lib/content';
+import type { HomePage, SiteInfo } from '@/lib/types';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
@@ -24,8 +25,8 @@ export default async function LocaleLayout({
     notFound();
   }
   
-  // Get default site (in a real multi-site system, this would be dynamic)
-  const site = await getDefaultSite();
+  const host = headers().get('host');
+  const site = (await getSiteByHost(host)) || (await getDefaultSite());
   
   if (!site) {
     return <div>No site configured</div>;
@@ -36,6 +37,8 @@ export default async function LocaleLayout({
   
   // Load site info for header/footer
   const siteInfo = await loadSiteInfo(site.id, locale as Locale) as SiteInfo | null;
+  const homeContent = await loadPageContent<HomePage>('home', locale as Locale);
+  const menuConfig = homeContent?.menu;
   
   // Generate inline style for theme variables
   const themeStyle = theme ? `
@@ -73,8 +76,14 @@ export default async function LocaleLayout({
         <style dangerouslySetInnerHTML={{ __html: themeStyle }} />
       )}
       
-      <div className="min-h-screen flex flex-col">
-        <Header locale={locale as Locale} siteId={site.id} siteInfo={siteInfo ?? undefined} />
+      <div className="min-h-screen flex flex-col relative">
+        <Header
+          locale={locale as Locale}
+          siteId={site.id}
+          siteInfo={siteInfo ?? undefined}
+          variant={menuConfig?.variant || siteInfo?.headerVariant || 'default'}
+          menu={menuConfig}
+        />
         <main className="flex-grow">{children}</main>
         <Footer locale={locale as Locale} siteId={site.id} />
       </div>

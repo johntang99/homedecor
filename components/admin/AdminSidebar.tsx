@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { BookOpen, Building2, FileText, Image, LayoutGrid, Settings, Users } from 'lucide-react';
+import { BookOpen, Building2, FileText, Image, Layers, LayoutGrid, Settings, Users } from 'lucide-react';
 
 const navigation = [
   { name: 'Sites', href: '/admin/sites', icon: Building2 },
@@ -7,6 +7,7 @@ const navigation = [
   { name: 'Blog Posts', href: '/admin/blog-posts', icon: BookOpen },
   { name: 'Media', href: '/admin/media', icon: Image },
   { name: 'Components', href: '/admin/components', icon: LayoutGrid },
+  { name: 'Variants', href: '/admin/variants', icon: Layers },
   { name: 'Users', href: '/admin/users', icon: Users },
   { name: 'Settings', href: '/admin/settings', icon: Settings },
 ];

@@ -23,6 +23,11 @@ async function loadUsers(): Promise<UserRecord[]> {
   }
 }
 
+export async function listUsers(): Promise<User[]> {
+  const users = await loadUsers();
+  return users.map(({ passwordHash: _, ...rest }) => rest);
+}
+
 async function saveUsers(users: UserRecord[]): Promise<void> {
   const dir = path.dirname(USERS_FILE);
   await fs.mkdir(dir, { recursive: true });
@@ -45,7 +50,11 @@ export async function authenticate(email: string, password: string): Promise<Ses
   const userIndex = users.findIndex((u) => u.id === user.id);
   if (userIndex !== -1) {
     users[userIndex].lastLoginAt = new Date().toISOString();
-    await saveUsers(users);
+    try {
+      await saveUsers(users);
+    } catch (error) {
+      console.warn('Skipping lastLoginAt write:', error);
+    }
   }
 
   const userWithoutPassword: User = {
@@ -170,6 +179,14 @@ export async function deleteUser(userId: string): Promise<void> {
     throw new Error('User not found');
   }
   await saveUsers(filtered);
+}
+
+export async function setPassword(userId: string, newPassword: string): Promise<void> {
+  const users = await loadUsers();
+  const user = users.find((u) => u.id === userId);
+  if (!user) throw new Error('User not found');
+  user.passwordHash = await bcrypt.hash(newPassword, 10);
+  await saveUsers(users);
 }
 
 export async function changePassword(

@@ -1,5 +1,6 @@
 {
   "hero": {
+    "variant": "centered",
     "title": "Traditional Chinese Medicine Modalities",
     "subtitle": "Comprehensive healing therapies tailored to your unique needs",
     "backgroundImage": "/uploads/dr-huang-clinic/services/hero-bg.jpg"
@@ -217,6 +218,7 @@
     ]
   },
   "cta": {
+    "variant": "centered",
     "title": "Ready to Experience Natural Healing?",
     "subtitle": "Schedule a consultation to discuss which treatments are right for you. We'll create a personalized plan tailored to your unique health needs.",
     "primaryCta": {

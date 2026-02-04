@@ -1,5 +1,6 @@
 {
   "hero": {
+    "variant": "centered",
     "title": "传统中医疗法",
     "subtitle": "为您量身定制的综合治疗方案",
     "backgroundImage": "/uploads/dr-huang-clinic/services/hero-bg.jpg"
@@ -217,6 +218,7 @@
     ]
   },
   "cta": {
+    "variant": "centered",
     "title": "准备体验自然疗法？",
     "subtitle": "预约咨询，了解哪些疗法最适合您。我们将根据您的独特健康需求制定个性化方案。",
     "primaryCta": {

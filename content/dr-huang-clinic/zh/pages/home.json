@@ -9,6 +9,24 @@
       "visible": true
     }
   },
+  "menu": {
+    "variant": "stacked",
+    "items": [
+      { "text": "首页", "url": "/zh" },
+      { "text": "服务项目", "url": "/zh/services" },
+      { "text": "治疗病症", "url": "/zh/conditions" },
+      { "text": "关于我们", "url": "/zh/about" },
+      { "text": "案例研究", "url": "/zh/case-studies" },
+      { "text": "图库", "url": "/zh/gallery" },
+      { "text": "首次就诊", "url": "/zh/new-patients" },
+      { "text": "博客", "url": "/zh/blog" },
+      { "text": "联系我们", "url": "/zh/contact" }
+    ],
+    "cta": {
+      "text": "在线预约",
+      "link": "/zh/contact"
+    }
+  },
   "hero": {
     "variant": "split-photo-right",
     "image": "/uploads/dr-huang-clinic/home/hero-bg.jpg",
@@ -77,6 +95,7 @@
     ]
   },
   "testimonials": {
+    "variant": "grid",
     "badge": "患者成功案例",
     "title": "真实患者的真实效果",
     "subtitle": "听听我们患者的康复之旅",
@@ -108,6 +127,9 @@
   "howItWorks": {
     "title": "中医如何运作",
     "subtitle": "整体治疗方法",
+    "variant": "vertical-image-right",
+    "image": "/uploads/dr-huang-clinic/home/welcome-section.jpg",
+    "imageAlt": "黄医生诊所的诊疗服务",
     "steps": [
       {
         "number": 1,
@@ -130,6 +152,7 @@
     ]
   },
   "conditions": {
+    "variant": "grid-cards",
     "title": "我们治疗的病症",
     "subtitle": "传统中医可以帮助治疗多种健康问题",
     "conditions": [
@@ -247,6 +270,7 @@
     }
   },
   "blog": {
+    "variant": "cards-grid",
     "badge": "学习与探索",
     "title": "博客与媒体最新资讯",
     "subtitle": "关于中医和健康的教育资源",
@@ -285,6 +309,7 @@
     }
   },
   "gallery": {
+    "variant": "grid-uniform",
     "badge": "参观我们的诊所",
     "title": "虚拟参观",
     "subtitle": "查看我们温馨、宁静的治疗环境",
@@ -380,6 +405,7 @@
     ]
   },
   "cta": {
+    "variant": "centered",
     "title": "准备开始您的康复之旅吗？",
     "subtitle": "今天迈出自然健康的第一步",
     "primaryCta": {

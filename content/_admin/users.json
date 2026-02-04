@@ -8,5 +8,17 @@
     "passwordHash": "$2b$10$/0JWXOsVJhECqGijCIxdWOR.dJxaN2/2CIaVZwmMqixqKgvfe3Nqu",
     "createdAt": "2024-01-01T00:00:00Z",
     "lastLoginAt": "2026-02-02T21:25:58.624Z"
+  },
+  {
+    "id": "user-1770166350179",
+    "email": "jackylee@example.com",
+    "name": "Jacky Lee",
+    "role": "site_admin",
+    "sites": [
+      "dr-huang-clinic"
+    ],
+    "passwordHash": "$2b$10$6AYZkx9FT/rc.snMRAhwnuU9YHk0wxdmddMZFztUIoEQ2EAEkoEUi",
+    "createdAt": "2026-02-04T00:52:30.179Z",
+    "lastLoginAt": "2026-02-04T00:52:30.179Z"
   }
 ]

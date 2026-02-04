@@ -1,5 +1,6 @@
 {
   "hero": {
+    "variant": "centered",
     "title": "Welcome New Patients",
     "subtitle": "Everything you need to know before your first visit to Dr. Huang Clinic",
     "backgroundImage": "/uploads/dr-huang-clinic/new-patients/hero-bg.jpg"
@@ -237,6 +238,7 @@
     ]
   },
   "cta": {
+    "variant": "centered",
     "title": "Ready to Get Started?",
     "description": "Schedule your initial consultation and take the first step toward natural wellness",
     "primaryCta": {

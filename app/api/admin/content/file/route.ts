@@ -109,11 +109,15 @@ export async function POST(request: NextRequest) {
   if (action === 'create') {
     const slug = payload.slug as string | undefined;
     const templateId = (payload.templateId as string | undefined) || 'basic';
+    const targetDir = (payload.targetDir as string | undefined) || 'pages';
     if (!slug) {
       return NextResponse.json({ message: 'slug is required' }, { status: 400 });
     }
+    if (!['pages', 'blog'].includes(targetDir)) {
+      return NextResponse.json({ message: 'Invalid target directory' }, { status: 400 });
+    }
     const normalized = slug.trim().toLowerCase();
-    const filePath = `pages/${normalized}.json`;
+    const filePath = `${targetDir}/${normalized}.json`;
     const resolved = resolveContentPath(siteId, locale, filePath);
     if (!resolved) {
       return NextResponse.json({ message: 'Invalid path' }, { status: 400 });
@@ -135,6 +139,7 @@ export async function POST(request: NextRequest) {
   if (action === 'duplicate') {
     const sourcePath = payload.path as string | undefined;
     const slug = payload.slug as string | undefined;
+    const targetDir = payload.targetDir as string | undefined;
     if (!sourcePath || !slug) {
       return NextResponse.json(
         { message: 'path and slug are required' },
@@ -142,17 +147,70 @@ export async function POST(request: NextRequest) {
       );
     }
     const normalized = slug.trim().toLowerCase();
-    const targetPath = `pages/${normalized}.json`;
+    const sourceDir = sourcePath.startsWith('blog/') ? 'blog' : 'pages';
+    const resolvedTargetDir =
+      sourceDir === 'blog' ? 'blog' : targetDir && ['pages', 'blog'].includes(targetDir) ? targetDir : 'pages';
+    if (sourceDir === 'blog' && resolvedTargetDir !== 'blog') {
+      return NextResponse.json(
+        { message: 'Blog posts must be duplicated into blog/' },
+        { status: 400 }
+      );
+    }
+    const targetPath = `${resolvedTargetDir}/${normalized}.json`;
     const sourceResolved = resolveContentPath(siteId, locale, sourcePath);
     const targetResolved = resolveContentPath(siteId, locale, targetPath);
     if (!sourceResolved || !targetResolved) {
       return NextResponse.json({ message: 'Invalid path' }, { status: 400 });
     }
     const content = await fs.readFile(sourceResolved, 'utf-8');
+    let nextContent = content;
+    if (sourceDir === 'blog') {
+      try {
+        const parsed = JSON.parse(content);
+        parsed.slug = normalized;
+        nextContent = JSON.stringify(parsed, null, 2);
+      } catch (error) {
+        // fallback to raw content if JSON is invalid
+      }
+    }
     await fs.mkdir(path.dirname(targetResolved), { recursive: true });
-    await fs.writeFile(targetResolved, content);
+    await fs.writeFile(targetResolved, nextContent);
     return NextResponse.json({ path: targetPath });
   }
 
   return NextResponse.json({ message: 'Invalid action' }, { status: 400 });
+}
+
+export async function DELETE(request: NextRequest) {
+  const session = await getSessionFromRequest(request);
+  if (!session) {
+    return NextResponse.json({ message: 'Not authenticated' }, { status: 401 });
+  }
+
+  const { searchParams } = new URL(request.url);
+  const siteId = searchParams.get('siteId');
+  const locale = searchParams.get('locale');
+  const filePath = searchParams.get('path');
+
+  if (!siteId || !locale || !filePath) {
+    return NextResponse.json(
+      { message: 'siteId, locale, and path are required' },
+      { status: 400 }
+    );
+  }
+
+  if (['theme.json', 'site.json', 'navigation.json'].includes(filePath)) {
+    return NextResponse.json(
+      { message: 'Protected file cannot be deleted' },
+      { status: 400 }
+    );
+  }
+
+  const resolved = resolveContentPath(siteId, locale, filePath);
+  if (!resolved) {
+    return NextResponse.json({ message: 'Invalid path' }, { status: 400 });
+  }
+
+  await fs.unlink(resolved);
+  return NextResponse.json({ success: true });
 }

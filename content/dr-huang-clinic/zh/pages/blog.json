@@ -1,5 +1,6 @@
 {
   "hero": {
+    "variant": "centered",
     "title": "中医博客和资源",
     "subtitle": "关于传统中医、健康和自然疗法的教育文章和视频",
     "backgroundImage": "/uploads/dr-huang-clinic/blog/hero-bg.jpg"
@@ -146,6 +147,7 @@
     }
   ],
   "cta": {
+    "variant": "centered",
     "title": "对中医有疑问？",
     "description": "安排咨询以讨论传统中医如何帮助您实现健康目标",
     "primaryCta": {

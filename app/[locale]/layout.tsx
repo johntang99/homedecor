@@ -2,8 +2,8 @@ import { notFound } from 'next/navigation';
 import { headers } from 'next/headers';
 import { locales, type Locale } from '@/lib/i18n';
 import { getDefaultSite, getSiteByHost } from '@/lib/sites';
-import { loadPageContent, loadSeo, loadTheme, loadSiteInfo } from '@/lib/content';
-import type { HomePage, SeoConfig, SiteInfo } from '@/lib/types';
+import { loadFooter, loadPageContent, loadSeo, loadTheme, loadSiteInfo } from '@/lib/content';
+import type { FooterSection, HomePage, SeoConfig, SiteInfo } from '@/lib/types';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { getBaseUrlFromHost } from '@/lib/seo';
@@ -85,9 +85,10 @@ export default async function LocaleLayout({
   const theme = await loadTheme(site.id);
   
   // Load site info for header/footer
-  const [siteInfo, seo] = await Promise.all([
+  const [siteInfo, seo, footer] = await Promise.all([
     loadSiteInfo(site.id, locale as Locale) as Promise<SiteInfo | null>,
     loadSeo(site.id, locale as Locale) as Promise<SeoConfig | null>,
+    loadFooter<FooterSection>(site.id, locale as Locale),
   ]);
   const homeContent = await loadPageContent<HomePage>('home', locale as Locale);
   const menuConfig = homeContent?.menu;
@@ -163,7 +164,11 @@ export default async function LocaleLayout({
           menu={menuConfig}
         />
         <main className="flex-grow">{children}</main>
-        <Footer locale={locale as Locale} siteId={site.id} />
+        <Footer
+          locale={locale as Locale}
+          siteId={site.id}
+          footer={footer ?? undefined}
+        />
       </div>
     </>
   );

@@ -103,6 +103,13 @@ export async function loadSeo(siteId: string, locale: Locale): Promise<SeoConfig
 }
 
 /**
+ * Load footer config
+ */
+export async function loadFooter<T>(siteId: string, locale: Locale): Promise<T | null> {
+  return loadContent<T>(siteId, locale, 'footer.json');
+}
+
+/**
  * Load all items from a directory (e.g., blog posts, services)
  */
 export async function loadAllItems<T>(

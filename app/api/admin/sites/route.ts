@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createSite, getSiteById, getSites } from '@/lib/sites';
 import { getSessionFromRequest } from '@/lib/admin/auth';
+import { getDefaultFooter } from '@/lib/footer';
 import type { SiteConfig } from '@/lib/types';
 import fs from 'fs/promises';
 import path from 'path';
@@ -85,7 +86,24 @@ export async function POST(request: NextRequest) {
       );
     };
 
+    const ensureFooterFiles = async () => {
+      const locales = created.supportedLocales?.length ? created.supportedLocales : ['en'];
+      await Promise.all(
+        locales.map(async (locale) => {
+          const footerPath = path.join(process.cwd(), 'content', created.id, locale, 'footer.json');
+          try {
+            await fs.access(footerPath);
+          } catch (error) {
+            await fs.mkdir(path.dirname(footerPath), { recursive: true });
+            const footer = getDefaultFooter(locale as any);
+            await fs.writeFile(footerPath, JSON.stringify(footer, null, 2));
+          }
+        })
+      );
+    };
+
     await ensureSeoFiles();
+    await ensureFooterFiles();
 
     return NextResponse.json(created);
   } catch (error: any) {

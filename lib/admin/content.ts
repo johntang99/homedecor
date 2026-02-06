@@ -1,5 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
+import { getDefaultFooter } from '../footer';
 
 export interface ContentFileItem {
   id: string;
@@ -47,12 +48,28 @@ async function ensureSeoFile(siteId: string, locale: string) {
   }
 }
 
+async function ensureFooterFile(siteId: string, locale: string) {
+  const footerPath = path.join(CONTENT_DIR, siteId, locale, 'footer.json');
+  try {
+    await fs.access(footerPath);
+  } catch (error) {
+    try {
+      await fs.mkdir(path.dirname(footerPath), { recursive: true });
+      const footer = getDefaultFooter(locale as any);
+      await fs.writeFile(footerPath, JSON.stringify(footer, null, 2));
+    } catch (writeError) {
+      // ignore write failures (read-only environments)
+    }
+  }
+}
+
 export async function listContentFiles(
   siteId: string,
   locale: string
 ): Promise<ContentFileItem[]> {
   const items: ContentFileItem[] = [];
   await ensureSeoFile(siteId, locale);
+  await ensureFooterFile(siteId, locale);
 
   const pagesDir = path.join(CONTENT_DIR, siteId, locale, 'pages');
   try {
@@ -117,6 +134,12 @@ export async function listContentFiles(
     scope: 'locale',
   });
   items.push({
+    id: 'footer',
+    label: 'Footer',
+    path: 'footer.json',
+    scope: 'locale',
+  });
+  items.push({
     id: 'site',
     label: 'Site Info',
     path: 'site.json',
@@ -147,6 +170,10 @@ export function resolveContentPath(siteId: string, locale: string, filePath: str
 
   if (filePath === 'seo.json') {
     return path.join(CONTENT_DIR, siteId, locale, 'seo.json');
+  }
+
+  if (filePath === 'footer.json') {
+    return path.join(CONTENT_DIR, siteId, locale, 'footer.json');
   }
 
   if (filePath.startsWith('pages/')) {

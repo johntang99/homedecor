@@ -312,20 +312,22 @@ export interface CTASection {
 }
 
 export interface FooterSection {
-  logo: {
-    image?: string;
-    text: string;
+  brand: {
+    logoText: string;
+    name: string;
+    description: string;
   };
-  description: string;
   quickLinks: NavigationLink[];
   services: NavigationLink[];
   contact: {
-    address: string;
+    addressLines: string[];
     phone: string;
+    phoneLink?: string;
     email: string;
+    emailLink?: string;
   };
-  hours: BusinessHours[];
-  social?: SocialMedia;
+  hours: string[];
+  legalLinks?: NavigationLink[];
   copyright: string;
 }
 

@@ -1,0 +1,36 @@
+{
+  "brand": {
+    "logoText": "TCM",
+    "name": "Dr Huang Clinic",
+    "description": "Traditional Chinese Medicine and Acupuncture serving the community with holistic healing."
+  },
+  "quickLinks": [
+    { "text": "About Us", "url": "/en/about" },
+    { "text": "Services", "url": "/en/services" },
+    { "text": "Conditions", "url": "/en/conditions" },
+    { "text": "Case Studies", "url": "/en/case-studies" },
+    { "text": "New Visit", "url": "/en/new-patients" },
+    { "text": "New Patients", "url": "/en/new-patients" },
+    { "text": "Blog", "url": "/en/blog" },
+    { "text": "Contact", "url": "/en/contact" }
+  ],
+  "services": [
+    { "text": "Acupuncture", "url": "/en/services#acupuncture" },
+    { "text": "Herbal Medicine", "url": "/en/services#herbs" },
+    { "text": "Cupping", "url": "/en/services#cupping" },
+    { "text": "Tui Na", "url": "/en/services#tuina" }
+  ],
+  "contact": {
+    "addressLines": ["71 East Main Street", "Middletown, NY 10940"],
+    "phone": "(845) 381-1106",
+    "phoneLink": "tel:+18453811106",
+    "email": "sancai.acu@gmail.com",
+    "emailLink": "mailto:sancai.acu@gmail.com"
+  },
+  "hours": ["Mon-Fri: 9:00 AM - 6:00 PM", "Sat: 10:00 AM - 2:00 PM"],
+  "legalLinks": [
+    { "text": "Privacy Policy", "url": "/en/privacy" },
+    { "text": "Terms of Service", "url": "/en/terms" }
+  ],
+  "copyright": "© {year} Dr Huang Clinic. All rights reserved."
+}

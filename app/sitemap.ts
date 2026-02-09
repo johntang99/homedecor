@@ -61,20 +61,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Pages
     const pageSlugs = await listPageSlugs(site.id, locale);
     for (const slug of pageSlugs) {
-      const filePath = path.join(CONTENT_DIR, site.id, locale, 'pages', `${slug}.json`);
       entries.push({
         url: new URL(`/${locale}/${slug}`, baseUrl).toString(),
-        lastModified: await getLastModified(filePath),
+        lastModified: new Date(),
       });
     }
 
     // Blog posts
     const blogSlugs = await listBlogSlugs(site.id, locale);
     for (const slug of blogSlugs) {
-      const filePath = path.join(CONTENT_DIR, site.id, locale, 'blog', `${slug}.json`);
       entries.push({
         url: new URL(`/${locale}/blog/${slug}`, baseUrl).toString(),
-        lastModified: await getLastModified(filePath),
+        lastModified: new Date(),
       });
     }
   }

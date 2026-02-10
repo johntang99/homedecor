@@ -37,6 +37,7 @@ export function BookingSettingsManager({
   const [services, setServices] = useState<BookingService[]>([]);
   const [status, setStatus] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [importing, setImporting] = useState(false);
 
   const loadSettings = async () => {
     if (!siteId) return;
@@ -142,6 +143,38 @@ export function BookingSettingsManager({
     setStatus('Saved');
   };
 
+  const handleImport = async () => {
+    if (!siteId) return;
+    const confirmed = window.confirm(
+      'Import booking settings, services, and bookings from JSON files into the database?'
+    );
+    if (!confirmed) return;
+    setImporting(true);
+    setStatus(null);
+    try {
+      const response = await fetch('/api/admin/booking/import', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ siteId }),
+      });
+      const payload = await response.json();
+      if (!response.ok) {
+        throw new Error(payload.message || 'Import failed');
+      }
+      setStatus(
+        `Imported services: ${payload.servicesImported || 0}, settings: ${
+          payload.settingsImported || 0
+        }, bookings: ${payload.bookingsImported || 0}.`
+      );
+      await loadSettings();
+      await loadServices();
+    } catch (error: any) {
+      setStatus(error?.message || 'Import failed');
+    } finally {
+      setImporting(false);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -149,19 +182,24 @@ export function BookingSettingsManager({
           <h1 className="text-2xl font-semibold text-gray-900">Booking Settings</h1>
           <p className="text-sm text-gray-600">Configure services, hours, and booking rules.</p>
         </div>
-        <div>
-          <label className="block text-xs font-medium text-gray-500">Site</label>
-          <select
-            className="mt-1 rounded-md border border-gray-200 px-3 py-2 text-sm"
-            value={siteId}
-            onChange={(event) => setSiteId(event.target.value)}
-          >
-            {sites.map((site) => (
-              <option key={site.id} value={site.id}>
-                {site.name}
-              </option>
-            ))}
-          </select>
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-end">
+          <div>
+            <label className="block text-xs font-medium text-gray-500">Site</label>
+            <select
+              className="mt-1 rounded-md border border-gray-200 px-3 py-2 text-sm"
+              value={siteId}
+              onChange={(event) => setSiteId(event.target.value)}
+            >
+              {sites.map((site) => (
+                <option key={site.id} value={site.id}>
+                  {site.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <Button variant="outline" onClick={handleImport} disabled={importing}>
+            {importing ? 'Importing…' : 'Import from JSON'}
+          </Button>
         </div>
       </div>
 

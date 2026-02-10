@@ -7,6 +7,12 @@ import { headers } from 'next/headers';
 import { getSiteByHost } from './sites';
 import fs from 'fs';
 import path from 'path';
+import {
+  canUseContentDb,
+  fetchContentEntry,
+  fetchThemeEntry,
+  listContentEntriesByPrefix,
+} from './contentDb';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content');
 
@@ -33,6 +39,13 @@ export async function loadContent<T>(
   locale: Locale,
   contentPath: string
 ): Promise<T | null> {
+  if (canUseContentDb()) {
+    const entry = await fetchContentEntry(siteId, locale, contentPath);
+    if (entry?.data) {
+      return entry.data as T;
+    }
+  }
+
   try {
     const filePath = path.join(CONTENT_DIR, siteId, locale, contentPath);
     
@@ -80,13 +93,20 @@ export async function loadNavigation(siteId: string, locale: Locale) {
  * Load theme config
  */
 export async function loadTheme(siteId: string) {
+  if (canUseContentDb()) {
+    const entry = await fetchThemeEntry(siteId);
+    if (entry?.data) {
+      return entry.data;
+    }
+  }
+
   try {
     const filePath = path.join(CONTENT_DIR, siteId, 'theme.json');
-    
+
     if (!fs.existsSync(filePath)) {
       return null;
     }
-    
+
     const data = await fs.promises.readFile(filePath, 'utf-8');
     return JSON.parse(data);
   } catch (error) {
@@ -117,6 +137,16 @@ export async function loadAllItems<T>(
   locale: Locale,
   directory: string
 ): Promise<T[]> {
+  if (canUseContentDb()) {
+    const resolvedSiteId = await resolveSiteId(siteId);
+    const entries = await listContentEntriesByPrefix(
+      resolvedSiteId,
+      locale,
+      `${directory}/`
+    );
+    return entries.map((entry) => entry.data as T);
+  }
+
   try {
     const resolvedSiteId = await resolveSiteId(siteId);
     const dirPath = path.join(CONTENT_DIR, resolvedSiteId, locale, directory);

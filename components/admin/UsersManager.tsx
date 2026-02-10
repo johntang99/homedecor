@@ -18,7 +18,9 @@ export function UsersManager({ sites }: UsersManagerProps) {
   const [drafts, setDrafts] = useState<Record<string, UserDraft>>({});
   const [status, setStatus] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [importing, setImporting] = useState(false);
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+  const [currentUserRole, setCurrentUserRole] = useState<User['role'] | null>(null);
 
   const [newUser, setNewUser] = useState<UserDraft>({
     name: '',
@@ -51,6 +53,7 @@ export function UsersManager({ sites }: UsersManagerProps) {
     if (!response.ok) return;
     const payload = await response.json();
     setCurrentUserId(payload?.user?.id || null);
+    setCurrentUserRole(payload?.user?.role || null);
   };
 
   useEffect(() => {
@@ -72,6 +75,14 @@ export function UsersManager({ sites }: UsersManagerProps) {
   }, [users]);
 
   const siteOptions = useMemo(() => sites.map((site) => site.id), [sites]);
+
+  if (currentUserRole && currentUserRole !== 'super_admin') {
+    return (
+      <div className="rounded-lg border border-gray-200 bg-white p-6 text-sm text-gray-600">
+        You do not have access to manage users.
+      </div>
+    );
+  }
 
   const updateDraft = (id: string, updates: Partial<UserDraft>) => {
     setDrafts((current) => ({
@@ -100,6 +111,28 @@ export function UsersManager({ sites }: UsersManagerProps) {
     }
     setNewUser({ name: '', email: '', role: 'editor', sites: [], password: '' });
     await loadUsers();
+  };
+
+  const handleImport = async () => {
+    const confirmed = window.confirm(
+      'Import users from content/_admin/users.json into the database?'
+    );
+    if (!confirmed) return;
+    setStatus(null);
+    setImporting(true);
+    try {
+      const response = await fetch('/api/admin/users/import', { method: 'POST' });
+      const payload = await response.json();
+      if (!response.ok) {
+        throw new Error(payload.message || 'Import failed');
+      }
+      setStatus(`Imported ${payload.imported || 0} user(s).`);
+      await loadUsers();
+    } catch (error: any) {
+      setStatus(error?.message || 'Import failed');
+    } finally {
+      setImporting(false);
+    }
   };
 
   const handleSave = async (id: string) => {
@@ -158,9 +191,19 @@ export function UsersManager({ sites }: UsersManagerProps) {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-semibold text-gray-900">Users</h1>
-        <p className="text-sm text-gray-600">Invite team members and manage roles.</p>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h1 className="text-2xl font-semibold text-gray-900">Users</h1>
+          <p className="text-sm text-gray-600">Invite team members and manage roles.</p>
+        </div>
+        <button
+          type="button"
+          onClick={handleImport}
+          disabled={importing}
+          className="px-4 py-2 rounded-lg border border-gray-200 text-sm text-gray-700 hover:bg-gray-50 disabled:opacity-60"
+        >
+          {importing ? 'Importing…' : 'Import Users'}
+        </button>
       </div>
 
       {status && (

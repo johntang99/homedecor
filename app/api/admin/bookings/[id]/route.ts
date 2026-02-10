@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getSessionFromRequest } from '@/lib/admin/auth';
 import { moveBooking, updateBooking } from '@/lib/booking/storage';
 import type { BookingRecord } from '@/lib/types';
+import { canManageBookings, requireSiteAccess } from '@/lib/admin/permissions';
 
 export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
   const session = await getSessionFromRequest(request);
@@ -15,6 +16,15 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
 
   if (!siteId || !booking) {
     return NextResponse.json({ message: 'Missing siteId or booking' }, { status: 400 });
+  }
+
+  try {
+    requireSiteAccess(session.user, siteId);
+  } catch {
+    return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
+  }
+  if (!canManageBookings(session.user)) {
+    return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
   }
 
   if (booking.id !== params.id) {

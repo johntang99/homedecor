@@ -31,6 +31,7 @@ export function BookingsManager({ sites, selectedSiteId }: BookingsManagerProps)
   const [drafts, setDrafts] = useState<Record<string, BookingRecord>>({});
   const [status, setStatus] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [importing, setImporting] = useState(false);
   const [selectedCustomerKey, setSelectedCustomerKey] = useState<string | null>(null);
   const [viewMode, setViewMode] = useState<'calendar' | 'list' | 'customers'>('calendar');
   const [hoverCard, setHoverCard] = useState<{
@@ -82,6 +83,38 @@ export function BookingsManager({ sites, selectedSiteId }: BookingsManagerProps)
       setStatus(error.message);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleImport = async () => {
+    if (!siteId) return;
+    const confirmed = window.confirm(
+      'Import bookings (plus settings/services) from JSON files into the database?'
+    );
+    if (!confirmed) return;
+    setImporting(true);
+    setStatus(null);
+    try {
+      const response = await fetch('/api/admin/booking/import', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ siteId }),
+      });
+      const payload = await response.json();
+      if (!response.ok) {
+        throw new Error(payload.message || 'Import failed');
+      }
+      setStatus(
+        `Imported services: ${payload.servicesImported || 0}, settings: ${
+          payload.settingsImported || 0
+        }, bookings: ${payload.bookingsImported || 0}.`
+      );
+      await loadServices();
+      await loadBookings();
+    } catch (error: any) {
+      setStatus(error?.message || 'Import failed');
+    } finally {
+      setImporting(false);
     }
   };
 
@@ -194,7 +227,7 @@ export function BookingsManager({ sites, selectedSiteId }: BookingsManagerProps)
           <h1 className="text-2xl font-semibold text-gray-900">Bookings</h1>
           <p className="text-sm text-gray-600">Review and manage client bookings.</p>
         </div>
-        <div className="grid gap-3 sm:grid-cols-3 sm:items-end">
+        <div className="grid gap-3 sm:grid-cols-4 sm:items-end">
           <div>
             <label className="block text-xs font-medium text-gray-500">Site</label>
             <select
@@ -226,6 +259,11 @@ export function BookingsManager({ sites, selectedSiteId }: BookingsManagerProps)
               value={to}
               onChange={(event) => setTo(event.target.value)}
             />
+          </div>
+          <div className="flex items-end">
+            <Button variant="outline" onClick={handleImport} disabled={importing}>
+              {importing ? 'Importing…' : 'Import from JSON'}
+            </Button>
           </div>
         </div>
       </div>

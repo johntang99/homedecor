@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getSiteById, updateSite } from '@/lib/sites';
 import { getSessionFromRequest } from '@/lib/admin/auth';
 import type { SiteConfig } from '@/lib/types';
+import { isSuperAdmin, requireRole, requireSiteAccess } from '@/lib/admin/permissions';
 
 export async function GET(
   request: NextRequest,
@@ -10,6 +11,12 @@ export async function GET(
   const session = await getSessionFromRequest(request);
   if (!session) {
     return NextResponse.json({ message: 'Not authenticated' }, { status: 401 });
+  }
+
+  try {
+    requireSiteAccess(session.user, params.id);
+  } catch {
+    return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
   }
 
   const site = await getSiteById(params.id);
@@ -27,6 +34,13 @@ export async function PUT(
   const session = await getSessionFromRequest(request);
   if (!session) {
     return NextResponse.json({ message: 'Not authenticated' }, { status: 401 });
+  }
+
+  try {
+    requireRole(session.user, ['super_admin', 'site_admin']);
+    requireSiteAccess(session.user, params.id);
+  } catch {
+    return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
   }
 
   const payload = (await request.json()) as Partial<SiteConfig>;

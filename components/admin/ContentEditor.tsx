@@ -181,6 +181,49 @@ export function ContentEditor({
     setStatus('Saved');
   };
 
+  const handleImport = async () => {
+    setStatus(null);
+    setLoading(true);
+    try {
+      const response = await fetch('/api/admin/content/import', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ siteId, locale }),
+      });
+      const payload = await response.json();
+      if (!response.ok) {
+        throw new Error(payload.message || 'Import failed');
+      }
+      setStatus(`Imported ${payload.imported || 0} items from JSON.`);
+      await loadFiles(activeFile?.path);
+    } catch (error: any) {
+      setStatus(error?.message || 'Import failed');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleExport = async () => {
+    setStatus(null);
+    setLoading(true);
+    try {
+      const response = await fetch('/api/admin/content/export', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ siteId, locale }),
+      });
+      const payload = await response.json();
+      if (!response.ok) {
+        throw new Error(payload.message || 'Export failed');
+      }
+      setStatus(`Exported to ${payload.exportPath}`);
+    } catch (error: any) {
+      setStatus(error?.message || 'Export failed');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleCreate = async () => {
     const isBlog = fileFilter === 'blog';
     const slug = window.prompt(
@@ -588,6 +631,22 @@ export function ContentEditor({
                 </option>
               ))}
             </select>
+          </div>
+          <div className="flex items-end gap-2 pt-4 sm:pt-0">
+            <button
+              type="button"
+              onClick={handleImport}
+              className="px-3 py-2 rounded-md border border-gray-200 text-xs text-gray-700 hover:bg-gray-50"
+            >
+              Import JSON
+            </button>
+            <button
+              type="button"
+              onClick={handleExport}
+              className="px-3 py-2 rounded-md border border-gray-200 text-xs text-gray-700 hover:bg-gray-50"
+            >
+              Export JSON
+            </button>
           </div>
         </div>
       </div>

@@ -6,6 +6,13 @@ import type { BookingSettings, BookingService } from '@/lib/types';
 import type { SiteConfig } from '@/lib/types';
 import fs from 'fs/promises';
 import path from 'path';
+import {
+  canUseContentDb,
+  listContentEntriesForSite,
+  upsertContentEntry,
+} from '@/lib/contentDb';
+import { saveBookingServicesDb, saveBookingSettingsDb } from '@/lib/booking/db';
+import { filterSitesForUser, isSuperAdmin } from '@/lib/admin/permissions';
 
 export async function GET(request: NextRequest) {
   const session = await getSessionFromRequest(request);
@@ -14,13 +21,17 @@ export async function GET(request: NextRequest) {
   }
 
   const sites = await getSites();
-  return NextResponse.json(sites);
+  const visible = filterSitesForUser(sites, session.user);
+  return NextResponse.json(visible);
 }
 
 export async function POST(request: NextRequest) {
   const session = await getSessionFromRequest(request);
   if (!session) {
     return NextResponse.json({ message: 'Not authenticated' }, { status: 401 });
+  }
+  if (!isSuperAdmin(session.user)) {
+    return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
   }
 
   const payload = (await request.json()) as Partial<SiteConfig> & {
@@ -46,42 +57,62 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ message: 'Clone source not found' }, { status: 404 });
       }
 
-      const contentRoot = path.join(process.cwd(), 'content');
-      const sourceDir = path.join(contentRoot, source.id);
-      const targetDir = path.join(contentRoot, created.id);
+      if (canUseContentDb()) {
+        const entries = await listContentEntriesForSite(source.id);
+        await Promise.all(
+          entries.map((entry) =>
+            upsertContentEntry({
+              siteId: created.id,
+              locale: entry.locale,
+              path: entry.path,
+              data: entry.data,
+              updatedBy: session.user.id,
+            })
+          )
+        );
+      } else {
+        const contentRoot = path.join(process.cwd(), 'content');
+        const sourceDir = path.join(contentRoot, source.id);
+        const targetDir = path.join(contentRoot, created.id);
 
-      await fs.cp(sourceDir, targetDir, { recursive: true, errorOnExist: false });
+        await fs.cp(sourceDir, targetDir, { recursive: true, errorOnExist: false });
 
-      const uploadsRoot = path.join(process.cwd(), 'public', 'uploads');
-      const sourceUploads = path.join(uploadsRoot, source.id);
-      const targetUploads = path.join(uploadsRoot, created.id);
-      await fs.cp(sourceUploads, targetUploads, { recursive: true, errorOnExist: false });
+        const uploadsRoot = path.join(process.cwd(), 'public', 'uploads');
+        const sourceUploads = path.join(uploadsRoot, source.id);
+        const targetUploads = path.join(uploadsRoot, created.id);
+        await fs.cp(sourceUploads, targetUploads, { recursive: true, errorOnExist: false });
+      }
     }
 
     const ensureSeoFiles = async () => {
       const locales = created.supportedLocales?.length ? created.supportedLocales : ['en'];
       await Promise.all(
         locales.map(async (locale) => {
+          const seoPayload = {
+            title: created.name,
+            description: '',
+            home: {
+              title: '',
+              description: '',
+            },
+          };
+          if (canUseContentDb()) {
+            await upsertContentEntry({
+              siteId: created.id,
+              locale,
+              path: 'seo.json',
+              data: seoPayload,
+              updatedBy: session.user.id,
+            });
+            return;
+          }
+
           const seoPath = path.join(process.cwd(), 'content', created.id, locale, 'seo.json');
           try {
             await fs.access(seoPath);
           } catch (error) {
             await fs.mkdir(path.dirname(seoPath), { recursive: true });
-            await fs.writeFile(
-              seoPath,
-              JSON.stringify(
-                {
-                  title: created.name,
-                  description: '',
-                  home: {
-                    title: '',
-                    description: '',
-                  },
-                },
-                null,
-                2
-              )
-            );
+            await fs.writeFile(seoPath, JSON.stringify(seoPayload, null, 2));
           }
         })
       );
@@ -91,12 +122,23 @@ export async function POST(request: NextRequest) {
       const locales = created.supportedLocales?.length ? created.supportedLocales : ['en'];
       await Promise.all(
         locales.map(async (locale) => {
+          const footer = getDefaultFooter(locale as any);
+          if (canUseContentDb()) {
+            await upsertContentEntry({
+              siteId: created.id,
+              locale,
+              path: 'footer.json',
+              data: footer,
+              updatedBy: session.user.id,
+            });
+            return;
+          }
+
           const footerPath = path.join(process.cwd(), 'content', created.id, locale, 'footer.json');
           try {
             await fs.access(footerPath);
           } catch (error) {
             await fs.mkdir(path.dirname(footerPath), { recursive: true });
-            const footer = getDefaultFooter(locale as any);
             await fs.writeFile(footerPath, JSON.stringify(footer, null, 2));
           }
         })
@@ -128,6 +170,11 @@ export async function POST(request: NextRequest) {
         notificationEmails: [],
         notificationPhones: [],
       };
+      if (canUseContentDb()) {
+        await saveBookingServicesDb(created.id, defaultServices);
+        await saveBookingSettingsDb(created.id, defaultSettings);
+        return;
+      }
       try {
         await fs.mkdir(bookingRoot, { recursive: true });
         await fs.access(servicesPath);

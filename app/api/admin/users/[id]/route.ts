@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { deleteUser, getSessionFromRequest, updateUser } from '@/lib/admin/auth';
 import type { User } from '@/lib/types';
+import { isSuperAdmin } from '@/lib/admin/permissions';
 
 interface RouteParams {
   params: {
@@ -12,6 +13,9 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
   const session = await getSessionFromRequest(request);
   if (!session) {
     return NextResponse.json({ message: 'Not authenticated' }, { status: 401 });
+  }
+  if (!isSuperAdmin(session.user)) {
+    return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
   }
 
   const payload = await request.json();
@@ -33,6 +37,9 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
   const session = await getSessionFromRequest(request);
   if (!session) {
     return NextResponse.json({ message: 'Not authenticated' }, { status: 401 });
+  }
+  if (!isSuperAdmin(session.user)) {
+    return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
   }
 
   try {

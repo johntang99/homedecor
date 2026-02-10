@@ -2,12 +2,18 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getSiteById } from '@/lib/sites';
 import { SiteForm } from '@/components/admin/SiteForm';
+import { getSession } from '@/lib/admin/auth';
+import { canAccessSite } from '@/lib/admin/permissions';
 
 export default async function AdminSiteDetailPage({
   params,
 }: {
   params: { id: string };
 }) {
+  const session = await getSession();
+  if (!session || !canAccessSite(session.user, params.id)) {
+    notFound();
+  }
   const site = await getSiteById(params.id);
   if (!site) {
     notFound();

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionFromRequest } from '@/lib/admin/auth';
 import { listContentFiles } from '@/lib/admin/content';
+import { requireSiteAccess } from '@/lib/admin/permissions';
 
 export async function GET(request: NextRequest) {
   const session = await getSessionFromRequest(request);
@@ -16,6 +17,12 @@ export async function GET(request: NextRequest) {
       { message: 'siteId and locale are required' },
       { status: 400 }
     );
+  }
+
+  try {
+    requireSiteAccess(session.user, siteId);
+  } catch {
+    return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
   }
 
   const files = await listContentFiles(siteId, locale);

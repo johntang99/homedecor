@@ -1,11 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createUser, getSessionFromRequest, listUsers } from '@/lib/admin/auth';
 import type { User } from '@/lib/types';
+import { isSuperAdmin } from '@/lib/admin/permissions';
 
 export async function GET(request: NextRequest) {
   const session = await getSessionFromRequest(request);
   if (!session) {
     return NextResponse.json({ message: 'Not authenticated' }, { status: 401 });
+  }
+  if (!isSuperAdmin(session.user)) {
+    return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
   }
   const users = await listUsers();
   return NextResponse.json({ users });
@@ -15,6 +19,9 @@ export async function POST(request: NextRequest) {
   const session = await getSessionFromRequest(request);
   if (!session) {
     return NextResponse.json({ message: 'Not authenticated' }, { status: 401 });
+  }
+  if (!isSuperAdmin(session.user)) {
+    return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
   }
 
   const payload = await request.json();

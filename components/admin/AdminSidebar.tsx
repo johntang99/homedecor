@@ -1,5 +1,18 @@
 import Link from 'next/link';
-import { BookOpen, Building2, Calendar, FileText, Image, Layers, LayoutGrid, Settings, SlidersHorizontal, Users } from 'lucide-react';
+import {
+  BookOpen,
+  Building2,
+  Calendar,
+  FileText,
+  Image,
+  Layers,
+  LayoutGrid,
+  Settings,
+  SlidersHorizontal,
+  Users,
+} from 'lucide-react';
+import { getSession } from '@/lib/admin/auth';
+import { isSuperAdmin } from '@/lib/admin/permissions';
 
 const navigation = [
   { name: 'Sites', href: '/admin/sites', icon: Building2 },
@@ -14,14 +27,17 @@ const navigation = [
   { name: 'Settings', href: '/admin/settings', icon: Settings },
 ];
 
-export function AdminSidebar() {
+export async function AdminSidebar() {
+  const session = await getSession();
+  const isAdmin = session?.user ? isSuperAdmin(session.user) : false;
+  const items = isAdmin ? navigation : navigation.filter((item) => item.name !== 'Users');
   return (
     <aside className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 bg-white border-r border-gray-200">
       <div className="flex items-center h-16 px-6 border-b border-gray-200">
         <span className="text-lg font-semibold">Admin Dashboard</span>
       </div>
       <nav className="flex-1 overflow-y-auto px-4 py-6 space-y-2">
-        {navigation.map((item) => (
+        {items.map((item) => (
           <Link
             key={item.href}
             href={item.href}

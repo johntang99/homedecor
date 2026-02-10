@@ -4,6 +4,14 @@ import path from 'path';
 import { getSessionFromRequest } from '@/lib/admin/auth';
 import { resolveContentPath } from '@/lib/admin/content';
 import { CONTENT_TEMPLATES } from '@/lib/admin/templates';
+import {
+  canUseContentDb,
+  deleteContentEntry,
+  fetchContentEntry,
+  insertContentRevision,
+  upsertContentEntry,
+} from '@/lib/contentDb';
+import { canWriteContent, requireSiteAccess } from '@/lib/admin/permissions';
 
 export async function GET(request: NextRequest) {
   const session = await getSessionFromRequest(request);
@@ -23,13 +31,41 @@ export async function GET(request: NextRequest) {
     );
   }
 
+  try {
+    requireSiteAccess(session.user, siteId);
+  } catch {
+    return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
+  }
+
   const resolved = resolveContentPath(siteId, locale, filePath);
   if (!resolved) {
     return NextResponse.json({ message: 'Invalid path' }, { status: 400 });
   }
 
   try {
+    if (canUseContentDb()) {
+      const entry = await fetchContentEntry(siteId, locale, filePath);
+      if (entry?.data) {
+        return NextResponse.json({ content: JSON.stringify(entry.data, null, 2) });
+      }
+    }
+
     const content = await fs.readFile(resolved, 'utf-8');
+    if (canUseContentDb()) {
+      try {
+        const parsed = JSON.parse(content);
+        await upsertContentEntry({
+          siteId,
+          locale,
+          path: filePath,
+          data: parsed,
+          updatedBy: session.user.email,
+        });
+      } catch (error) {
+        // ignore invalid JSON during fallback
+      }
+    }
+
     return NextResponse.json({ content });
   } catch (error) {
     return NextResponse.json({ message: 'File not found' }, { status: 404 });
@@ -55,6 +91,15 @@ export async function PUT(request: NextRequest) {
     );
   }
 
+  try {
+    requireSiteAccess(session.user, siteId);
+  } catch {
+    return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
+  }
+  if (!canWriteContent(session.user)) {
+    return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
+  }
+
   const resolved = resolveContentPath(siteId, locale, filePath);
   if (!resolved) {
     return NextResponse.json({ message: 'Invalid path' }, { status: 400 });
@@ -64,6 +109,27 @@ export async function PUT(request: NextRequest) {
     JSON.parse(content);
   } catch (error) {
     return NextResponse.json({ message: 'Invalid JSON' }, { status: 400 });
+  }
+
+  if (canUseContentDb()) {
+    const existing = await fetchContentEntry(siteId, locale, filePath);
+    if (existing?.data) {
+      await insertContentRevision({
+        entryId: existing.id,
+        data: existing.data,
+        createdBy: session.user.email,
+        note: 'Admin update',
+      });
+    }
+    const parsed = JSON.parse(content);
+    await upsertContentEntry({
+      siteId,
+      locale,
+      path: filePath,
+      data: parsed,
+      updatedBy: session.user.email,
+    });
+    return NextResponse.json({ success: true });
   }
 
   await fs.mkdir(path.dirname(resolved), { recursive: true });
@@ -106,6 +172,15 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  try {
+    requireSiteAccess(session.user, siteId);
+  } catch {
+    return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
+  }
+  if (!canWriteContent(session.user)) {
+    return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
+  }
+
   if (action === 'create') {
     const slug = payload.slug as string | undefined;
     const templateId = (payload.templateId as string | undefined) || 'basic';
@@ -131,6 +206,21 @@ export async function POST(request: NextRequest) {
     const template =
       CONTENT_TEMPLATES.find((item) => item.id === templateId) ||
       CONTENT_TEMPLATES[0];
+    if (canUseContentDb()) {
+      const existing = await fetchContentEntry(siteId, locale, filePath);
+      if (existing) {
+        return NextResponse.json({ message: 'File already exists' }, { status: 409 });
+      }
+      await upsertContentEntry({
+        siteId,
+        locale,
+        path: filePath,
+        data: template.content,
+        updatedBy: session.user.email,
+      });
+      return NextResponse.json({ path: filePath });
+    }
+
     await fs.mkdir(path.dirname(resolved), { recursive: true });
     await fs.writeFile(resolved, JSON.stringify(template.content, null, 2));
     return NextResponse.json({ path: filePath });
@@ -162,7 +252,17 @@ export async function POST(request: NextRequest) {
     if (!sourceResolved || !targetResolved) {
       return NextResponse.json({ message: 'Invalid path' }, { status: 400 });
     }
-    const content = await fs.readFile(sourceResolved, 'utf-8');
+    let content = '';
+    if (canUseContentDb()) {
+      const sourceEntry = await fetchContentEntry(siteId, locale, sourcePath);
+      if (sourceEntry?.data) {
+        content = JSON.stringify(sourceEntry.data, null, 2);
+      }
+    }
+    if (!content) {
+      content = await fs.readFile(sourceResolved, 'utf-8');
+    }
+
     let nextContent = content;
     if (sourceDir === 'blog') {
       try {
@@ -173,6 +273,18 @@ export async function POST(request: NextRequest) {
         // fallback to raw content if JSON is invalid
       }
     }
+    if (canUseContentDb()) {
+      const parsed = JSON.parse(nextContent);
+      await upsertContentEntry({
+        siteId,
+        locale,
+        path: targetPath,
+        data: parsed,
+        updatedBy: session.user.email,
+      });
+      return NextResponse.json({ path: targetPath });
+    }
+
     await fs.mkdir(path.dirname(targetResolved), { recursive: true });
     await fs.writeFile(targetResolved, nextContent);
     return NextResponse.json({ path: targetPath });
@@ -199,6 +311,15 @@ export async function DELETE(request: NextRequest) {
     );
   }
 
+  try {
+    requireSiteAccess(session.user, siteId);
+  } catch {
+    return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
+  }
+  if (!canWriteContent(session.user)) {
+    return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
+  }
+
   if (['theme.json', 'site.json', 'navigation.json'].includes(filePath)) {
     return NextResponse.json(
       { message: 'Protected file cannot be deleted' },
@@ -209,6 +330,11 @@ export async function DELETE(request: NextRequest) {
   const resolved = resolveContentPath(siteId, locale, filePath);
   if (!resolved) {
     return NextResponse.json({ message: 'Invalid path' }, { status: 400 });
+  }
+
+  if (canUseContentDb()) {
+    await deleteContentEntry({ siteId, locale, path: filePath });
+    return NextResponse.json({ success: true });
   }
 
   await fs.unlink(resolved);

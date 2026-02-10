@@ -4,11 +4,9 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import { Locale } from '@/lib/types';
-import { getRequestSiteId, loadPageContent } from '@/lib/content';
+import { getRequestSiteId, loadItemBySlug, loadPageContent } from '@/lib/content';
 import { buildPageMetadata } from '@/lib/seo';
 import { Button, Badge, Icon, Card, CardHeader, CardTitle, CardDescription } from '@/components/ui';
-import { promises as fs } from 'fs';
-import path from 'path';
 
 export const dynamic = 'force-dynamic';
 
@@ -83,21 +81,13 @@ async function loadBlogPost(
   slug: string,
   locale: Locale
 ): Promise<BlogPostData | null> {
-  try {
-    const filePath = path.join(process.cwd(), 'content', siteId, locale, 'blog', `${slug}.json`);
-    const fileContents = await fs.readFile(filePath, 'utf8');
-    return JSON.parse(fileContents);
-  } catch (error) {
-    return null;
-  }
+  return loadItemBySlug<BlogPostData>(siteId, locale, 'blog', slug);
 }
 
 async function loadBlogList(siteId: string, locale: Locale): Promise<BlogListItem[]> {
   try {
-    const filePath = path.join(process.cwd(), 'content', siteId, locale, 'pages', 'blog.json');
-    const fileContents = await fs.readFile(filePath, 'utf8');
-    const data = JSON.parse(fileContents);
-    return data.posts || [];
+    const content = await loadPageContent<{ posts?: BlogListItem[] }>('blog', locale, siteId);
+    return content?.posts || [];
   } catch (error) {
     return [];
   }

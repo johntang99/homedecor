@@ -5,6 +5,17 @@ import path from 'path';
 import { cookies } from 'next/headers';
 import { NextRequest } from 'next/server';
 import type { User, Session } from '@/lib/types';
+import {
+  canUseAdminDb,
+  createAdminUserDb,
+  deleteAdminUserDb,
+  findAdminUserByEmailDb,
+  findAdminUserByIdDb,
+  listAdminUsersDb,
+  setAdminPasswordDb,
+  updateAdminUserDb,
+  updateLastLoginDb,
+} from '@/lib/admin/usersDb';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'change-me-in-production';
 const TOKEN_EXPIRY = '7d';
@@ -15,6 +26,13 @@ interface UserRecord extends User {
 }
 
 async function loadUsers(): Promise<UserRecord[]> {
+  if (canUseAdminDb()) {
+    const users = await listAdminUsersDb();
+    return users.map((user) => ({
+      ...user,
+      passwordHash: '',
+    }));
+  }
   try {
     const content = await fs.readFile(USERS_FILE, 'utf-8');
     return JSON.parse(content);
@@ -24,17 +42,38 @@ async function loadUsers(): Promise<UserRecord[]> {
 }
 
 export async function listUsers(): Promise<User[]> {
+  if (canUseAdminDb()) {
+    return listAdminUsersDb();
+  }
   const users = await loadUsers();
   return users.map(({ passwordHash: _, ...rest }) => rest);
 }
 
 async function saveUsers(users: UserRecord[]): Promise<void> {
+  if (canUseAdminDb()) {
+    return;
+  }
   const dir = path.dirname(USERS_FILE);
   await fs.mkdir(dir, { recursive: true });
   await fs.writeFile(USERS_FILE, JSON.stringify(users, null, 2));
 }
 
 async function findUserByEmail(email: string): Promise<UserRecord | null> {
+  if (canUseAdminDb()) {
+    const row = await findAdminUserByEmailDb(email);
+    if (!row) return null;
+    return {
+      id: row.id,
+      email: row.email,
+      name: row.name,
+      role: row.role,
+      sites: row.sites || [],
+      avatar: row.avatar || undefined,
+      createdAt: row.created_at,
+      lastLoginAt: row.last_login_at,
+      passwordHash: row.password_hash,
+    };
+  }
   const users = await loadUsers();
   return users.find((user) => user.email === email) || null;
 }
@@ -51,7 +90,11 @@ export async function authenticate(email: string, password: string): Promise<Ses
   if (userIndex !== -1) {
     users[userIndex].lastLoginAt = new Date().toISOString();
     try {
-      await saveUsers(users);
+      if (canUseAdminDb()) {
+        await updateLastLoginDb(user.id);
+      } else {
+        await saveUsers(users);
+      }
     } catch (error) {
       console.warn('Skipping lastLoginAt write:', error);
     }
@@ -131,12 +174,30 @@ export async function createUser(
   role: User['role'],
   sites: string[] = []
 ): Promise<User> {
+  const passwordHash = await bcrypt.hash(password, 10);
+  if (canUseAdminDb()) {
+    const existing = await findAdminUserByEmailDb(email);
+    if (existing) {
+      throw new Error('User already exists');
+    }
+    const created = await createAdminUserDb({
+      email,
+      name,
+      role,
+      sites,
+      passwordHash,
+    });
+    if (!created) {
+      throw new Error('Failed to create user');
+    }
+    return created;
+  }
+
   const users = await loadUsers();
   if (users.some((u) => u.email === email)) {
     throw new Error('User already exists');
   }
 
-  const passwordHash = await bcrypt.hash(password, 10);
   const newUser: UserRecord = {
     id: `user-${Date.now()}`,
     email,
@@ -156,6 +217,14 @@ export async function createUser(
 }
 
 export async function updateUser(userId: string, updates: Partial<User>): Promise<User> {
+  if (canUseAdminDb()) {
+    const updated = await updateAdminUserDb(userId, updates);
+    if (!updated) {
+      throw new Error('User not found');
+    }
+    return updated;
+  }
+
   const users = await loadUsers();
   const userIndex = users.findIndex((u) => u.id === userId);
   if (userIndex === -1) {
@@ -173,6 +242,13 @@ export async function updateUser(userId: string, updates: Partial<User>): Promis
 }
 
 export async function deleteUser(userId: string): Promise<void> {
+  if (canUseAdminDb()) {
+    const existing = await findAdminUserByIdDb(userId);
+    if (!existing) throw new Error('User not found');
+    await deleteAdminUserDb(userId);
+    return;
+  }
+
   const users = await loadUsers();
   const filtered = users.filter((u) => u.id !== userId);
   if (filtered.length === users.length) {
@@ -182,10 +258,18 @@ export async function deleteUser(userId: string): Promise<void> {
 }
 
 export async function setPassword(userId: string, newPassword: string): Promise<void> {
+  const passwordHash = await bcrypt.hash(newPassword, 10);
+  if (canUseAdminDb()) {
+    const existing = await findAdminUserByIdDb(userId);
+    if (!existing) throw new Error('User not found');
+    await setAdminPasswordDb(userId, passwordHash);
+    return;
+  }
+
   const users = await loadUsers();
   const user = users.find((u) => u.id === userId);
   if (!user) throw new Error('User not found');
-  user.passwordHash = await bcrypt.hash(newPassword, 10);
+  user.passwordHash = passwordHash;
   await saveUsers(users);
 }
 
@@ -194,6 +278,15 @@ export async function changePassword(
   oldPassword: string,
   newPassword: string
 ): Promise<void> {
+  if (canUseAdminDb()) {
+    const existing = await findAdminUserByIdDb(userId);
+    if (!existing) throw new Error('User not found');
+    const isValid = await bcrypt.compare(oldPassword, existing.password_hash);
+    if (!isValid) throw new Error('Invalid current password');
+    await setAdminPasswordDb(userId, await bcrypt.hash(newPassword, 10));
+    return;
+  }
+
   const users = await loadUsers();
   const user = users.find((u) => u.id === userId);
   if (!user) throw new Error('User not found');

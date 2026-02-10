@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
 import { getSessionFromRequest } from '@/lib/admin/auth';
+import { upsertMediaDb } from '@/lib/admin/mediaDb';
+import { canManageMedia, requireSiteAccess } from '@/lib/admin/permissions';
 
 function sanitizeFolder(value: string) {
   const cleaned = value.replace(/[^a-zA-Z0-9/_-]/g, '').replace(/^\/+|\/+$/g, '');
@@ -33,6 +35,14 @@ export async function POST(request: NextRequest) {
   if (typeof siteId !== 'string' || !siteId) {
     return NextResponse.json({ message: 'siteId is required' }, { status: 400 });
   }
+  try {
+    requireSiteAccess(session.user, siteId);
+  } catch {
+    return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
+  }
+  if (!canManageMedia(session.user)) {
+    return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
+  }
 
   if (!(file instanceof File)) {
     return NextResponse.json({ message: 'file is required' }, { status: 400 });
@@ -53,6 +63,12 @@ export async function POST(request: NextRequest) {
   const buffer = Buffer.from(await file.arrayBuffer());
   const targetPath = path.join(uploadDir, filename);
   await fs.writeFile(targetPath, buffer);
+
+  await upsertMediaDb({
+    siteId,
+    path: relativePath,
+    url: `/uploads/${siteId}/${relativePath}`,
+  });
 
   return NextResponse.json({
     url: `/uploads/${siteId}/${relativePath}`,

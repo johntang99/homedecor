@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
 import { getSessionFromRequest } from '@/lib/admin/auth';
+import { deleteMediaDb } from '@/lib/admin/mediaDb';
+import { canManageMedia, requireSiteAccess } from '@/lib/admin/permissions';
 
 export async function DELETE(request: NextRequest) {
   const session = await getSessionFromRequest(request);
@@ -19,6 +21,14 @@ export async function DELETE(request: NextRequest) {
       { status: 400 }
     );
   }
+  try {
+    requireSiteAccess(session.user, siteId);
+  } catch {
+    return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
+  }
+  if (!canManageMedia(session.user)) {
+    return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
+  }
 
   const normalized = path.posix.normalize(filePath);
   if (normalized.startsWith('..') || normalized.includes('../')) {
@@ -32,5 +42,6 @@ export async function DELETE(request: NextRequest) {
   }
 
   await fs.unlink(absolute);
+  await deleteMediaDb(siteId, normalized);
   return NextResponse.json({ success: true });
 }

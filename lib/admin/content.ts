@@ -1,6 +1,7 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { getDefaultFooter } from '../footer';
+import { listContentEntries } from '@/lib/contentDb';
 
 export interface ContentFileItem {
   id: string;
@@ -113,6 +114,63 @@ export async function listContentFiles(
   await ensureFooterFile(siteId, locale);
   await ensureHeaderFile(siteId, locale);
 
+  const addItem = (item: ContentFileItem) => {
+    if (!items.some((entry) => entry.path === item.path)) {
+      items.push(item);
+    }
+  };
+
+  const dbEntries = await listContentEntries(siteId, locale);
+  if (dbEntries.length > 0) {
+    dbEntries.forEach((entry) => {
+      if (entry.path.startsWith('pages/') && entry.path.endsWith('.json')) {
+        const slug = entry.path.replace('pages/', '').replace('.json', '');
+        addItem({
+          id: `page-${slug}`,
+          label: `Page: ${titleCase(slug)}`,
+          path: entry.path,
+          scope: 'locale',
+        });
+        return;
+      }
+
+      if (entry.path.startsWith('blog/') && entry.path.endsWith('.json')) {
+        const slug = entry.path.replace('blog/', '').replace('.json', '');
+        const data = entry.data as Record<string, any>;
+        const title = typeof data?.title === 'string' ? data.title : '';
+        const publishDate =
+          typeof data?.publishDate === 'string' ? data.publishDate : '';
+        addItem({
+          id: `blog-${slug}`,
+          label: `Blog Post: ${title || titleCase(slug)}`,
+          path: entry.path,
+          scope: 'locale',
+          publishDate: publishDate || undefined,
+        });
+        return;
+      }
+
+      if (entry.path === 'navigation.json') {
+        addItem({ id: 'navigation', label: 'Navigation', path: entry.path, scope: 'locale' });
+      }
+      if (entry.path === 'header.json') {
+        addItem({ id: 'header', label: 'Header', path: entry.path, scope: 'locale' });
+      }
+      if (entry.path === 'seo.json') {
+        addItem({ id: 'seo', label: 'SEO', path: entry.path, scope: 'locale' });
+      }
+      if (entry.path === 'footer.json') {
+        addItem({ id: 'footer', label: 'Footer', path: entry.path, scope: 'locale' });
+      }
+      if (entry.path === 'site.json') {
+        addItem({ id: 'site', label: 'Site Info', path: entry.path, scope: 'locale' });
+      }
+      if (entry.path === 'theme.json') {
+        addItem({ id: 'theme', label: 'Theme', path: entry.path, scope: 'site' });
+      }
+    });
+  }
+
   const pagesDir = path.join(CONTENT_DIR, siteId, locale, 'pages');
   try {
     const files = await fs.readdir(pagesDir);
@@ -120,7 +178,7 @@ export async function listContentFiles(
       .filter((file) => file.endsWith('.json'))
       .forEach((file) => {
         const slug = file.replace('.json', '');
-        items.push({
+        addItem({
           id: `page-${slug}`,
           label: `Page: ${titleCase(slug)}`,
           path: `pages/${file}`,
@@ -150,7 +208,7 @@ export async function listContentFiles(
           } catch (error) {
             // ignore parse errors
           }
-          items.push({
+          addItem({
             id: `blog-${slug}`,
             label: `Blog Post: ${title || titleCase(slug)}`,
             path: `blog/${file}`,
@@ -163,37 +221,37 @@ export async function listContentFiles(
     // ignore missing blog directory
   }
 
-  items.push({
+  addItem({
     id: 'navigation',
     label: 'Navigation',
     path: 'navigation.json',
     scope: 'locale',
   });
-  items.push({
+  addItem({
     id: 'header',
     label: 'Header',
     path: 'header.json',
     scope: 'locale',
   });
-  items.push({
+  addItem({
     id: 'seo',
     label: 'SEO',
     path: 'seo.json',
     scope: 'locale',
   });
-  items.push({
+  addItem({
     id: 'footer',
     label: 'Footer',
     path: 'footer.json',
     scope: 'locale',
   });
-  items.push({
+  addItem({
     id: 'site',
     label: 'Site Info',
     path: 'site.json',
     scope: 'locale',
   });
-  items.push({
+  addItem({
     id: 'theme',
     label: 'Theme',
     path: 'theme.json',

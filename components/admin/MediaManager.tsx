@@ -23,6 +23,7 @@ export function MediaManager({ sites, selectedSiteId }: MediaManagerProps) {
   const [search, setSearch] = useState('');
   const [folder, setFolder] = useState('general');
   const [uploading, setUploading] = useState(false);
+  const [importing, setImporting] = useState(false);
 
   const loadMedia = async () => {
     if (!siteId) return;
@@ -101,6 +102,33 @@ export function MediaManager({ sites, selectedSiteId }: MediaManagerProps) {
     setStatus('Copied URL');
   };
 
+  const handleImport = async () => {
+    if (!siteId) return;
+    const confirmed = window.confirm(
+      'Sync media metadata from /public/uploads into the database?'
+    );
+    if (!confirmed) return;
+    setImporting(true);
+    setStatus(null);
+    try {
+      const response = await fetch('/api/admin/media/import', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ siteId }),
+      });
+      const payload = await response.json();
+      if (!response.ok) {
+        throw new Error(payload.message || 'Import failed');
+      }
+      setStatus(`Imported ${payload.imported || 0} media item(s).`);
+      await loadMedia();
+    } catch (error: any) {
+      setStatus(error?.message || 'Import failed');
+    } finally {
+      setImporting(false);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -170,6 +198,9 @@ export function MediaManager({ sites, selectedSiteId }: MediaManagerProps) {
         </label>
         <Button variant="outline" onClick={loadMedia} disabled={loading}>
           Refresh
+        </Button>
+        <Button variant="outline" onClick={handleImport} disabled={importing}>
+          {importing ? 'Syncing…' : 'Sync from uploads'}
         </Button>
       </div>
 

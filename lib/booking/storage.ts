@@ -1,6 +1,15 @@
 import fs from 'fs/promises';
 import path from 'path';
 import type { BookingRecord, BookingService, BookingSettings } from '@/lib/types';
+import {
+  canUseBookingDb,
+  listBookingsDb,
+  loadBookingServicesDb,
+  loadBookingSettingsDb,
+  saveBookingServicesDb,
+  saveBookingSettingsDb,
+  upsertBookingDb,
+} from '@/lib/booking/db';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content');
 
@@ -43,18 +52,34 @@ async function writeJsonFile<T>(filePath: string, payload: T) {
 }
 
 export async function loadBookingServices(siteId: string): Promise<BookingService[]> {
+  if (canUseBookingDb()) {
+    const services = await loadBookingServicesDb(siteId);
+    if (services.length) return services;
+  }
   return readJsonFile<BookingService[]>(getServicesPath(siteId), []);
 }
 
 export async function saveBookingServices(siteId: string, services: BookingService[]) {
+  if (canUseBookingDb()) {
+    await saveBookingServicesDb(siteId, services);
+    return;
+  }
   await writeJsonFile(getServicesPath(siteId), services);
 }
 
 export async function loadBookingSettings(siteId: string): Promise<BookingSettings | null> {
+  if (canUseBookingDb()) {
+    const settings = await loadBookingSettingsDb(siteId);
+    if (settings) return settings;
+  }
   return readJsonFile<BookingSettings | null>(getSettingsPath(siteId), null);
 }
 
 export async function saveBookingSettings(siteId: string, settings: BookingSettings) {
+  if (canUseBookingDb()) {
+    await saveBookingSettingsDb(siteId, settings);
+    return;
+  }
   await writeJsonFile(getSettingsPath(siteId), settings);
 }
 
@@ -98,6 +123,9 @@ export async function listBookings(
   startDate: string,
   endDate: string
 ): Promise<BookingRecord[]> {
+  if (canUseBookingDb()) {
+    return listBookingsDb(siteId, startDate, endDate);
+  }
   const monthKeys = listMonthKeysBetween(startDate, endDate);
   const all = await Promise.all(
     monthKeys.map((key) => loadBookingsForMonth(siteId, key))
@@ -108,6 +136,10 @@ export async function listBookings(
 }
 
 export async function addBooking(siteId: string, booking: BookingRecord) {
+  if (canUseBookingDb()) {
+    await upsertBookingDb(siteId, booking);
+    return;
+  }
   const monthKey = getMonthKey(booking.date);
   const bookings = await loadBookingsForMonth(siteId, monthKey);
   bookings.push(booking);
@@ -115,6 +147,10 @@ export async function addBooking(siteId: string, booking: BookingRecord) {
 }
 
 export async function updateBooking(siteId: string, updated: BookingRecord) {
+  if (canUseBookingDb()) {
+    await upsertBookingDb(siteId, updated);
+    return;
+  }
   const monthKey = getMonthKey(updated.date);
   const bookings = await loadBookingsForMonth(siteId, monthKey);
   const index = bookings.findIndex((booking) => booking.id === updated.id);
@@ -131,6 +167,10 @@ export async function moveBooking(
   originalDate: string,
   updated: BookingRecord
 ) {
+  if (canUseBookingDb()) {
+    await upsertBookingDb(siteId, updated);
+    return;
+  }
   const originalKey = getMonthKey(originalDate);
   const newKey = getMonthKey(updated.date);
   if (originalKey === newKey) {

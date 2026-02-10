@@ -5,6 +5,13 @@
 import { SiteConfig } from './types';
 import fs from 'fs';
 import path from 'path';
+import {
+  canUseSitesDb,
+  createSiteDb,
+  getSiteByIdDb,
+  listSitesDb,
+  updateSiteDb,
+} from './sitesDb';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content');
 const SITES_CONFIG_PATH = path.join(CONTENT_DIR, '_sites.json');
@@ -13,6 +20,10 @@ const SITES_CONFIG_PATH = path.join(CONTENT_DIR, '_sites.json');
  * Get all registered sites
  */
 export async function getSites(): Promise<SiteConfig[]> {
+  if (canUseSitesDb()) {
+    const sites = await listSitesDb();
+    if (sites.length) return sites;
+  }
   try {
     const data = await fs.promises.readFile(SITES_CONFIG_PATH, 'utf-8');
     const sites = JSON.parse(data);
@@ -33,6 +44,10 @@ async function saveSites(sites: SiteConfig[]): Promise<void> {
  * Get a single site by ID
  */
 export async function getSiteById(siteId: string): Promise<SiteConfig | null> {
+  if (canUseSitesDb()) {
+    const site = await getSiteByIdDb(siteId);
+    if (site) return site;
+  }
   const sites = await getSites();
   return sites.find(site => site.id === siteId) || null;
 }
@@ -71,6 +86,10 @@ export async function updateSite(
   siteId: string,
   updates: Partial<SiteConfig>
 ): Promise<SiteConfig | null> {
+  if (canUseSitesDb()) {
+    const updated = await updateSiteDb(siteId, updates);
+    if (updated) return updated;
+  }
   const sites = await getSites();
   const index = sites.findIndex((site) => site.id === siteId);
   if (index === -1) return null;
@@ -89,6 +108,10 @@ export async function updateSite(
 export async function createSite(
   input: Omit<SiteConfig, 'createdAt' | 'updatedAt'>
 ): Promise<SiteConfig> {
+  if (canUseSitesDb()) {
+    const created = await createSiteDb(input);
+    if (created) return created;
+  }
   const sites = await getSites();
   if (sites.some((site) => site.id === input.id)) {
     throw new Error('Site ID already exists');

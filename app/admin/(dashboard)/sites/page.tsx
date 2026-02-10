@@ -1,8 +1,13 @@
 import Link from 'next/link';
 import { getSites } from '@/lib/sites';
+import { ImportSitesButton } from '@/components/admin/ImportSitesButton';
+import { getSession } from '@/lib/admin/auth';
+import { filterSitesForUser, isSuperAdmin } from '@/lib/admin/permissions';
 
 export default async function AdminSitesPage() {
+  const session = await getSession();
   const sites = await getSites();
+  const visibleSites = session ? filterSitesForUser(sites, session.user) : sites;
 
   return (
     <div className="space-y-6">
@@ -13,16 +18,21 @@ export default async function AdminSitesPage() {
             Manage all clinic sites and their locales
           </p>
         </div>
-        <Link
-          href="/admin/sites/new"
-          className="px-4 py-2 rounded-lg bg-[var(--primary)] text-white text-sm font-medium hover:opacity-90"
-        >
-          Add Site
-        </Link>
+        <div className="flex items-center gap-3">
+          {session?.user && isSuperAdmin(session.user) && <ImportSitesButton />}
+          {session?.user && isSuperAdmin(session.user) && (
+            <Link
+              href="/admin/sites/new"
+              className="px-4 py-2 rounded-lg bg-[var(--primary)] text-white text-sm font-medium hover:opacity-90"
+            >
+              Add Site
+            </Link>
+          )}
+        </div>
       </div>
 
       <div className="grid gap-4">
-        {sites.map((site) => (
+        {visibleSites.map((site) => (
           <div
             key={site.id}
             className="bg-white border border-gray-200 rounded-xl p-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
@@ -72,7 +82,7 @@ export default async function AdminSitesPage() {
             </div>
           </div>
         ))}
-        {sites.length === 0 && (
+        {visibleSites.length === 0 && (
           <div className="bg-white border border-gray-200 rounded-xl p-6 text-sm text-gray-600">
             No sites found. Create your first site to get started.
           </div>

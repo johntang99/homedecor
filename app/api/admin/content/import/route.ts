@@ -4,6 +4,7 @@ import path from 'path';
 import { getSessionFromRequest } from '@/lib/admin/auth';
 import { fetchContentEntry, upsertContentEntry } from '@/lib/contentDb';
 import { canWriteContent, requireSiteAccess } from '@/lib/admin/permissions';
+import { locales } from '@/lib/i18n';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content');
 
@@ -121,7 +122,26 @@ export async function POST(request: NextRequest) {
   const themePath = path.join(CONTENT_DIR, siteId, 'theme.json');
   try {
     const themeData = await readJson(themePath);
-    queueUpsert('theme.json', themeData);
+    for (const entryLocale of locales) {
+      tasks.push(
+        (async () => {
+          if (mode === 'missing') {
+            const existing = await fetchContentEntry(siteId, entryLocale, 'theme.json');
+            if (existing?.data) {
+              skipped += 1;
+              return;
+            }
+          }
+          await upsertContentEntry({
+            siteId,
+            locale: entryLocale,
+            path: 'theme.json',
+            data: themeData,
+            updatedBy: session.user.email,
+          });
+        })()
+      );
+    }
   } catch (error) {
     // ignore missing theme
   }

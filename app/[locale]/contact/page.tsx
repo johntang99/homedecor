@@ -276,7 +276,7 @@ export default async function ContactPage({ params }: ContactPageProps) {
                     <h3 className="text-xl font-bold text-gray-900 mb-4">{map.title}</h3>
                     <div className="relative aspect-square bg-gray-100 rounded-xl overflow-hidden mb-4">
                       <iframe
-                        title="Clinic map"
+                        title="Business location map"
                         src={map.embedUrl}
                         className="absolute inset-0 w-full h-full"
                         loading="lazy"

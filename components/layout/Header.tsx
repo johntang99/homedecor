@@ -8,11 +8,39 @@ import { Locale } from '@/lib/i18n';
 import { SiteInfo } from '@/lib/types';
 import LanguageSwitcher from '../i18n/LanguageSwitcher';
 
+export interface HeaderConfig {
+  topbar?: {
+    phone?: string;
+    phoneHref?: string;
+    address?: string;
+    addressHref?: string;
+    hours?: string;
+    badge?: string;
+  };
+  menu?: {
+    logo?: {
+      emoji?: string;
+      text?: string;
+      subtext?: string;
+      image?: {
+        src?: string;
+        alt?: string;
+      };
+    };
+    items?: Array<{ text: string; url: string }>;
+  };
+  cta?: {
+    text?: string;
+    link?: string;
+  };
+}
+
 interface HeaderProps {
   locale: Locale;
   siteId: string;
   siteInfo?: SiteInfo;
   variant?: 'default' | 'centered' | 'transparent' | 'stacked';
+  headerConfig?: HeaderConfig;
   menu?: {
     variant?: 'default' | 'centered' | 'transparent' | 'stacked';
     items: Array<{ text: string; url: string }>;
@@ -28,29 +56,72 @@ export default function Header({
   siteId,
   siteInfo,
   variant = 'default',
+  headerConfig,
   menu,
 }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const topbarConfig = headerConfig?.topbar;
+  const logoConfig = headerConfig?.menu?.logo;
+  const logoImage = logoConfig?.image;
 
   // Navigation menu items
   const navigation =
     menu?.items && menu.items.length > 0
       ? menu.items
+      : headerConfig?.menu?.items && headerConfig.menu.items.length > 0
+      ? headerConfig.menu.items
       : [
-          { text: locale === 'en' ? 'Home' : '首页', url: `/${locale}` },
-          { text: locale === 'en' ? 'Services' : '服务项目', url: `/${locale}/services` },
-          { text: locale === 'en' ? 'Conditions' : '治疗病症', url: `/${locale}/conditions` },
-          { text: locale === 'en' ? 'About' : '关于我们', url: `/${locale}/about` },
-          { text: locale === 'en' ? 'Case Studies' : '案例研究', url: `/${locale}/case-studies` },
-          { text: locale === 'en' ? 'Gallery' : '图库', url: `/${locale}/gallery` },
-          { text: locale === 'en' ? 'New Visit' : '首次就诊', url: `/${locale}/new-patients` },
-          { text: locale === 'en' ? 'Blog' : '博客', url: `/${locale}/blog` },
-          { text: locale === 'en' ? 'Contact' : '联系我们', url: `/${locale}/contact` },
+          { text: locale === 'en' ? 'Home' : 'Inicio', url: `/${locale}` },
+          { text: locale === 'en' ? 'Services' : 'Servicios', url: `/${locale}/services` },
+          { text: locale === 'en' ? 'Pricing' : 'Precios', url: `/${locale}/pricing` },
+          { text: locale === 'en' ? 'About' : 'Nosotros', url: `/${locale}/about` },
+          { text: locale === 'en' ? 'Commercial' : 'Comercial', url: `/${locale}/case-studies` },
+          { text: locale === 'en' ? 'Gallery' : 'Galeria', url: `/${locale}/gallery` },
+          { text: locale === 'en' ? 'Blog' : 'Blog', url: `/${locale}/blog` },
+          { text: locale === 'en' ? 'Contact' : 'Contacto', url: `/${locale}/contact` },
         ];
 
   const cta = menu?.cta || {
-    text: locale === 'en' ? 'Book Online' : '在线预约',
+    text: headerConfig?.cta?.text || (locale === 'en' ? 'Schedule Pickup' : 'Programar recogida'),
+    link: headerConfig?.cta?.link || `/${locale}/contact`,
+  };
+
+  const renderLogo = (sizeClass: string, width: number, height: number) => {
+    if (logoImage?.src) {
+      return (
+        <Image
+          src={logoImage.src}
+          alt={logoImage.alt || logoConfig?.text || siteInfo?.clinicName || 'Logo'}
+          width={width}
+          height={height}
+          className={`${sizeClass} hover:opacity-90 transition-opacity`}
+        />
+      );
+    }
+
+    const text = logoConfig?.text || siteInfo?.clinicName || 'WeWash';
+    const emoji = logoConfig?.emoji;
+    return (
+      <div className="inline-flex items-center gap-2 text-primary">
+        {emoji && <span className="text-lg leading-none">{emoji}</span>}
+        <span className="font-semibold">{text}</span>
+      </div>
+    );
+  };
+
+  const topbarPhone = topbarConfig?.phone || siteInfo?.phone;
+  const topbarPhoneHref = topbarConfig?.phoneHref || (topbarPhone ? `tel:${topbarPhone}` : undefined);
+  const topbarAddress =
+    topbarConfig?.address ||
+    (siteInfo?.address ? `${siteInfo.address}, ${siteInfo.city}, ${siteInfo.state} ${siteInfo.zip}` : undefined);
+  const topbarAddressHref = topbarConfig?.addressHref || siteInfo?.addressMapUrl || '#';
+  const topbarBadge =
+    topbarConfig?.badge ||
+    (locale === 'en' ? 'Same-day rush available' : 'Servicio urgente el mismo dia');
+
+  const legacyCta = {
+    text: locale === 'en' ? 'Schedule Pickup' : 'Programar recogida',
     link: `/${locale}/contact`,
   };
   
@@ -74,19 +145,19 @@ export default function Header({
       <div className="container-custom">
         <div className="flex justify-between items-center text-sm">
           <div className="flex flex-wrap items-center gap-6">
-            {siteInfo?.address && (
+            {topbarAddress && (
               <a
-                href={siteInfo.addressMapUrl || '#'}
+                href={topbarAddressHref}
                 className="flex items-center gap-2 text-white hover:text-white transition-colors"
               >
                 <MapPin className="w-4 h-4" />
-                {siteInfo.address}, {siteInfo.city}, {siteInfo.state} {siteInfo.zip}
+                {topbarAddress}
               </a>
             )}
-            {siteInfo?.phone && (
-              <a href={`tel:${siteInfo.phone}`} className="flex items-center gap-2 text-white hover:text-white transition-colors">
+            {topbarPhone && (
+              <a href={topbarPhoneHref} className="flex items-center gap-2 text-white hover:text-white transition-colors">
                 <Phone className="w-4 h-4" />
-                {siteInfo.phone}
+                {topbarPhone}
               </a>
             )}
             {siteInfo?.email && (
@@ -121,7 +192,7 @@ export default function Header({
               )}
             </div>
             <span className="badge bg-white/20 text-white">
-              {locale === 'en' ? 'Accepting New Patients' : '接受新患者'}
+              {topbarBadge}
             </span>
           </div>
         </div>
@@ -146,13 +217,7 @@ export default function Header({
             {/* Logo - Centered */}
             <div className="flex justify-center mb-4">
               <Link href={`/${locale}`}>
-                <Image
-                  src="/uploads/dr-huang-clinic/home/drhuang-2.svg"
-                  alt="Dr Huang Clinic"
-                  width={60}
-                  height={60}
-                  className="w-auto h-16 hover:opacity-90 transition-opacity"
-                />
+                {renderLogo('w-auto h-16', 60, 60)}
             </Link>
             </div>
             
@@ -171,7 +236,7 @@ export default function Header({
               <LanguageSwitcher currentLocale={locale} />
               
               <Link href={cta.link} className="btn-primary text-sm px-5 py-2.5 ml-4">
-                {cta.text}
+                {cta.text || legacyCta.text}
               </Link>
             </div>
             
@@ -197,13 +262,7 @@ export default function Header({
             <div className="flex items-center h-20">
               {/* Logo */}
               <Link href={`/${locale}`} className="flex-shrink-0">
-                <Image
-                  src="/uploads/dr-huang-clinic/home/drhuang-2.svg"
-                  alt="Dr Huang Clinic"
-                  width={48}
-                  height={48}
-                  className="w-auto h-12 hover:opacity-90 transition-opacity"
-                />
+                {renderLogo('w-auto h-12', 48, 48)}
               </Link>
               
               {/* Desktop Navigation - All in one line */}
@@ -221,7 +280,7 @@ export default function Header({
               <div className="hidden xl:flex items-center gap-4">
                 <LanguageSwitcher currentLocale={locale} />
                 <Link href={cta.link} className="btn-primary text-sm px-5 py-2.5 whitespace-nowrap">
-                  {cta.text}
+                  {cta.text || legacyCta.text}
                 </Link>
               </div>
             
@@ -264,7 +323,7 @@ export default function Header({
                   className="btn-primary text-center mt-1"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  {cta.text}
+                  {cta.text || legacyCta.text}
                 </Link>
               </div>
             </div>

@@ -1,13 +1,13 @@
 {
   "hero": {
     "variant": "centered",
-    "title": "Welcome New Patients",
-    "subtitle": "Everything you need to know before your first visit to Dr. Huang Clinic",
-    "backgroundImage": "/uploads/dr-huang-clinic/general/welcome-clinic-10.png"
+    "title": "Welcome New Customers",
+    "subtitle": "Everything to know before your first WeWash order",
+    "backgroundImage": "/uploads/wewash/general/welcome-clinic-10.png"
   },
   "introduction": {
-    "text": "We're excited to welcome you to our clinic! Your first visit is an important step in your healing journey. This page will help you prepare and know what to expect.",
-    "highlight": "New patient appointments are comprehensive 90-minute sessions that include consultation, diagnosis, and your first treatment."
+    "text": "We are excited to welcome you to WeWash. This page explains how to prepare your first household or commercial order.",
+    "highlight": "First orders are fastest when service type, pickup ZIP, and delivery details are completed in advance."
   },
   "whatToExpect": {
     "title": "What to Expect at Your First Visit",
@@ -86,7 +86,7 @@
         "importance": "important"
       },
       {
-        "icon": "ShirtIcon",
+        "icon": "Shirt",
         "title": "Wear Comfortable Clothing",
         "description": "Wear loose, comfortable clothing that can easily be rolled up to access your arms, legs, and back. We have gowns available if needed.",
         "importance": "important"

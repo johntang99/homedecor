@@ -1,36 +1,35 @@
 {
   "brand": {
-    "logoText": "TCM",
-    "name": "Dr Huang Clinic",
-    "description": "Traditional Chinese Medicine and Acupuncture serving the community with holistic healing."
+    "logoText": "WW",
+    "name": "WeWash",
+    "description": "Modern laundry care for busy households and businesses. Pickup, drop-off, and commercial service."
   },
   "quickLinks": [
-    { "text": "About Us", "url": "/en/about" },
+    { "text": "Home", "url": "/en" },
     { "text": "Services", "url": "/en/services" },
-    { "text": "Conditions", "url": "/en/conditions" },
-    { "text": "Case Studies", "url": "/en/case-studies" },
-    { "text": "New Visit", "url": "/en/new-patients" },
-    { "text": "New Patients", "url": "/en/new-patients" },
+    { "text": "Pricing", "url": "/en/pricing" },
+    { "text": "Commercial", "url": "/en/case-studies" },
+    { "text": "Service Areas", "url": "/en/contact" },
     { "text": "Blog", "url": "/en/blog" },
     { "text": "Contact", "url": "/en/contact" }
   ],
   "services": [
-    { "text": "Acupuncture", "url": "/en/services#acupuncture" },
-    { "text": "Herbal Medicine", "url": "/en/services#herbs" },
-    { "text": "Cupping", "url": "/en/services#cupping" },
-    { "text": "Tui Na", "url": "/en/services#tuina" }
+    { "text": "Wash & Fold", "url": "/en/services#wash-fold" },
+    { "text": "Dry Cleaning", "url": "/en/services#dry-cleaning" },
+    { "text": "Pickup & Delivery", "url": "/en/services#pickup-delivery" },
+    { "text": "Commercial Laundry", "url": "/en/services#commercial" }
   ],
   "contact": {
-    "addressLines": ["71 East Main Street", "Middletown, NY 10940"],
-    "phone": "(845) 381-1106",
-    "phoneLink": "tel:+18453811106",
-    "email": "sancai.acu@gmail.com",
-    "emailLink": "mailto:sancai.acu@gmail.com"
+    "addressLines": ["87 North Street", "Middletown, NY 10940"],
+    "phone": "(845) 394-0158",
+    "phoneLink": "tel:+18453940158",
+    "email": "hello@wewash99.com",
+    "emailLink": "mailto:hello@wewash99.com"
   },
-  "hours": ["Mon-Fri: 9:00 AM - 6:00 PM", "Sat: 10:00 AM - 2:00 PM"],
+  "hours": ["Mon-Fri: 8:00 AM - 8:00 PM", "Sat-Sun: 9:00 AM - 6:00 PM"],
   "legalLinks": [
     { "text": "Privacy Policy", "url": "/en/privacy" },
     { "text": "Terms of Service", "url": "/en/terms" }
   ],
-  "copyright": "© {year} Dr Huang Clinic. All rights reserved."
+  "copyright": "© {year} WeWash. All rights reserved."
 }

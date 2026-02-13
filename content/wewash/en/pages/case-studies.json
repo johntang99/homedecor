@@ -1,19 +1,19 @@
 {
   "hero": {
     "variant": "centered",
-    "title": "Patient Success Stories",
-    "subtitle": "Real cases, real results - see how Traditional Chinese Medicine has transformed lives",
-    "backgroundImage": "/uploads/dr-huang-clinic/home/hero-bg.jpg"
+    "title": "Commercial Success Stories",
+    "subtitle": "Real laundry operations wins from local businesses and property teams.",
+    "backgroundImage": "/uploads/wewash/home/hero-bg.jpg"
   },
   "introduction": {
-    "text": "These case studies represent real patients who have experienced significant health improvements through our TCM treatments. All names have been changed to protect patient privacy, but the stories and outcomes are genuine.",
-    "note": "Individual results may vary. These cases represent typical outcomes but cannot guarantee specific results for any individual."
+    "text": "These case studies summarize real service improvements after adopting WeWash commercial programs. Names may be anonymized for privacy.",
+    "note": "Results vary by order mix, service area, and scheduling model."
   },
   "categories": [
     {
       "id": "all",
       "name": "All Cases",
-      "icon": "Grid"
+      "icon": "LayoutGrid"
     },
     {
       "id": "pain-management",
@@ -46,7 +46,7 @@
       "id": "chronic-back-pain-jennifer",
       "category": "pain-management",
       "condition": "Chronic Lower Back Pain",
-      "image": "/uploads/dr-huang-clinic/case-studies/chronic-pain.jpg",
+      "image": "/uploads/wewash/case-studies/chronic-pain.jpg",
       "beforeImage": "https://images.unsplash.com/photo-1554574004-b5ed96682e9b?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0",
       "afterImage": "https://images.unsplash.com/photo-1768507423533-b87b62769758?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0",
       "summary": "After 8 years of debilitating back pain and unsuccessful conventional treatments, **Jennifer** found lasting relief through acupuncture and herbal medicine.\n\n- Patient presented with persistent lower back pain that had been affecting her daily activities for over 5 years. \n- The pain was worse in the morning and after prolonged sitting or standing. She had tried physical therapy and pain medications with minimal long-term relief."
@@ -55,15 +55,15 @@
       "id": "fertility-success-lisa",
       "category": "womens-health",
       "condition": "Infertility (Unexplained)",
-      "image": "/uploads/dr-huang-clinic/case-studies/fertility.jpg",
+      "image": "/uploads/wewash/case-studies/fertility.jpg",
       "summary": "After 3 years of unsuccessful attempts to conceive and one failed IVF cycle, Lisa achieved natural pregnancy through TCM treatment.",
-      "afterImage": "/uploads/dr-huang-clinic/gallery/treatment-room-2.jpg"
+      "afterImage": "/uploads/wewash/gallery/treatment-room-2.jpg"
     },
     {
       "id": "anxiety-depression-robert",
       "category": "mental-health",
       "condition": "Anxiety & Depression",
-      "image": "/uploads/dr-huang-clinic/case-studies/migraine.jpg",
+      "image": "/uploads/wewash/case-studies/migraine.jpg",
       "beforeImage": "https://images.unsplash.com/photo-1554574004-b5ed96682e9b?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0",
       "afterImage": "https://images.unsplash.com/photo-1513097847644-f00cfe868607?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0",
       "summary": "Robert overcame debilitating anxiety and depression through TCM, reducing his reliance on medication and regaining quality of life."
@@ -72,21 +72,21 @@
       "id": "ibs-sarah",
       "category": "digestive",
       "condition": "Irritable Bowel Syndrome (IBS)",
-      "image": "/uploads/dr-huang-clinic/case-studies/chronic-pain.jpg",
+      "image": "/uploads/wewash/case-studies/chronic-pain.jpg",
       "summary": "Sarah found relief from severe IBS symptoms that had limited her life for years through targeted TCM treatment."
     },
     {
       "id": "migraines-michael",
       "category": "pain-management",
       "condition": "Chronic Migraines",
-      "image": "/uploads/dr-huang-clinic/case-studies/migraine.jpg",
+      "image": "/uploads/wewash/case-studies/migraine.jpg",
       "summary": "After 15 years of debilitating migraines, Michael reduced frequency and severity by 85% through acupuncture and herbal medicine."
     },
     {
       "id": "menopause-patricia",
       "category": "womens-health",
       "condition": "Menopause Symptoms",
-      "image": "/uploads/dr-huang-clinic/case-studies/fertility.jpg",
+      "image": "/uploads/wewash/case-studies/fertility.jpg",
       "summary": "Patricia eliminated severe hot flashes and night sweats and improved sleep and mood through TCM treatment."
     }
   ],

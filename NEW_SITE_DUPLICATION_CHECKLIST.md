@@ -9,8 +9,8 @@ Reference SOP:
 
 ## A) Pre-flight
 
-- [ ] Confirm source project is `chinese-medicine`.
-- [ ] Confirm target folder name (example: `chinese-medicine-newsite`).
+- [ ] Confirm source project is `wewash`.
+- [ ] Confirm target folder name (example: `wewash-newsite`).
 - [ ] Confirm new `siteId` (example: `new-site-id`).
 - [ ] Confirm new production domain.
 - [ ] Confirm this migration will use a new Supabase project.
@@ -22,14 +22,14 @@ Reference SOP:
 - [ ] Duplicate project folder:
 
 ```bash
-cd /Users/johntang/Desktop/clients/medical-clinic
-cp -R chinese-medicine chinese-medicine-newsite
-cd chinese-medicine-newsite
+cd /Users/johntang/Desktop/clients/laundry
+cp -R wewash wewash-newsite
+cd wewash-newsite
 rm -rf node_modules .next
 npm install
 ```
 
-- [ ] Keep original `chinese-medicine` unchanged.
+- [ ] Keep original `wewash` unchanged.
 - [ ] Initialize separate git remote/repo for new client.
 
 ---
@@ -80,13 +80,13 @@ create table if not exists public.content_revisions (
 - [ ] Copy base content:
 
 ```bash
-cd /Users/johntang/Desktop/clients/medical-clinic/chinese-medicine-newsite
-cp -R content/dr-huang-clinic content/new-site-id
+cd /Users/johntang/Desktop/clients/laundry/wewash-newsite
+cp -R content/wewash content/new-site-id
 ```
 
 - [ ] Update `content/new-site-id/theme.json`.
 - [ ] Update `content/new-site-id/en/site.json`.
-- [ ] Update `content/new-site-id/zh/site.json`.
+- [ ] Update `content/new-site-id/es/site.json`.
 - [ ] Update both locales:
   - [ ] `navigation.json`
   - [ ] `header.json`
@@ -157,7 +157,7 @@ npm run dev
 
 - [ ] Import sites (`/api/admin/sites/import`).
 - [ ] Import users if required (`/api/admin/users/import`).
-- [ ] For each locale (`en`, `zh`), import content using `missing` mode first.
+- [ ] For each locale (`en`, `es`), import content using `missing` mode first.
 - [ ] Import booking data for site (`/api/admin/booking/import`).
 - [ ] Import media only if existing assets are being migrated (`/api/admin/media/import`).
 - [ ] Use overwrite import only intentionally.
@@ -189,7 +189,7 @@ npm run build
 
 ## I) Post-deploy verification
 
-- [ ] `/en` and `/zh` load.
+- [ ] `/en` and `/es` load.
 - [ ] Admin login works.
 - [ ] Edit in `Site Settings` saves and persists.
 - [ ] Contact form sends:

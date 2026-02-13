@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
       domain: payload.domain,
       enabled: payload.enabled ?? true,
       defaultLocale: payload.defaultLocale ?? 'en',
-      supportedLocales: payload.supportedLocales ?? ['en', 'zh'],
+      supportedLocales: payload.supportedLocales ?? ['en', 'es'],
     });
 
     if (payload.cloneFrom) {
@@ -150,21 +150,40 @@ export async function POST(request: NextRequest) {
       const servicesPath = path.join(bookingRoot, 'services.json');
       const settingsPath = path.join(bookingRoot, 'settings.json');
       const defaultServices: BookingService[] = [
-        { id: 'acupuncture', name: 'Acupuncture', durationMinutes: 60, price: 120, active: true },
+        {
+          id: 'wash-fold-pickup',
+          name: 'Wash & Fold (Pickup + Delivery)',
+          serviceType: 'pickup_delivery',
+          pricingModel: 'by_weight',
+          unitLabel: 'lb',
+          durationMinutes: 60,
+          price: 1.95,
+          minOrderValue: 35,
+          leadTimeHours: 12,
+          capacityPerSlot: 4,
+          recurringEligible: true,
+          active: true,
+        },
       ];
       const defaultSettings: BookingSettings = {
         timezone: 'America/New_York',
-        bufferMinutes: 10,
-        minNoticeHours: 12,
+        bufferMinutes: 15,
+        minNoticeHours: 4,
         maxDaysAhead: 60,
+        defaultServiceType: 'pickup_delivery',
+        serviceAreaZips: [],
+        blackoutWindows: [],
+        rushLeadHours: 6,
+        maxOrdersPerSlot: 4,
+        recurringEnabled: true,
         businessHours: [
-          { day: 'Mon', open: '09:00', close: '17:00' },
-          { day: 'Tue', open: '09:00', close: '17:00' },
-          { day: 'Wed', open: '09:00', close: '17:00' },
-          { day: 'Thu', open: '09:00', close: '17:00' },
-          { day: 'Fri', open: '09:00', close: '17:00' },
-          { day: 'Sat', open: '10:00', close: '14:00' },
-          { day: 'Sun', open: '00:00', close: '00:00', closed: true },
+          { day: 'Mon', open: '08:00', close: '20:00' },
+          { day: 'Tue', open: '08:00', close: '20:00' },
+          { day: 'Wed', open: '08:00', close: '20:00' },
+          { day: 'Thu', open: '08:00', close: '20:00' },
+          { day: 'Fri', open: '08:00', close: '20:00' },
+          { day: 'Sat', open: '09:00', close: '18:00' },
+          { day: 'Sun', open: '09:00', close: '16:00', closed: false },
         ],
         blockedDates: [],
         notificationEmails: [],

@@ -1,12 +1,12 @@
 {
   "hero": {
     "variant": "centered",
-    "title": "Health and Lifestyle Blog & Resources",
-    "subtitle": "Educational articles and videos about Traditional Chinese Medicine, wellness, and natural health",
-    "backgroundImage": "/uploads/dr-huang-clinic/blog/dr-huang-lecture-20.png"
+    "title": "Blog Under Development",
+    "subtitle": "We are preparing laundry-focused articles and resources.",
+    "backgroundImage": "/uploads/wewash/blog/dr-huang-lecture-20.png"
   },
   "introduction": {
-    "text": "Stay informed about Traditional Chinese Medicine with our blog. We share educational articles, treatment insights, wellness tips, and patient success stories to help you on your healing journey."
+    "text": "Blog content is currently under development."
   },
   "categories": [
     {
@@ -47,15 +47,15 @@
   ],
   "cta": {
     "variant": "centered",
-    "title": "Have Questions About TCM?",
-    "description": "Schedule a consultation to discuss how Traditional Chinese Medicine can help you achieve your health goals",
+    "title": "Need help now?",
+    "description": "Contact WeWash directly for service questions and booking support.",
     "primaryCta": {
-      "text": "Book Consultation",
-      "link": "/en/contact"
+      "text": "Book Pickup",
+      "link": "/en/book"
     },
     "secondaryCta": {
-      "text": "Learn About Our Services",
-      "link": "/en/services"
+      "text": "Contact Support",
+      "link": "/en/contact"
     }
   }
 }

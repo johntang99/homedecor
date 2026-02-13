@@ -7,7 +7,7 @@ echo "📸 Downloading stock photos for Dr. Huang Clinic..."
 echo "This will download 40+ images (~50MB total)"
 echo ""
 
-cd public/uploads/dr-huang-clinic
+cd public/uploads/wewash
 
 # Hero Images (1920x1080)
 echo "⬇️  Downloading hero images..."
@@ -22,7 +22,7 @@ curl -L "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=1920&h=1080
 # Dr. Huang Photos
 echo "⬇️  Downloading doctor photos..."
 curl -L "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&h=800&fit=crop" -o about/dr-huang-portrait.jpg
-curl -L "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=1200&h=800&fit=crop" -o about/dr-huang-clinic.jpg
+curl -L "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=1200&h=800&fit=crop" -o about/wewash.jpg
 
 # Service Photos (800x600)
 echo "⬇️  Downloading service photos..."
@@ -73,7 +73,7 @@ curl -L "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=800&h=60
 
 echo ""
 echo "✅ Download complete!"
-echo "📁 Images saved to: public/uploads/dr-huang-clinic/"
+echo "📁 Images saved to: public/uploads/wewash/"
 echo ""
 echo "Total images downloaded: 40+"
 echo ""

@@ -1,13 +1,13 @@
 {
   "hero": {
     "variant": "centered",
-    "title": "Conditions We Treat",
-    "subtitle": "Traditional Chinese Medicine offers natural, effective solutions for a wide range of health concerns",
-    "backgroundImage": "/uploads/dr-huang-clinic/general/tcm-emotion-1.webp"
+    "title": "Use Cases We Handle",
+    "subtitle": "Laundry service solutions for households, rentals, and commercial teams.",
+    "backgroundImage": "/uploads/wewash/general/tcm-emotion-1.webp"
   },
   "introduction": {
-    "text": "At Dr. Huang Clinic, we treat the whole person, not just symptoms. Our comprehensive approach addresses the root causes of illness while providing relief from immediate discomfort. Below are some of the conditions we commonly treat with excellent results.",
-    "note": "Don't see your condition listed? Contact us - we may still be able to help!"
+    "text": "WeWash supports different laundry workloads, from family weekly cycles to high-turnover business operations. Below are common scenarios we serve.",
+    "note": "If your scenario is not listed, contact us for a custom service recommendation."
   },
   "categories": [
     {
@@ -52,7 +52,7 @@
       "id": "back-pain",
       "category": "pain-management",
       "icon": "Activity",
-      "image": "/uploads/dr-huang-clinic/gallery/acupuncture-needles.jpg",
+      "image": "/uploads/wewash/gallery/acupuncture-needles.jpg",
       "title": "Back Pain",
       "description": "Whether acute or chronic, acupuncture and TCM therapies provide effective relief for lower back pain, upper back pain, and sciatica without drugs or surgery.",
       "symptoms": [
@@ -122,7 +122,7 @@
       "id": "headaches-migraines",
       "category": "pain-management",
       "icon": "Activity",
-      "image": "/uploads/dr-huang-clinic/general/headache-2.jpeg",
+      "image": "/uploads/wewash/general/headache-2.jpeg",
       "title": "Headaches & Migraines",
       "description": "Effective treatment for tension headaches, migraines, and chronic head pain without medication.",
       "symptoms": [
@@ -147,7 +147,7 @@
       "id": "anxiety",
       "category": "mental-health",
       "icon": "Brain",
-      "image": "/uploads/dr-huang-clinic/general/anxiate-3.jpeg",
+      "image": "/uploads/wewash/general/anxiate-3.jpeg",
       "title": "Anxiety & Panic Disorders",
       "description": "Natural, drug-free support for anxiety, panic attacks, and general nervousness.",
       "symptoms": [

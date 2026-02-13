@@ -1,10 +1,18 @@
 import { notFound } from 'next/navigation';
 import { headers } from 'next/headers';
 import { defaultLocale, locales, type Locale } from '@/lib/i18n';
-import { getDefaultSite, getSiteByHost } from '@/lib/sites';
-import { loadFooter, loadPageContent, loadSeo, loadTheme, loadSiteInfo } from '@/lib/content';
+import { getDefaultSite, getSiteById } from '@/lib/sites';
+import {
+  getRequestSiteId,
+  loadContent,
+  loadFooter,
+  loadPageContent,
+  loadSeo,
+  loadTheme,
+  loadSiteInfo,
+} from '@/lib/content';
 import type { FooterSection, HomePage, SeoConfig, SiteInfo } from '@/lib/types';
-import Header from '@/components/layout/Header';
+import Header, { type HeaderConfig } from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { getBaseUrlFromHost } from '@/lib/seo';
 
@@ -19,14 +27,15 @@ export async function generateMetadata({
 }) {
   const host = headers().get('host');
   const baseUrl = getBaseUrlFromHost(host);
-  const site = (await getSiteByHost(host)) || (await getDefaultSite());
+  const requestSiteId = await getRequestSiteId();
+  const site = (await getSiteById(requestSiteId)) || (await getDefaultSite());
   const locale = params.locale as Locale;
 
   if (!site) {
     return {
       metadataBase: baseUrl,
       title: 'Clinic Website',
-      description: 'Healthcare services',
+      description: 'Laundry and garment care services',
     };
   }
 
@@ -38,7 +47,7 @@ export async function generateMetadata({
   const description =
     seo?.description ||
     siteInfo?.description ||
-    'Traditional Chinese medicine and acupuncture services.';
+    'Laundry pickup, delivery, and commercial garment care services.';
   const titleDefault = seo?.title || titleBase;
   const canonical = new URL(`/${locale}`, baseUrl).toString();
   const languageAlternates = locales.reduce<Record<string, string>>((acc, entry) => {
@@ -87,7 +96,8 @@ export default async function LocaleLayout({
   }
   
   const host = headers().get('host');
-  const site = (await getSiteByHost(host)) || (await getDefaultSite());
+  const requestSiteId = await getRequestSiteId();
+  const site = (await getSiteById(requestSiteId)) || (await getDefaultSite());
   
   if (!site) {
     return <div>No site configured</div>;
@@ -97,10 +107,11 @@ export default async function LocaleLayout({
   const theme = await loadTheme(site.id);
   
   // Load site info for header/footer
-  const [siteInfo, seo, footer] = await Promise.all([
+  const [siteInfo, seo, footer, headerConfig] = await Promise.all([
     loadSiteInfo(site.id, locale as Locale) as Promise<SiteInfo | null>,
     loadSeo(site.id, locale as Locale) as Promise<SeoConfig | null>,
     loadFooter<FooterSection>(site.id, locale as Locale),
+    loadContent<HeaderConfig>(site.id, locale as Locale, 'header.json'),
   ]);
   const homeContent = await loadPageContent<HomePage>('home', locale as Locale);
   const menuConfig = homeContent?.menu;
@@ -153,7 +164,7 @@ export default async function LocaleLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
-              '@type': 'MedicalBusiness',
+              '@type': 'LocalBusiness',
               name: siteInfo.clinicName,
               url: new URL(`/${locale}`, baseUrl).toString(),
               description: siteInfo.description,
@@ -178,6 +189,7 @@ export default async function LocaleLayout({
           siteId={site.id}
           siteInfo={siteInfo ?? undefined}
           variant={menuConfig?.variant || siteInfo?.headerVariant || 'default'}
+          headerConfig={headerConfig ?? undefined}
           menu={menuConfig}
         />
         <main className="flex-grow">{children}</main>

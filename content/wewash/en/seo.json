@@ -1,20 +1,28 @@
 {
-  "title": "Dr Huang Clinic",
-  "description": "Traditional Chinese Medicine & Acupuncture in Middletown, NY.",
+  "title": "WeWash Laundry",
+  "description": "Laundry pickup and delivery, wash-and-fold, dry cleaning, and commercial linen service in Middletown, NY.",
 
   "home": {
-    "title": "Traditional Chinese Medicine & Acupuncture in Middletown, NY | Dr Huang Clinic",
-    "description": "Offering acupuncture, herbal medicine, and holistic care in Middletown, NY. Book an appointment today."
+    "title": "Laundry Pickup, Drop-off, and Commercial Service | WeWash",
+    "description": "Book laundry pickup and delivery, drop off your weekly wash, or request a commercial laundry quote."
   },
 
   "pages": {
     "about": {
-      "title": "About Dr. Huang | Dr Huang Clinic",
-      "description": "Meet Dr. Huang and our clinic story."
+      "title": "About WeWash | Laundry Team and Standards",
+      "description": "Meet the WeWash team and learn our quality standards for garment and linen care."
     },
     "services": {
-      "title": "Acupuncture & Herbal Medicine | Dr Huang Clinic",
-      "description": "Personalized treatments for pain, stress, and wellness."
+      "title": "Laundry Services | Wash & Fold, Dry Cleaning, Commercial",
+      "description": "Explore household and business laundry services, turnaround options, and add-ons."
+    },
+    "pricing": {
+      "title": "Laundry Pricing | WeWash",
+      "description": "Transparent laundry pricing by weight, by item, and commercial account plans."
+    },
+    "contact": {
+      "title": "Contact and Service Areas | WeWash",
+      "description": "Check service areas, request pickup, and contact WeWash support."
     }
   }
 }

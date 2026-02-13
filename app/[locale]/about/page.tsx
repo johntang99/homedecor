@@ -237,7 +237,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
                     <div className="relative z-10 text-center">
                       <div className="text-8xl mb-6">🏥</div>
                       <p className="text-gray-700 font-semibold text-subheading mb-2">
-                        {siteInfo?.clinicName || 'Dr. Huang Clinic'}
+                        {siteInfo?.clinicName || 'WeWash Laundry'}
                       </p>
                       <p className="text-gray-600 text-sm">
                         {siteInfo?.tagline || 'Traditional Chinese Medicine'}
@@ -531,7 +531,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
         </section>
       )}
 
-      {/* About the Clinic */}
+      {/* About the Business */}
       {isEnabled('clinic') && (
         <section className="py-20 px-4 bg-gray-50" style={sectionStyle('clinic')}>
         <div className="container mx-auto max-w-6xl">
@@ -553,7 +553,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
             {/* Features List */}
             <div className="bg-white border-2 border-gray-200 rounded-xl p-8">
               <h3 className="text-subheading font-bold text-gray-900 mb-6">
-                {locale === 'en' ? 'Clinic Features' : '诊所特色'}
+                {locale === 'en' ? 'Business Features' : 'Caracteristicas del negocio'}
               </h3>
               <ul className="space-y-3">
                 {(clinic.features && clinic.features.length > 0

@@ -58,9 +58,9 @@ export default async function ServicesPageComponent({ params }: ServicesPageProp
   const { hero, overview, services, faq, cta } = content;
   const blogBySlug = new Map(blogPosts.map((post) => [post.slug, post]));
   const preferredSlugs = [
-    'first-visit-acupuncture-guide',
-    'acupuncture-pain-relief-science',
-    'chinese-herbal-formulas',
+    'laundry-turnaround-planning',
+    'fabric-care-basics',
+    'commercial-laundry-checklist',
   ];
   const preferredPosts = preferredSlugs
     .map((slug) => blogBySlug.get(slug))
@@ -73,18 +73,18 @@ export default async function ServicesPageComponent({ params }: ServicesPageProp
   const trustItems = [
     {
       icon: Award,
-      title: locale === 'en' ? 'Licensed Practitioner' : '持牌医师',
-      description: locale === 'en' ? 'Certified & experienced' : '认证与经验丰富',
+      title: locale === 'en' ? 'Quality Process' : 'Proceso de calidad',
+      description: locale === 'en' ? 'Inspected before delivery' : 'Inspeccion antes de entregar',
     },
     {
       icon: Users,
-      title: locale === 'en' ? 'Personalized Plans' : '个性化方案',
-      description: locale === 'en' ? 'Tailored to your needs' : '贴合您的需求',
+      title: locale === 'en' ? 'Flexible Plans' : 'Planes flexibles',
+      description: locale === 'en' ? 'Built for your schedule' : 'Adaptados a tu horario',
     },
     {
       icon: Shield,
-      title: locale === 'en' ? 'Calm & Private' : '安静私密',
-      description: locale === 'en' ? 'Peaceful healing space' : '安心疗愈空间',
+      title: locale === 'en' ? 'Reliable Operations' : 'Operacion confiable',
+      description: locale === 'en' ? 'Route and SLA controls' : 'Control por rutas y SLA',
     },
   ];
   const layoutOrder = new Map<string, number>(
@@ -174,10 +174,10 @@ export default async function ServicesPageComponent({ params }: ServicesPageProp
                     <div className="relative z-10 text-center">
                       <div className="text-8xl mb-6">🧘</div>
                       <p className="text-gray-700 font-semibold text-subheading mb-2">
-                        {locale === 'en' ? 'Holistic TCM Treatments' : '整体中医疗法'}
+                        {locale === 'en' ? 'Hybrid Laundry Services' : 'Servicios de lavanderia hibridos'}
                       </p>
                       <p className="text-gray-600 text-sm">
-                        {locale === 'en' ? 'Time-tested healing methods' : '经验证的疗愈方法'}
+                        {locale === 'en' ? 'Pickup, drop-off, and commercial-ready' : 'Recogida, entrega y listo para comercial'}
                       </p>
                     </div>
                   </div>
@@ -201,7 +201,9 @@ export default async function ServicesPageComponent({ params }: ServicesPageProp
 
             <div className="bg-gradient-to-br from-primary/5 to-backdrop-primary rounded-2xl p-8 lg:p-12">
               <h2 className="text-heading font-bold text-gray-900 mb-6">
-                Benefits of Traditional Chinese Medicine
+                {locale === 'en'
+                  ? 'Benefits of the WeWash Service Model'
+                  : 'Beneficios del modelo de servicio WeWash'}
               </h2>
               <div className="grid sm:grid-cols-2 gap-4">
                 {overview.benefits.map((benefit, index) => (
@@ -294,7 +296,7 @@ export default async function ServicesPageComponent({ params }: ServicesPageProp
                         <div className="bg-white rounded-xl p-6 border border-gray-100">
                           <h4 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
                             <Icon name="Info" size="sm" className="text-primary" />
-                            What to Expect
+                            {locale === 'en' ? 'What to Expect' : 'Que esperar'}
                           </h4>
                           <p className="text-sm text-gray-600 leading-relaxed">
                             {service.whatToExpect}
@@ -320,7 +322,9 @@ export default async function ServicesPageComponent({ params }: ServicesPageProp
                 {faq.title}
               </h2>
               <p className="text-gray-600">
-                Common questions about our treatments and what to expect
+                {locale === 'en'
+                  ? 'Common questions about service, pricing, and turnaround'
+                  : 'Preguntas comunes sobre servicio, precios y tiempos'}
               </p>
             </div>
 
@@ -347,19 +351,19 @@ export default async function ServicesPageComponent({ params }: ServicesPageProp
               <div className="flex items-center justify-between gap-4 mb-10">
                 <div>
                   <h2 className="text-heading font-bold text-gray-900">
-                    {locale === 'en' ? 'Related Reading' : '相关阅读'}
+                    {locale === 'en' ? 'Related Reading' : 'Lecturas relacionadas'}
                   </h2>
                   <p className="text-gray-600">
                     {locale === 'en'
-                      ? 'Learn more about acupuncture, herbs, and wellness.'
-                      : '了解更多针灸、中药与健康知识。'}
+                      ? 'Learn more about laundry operations and garment care.'
+                      : 'Aprende mas sobre operaciones y cuidado de prendas.'}
                   </p>
                 </div>
                 <Link
                   href={`/${locale}/blog`}
                   className="text-primary font-semibold hover:text-primary-dark"
                 >
-                  {locale === 'en' ? 'View all' : '查看全部'}
+                  {locale === 'en' ? 'View all' : 'Ver todo'}
                 </Link>
               </div>
 
@@ -369,7 +373,7 @@ export default async function ServicesPageComponent({ params }: ServicesPageProp
                     <Card className="h-full hover:shadow-lg transition-shadow">
                       <CardHeader>
                         <Badge variant="secondary" size="sm">
-                          {post.category || (locale === 'en' ? 'Wellness' : '健康')}
+                          {post.category || (locale === 'en' ? 'Laundry' : 'Lavanderia')}
                         </Badge>
                         <CardTitle className="text-base mt-3 line-clamp-2">
                           {post.title}

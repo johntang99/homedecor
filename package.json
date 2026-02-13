@@ -1,12 +1,12 @@
 {
-  "name": "tcm-multi-site-system",
+  "name": "laundry-wewash",
   "version": "1.0.0",
-  "description": "Traditional Chinese Medicine Multi-Site System",
+  "description": "Laundry WeWash",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3003",
+    "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 3003",
+    "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit"
   },

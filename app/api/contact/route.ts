@@ -13,10 +13,10 @@ interface ContactFormData {
 
 function getReasonLabel(reason: string): string {
   const labels: Record<string, string> = {
-    'new-appointment': 'Schedule New Patient Appointment',
-    'followup-appointment': 'Schedule Follow-up Appointment',
-    'treatment-question': 'Question About Treatment',
-    'pricing-question': 'Question About Pricing/Insurance',
+    'new-appointment': 'Book Laundry Service',
+    'followup-appointment': 'Modify Existing Laundry Booking',
+    'treatment-question': 'Question About Services',
+    'pricing-question': 'Question About Pricing',
     'information': 'Request Information',
     'other': 'Other',
   };
@@ -49,7 +49,7 @@ function createEmailHTML(data: ContactFormData): string {
                 <tr>
                   <td style="padding: 32px 32px 24px; background: linear-gradient(135deg, #059669 0%, #047857 100%); border-radius: 8px 8px 0 0;">
                     <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 700;">📧 New Contact Form Submission</h1>
-                    <p style="margin: 8px 0 0; color: rgba(255,255,255,0.9); font-size: 14px;">Dr. Huang Clinic Website</p>
+                    <p style="margin: 8px 0 0; color: rgba(255,255,255,0.9); font-size: 14px;">WeWash Website</p>
                   </td>
                 </tr>
                 
@@ -57,7 +57,7 @@ function createEmailHTML(data: ContactFormData): string {
                 <tr>
                   <td style="padding: 32px;">
                     <div style="background-color: #f0fdf4; border-left: 4px solid #059669; padding: 16px; margin-bottom: 24px; border-radius: 4px;">
-                      <p style="margin: 0; color: #065f46; font-weight: 600; font-size: 14px;">⚡ Action Required: New patient inquiry</p>
+                      <p style="margin: 0; color: #065f46; font-weight: 600; font-size: 14px;">⚡ Action Required: New customer inquiry</p>
                     </div>
 
                     <table role="presentation" style="width: 100%; border-collapse: collapse;">
@@ -105,7 +105,7 @@ function createEmailHTML(data: ContactFormData): string {
 
                     <!-- Action Button -->
                     <div style="margin-top: 32px; text-align: center;">
-                      <a href="mailto:${email}?subject=Re: ${reasonLabel}" style="display: inline-block; padding: 12px 24px; background-color: #059669; color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 14px;">Reply to Patient</a>
+                      <a href="mailto:${email}?subject=Re: ${reasonLabel}" style="display: inline-block; padding: 12px 24px; background-color: #059669; color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 14px;">Reply to Customer</a>
                     </div>
                   </td>
                 </tr>
@@ -114,8 +114,8 @@ function createEmailHTML(data: ContactFormData): string {
                 <tr>
                   <td style="padding: 24px 32px; background-color: #f9fafb; border-radius: 0 0 8px 8px; border-top: 1px solid #e5e7eb;">
                     <p style="margin: 0; color: #6b7280; font-size: 12px; text-align: center;">
-                      This email was sent from the Dr. Huang Clinic contact form.<br>
-                      <strong>Remember:</strong> Respond within 24 hours for best patient experience.
+                      This email was sent from the WeWash contact form.<br>
+                      <strong>Remember:</strong> Respond quickly for best customer experience.
                     </p>
                   </td>
                 </tr>
@@ -135,7 +135,7 @@ function createAutoReplyHTML(name: string): string {
       <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Thank You for Contacting Dr. Huang Clinic</title>
+        <title>Thank You for Contacting WeWash</title>
       </head>
       <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f9fafb; color: #111827;">
         <table role="presentation" style="width: 100%; border-collapse: collapse;">
@@ -155,24 +155,24 @@ function createAutoReplyHTML(name: string): string {
                     <p style="margin: 0 0 16px; color: #111827; font-size: 16px; line-height: 1.6;">Dear ${name},</p>
                     
                     <p style="margin: 0 0 16px; color: #111827; font-size: 16px; line-height: 1.6;">
-                      Thank you for contacting <strong>Dr. Huang Clinic</strong>. We've received your message and will respond within <strong>24 hours</strong>.
+                      Thank you for contacting <strong>WeWash</strong>. We've received your message and will respond shortly.
                     </p>
 
                     <div style="margin: 24px 0; padding: 20px; background-color: #f0fdf4; border-left: 4px solid #059669; border-radius: 4px;">
                       <p style="margin: 0; color: #065f46; font-size: 14px; line-height: 1.6;">
                         <strong>🕐 Need immediate assistance?</strong><br>
-                        Call us at <a href="tel:+18453811106" style="color: #059669; text-decoration: none; font-weight: 600;">(845) 381-1106</a><br>
-                        <span style="color: #6b7280; font-size: 13px;">Monday-Friday: 9am-6pm | Saturday: 9am-2pm</span>
+                        Call us at <a href="tel:+18453940158" style="color: #059669; text-decoration: none; font-weight: 600;">(845) 394-0158</a><br>
+                        <span style="color: #6b7280; font-size: 13px;">Mon-Fri: 8am-8pm | Sat-Sun: 9am-6pm</span>
                       </p>
                     </div>
 
                     <p style="margin: 24px 0 0; color: #6b7280; font-size: 14px; line-height: 1.6;">
-                      We look forward to helping you on your healing journey.
+                      We look forward to supporting your laundry needs.
                     </p>
 
                     <p style="margin: 16px 0 0; color: #111827; font-size: 16px;">
-                      <strong>Dr. Huang, L.Ac., MSTCM</strong><br>
-                      <span style="color: #6b7280; font-size: 14px;">Licensed Acupuncturist & TCM Practitioner</span>
+                      <strong>WeWash Support Team</strong><br>
+                      <span style="color: #6b7280; font-size: 14px;">Laundry Operations & Customer Care</span>
                     </p>
                   </td>
                 </tr>
@@ -183,14 +183,14 @@ function createAutoReplyHTML(name: string): string {
                     <table role="presentation" style="width: 100%;">
                       <tr>
                         <td style="text-align: center; padding-bottom: 16px;">
-                          <p style="margin: 0; color: #111827; font-size: 14px; font-weight: 600;">Dr. Huang Clinic</p>
-                          <p style="margin: 4px 0 0; color: #6b7280; font-size: 13px;">Traditional Chinese Medicine & Acupuncture</p>
+                          <p style="margin: 0; color: #111827; font-size: 14px; font-weight: 600;">WeWash</p>
+                          <p style="margin: 4px 0 0; color: #6b7280; font-size: 13px;">Laundry Pickup, Delivery, and Commercial Service</p>
                         </td>
                       </tr>
                       <tr>
                         <td style="text-align: center; color: #6b7280; font-size: 12px; line-height: 1.5;">
-                          📍 71 East Main Street, Middletown, NY 10940<br>
-                          📞 (845) 381-1106 | ✉️ sancai.acu@gmail.com
+                          📍 87 North Street, Middletown, NY 10940<br>
+                          📞 (845) 394-0158 | ✉️ hello@wewash99.com
                         </td>
                       </tr>
                     </table>
@@ -246,7 +246,7 @@ export async function POST(request: NextRequest) {
       to: process.env.CONTACT_FALLBACK_TO || 'support@baamplatform.com',
       cc: process.env.ALERT_TO ? [process.env.ALERT_TO] : undefined,
       reply_to: email,
-      subject: `🏥 New Contact: ${reasonLabel} - ${name}`,
+      subject: `🧺 New Contact: ${reasonLabel} - ${name}`,
       html: emailHTML,
     });
 
@@ -254,7 +254,7 @@ export async function POST(request: NextRequest) {
     const autoReplyEmail = await resend.emails.send({
       from: process.env.RESEND_FROM || 'No-Reply<no-reply@baamplatform.com>',
       to: email,
-      subject: 'Thank you for contacting Dr. Huang Clinic',
+      subject: 'Thank you for contacting WeWash',
       html: autoReplyHTML,
     });
 
@@ -267,7 +267,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       { 
         success: true, 
-        message: 'Your message has been sent successfully. We will contact you within 24 hours. Please check your email for confirmation.' 
+        message: 'Your message has been sent successfully. Our team will contact you soon. Please check your email for confirmation.' 
       },
       { status: 200 }
     );
@@ -277,7 +277,7 @@ export async function POST(request: NextRequest) {
     // Return user-friendly error
     return NextResponse.json(
       { 
-        error: 'An error occurred while sending your message. Please try calling us directly at (845) 381-1106.',
+        error: 'An error occurred while sending your message. Please try calling us directly at (845) 394-0158.',
         details: process.env.NODE_ENV === 'development' ? String(error) : undefined
       },
       { status: 500 }

@@ -77,6 +77,12 @@ export function getBusinessHoursForDate(
   date: string,
   settings: BookingSettings
 ) {
+  if (
+    Array.isArray(settings.blackoutWindows) &&
+    settings.blackoutWindows.some((window) => date >= window.start && date <= window.end)
+  ) {
+    return null;
+  }
   if (settings.blockedDates.includes(date)) {
     return null;
   }
@@ -104,9 +110,15 @@ export function generateAvailableSlots({
   const closeMinutes = parseTimeToMinutes(hours.close);
   const duration = service.durationMinutes;
   const step = duration + settings.bufferMinutes;
+  const perServiceLeadHours = Number(service.leadTimeHours || 0);
+  const minNoticeHours = Math.max(settings.minNoticeHours, perServiceLeadHours);
+  const capacityPerSlot = Math.max(
+    1,
+    Number(service.capacityPerSlot || settings.maxOrdersPerSlot || 1)
+  );
 
   const nowUtc = getNowUtcForTimeZone(settings.timezone);
-  const minNoticeUtc = nowUtc + settings.minNoticeHours * 60 * 60 * 1000;
+  const minNoticeUtc = nowUtc + minNoticeHours * 60 * 60 * 1000;
 
   const slots: string[] = [];
   for (
@@ -115,6 +127,18 @@ export function generateAvailableSlots({
     start += step
   ) {
     const slotTime = formatMinutesToTime(start);
+    if (Array.isArray(service.availableWindows) && service.availableWindows.length > 0) {
+      const dayName = getDayName(date);
+      const windowsForDay = service.availableWindows.filter((window) => window.day === dayName);
+      const allowedByWindow = windowsForDay.some((window) => {
+        const windowStart = parseTimeToMinutes(window.start);
+        const windowEnd = parseTimeToMinutes(window.end);
+        return start >= windowStart && start + duration <= windowEnd;
+      });
+      if (!allowedByWindow) {
+        continue;
+      }
+    }
     const slotUtc = buildUtcFromLocalParts({
       year: Number(date.slice(0, 4)),
       month: Number(date.slice(5, 7)),
@@ -126,15 +150,15 @@ export function generateAvailableSlots({
       continue;
     }
 
-    const overlaps = bookings.some((booking) => {
+    const overlappingCount = bookings.filter((booking) => {
       if (booking.status === 'cancelled') return false;
       if (booking.date !== date) return false;
       const bookingStart = parseTimeToMinutes(booking.time);
       const bookingEnd = bookingStart + booking.durationMinutes + settings.bufferMinutes;
       const slotEnd = start + duration;
       return start < bookingEnd && slotEnd > bookingStart;
-    });
-    if (!overlaps) {
+    }).length;
+    if (overlappingCount < capacityPerSlot) {
       slots.push(slotTime);
     }
   }

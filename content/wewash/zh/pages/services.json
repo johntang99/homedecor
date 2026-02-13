@@ -3,7 +3,7 @@
     "variant": "centered",
     "title": "传统中医疗法",
     "subtitle": "为您量身定制的综合治疗方案",
-    "backgroundImage": "/uploads/dr-huang-clinic/general/Acupuncture-15.webp"
+    "backgroundImage": "/uploads/wewash/general/Acupuncture-15.webp"
   },
   "overview": {
     "introduction": "在黄医生诊所，我们提供全套传统中医治疗服务。每种疗法都经过精心选择和定制，以解决您的具体健康问题和保健目标。我们的整体方法结合了古老的智慧和现代的理解，提供有效的自然治疗。",
@@ -36,7 +36,7 @@
         "提高能量水平"
       ],
       "whatToExpect": "在针灸治疗期间，您将舒适地放松，而细如发丝的针被轻轻地插入特定穴位。大多数患者感觉很少或没有不适。您将休息20-30分钟，在此期间针在起作用，通常会体验到深度放松。许多人在治疗期间会入睡！",
-      "image": "/uploads/dr-huang-clinic/general/acupuncture-16.webp",
+      "image": "/uploads/wewash/general/acupuncture-16.webp",
       "order": 1
     },
     {
@@ -56,7 +56,7 @@
         "促进长期健康"
       ],
       "whatToExpect": "经过全面的咨询和诊断后，我们将为您创建专门的定制中药配方。您将收到关于如何准备和服用中药的详细说明。我们会监测您的进展，并根据需要调整配方以获得最佳效果。",
-      "image": "/uploads/dr-huang-clinic/general/chinese-herb-10.webp",
+      "image": "/uploads/wewash/general/chinese-herb-10.webp",
       "order": 2
     },
     {
@@ -76,7 +76,7 @@
         "增强免疫系统"
       ],
       "whatToExpect": "玻璃或硅胶罐被放置在紧张或疼痛的区域。您会感到强烈的拉扯感，大多数人认为这是缓解而不是疼痛。罐可能会留在原位5-15分钟，或在皮肤上移动。暂时的圆形印记是正常的，会在几天内消退。",
-      "image": "/uploads/dr-huang-clinic/general/cupping-10.jpg",
+      "image": "/uploads/wewash/general/cupping-10.jpg",
       "order": 3
     },
     {
@@ -96,7 +96,7 @@
         "补虚"
       ],
       "whatToExpect": "在艾灸期间，您会感到温暖的感觉，因为燃烧的艾条在您身体的特定穴位附近。治疗深度放松和温暖。有些人形容这感觉就像温和的阳光照在皮肤上。艾草有独特的泥土香气。",
-      "image": "/uploads/dr-huang-clinic/blog/moxibustion-2.jpeg",
+      "image": "/uploads/wewash/blog/moxibustion-2.jpeg",
       "order": 4
     },
     {
@@ -116,7 +116,7 @@
         "改善消化"
       ],
       "whatToExpect": "推拿可以从温和到相当有力，具体取决于您的状况和体质。医师使用手、手指、肘部，有时还有脚来应用各种技术。治疗期间您将保持穿着衣服，通常持续30-60分钟。",
-      "image": "/uploads/dr-huang-clinic/blog/acupuncture-pain.jpg",
+      "image": "/uploads/wewash/blog/acupuncture-pain.jpg",
       "order": 5
     },
     {
@@ -136,7 +136,7 @@
         "颈肩紧张释放"
       ],
       "whatToExpect": "在您的皮肤上涂抹油，然后使用光滑的工具以向下的笔画刮擦紧张或疼痛的区域。您会感到压力和刮擦，可能会很强烈但不是无法忍受的。治疗期间会出现红色或紫色印记，通常在2-7天内消退。",
-      "image": "/uploads/dr-huang-clinic/blog/gua-sha-22.png",
+      "image": "/uploads/wewash/blog/gua-sha-22.png",
       "order": 6
     },
     {
@@ -156,7 +156,7 @@
         "易于在家实施"
       ],
       "whatToExpect": "在咨询期间，我们将讨论您的饮食，并根据您的状况提供有关要强调或避免的食物的具体建议。您将收到适合您生活方式的实用、可实现的指导。随着您的健康改善，我们会调整建议。",
-      "image": "/uploads/dr-huang-clinic/general/chinese-dietary-10.jpg",
+      "image": "/uploads/wewash/general/chinese-dietary-10.jpg",
       "order": 7
     },
     {
@@ -176,7 +176,7 @@
         "长期健康策略"
       ],
       "whatToExpect": "在整个治疗过程中，我们将讨论您生活方式的各个方面，并提供具体的、可操作的建议。这可能包括呼吸练习、冥想技巧、睡眠卫生习惯、季节性调整以及管理压力的方法。我们与您合作创建可持续的改变。",
-      "image": "/uploads/dr-huang-clinic/services/lifestyle.jpg",
+      "image": "/uploads/wewash/services/lifestyle.jpg",
       "order": 8
     }
   ],

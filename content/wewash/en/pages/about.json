@@ -1,18 +1,18 @@
 {
   "hero": {
     "variant": "centered",
-    "title": "Meet Dr. Huang",
-    "subtitle": "Dedicated to Your Health & Wellness Through Traditional Chinese Medicine",
-    "description": "Committed to healing through time-tested wisdom and personalized care.",
-    "backgroundImage": "/uploads/dr-huang-clinic/about/dr-huang-lecture-20.png"
+    "title": "About WeWash",
+    "subtitle": "Laundry operations built for consistency, speed, and garment care quality.",
+    "description": "WeWash is a modern laundry team serving homes and businesses with reliable workflows.",
+    "backgroundImage": "/uploads/wewash/about/dr-huang-lecture-20.png"
   },
   "profile": {
-    "name": "Dr. Huang",
-    "title": "Licensed Acupuncturist & TCM Practitioner",
-    "image": "/uploads/dr-huang-clinic/about/dr-huang-11.png",
-    "bio": "Dr.Huang has dedicated over 20 years to the practice of Traditional Chinese Medicine, helping thousands of patients achieve better health through natural, holistic healing methods. Her passion for TCM began during his undergraduate studies in biology, where he became fascinated by the body's innate healing abilities and the elegant wisdom of Chinese medicine.",
-    "quote": "True healing comes from addressing the root cause, not just suppressing symptoms. Every patient is unique, and treatment must reflect that individuality.",
-    "signature": "/uploads/dr-huang-clinic/about/signature.png"
+    "name": "WeWash Operations Team",
+    "title": "Laundry and Route Operations Specialists",
+    "image": "/uploads/wewash/about/dr-huang-11.png",
+    "bio": "Our team combines garment care experience, route planning, and service operations discipline to deliver dependable laundry outcomes for household and commercial clients.",
+    "quote": "Reliable laundry service is built on process quality, clear communication, and repeatable operations.",
+    "signature": "/uploads/wewash/about/signature.png"
   },
   "credentials": {
     "title": "Education & Credentials",
@@ -32,14 +32,14 @@
         "location": "License #12345"
       },
       {
-        "icon": "Certificate",
+        "icon": "BadgeCheck",
         "credential": "National Board Certification in Acupuncture",
         "institution": "NCCAOM (National Certification Commission)",
         "year": "2009",
         "location": "Diplomate in Acupuncture"
       },
       {
-        "icon": "Certificate",
+        "icon": "BadgeCheck",
         "credential": "National Board Certification in Chinese Herbology",
         "institution": "NCCAOM",
         "year": "2009",

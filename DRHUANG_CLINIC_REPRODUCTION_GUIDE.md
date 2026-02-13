@@ -1,6 +1,6 @@
-# DrHuang Clinic Reproduction Guide
+# Wewash Reproduction Guide
 
-This document describes the current production architecture for `dr-huang-clinic` inside `medical-clinic/chinese-medicine`, so another developer can reproduce the same site structure and behavior.
+This document describes the current production architecture for `wewash` inside `laundry/wewash`, so another developer can reproduce the same site structure and behavior.
 
 It covers:
 - DB-first + file fallback content model
@@ -13,10 +13,10 @@ It covers:
 
 ## 1) System Architecture
 
-DrHuang clinic is implemented as a multi-site, multi-locale Next.js app with:
+Wewash is implemented as a multi-site, multi-locale Next.js app with:
 
 - **App router + host-based site resolution**
-  - Site is resolved by host, fallback to `dr-huang-clinic`
+  - Site is resolved by host, fallback to `wewash`
   - Locale routes are under `app/[locale]`
 - **DB-first content loading**
   - Read from Supabase `content_entries` first
@@ -44,19 +44,19 @@ Core app and data paths:
 - `lib/content.ts` - DB-first loader + file fallback
 - `lib/contentDb.ts` - Supabase content adapters
 - `lib/types.ts` - shared content and variant types
-- `content/dr-huang-clinic/*` - site content source
+- `content/wewash/*` - site content source
 - `supabase/admin-schema.sql` - admin/site/media/booking tables
 - `supabase/rls.sql` - deny-public RLS policies
 
 ---
 
-## 3) DrHuang Content Structure
+## 3) Wewash Content Structure
 
 Current site content root:
 
-- `content/dr-huang-clinic/theme.json`
-- `content/dr-huang-clinic/en/*`
-- `content/dr-huang-clinic/zh/*`
+- `content/wewash/theme.json`
+- `content/wewash/en/*`
+- `content/wewash/es/*`
 
 Per-locale base files:
 
@@ -71,9 +71,9 @@ Per-locale base files:
 
 Booking files (filesystem backup/source):
 
-- `content/dr-huang-clinic/booking/services.json`
-- `content/dr-huang-clinic/booking/settings.json`
-- `content/dr-huang-clinic/booking/bookings/*.json`
+- `content/wewash/booking/services.json`
+- `content/wewash/booking/settings.json`
+- `content/wewash/booking/bookings/*.json`
 
 ---
 
@@ -97,8 +97,8 @@ Rules:
 - Order in `sections[]` controls render order.
 - If no layout exists, renderer falls back to default order.
 
-Files in DrHuang already include layout JSON for:
-- `home`, `about`, `contact`, `services`, `conditions`, `pricing`, `gallery`, `blog`, `case-studies`, `new-patients` (EN + ZH)
+Files in Wewash already include layout JSON for:
+- `home`, `about`, `contact`, `services`, `conditions`, `pricing`, `gallery`, `blog`, `case-studies`, `new-patients` (EN + ES)
 
 ---
 
@@ -281,15 +281,15 @@ If reproducing from older branch, ensure this file contains variant dropdown log
 
 ---
 
-## 11) Reproduce DrHuang on a Fresh Environment
+## 11) Reproduce Wewash on a Fresh Environment
 
 ### A. Code + files
 
 1. Copy project codebase.
-2. Ensure DrHuang files exist under:
-   - `content/dr-huang-clinic/theme.json`
-   - `content/dr-huang-clinic/en/*`
-   - `content/dr-huang-clinic/zh/*`
+2. Ensure Wewash files exist under:
+   - `content/wewash/theme.json`
+   - `content/wewash/en/*`
+   - `content/wewash/es/*`
    - including all `pages/*.layout.json`
 
 ### B. Database
@@ -313,28 +313,162 @@ From admin UI:
 3. If needed, run overwrite import intentionally
 4. Verify pages load from DB and admin edits persist
 
+### E. Mandatory identity updates (site ID + locales + users)
+
+Do not skip this section when cloning to a new client:
+
+1. **Site identity**
+   - Update all `siteId` references from template values to your new site ID.
+   - Ensure `content/<siteId>/...` exists and old template site IDs are removed from active routing config.
+2. **Locales**
+   - Set `defaultLocale` and `supportedLocales` consistently in:
+     - `content/_sites.json`
+     - DB table `sites` (`default_locale`, `supported_locales`)
+   - For Wewash, this must be `default=en`, `supported=[en, es]`.
+3. **Users + RBAC**
+   - Create at least one `super_admin` user in DB.
+   - Ensure `site_admin/editor/viewer` users are assigned to the correct site IDs.
+   - Remove or downgrade template users that should not access the new site.
+4. **Admin verification**
+   - In `/admin/sites`, verify site ID, domain, and locales.
+   - In `/admin/users`, verify role and `sites` mapping for each user.
+
+### F. How to add a site and user (exact ops)
+
+Use this when bootstrapping a new client site.
+
+#### Option 1 (recommended): Admin UI
+
+1. **Add site**
+   - Login as `super_admin`.
+   - Go to `/admin/sites` -> create new site.
+   - Fill: `id`, `name`, `domain`, `enabled`, `defaultLocale`, `supportedLocales`.
+   - For Wewash baseline: `defaultLocale=en`, `supportedLocales=[en, es]`.
+   - Save, then open the site detail page to confirm values persisted.
+
+2. **Add user**
+   - Go to `/admin/users` -> create user.
+   - Fill: `email`, `name`, `role`, `sites`.
+   - `role` should be one of: `super_admin`, `site_admin`, `editor`, `viewer`.
+   - Assign correct site IDs in `sites` (empty for `super_admin` is acceptable).
+   - Create user, then use password reset/set action to define initial password.
+
+3. **Verify access**
+   - Logout, login with the new user.
+   - Confirm expected admin pages are accessible based on role/site scope.
+
+#### Option 2: API (authenticated admin session required)
+
+Create site:
+
+```bash
+curl -X POST "http://localhost:5001/api/admin/sites" \
+  -H "Content-Type: application/json" \
+  -b "<ADMIN_SESSION_COOKIE>" \
+  --data-raw '{
+    "id":"new-site-id",
+    "name":"New Site Name",
+    "domain":"example.com",
+    "enabled":true,
+    "defaultLocale":"en",
+    "supportedLocales":["en","es"]
+  }'
+```
+
+Create user:
+
+```bash
+curl -X POST "http://localhost:5001/api/admin/users" \
+  -H "Content-Type: application/json" \
+  -b "<ADMIN_SESSION_COOKIE>" \
+  --data-raw '{
+    "email":"owner@example.com",
+    "name":"Site Owner",
+    "role":"site_admin",
+    "sites":["new-site-id"]
+  }'
+```
+
+Set/reset password:
+
+```bash
+curl -X POST "http://localhost:5001/api/admin/users/<USER_ID>/password" \
+  -H "Content-Type: application/json" \
+  -b "<ADMIN_SESSION_COOKIE>" \
+  --data-raw '{
+    "password":"ChangeMe123!"
+  }'
+```
+
+#### Option 3: SQL fallback (last resort)
+
+Use SQL only if admin APIs are unavailable.
+
+1. Insert site:
+
+```sql
+insert into public.sites (id, name, domain, enabled, default_locale, supported_locales)
+values ('new-site-id', 'New Site Name', 'example.com', true, 'en', array['en','es']::text[])
+on conflict (id) do update
+set name = excluded.name,
+    domain = excluded.domain,
+    enabled = excluded.enabled,
+    default_locale = excluded.default_locale,
+    supported_locales = excluded.supported_locales;
+```
+
+2. Generate password hash (from project root):
+
+```bash
+node -e "const b=require('bcryptjs'); console.log(b.hashSync('ChangeMe123!',10));"
+```
+
+3. Insert user with that hash:
+
+```sql
+insert into public.admin_users (id, email, name, role, sites, password_hash)
+values (
+  'user-new-site-admin',
+  'owner@example.com',
+  'Site Owner',
+  'site_admin',
+  array['new-site-id']::text[],
+  '<PASTE_BCRYPT_HASH>'
+)
+on conflict (id) do update
+set email = excluded.email,
+    name = excluded.name,
+    role = excluded.role,
+    sites = excluded.sites,
+    password_hash = excluded.password_hash;
+```
+
+4. Re-login and verify `/admin/sites` + `/admin/users` behavior.
+
 ---
 
 ## 12) Verification Checklist
 
 Use this checklist before handing off:
 
-- [ ] `/en` and `/zh` resolve correctly for DrHuang domain/host
+- [ ] `/en` and `/es` resolve correctly for Wewash domain/host
 - [ ] Theme changes in admin immediately affect typography/colors
 - [ ] Page order changes via `*.layout.json` reflect on frontend
 - [ ] Variant changes in page JSON reflect in frontend section layout
 - [ ] Admin content save writes to DB (not only local files)
 - [ ] Import/export works and `missing` mode does not overwrite
 - [ ] RBAC restrictions are enforced per role + site
+- [ ] `sites` table has the final site ID + domain + locale set (no template leftovers)
+- [ ] `admin_users` table has intended users only, with correct roles and site assignments
 - [ ] `npm run build` succeeds
 
 ---
 
 ## 13) Notes for Multi-Site Reuse
 
-To reproduce another clinic quickly:
+To reproduce another site quickly:
 
-1. Copy `dr-huang-clinic` content tree to new `content/<new-site-id>/`.
+1. Copy `wewash` content tree to new `content/<new-site-id>/`.
 2. Update `site.json`, `navigation.json`, `theme.json`, SEO.
 3. Keep page/section structure, layout files, and variant schema intact.
 4. Create site in admin (or import site JSON), then import content.
@@ -353,16 +487,16 @@ Use this SOP when you want a fully isolated new client deployment based on this 
 From the parent folder, duplicate the app into a new workspace.
 
 ```bash
-cd /Users/johntang/Desktop/clients/medical-clinic
-cp -R chinese-medicine chinese-medicine-newsite
-cd chinese-medicine-newsite
+cd /Users/johntang/Desktop/clients/laundry
+cp -R wewash wewash-newsite
+cd wewash-newsite
 rm -rf node_modules .next
 npm install
 ```
 
 Recommended:
 - Use a new git repository or new branch strategy for the new client.
-- Keep original `chinese-medicine` untouched.
+- Keep original `wewash` untouched.
 
 ### Step 2 - Create a brand-new Supabase project
 
@@ -404,19 +538,19 @@ create table if not exists public.content_revisions (
 );
 ```
 
-### Step 3 - Duplicate DrHuang content + booking data as base for new site
+### Step 3 - Duplicate Wewash content + booking data as base for new site
 
 Inside the new project copy:
 
 ```bash
-cd /Users/johntang/Desktop/clients/medical-clinic/chinese-medicine-newsite
-cp -R content/dr-huang-clinic content/new-site-id
+cd /Users/johntang/Desktop/clients/laundry/wewash-newsite
+cp -R content/wewash content/new-site-id
 ```
 
 Then update:
 - `content/new-site-id/theme.json`
 - `content/new-site-id/en/site.json`
-- `content/new-site-id/zh/site.json`
+- `content/new-site-id/es/site.json`
 - `navigation.json`, `header.json`, `footer.json`, `seo.json` for both locales
 - `pages/*.json` and `pages/*.layout.json` as needed
 - booking files:
@@ -467,6 +601,20 @@ Then from admin UI:
 5. Import media (`/api/admin/media/import`) if migrating existing assets.
 6. Use overwrite import only when intentional.
 
+### Step 5.1 - Lock identity and access immediately after import
+
+Before any design/content edits:
+
+1. Open `/admin/sites` and confirm:
+   - only intended site IDs are enabled
+   - domain points to the new client domain
+   - locale settings are final (`en/es` for Wewash)
+2. Open `/admin/users` and confirm:
+   - one known working `super_admin` exists
+   - site-scoped users only include intended site IDs
+   - old/template users are removed or restricted
+3. Re-login with the final admin account and verify all admin sections load.
+
 ### Step 6 - Configure domain mapping and host routing
 
 This app resolves site by host/domain.
@@ -486,7 +634,7 @@ Ensure new site record domain is correct in `sites`:
 ### Step 8 - Run production verification
 
 Verify:
-- `/en` and `/zh` routes load.
+- `/en` and `/es` routes load.
 - Admin login works.
 - `Site Settings` edits persist in DB.
 - Theme, layout, and variant edits reflect on frontend.
@@ -517,6 +665,10 @@ Verify:
 For a copy-paste execution list, use:
 
 - `NEW_SITE_DUPLICATION_CHECKLIST.md`
+- `ADMIN_TEMPLATE_SETUP_CHECKLIST.md`
+- `TEMPLATE_QA_MATRIX.md`
+- `content/starter-packs/starter-basic.json`
+- `content/starter-packs/starter-pro.json`
 
 ---
 

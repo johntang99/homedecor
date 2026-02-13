@@ -1,233 +1,134 @@
 {
   "hero": {
     "variant": "centered",
-    "title": "Traditional Chinese Medicine Modalities",
-    "subtitle": "Comprehensive healing therapies tailored to your unique needs",
-    "backgroundImage": "/uploads/dr-huang-clinic/general/Acupuncture-15.webp"
+    "title": "Laundry Services for Home and Business",
+    "subtitle": "Pickup and delivery, drop-off wash and fold, self-service, and commercial programs.",
+    "backgroundImage": "/uploads/wewash/home/hero-bg.jpg"
   },
   "overview": {
-    "introduction": "At Dr. Huang Clinic, we offer a complete range of Traditional Chinese Medicine treatments. Each modality is carefully selected and customized to address your specific health concerns and wellness goals. Our holistic approach combines ancient wisdom with modern understanding to provide effective, natural healing.",
+    "introduction": "WeWash is built for busy households, short-term rentals, hospitality teams, and local businesses. Choose the service flow that fits your schedule and volume.",
     "benefits": [
-      "Drug-free pain management",
-      "Natural stress and anxiety relief",
-      "Improved immune function",
-      "Enhanced energy and vitality",
-      "Hormonal balance support",
-      "Better sleep quality",
-      "Digestive health optimization",
-      "Accelerated injury recovery"
+      "Same-day and next-day turnaround options",
+      "Live order updates and clear ETAs",
+      "Professional stain handling and garment sorting",
+      "Recurring plans for families and business accounts",
+      "Transparent pricing by weight, item, or contract"
     ]
   },
   "services": [
     {
-      "id": "acupuncture",
-      "icon": "Syringe",
-      "title": "Acupuncture",
-      "shortDescription": "Our primary treatment modality using fine needles to restore balance and promote healing throughout the body.",
-      "fullDescription": "Acupuncture is the cornerstone of Traditional Chinese Medicine. By inserting ultra-fine, sterile needles at specific points along the body's meridians, we stimulate your body's natural healing response, restore energy flow (Qi), and promote balance. This time-tested therapy is effective for pain management, stress relief, and numerous health conditions.",
+      "id": "wash-fold",
+      "icon": "Shirt",
+      "title": "Wash & Fold",
+      "shortDescription": "Everyday laundry by weight with folded delivery ready for closets or storage.",
+      "fullDescription": "Our wash and fold process includes sorting by fabric and color, premium detergent options, low-heat drying rules, and quality checks before packing.",
       "benefits": [
-        "Effective pain relief without medication",
-        "Reduced inflammation",
-        "Improved circulation",
-        "Enhanced immune function",
-        "Stress and anxiety reduction",
-        "Better sleep quality",
-        "Hormonal balance",
-        "Increased energy levels"
+        "Simple per-pound pricing",
+        "Gentle handling for mixed garments",
+        "Optional fragrance-free processing",
+        "Fast turnaround windows"
       ],
-      "whatToExpect": "During your acupuncture session, you'll relax comfortably while hair-thin needles are gently inserted at specific points. Most patients feel minimal to no discomfort. You'll rest for 20-30 minutes while the needles work, often experiencing deep relaxation. Many people fall asleep during treatment!",
-      "image": "/uploads/dr-huang-clinic/general/acupuncture-16.webp",
+      "whatToExpect": "Schedule pickup or drop off your bags. We process, fold, and return your order with an itemized summary.",
+      "image": "/uploads/wewash/home/welcome-section.jpg",
       "order": 1
     },
     {
-      "id": "chinese-herbal-medicine",
-      "icon": "Leaf",
-      "title": "Chinese Herbal Medicine",
-      "shortDescription": "Custom herbal formulas carefully crafted to address your specific health concerns and support your body's healing.",
-      "fullDescription": "Chinese Herbal Medicine uses natural plant-based remedies that have been refined over thousands of years. We create personalized herbal formulas by combining multiple herbs that work synergistically to address your unique constitution and health concerns. Available as raw herbs, powders, pills, or tinctures.",
+      "id": "dry-cleaning",
+      "icon": "Sparkles",
+      "title": "Dry Cleaning",
+      "shortDescription": "Professional care for suits, dresses, outerwear, and delicate fabrics.",
+      "fullDescription": "From businesswear to special-event garments, our dry-cleaning workflow includes pre-spotting, fabric-safe solvents, pressing, and final inspection.",
       "benefits": [
-        "Customized to your exact needs",
-        "Treats root causes, not just symptoms",
-        "Minimal to no side effects",
-        "Complements acupuncture treatment",
-        "Addresses chronic conditions",
-        "Strengthens immune system",
-        "Supports internal organ function",
-        "Promotes long-term wellness"
+        "By-item pricing",
+        "Care label and fabric review",
+        "Pressing and finishing included",
+        "Packaging for transit and storage"
       ],
-      "whatToExpect": "After a thorough consultation and diagnosis, we'll create a custom herbal formula specifically for you. You'll receive detailed instructions on how to prepare and take your herbs. We monitor your progress and adjust the formula as needed for optimal results.",
-      "image": "/uploads/dr-huang-clinic/general/chinese-herb-10.webp",
+      "whatToExpect": "Tag each item in your order, choose standard or rush turnaround, and track completion status.",
+      "image": "/uploads/wewash/gallery/treatment-room-1.jpg",
       "order": 2
     },
     {
-      "id": "cupping-therapy",
-      "icon": "Circle",
-      "title": "Cupping Therapy",
-      "shortDescription": "Ancient therapy using suction cups to release muscle tension, improve circulation, and promote healing.",
-      "fullDescription": "Cupping therapy involves placing special cups on your skin to create suction. This draws blood flow to the area, releases tight muscles, clears stagnation, and promotes healing. We use both stationary cupping and moving cupping techniques depending on your needs.",
+      "id": "pickup-delivery",
+      "icon": "Truck",
+      "title": "Pickup & Delivery",
+      "shortDescription": "Door-to-door laundry service with route-based scheduling across covered ZIP codes.",
+      "fullDescription": "Book one-time or recurring pickups. Our route system groups windows by area to improve reliability and speed while keeping your preferred day/time profile.",
       "benefits": [
-        "Deep muscle tension release",
-        "Improved blood circulation",
-        "Reduced inflammation",
-        "Pain relief",
-        "Enhanced recovery from injury",
-        "Respiratory support",
-        "Detoxification",
-        "Immune system boost"
+        "Service-area ZIP controls",
+        "Morning and evening windows",
+        "One-time or recurring scheduling",
+        "Rush support for urgent orders"
       ],
-      "whatToExpect": "Glass or silicone cups are placed on areas of tension or pain. You'll feel a strong pulling sensation that most people find relieving rather than painful. The cups may be left in place for 5-15 minutes, or moved across the skin. Temporary circular marks are normal and fade within a few days.",
-      "image": "/uploads/dr-huang-clinic/general/cupping-10.jpg",
+      "whatToExpect": "Choose a pickup window, share address details, and receive status updates through the order lifecycle.",
+      "image": "/uploads/wewash/gallery/reception-area.jpg",
       "order": 3
     },
     {
-      "id": "moxibustion",
-      "icon": "Flame",
-      "title": "Moxibustion",
-      "shortDescription": "Warming therapy using dried mugwort herb to strengthen vitality, improve circulation, and expel cold.",
-      "fullDescription": "Moxibustion (or 'moxa') involves burning dried mugwort herb near acupuncture points to warm the body, strengthen Qi, and promote healing. This gentle heat therapy is especially effective for cold conditions, weak constitution, and chronic illness.",
+      "id": "self-service",
+      "icon": "Timer",
+      "title": "Self-Service Reservations",
+      "shortDescription": "Reserve machine blocks to reduce waiting during peak hours.",
+      "fullDescription": "Self-service customers can reserve preferred machine slots in advance, improving throughput for families and high-volume weekend users.",
       "benefits": [
-        "Strengthens immune system",
-        "Increases energy and vitality",
-        "Improves circulation",
-        "Relieves cold-type pain",
-        "Supports digestive function",
-        "Turns breech babies",
-        "Warms cold extremities",
-        "Tonifies deficiency"
+        "Capacity-managed time slots",
+        "Peak-time reservation support",
+        "Faster in-store flow",
+        "Ideal for planned weekly loads"
       ],
-      "whatToExpect": "During moxibustion, you'll feel pleasant warmth as the burning moxa is held near specific points on your body. The treatment is deeply relaxing and warming. Some people describe it as feeling like gentle sunshine on the skin. The herb has a distinctive, earthy aroma.",
-      "image": "/uploads/dr-huang-clinic/blog/moxibustion-2.jpeg",
+      "whatToExpect": "Select a date/time slot, confirm reservation, and check in at the counter on arrival.",
+      "image": "/uploads/wewash/gallery/exterior.jpg",
       "order": 4
     },
     {
-      "id": "tuina-massage",
-      "icon": "Hand",
-      "title": "Tui Na Medical Massage",
-      "shortDescription": "Traditional Chinese therapeutic massage combining acupressure, stretching, and joint mobilization.",
-      "fullDescription": "Tui Na is a form of Chinese medical massage that has been used for over 2,000 years. Unlike relaxation massage, Tui Na is therapeutic and diagnostic, using specific techniques to release blockages along meridians, improve circulation, and restore proper alignment.",
+      "id": "commercial",
+      "icon": "Building2",
+      "title": "Commercial Laundry Programs",
+      "shortDescription": "Contract-ready plans for salons, gyms, restaurants, clinics, and short-term rentals.",
+      "fullDescription": "Commercial accounts include SLA planning, pickup routes, volume pricing, and dedicated support for consistent weekly operations.",
       "benefits": [
-        "Relief from muscle pain and tension",
-        "Improved joint mobility",
-        "Better posture and alignment",
-        "Enhanced circulation",
-        "Stress reduction",
-        "Injury recovery support",
-        "Headache and migraine relief",
-        "Digestive improvement"
+        "Quote-based pricing tiers",
+        "Scheduled pickups with SLA targets",
+        "Custom sorting and packaging workflows",
+        "Monthly reporting and account management"
       ],
-      "whatToExpect": "Tui Na can range from gentle to quite vigorous depending on your condition and constitution. The practitioner uses hands, fingers, elbows, and sometimes feet to apply various techniques. You'll remain clothed during treatment, which typically lasts 30-60 minutes.",
-      "image": "/uploads/dr-huang-clinic/blog/acupuncture-pain.jpg",
+      "whatToExpect": "Request a quote, confirm volume and turnaround goals, and launch with a tailored operating schedule.",
+      "image": "/uploads/wewash/gallery/herbal-pharmacy.jpg",
       "order": 5
-    },
-    {
-      "id": "gua-sha",
-      "icon": "Shield",
-      "title": "Gua Sha",
-      "shortDescription": "Traditional scraping therapy to release muscle tension, reduce inflammation, and promote circulation.",
-      "fullDescription": "Gua Sha involves using a smooth-edged tool to apply pressure and scrape the skin, releasing unhealthy tissue and promoting healing. This technique is particularly effective for pain, stiffness, and acute illnesses. The temporary redness (called 'sha') that appears is actually stagnant blood being brought to the surface for clearing.",
-      "benefits": [
-        "Rapid pain relief",
-        "Reduced muscle tension",
-        "Decreased inflammation",
-        "Improved immune response",
-        "Enhanced circulation",
-        "Faster recovery from illness",
-        "Relief from headaches",
-        "Neck and shoulder tension release"
-      ],
-      "whatToExpect": "Oil is applied to your skin, then a smooth tool is used to scrape areas of tension or pain in downward strokes. You'll feel pressure and scraping, which can be intense but not unbearable. Red or purple marks appear during treatment and typically fade within 2-7 days.",
-      "image": "/uploads/dr-huang-clinic/blog/gua-sha-22.png",
-      "order": 6
-    },
-    {
-      "id": "dietary-therapy",
-      "icon": "Apple",
-      "title": "Chinese Dietary Therapy",
-      "shortDescription": "Personalized nutrition guidance based on TCM principles to support healing and maintain balance.",
-      "fullDescription": "Chinese Dietary Therapy recognizes that food is medicine. We provide personalized nutritional guidance based on your TCM constitution, current health condition, and the energetic properties of foods. This approach goes beyond calories and nutrients to consider how foods affect your body's balance.",
-      "benefits": [
-        "Supports treatment outcomes",
-        "Addresses root causes of illness",
-        "Improves digestion",
-        "Balances body temperature",
-        "Enhances energy levels",
-        "Promotes longevity",
-        "Customized to your constitution",
-        "Easy to implement at home"
-      ],
-      "whatToExpect": "During your consultation, we'll discuss your diet and provide specific recommendations about foods to emphasize or avoid based on your condition. You'll receive practical, achievable guidance that fits into your lifestyle. We'll adjust recommendations as your health improves.",
-      "image": "/uploads/dr-huang-clinic/general/chinese-dietary-10.jpg",
-      "order": 7
-    },
-    {
-      "id": "lifestyle-counseling",
-      "icon": "Heart",
-      "title": "Lifestyle & Wellness Counseling",
-      "shortDescription": "Holistic guidance on sleep, exercise, stress management, and daily habits to support your wellness journey.",
-      "fullDescription": "True healing requires more than just treatments. We provide comprehensive lifestyle counseling addressing sleep patterns, exercise routines, stress management techniques, and daily habits. This guidance is based on TCM principles and tailored to your unique constitution and life circumstances.",
-      "benefits": [
-        "Sustainable health improvements",
-        "Better sleep quality",
-        "Effective stress management",
-        "Increased energy and vitality",
-        "Emotional balance",
-        "Prevention of future illness",
-        "Enhanced treatment results",
-        "Long-term wellness strategies"
-      ],
-      "whatToExpect": "Throughout your treatment, we'll discuss various aspects of your lifestyle and provide specific, actionable recommendations. This might include breathing exercises, meditation techniques, sleep hygiene practices, seasonal adjustments, and ways to manage stress. We work with you to create sustainable changes.",
-      "image": "/uploads/dr-huang-clinic/services/lifestyle.jpg",
-      "order": 8
     }
   ],
   "faq": {
-    "title": "Frequently Asked Questions",
+    "title": "Service FAQs",
     "faqs": [
       {
-        "question": "Does acupuncture hurt?",
-        "answer": "Most people feel little to no pain during acupuncture. The needles are hair-thin (much finer than injection needles), and insertion typically feels like a tiny pinch or mosquito bite, if anything at all. Once the needles are in place, most patients experience deep relaxation and many fall asleep during treatment."
+        "question": "What is your normal turnaround time?",
+        "answer": "Most wash and fold orders are returned in 24-48 hours. Rush windows are available in select ZIP codes."
       },
       {
-        "question": "How many treatments will I need?",
-        "answer": "The number of treatments varies depending on your condition, how long you've had it, and how your body responds. Acute conditions may improve in 3-6 sessions, while chronic issues typically require 10-15 treatments or more. We'll develop a personalized treatment plan and adjust it based on your progress."
+        "question": "Can I mix wash-and-fold and dry-cleaning in one order?",
+        "answer": "Yes. We split and process each category independently, then return them together unless you request separate deliveries."
       },
       {
-        "question": "Is Chinese medicine safe?",
-        "answer": "Yes, when provided by a qualified, licensed practitioner. We use sterile, single-use needles and follow strict safety protocols. Chinese herbal medicine has been refined over thousands of years, and we only use high-quality, tested herbs from reputable suppliers. Side effects are rare and typically minor."
+        "question": "Do you support recurring pickup schedules?",
+        "answer": "Yes. Weekly and biweekly recurring plans are available for household and commercial customers."
       },
       {
-        "question": "Can TCM work alongside Western medicine?",
-        "answer": "Absolutely! TCM often complements Western medical treatments very well. Many patients use acupuncture to manage side effects of medications or procedures, support recovery, or address issues that conventional medicine hasn't fully resolved. We encourage open communication with all your healthcare providers."
-      },
-      {
-        "question": "What should I wear to my appointment?",
-        "answer": "Wear loose, comfortable clothing that can easily be rolled up to access your arms, legs, and back. We have gowns available if needed. Avoid wearing perfume or scented products, as some patients may be sensitive."
-      },
-      {
-        "question": "Do you accept insurance?",
-        "answer": "We accept most major insurance plans that include acupuncture coverage. We can provide you with a superbill (detailed receipt) to submit to your insurance company for potential reimbursement. Please contact us to verify your specific coverage. We also offer affordable self-pay rates and package discounts."
-      },
-      {
-        "question": "How should I prepare for my first visit?",
-        "answer": "Eat a light meal 1-2 hours before your appointment (don't come on an empty stomach). Avoid alcohol and excessive caffeine on treatment days. Bring a list of any medications or supplements you're taking, and wear comfortable clothing. Come with an open mind and be prepared to discuss your health history in detail."
-      },
-      {
-        "question": "What if I'm afraid of needles?",
-        "answer": "Many people who are nervous about needles are pleasantly surprised by acupuncture. The needles are extremely thin and insertion is usually painless. We'll go at your pace, explain everything we're doing, and can start with fewer needles if you prefer. We also offer needle-free modalities like herbal medicine, cupping, and Tui Na massage."
+        "question": "How do commercial quotes work?",
+        "answer": "We evaluate weekly volume, textile types, pickup cadence, and turnaround requirements, then provide a tiered quote."
       }
     ]
   },
   "cta": {
     "variant": "centered",
-    "title": "Ready to Experience Natural Healing?",
-    "subtitle": "Schedule a consultation to discuss which treatments are right for you. We'll create a personalized plan tailored to your unique health needs.",
+    "title": "Need a custom laundry workflow?",
+    "subtitle": "Talk to our team about recurring schedules, service areas, and commercial account setup.",
     "primaryCta": {
-      "text": "Book Your Consultation",
-      "link": "/en/contact"
+      "text": "Book Pickup",
+      "link": "/en/book"
     },
     "secondaryCta": {
-      "text": "Call: 845-381-1106",
-      "link": "tel:845-381-1106"
+      "text": "Request Commercial Quote",
+      "link": "/en/contact"
     }
   }
 }

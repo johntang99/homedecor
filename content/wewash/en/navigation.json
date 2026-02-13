@@ -9,24 +9,20 @@
       "url": "/en/services"
     },
     {
-      "text": "Conditions",
-      "url": "/en/conditions"
+      "text": "Pricing",
+      "url": "/en/pricing"
     },
     {
       "text": "About",
       "url": "/en/about"
     },
     {
-      "text": "Case Studies",
+      "text": "Commercial",
       "url": "/en/case-studies"
     },
     {
       "text": "Gallery",
       "url": "/en/gallery"
-    },
-    {
-      "text": "New Visit",
-      "url": "/en/new-patients"
     },
     {
       "text": "Blog",
@@ -38,7 +34,7 @@
     }
   ],
   "cta": {
-    "text": "Book Appointment",
+    "text": "Schedule Pickup",
     "link": "/en/contact"
   }
 }

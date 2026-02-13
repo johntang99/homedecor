@@ -1,0 +1,134 @@
+{
+  "hero": {
+    "variant": "centered",
+    "title": "Servicios de lavanderia para hogar y negocio",
+    "subtitle": "Recogida y entrega, drop-off, autoservicio y cuentas comerciales.",
+    "backgroundImage": "/uploads/wewash/home/hero-bg.jpg"
+  },
+  "overview": {
+    "introduction": "WeWash ayuda a familias ocupadas, alquileres temporales, restaurantes y equipos operativos con flujos de lavanderia confiables.",
+    "benefits": [
+      "Opciones de entrega el mismo dia o al siguiente",
+      "Actualizaciones de estado y horario claro",
+      "Tratamiento de manchas y clasificacion profesional",
+      "Planes recurrentes para hogares y empresas",
+      "Precios transparentes por libra, por prenda o por contrato"
+    ]
+  },
+  "services": [
+    {
+      "id": "wash-fold",
+      "icon": "Shirt",
+      "title": "Lavado y doblado",
+      "shortDescription": "Lavanderia diaria por peso con entrega doblada y lista para guardar.",
+      "fullDescription": "Clasificamos por color y tipo de tela, usamos reglas de secado seguras y revisamos cada pedido antes de entrega.",
+      "benefits": [
+        "Precio simple por libra",
+        "Manejo cuidadoso de prendas mixtas",
+        "Opcion sin fragancia",
+        "Tiempos rapidos de entrega"
+      ],
+      "whatToExpect": "Programa recogida o trae tus bolsas. Procesamos, doblamos y entregamos con resumen del pedido.",
+      "image": "/uploads/wewash/home/welcome-section.jpg",
+      "order": 1
+    },
+    {
+      "id": "dry-cleaning",
+      "icon": "Sparkles",
+      "title": "Tintoreria",
+      "shortDescription": "Cuidado profesional para trajes, vestidos, abrigos y telas delicadas.",
+      "fullDescription": "Nuestro proceso incluye tratamiento previo de manchas, limpieza por tipo de tela, planchado y revision final.",
+      "benefits": [
+        "Precio por prenda",
+        "Revision de etiquetas y material",
+        "Planchado incluido",
+        "Empaque listo para transporte"
+      ],
+      "whatToExpect": "Etiqueta tus prendas, elige servicio normal o urgente y sigue el progreso.",
+      "image": "/uploads/wewash/gallery/treatment-room-1.jpg",
+      "order": 2
+    },
+    {
+      "id": "pickup-delivery",
+      "icon": "Truck",
+      "title": "Recogida y entrega",
+      "shortDescription": "Servicio puerta a puerta con ventanas por ruta y cobertura por codigo postal.",
+      "fullDescription": "Puedes reservar pedidos unicos o recurrentes. Organizamos rutas por zona para mejorar puntualidad y eficiencia.",
+      "benefits": [
+        "Cobertura por ZIP configurada",
+        "Ventanas de manana y tarde",
+        "Pedidos unicos o recurrentes",
+        "Soporte urgente cuando se requiere"
+      ],
+      "whatToExpect": "Selecciona ventana de recogida, comparte direccion y recibe actualizaciones durante todo el proceso.",
+      "image": "/uploads/wewash/gallery/reception-area.jpg",
+      "order": 3
+    },
+    {
+      "id": "self-service",
+      "icon": "Timer",
+      "title": "Reservas de autoservicio",
+      "shortDescription": "Reserva bloques de maquinas para reducir esperas en horas pico.",
+      "fullDescription": "Los clientes de autoservicio pueden reservar franjas horarias para mejorar flujo y tiempos de atencion.",
+      "benefits": [
+        "Control de capacidad por horario",
+        "Reservas en horarios de alta demanda",
+        "Operacion mas rapida en tienda",
+        "Ideal para cargas semanales"
+      ],
+      "whatToExpect": "Elige fecha y horario, confirma tu reserva y registrate al llegar.",
+      "image": "/uploads/wewash/gallery/exterior.jpg",
+      "order": 4
+    },
+    {
+      "id": "commercial",
+      "icon": "Building2",
+      "title": "Programas comerciales",
+      "shortDescription": "Planes para restaurantes, salones, gimnasios, clinicas y alojamientos temporales.",
+      "fullDescription": "Las cuentas comerciales incluyen acuerdos de nivel de servicio, rutas fijas, precios por volumen y soporte dedicado.",
+      "benefits": [
+        "Precios por cotizacion",
+        "Recogidas programadas con objetivos SLA",
+        "Flujos personalizados de clasificacion",
+        "Reportes mensuales y gestion de cuenta"
+      ],
+      "whatToExpect": "Solicita cotizacion, define volumen y tiempos de entrega, y lanza un plan operativo personalizado.",
+      "image": "/uploads/wewash/gallery/herbal-pharmacy.jpg",
+      "order": 5
+    }
+  ],
+  "faq": {
+    "title": "Preguntas frecuentes de servicios",
+    "faqs": [
+      {
+        "question": "¿Cual es el tiempo de entrega normal?",
+        "answer": "La mayoria de pedidos de lavado y doblado se entregan en 24-48 horas. El servicio urgente depende de zona."
+      },
+      {
+        "question": "¿Puedo combinar lavado y tintoreria?",
+        "answer": "Si. Procesamos cada categoria por separado y entregamos junto, salvo que pidas lo contrario."
+      },
+      {
+        "question": "¿Ofrecen recogidas recurrentes?",
+        "answer": "Si. Tenemos planes semanales y quincenales para hogares y clientes comerciales."
+      },
+      {
+        "question": "¿Como funciona la cotizacion comercial?",
+        "answer": "Evaluamos volumen semanal, tipos de textiles, frecuencia de recogida y objetivo de entrega para definir tarifa."
+      }
+    ]
+  },
+  "cta": {
+    "variant": "centered",
+    "title": "¿Necesitas un flujo de lavanderia personalizado?",
+    "subtitle": "Habla con nuestro equipo para configurar rutas, frecuencias y cuenta comercial.",
+    "primaryCta": {
+      "text": "Reservar recogida",
+      "link": "/es/book"
+    },
+    "secondaryCta": {
+      "text": "Solicitar cotizacion comercial",
+      "link": "/es/contact"
+    }
+  }
+}

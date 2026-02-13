@@ -1,0 +1,39 @@
+{
+  "topbar": {
+    "phone": "(845) 394-0158",
+    "phoneHref": "tel:+18453940158",
+    "address": "87 North Street, Middletown, NY 10940",
+    "addressHref": "https://maps.google.com/?q=87+North+Street+Middletown+NY+10940",
+    "hours": "Recogida y entrega 7 dias",
+    "badge": "Servicio urgente el mismo dia"
+  },
+  "menu": {
+    "logo": {
+      "emoji": "🧺",
+      "text": "WeWash",
+      "subtext": "Lavanderia para hogar y negocios",
+      "image": {
+        "src": "/uploads/wewash/home/drhuang-2.svg",
+        "alt": "Logo de WeWash"
+      }
+    },
+    "items": [
+      { "text": "Inicio", "url": "/es" },
+      { "text": "Servicios", "url": "/es/services" },
+      { "text": "Precios", "url": "/es/pricing" },
+      { "text": "Comercial", "url": "/es/case-studies" },
+      { "text": "Nosotros", "url": "/es/about" },
+      { "text": "Galeria", "url": "/es/gallery" },
+      { "text": "Blog", "url": "/es/blog" },
+      { "text": "Contacto", "url": "/es/contact" }
+    ]
+  },
+  "languages": [
+    { "label": "English", "locale": "en", "url": "/en" },
+    { "label": "Español", "locale": "es", "url": "/es" }
+  ],
+  "cta": {
+    "text": "Programar recogida",
+    "link": "/es/contact"
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "hero": {
+    "variant": "centered",
+    "title": "Sobre WeWash",
+    "subtitle": "Operacion de lavanderia enfocada en calidad, velocidad y consistencia.",
+    "description": "WeWash combina procesos estandarizados y atencion cercana para hogares y negocios.",
+    "backgroundImage": "/uploads/wewash/about/dr-huang-lecture-20.png"
+  },
+  "profile": {
+    "name": "Equipo Operativo WeWash",
+    "title": "Especialistas en lavanderia y rutas de servicio",
+    "image": "/uploads/wewash/about/dr-huang-11.png",
+    "bio": "Nuestro equipo integra experiencia en cuidado de prendas, planificacion de rutas y gestion operativa para entregar resultados confiables.",
+    "quote": "Un gran servicio de lavanderia depende de procesos claros, comunicacion y ejecucion consistente.",
+    "signature": "/uploads/wewash/about/signature.png"
+  },
+  "credentials": {
+    "title": "Education & Credentials",
+    "items": [
+      {
+        "icon": "GraduationCap",
+        "credential": "Master of Science in Traditional Chinese Medicine",
+        "institution": "Pacific College of Health and Science",
+        "year": "2008",
+        "location": "San Diego, CA"
+      },
+      {
+        "icon": "Award",
+        "credential": "Licensed Acupuncturist (L.Ac.)",
+        "institution": "New York State Education Department",
+        "year": "2009",
+        "location": "License #12345"
+      },
+      {
+        "icon": "BadgeCheck",
+        "credential": "National Board Certification in Acupuncture",
+        "institution": "NCCAOM (National Certification Commission)",
+        "year": "2009",
+        "location": "Diplomate in Acupuncture"
+      },
+      {
+        "icon": "BadgeCheck",
+        "credential": "National Board Certification in Chinese Herbology",
+        "institution": "NCCAOM",
+        "year": "2009",
+        "location": "Diplomate in Chinese Herbology"
+      },
+      {
+        "icon": "BookOpen",
+        "credential": "Bachelor of Science in Biology",
+        "institution": "Cornell University",
+        "year": "2004",
+        "location": "Ithaca, NY"
+      }
+    ]
+  },
+  "specializations": {
+    "title": "Areas of Specialization",
+    "description": "Through years of clinical practice and continuing education, Dr. Huang has developed particular expertise in several key areas:",
+    "areas": [
+      {
+        "icon": "Activity",
+        "title": "Pain Management",
+        "description": "Sports injuries, chronic pain, arthritis, and musculoskeletal disorders"
+      },
+      {
+        "icon": "Heart",
+        "title": "Women's Health",
+        "description": "Fertility support, menstrual disorders, pregnancy care, and menopause"
+      },
+      {
+        "icon": "Brain",
+        "title": "Stress & Mental Health",
+        "description": "Anxiety, depression, insomnia, and stress-related conditions"
+      },
+      {
+        "icon": "Apple",
+        "title": "Digestive Disorders",
+        "description": "IBS, acid reflux, bloating, and chronic digestive issues"
+      }
+    ]
+  },
+  "philosophy": {
+    "title": "Treatment Philosophy",
+    "introduction": "Dr. Huang's approach to healing is rooted in the fundamental principles of Traditional Chinese Medicine while incorporating modern clinical understanding.",
+    "principles": [
+      {
+        "title": "Treat the Whole Person",
+        "description": "TCM recognizes that physical symptoms are often connected to emotional, mental, and spiritual factors. Dr. Huang addresses all aspects of health, not just isolated symptoms."
+      },
+      {
+        "title": "Find the Root Cause",
+        "description": "Rather than merely suppressing symptoms, treatment focuses on identifying and addressing the underlying imbalances that create disease. This approach leads to lasting results."
+      },
+      {
+        "title": "Personalized Care",
+        "description": "No two patients are alike. Each treatment plan is carefully customized based on your unique constitution, health history, and current condition."
+      },
+      {
+        "title": "Patient Education",
+        "description": "Understanding your body and condition empowers you to take an active role in your healing. Dr. Huang takes time to explain your diagnosis and treatment in clear, accessible terms."
+      },
+      {
+        "title": "Integration with Western Medicine",
+        "description": "TCM can work beautifully alongside conventional medical care. Dr. Huang collaborates with other healthcare providers to ensure comprehensive, coordinated treatment."
+      },
+      {
+        "title": "Prevention & Wellness",
+        "description": "The best medicine prevents illness before it occurs. Treatment includes guidance on diet, lifestyle, and self-care practices to maintain long-term health."
+      }
+    ]
+  },
+  "journey": {
+    "title": "My Journey to Chinese Medicine",
+    "story": "My path to Traditional Chinese Medicine began with a personal health challenge. As a biology student at Cornell, I suffered from chronic migraines that conventional medicine couldn't fully resolve. A friend suggested I try acupuncture, and after just a few treatments, my migraines improved dramatically. I was amazed - not just by the relief, but by the holistic approach that considered my stress levels, sleep patterns, and diet alongside the physical symptoms.\n\nThis experience sparked a deep curiosity about TCM. I began studying the theories, philosophy, and diagnostic methods during my remaining undergraduate years. After graduation, instead of pursuing medical school as originally planned, I enrolled in a Master's program in Traditional Chinese Medicine.\n\nThose years of intensive study were transformative. I learned pulse diagnosis, tongue diagnosis, acupuncture techniques, herbal pharmacology, and the intricate theories that have guided Chinese medicine for thousands of years. But more importantly, I learned to see patients as whole human beings, not just collections of symptoms.\n\nAfter earning my master's degree and passing national board certifications, I began my clinical practice. Each patient has taught me something new, and after 15 years, I remain passionate about this medicine's ability to help people heal naturally. Opening Dr. Huang Clinic in Middletown has allowed me to serve this wonderful community and share the benefits of TCM with my neighbors."
+  },
+  "affiliations": {
+    "title": "Professional Memberships & Affiliations",
+    "organizations": [
+      {
+        "name": "National Certification Commission for Acupuncture and Oriental Medicine (NCCAOM)",
+        "role": "Certified Diplomate"
+      },
+      {
+        "name": "New York State Society of Acupuncture and Integrative Medicine",
+        "role": "Active Member"
+      },
+      {
+        "name": "American Association of Acupuncture and Oriental Medicine (AAAOM)",
+        "role": "Professional Member"
+      },
+      {
+        "name": "Council of Colleges of Acupuncture and Herbal Medicine",
+        "role": "Supporting Member"
+      }
+    ]
+  },
+  "continuingEducation": {
+    "title": "Continuing Education & Training",
+    "description": "Dr. Huang maintains active involvement in the TCM community and regularly pursues advanced training:",
+    "items": [
+      "Advanced Sports Medicine Acupuncture certification (2019)",
+      "Fertility and Reproductive Health specialization (2016)",
+      "Classical Chinese Herbal Medicine seminars with Dr. Heiner Fruehauf",
+      "Annual attendance at national TCM conferences",
+      "Regular study groups with local TCM practitioners",
+      "30+ hours of continuing education annually (required: 30 hours every 3 years)"
+    ]
+  },
+  "clinic": {
+    "title": "About Our Clinic",
+    "description": [
+      "Dr. Huang Clinic was founded in 2010 with a simple mission: to provide accessible, high-quality Traditional Chinese Medicine care to the Middletown community.",
+      "What started as a small practice has grown into a trusted wellness center, helping over 1,000 patients achieve better health naturally."
+    ],
+    "features": [
+      "Wheelchair accessible",
+      "Convenient parking",
+      "Multilingual services (English, Mandarin)",
+      "Accepting new patients",
+      "Clean, modern treatment rooms",
+      "Peaceful, calming atmosphere"
+    ],
+    "values": [
+      {
+        "icon": "Heart",
+        "title": "Compassionate Care",
+        "description": "We treat every patient with respect, empathy, and genuine concern for their wellbeing."
+      },
+      {
+        "icon": "Award",
+        "title": "Clinical Excellence",
+        "description": "We maintain the highest standards of practice, using premium herbs and sterile techniques."
+      },
+      {
+        "icon": "Users",
+        "title": "Patient-Centered",
+        "description": "Your needs, concerns, and goals are at the center of everything we do."
+      },
+      {
+        "icon": "Leaf",
+        "title": "Natural Healing",
+        "description": "We believe in supporting the body's natural ability to heal itself."
+      }
+    ],
+    "environment": "Our clinic provides a peaceful, welcoming environment designed to promote relaxation and healing. From the moment you enter, you'll feel the difference - calming colors, comfortable treatment rooms, and a warm, friendly atmosphere that puts patients at ease."
+  },
+  "cta": {
+    "variant": "centered",
+    "title": "Ready to Start Your Healing Journey?",
+    "description": "Schedule your initial consultation to discuss your health goals and discover how TCM can help you feel your best.",
+    "primaryCta": {
+      "text": "Book Your Consultation",
+      "link": "/en/contact"
+    },
+    "secondaryCta": {
+      "text": "Call Us Today",
+      "link": "tel:+18453811106"
+    }
+  }
+}

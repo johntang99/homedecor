@@ -1,0 +1,177 @@
+{
+  "hero": {
+    "variant": "centered",
+    "title": "Get in Touch",
+    "subtitle": "Estamos aqui para ayudarte con recogidas, tarifas y planes comerciales.",
+    "backgroundImage": "/uploads/wewash/contact/hero-bg.jpg"
+  },
+  "introduction": {
+    "text": "Contacta a WeWash para programar recogida, consultar cobertura por ZIP o activar una cuenta comercial."
+  },
+  "contactMethods": [
+    {
+      "icon": "Phone",
+      "title": "Call Us",
+      "primary": "(845) 381-1106",
+      "secondary": null,
+      "description": "Mon-Fri: 9am-6pm, Sat: 9am-2pm",
+      "action": {
+        "text": "Call Now",
+        "link": "tel:+18453811106"
+      }
+    },
+    {
+      "icon": "Mail",
+      "title": "Email",
+      "primary": "sancai.acu@gmail.com",
+      "secondary": null,
+      "description": "We typically respond within 24 hours",
+      "action": {
+        "text": "Send Email",
+        "link": "mailto:sancai.acu@gmail.com"
+      }
+    },
+    {
+      "icon": "MapPin",
+      "title": "Visit Us",
+      "primary": "71 East Main Street",
+      "secondary": "Middletown, NY 10940",
+      "description": "Free parking available",
+      "action": {
+        "text": "Get Directions",
+        "link": "https://maps.google.com/?q=71+East+Main+Street+Middletown+NY+10940"
+      }
+    },
+    {
+      "icon": "CalendarCheck",
+      "title": "Book Online",
+      "primary": "Book an appointment",
+      "secondary": null,
+      "description": "Pick a service and time that works for you",
+      "action": {
+        "text": "Book Now",
+        "link": "/en/book"
+      }
+    }
+  ],
+  "hours": {
+    "title": "Hours of Operation",
+    "schedule": [
+      {
+        "day": "Monday",
+        "time": "9:00 AM - 6:00 PM",
+        "isOpen": true
+      },
+      {
+        "day": "Tuesday",
+        "time": "9:00 AM - 6:00 PM",
+        "isOpen": true
+      },
+      {
+        "day": "Wednesday",
+        "time": "9:00 AM - 7:00 PM",
+        "isOpen": true,
+        "note": "Community Acupuncture Day"
+      },
+      {
+        "day": "Thursday",
+        "time": "9:00 AM - 6:00 PM",
+        "isOpen": true
+      },
+      {
+        "day": "Friday",
+        "time": "9:00 AM - 6:00 PM",
+        "isOpen": true
+      },
+      {
+        "day": "Saturday",
+        "time": "9:00 AM - 2:00 PM",
+        "isOpen": true
+      },
+      {
+        "day": "Sunday",
+        "time": "Closed",
+        "isOpen": false
+      }
+    ],
+    "note": "Last appointment starts 1 hour before closing. Please call ahead for same-day appointments."
+  },
+  "form": {
+    "variant": "single-column",
+    "title": "Send Us a Message",
+    "subtitle": "Fill out the form below and we'll get back to you as soon as possible",
+    "fields": {
+      "name": {
+        "label": "Full Name",
+        "placeholder": "John Smith",
+        "required": true
+      },
+      "email": {
+        "label": "Email Address",
+        "placeholder": "john@example.com",
+        "required": true
+      },
+      "phone": {
+        "label": "Phone Number",
+        "placeholder": "(555) 123-4567",
+        "required": true
+      },
+      "reason": {
+        "label": "Reason for Contact",
+        "placeholder": "Select a reason",
+        "required": true,
+        "options": [
+          "Schedule New Patient Appointment",
+          "Schedule Follow-up Appointment",
+          "Question About Treatment",
+          "Question About Pricing/Insurance",
+          "Request Information",
+          "Other"
+        ]
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Tell us how we can help you...",
+        "required": true
+      }
+    },
+    "submitButton": {
+      "text": "Send Message"
+    },
+    "successMessage": "Thank you for contacting us! We'll get back to you within 24 hours.",
+    "errorMessage": "Sorry, there was an error sending your message. Please try calling us directly at (845) 381-1106."
+  },
+  "map": {
+    "title": "Find Us",
+    "embedUrl": "https://www.google.com/maps?q=71+East+Main+Street,+Middletown,+NY+10940&output=embed",
+    "showMap": true,
+    "directions": "We're located on East Main Street in downtown Middletown, easily accessible from Route 211 and I-84. Free street parking is available, as well as a public parking lot behind our building."
+  },
+  "emergency": {
+    "title": "Medical Emergency?",
+    "message": "If you're experiencing a medical emergency, please call 911 or visit your nearest emergency room immediately.",
+    "phone": "911",
+    "visible": true
+  },
+  "faq": {
+    "title": "Quick Answers",
+    "items": [
+      {
+        "question": "Do I need an appointment?",
+        "answer": "Yes, we see patients by appointment only. This ensures you receive our full attention and there's minimal wait time. Call us or use the form above to schedule."
+      },
+      {
+        "question": "Do you accept walk-ins?",
+        "answer": "We occasionally have same-day appointments available. Please call ahead to check availability rather than walking in."
+      },
+      {
+        "question": "How do I prepare for my first visit?",
+        "answer": "Please arrive 10 minutes early to complete paperwork (or download forms from our New Patients page). Eat a light meal 1-2 hours before, wear comfortable clothing, and bring a list of any medications you're taking."
+      },
+      {
+        "question": "Do you offer free consultations?",
+        "answer": "We offer a brief phone consultation (10-15 minutes) at no charge to answer questions and determine if TCM is right for you. Full in-person consultations include treatment and are billed at our initial visit rate."
+      }
+    ]
+  }
+}

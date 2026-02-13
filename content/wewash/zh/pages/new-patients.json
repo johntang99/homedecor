@@ -3,7 +3,7 @@
     "variant": "centered",
     "title": "欢迎新患者",
     "subtitle": "首次访问黄医生诊所前您需要了解的一切",
-    "backgroundImage": "/uploads/dr-huang-clinic/general/welcome-clinic-10.png"
+    "backgroundImage": "/uploads/wewash/general/welcome-clinic-10.png"
   },
   "introduction": {
     "text": "我们很高兴欢迎您来到我们的诊所！您的首次访问是康复之旅的重要一步。此页面将帮助您准备并了解期待什么。",
@@ -86,7 +86,7 @@
         "importance": "important"
       },
       {
-        "icon": "ShirtIcon",
+        "icon": "Shirt",
         "title": "穿舒适的衣服",
         "description": "穿宽松、舒适的衣服，可以轻松卷起以接触您的手臂、腿和背部。如果需要，我们有长袍可用。",
         "importance": "important"

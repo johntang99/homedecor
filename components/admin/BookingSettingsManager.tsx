@@ -14,6 +14,12 @@ const DEFAULT_SETTINGS: BookingSettings = {
   bufferMinutes: 10,
   minNoticeHours: 12,
   maxDaysAhead: 60,
+  defaultServiceType: 'pickup_delivery',
+  serviceAreaZips: [],
+  blackoutWindows: [],
+  rushLeadHours: 6,
+  maxOrdersPerSlot: 2,
+  recurringEnabled: true,
   businessHours: [
     { day: 'Mon', open: '09:00', close: '17:00' },
     { day: 'Tue', open: '09:00', close: '17:00' },
@@ -98,8 +104,17 @@ export function BookingSettingsManager({
       {
         id: `service-${Date.now()}`,
         name: 'New Service',
+        serviceType: 'pickup_delivery',
+        pricingModel: 'flat',
+        category: 'residential',
         durationMinutes: 30,
         price: 0,
+        unitLabel: 'bag',
+        leadTimeHours: 12,
+        capacityPerSlot: 2,
+        recurringEligible: true,
+        commercialEligible: false,
+        addOns: [],
         active: true,
       },
     ]);
@@ -292,6 +307,35 @@ export function BookingSettingsManager({
                         updateService(index, { durationMinutes: Number(event.target.value) })
                       }
                     />
+                    <select
+                      className="rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      value={service.serviceType || 'pickup_delivery'}
+                      onChange={(event) =>
+                        updateService(index, {
+                          serviceType: event.target.value as BookingService['serviceType'],
+                        })
+                      }
+                    >
+                      <option value="pickup_delivery">Pickup & Delivery</option>
+                      <option value="dropoff">Drop-off</option>
+                      <option value="self_service">Self-service</option>
+                      <option value="commercial">Commercial</option>
+                    </select>
+                    <select
+                      className="rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      value={service.pricingModel || 'flat'}
+                      onChange={(event) =>
+                        updateService(index, {
+                          pricingModel: event.target.value as BookingService['pricingModel'],
+                        })
+                      }
+                    >
+                      <option value="flat">Flat</option>
+                      <option value="by_weight">By weight</option>
+                      <option value="by_item">By item</option>
+                      <option value="subscription">Subscription</option>
+                      <option value="quote">Quote</option>
+                    </select>
                     <input
                       type="number"
                       className="rounded-md border border-gray-200 px-3 py-2 text-sm"
@@ -300,6 +344,38 @@ export function BookingSettingsManager({
                       onChange={(event) =>
                         updateService(index, {
                           price: event.target.value === '' ? undefined : Number(event.target.value),
+                        })
+                      }
+                    />
+                    <input
+                      className="rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Unit label (e.g. bag, lb)"
+                      value={service.unitLabel || ''}
+                      onChange={(event) =>
+                        updateService(index, { unitLabel: event.target.value || undefined })
+                      }
+                    />
+                    <input
+                      type="number"
+                      className="rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Lead time (hours)"
+                      value={service.leadTimeHours ?? ''}
+                      onChange={(event) =>
+                        updateService(index, {
+                          leadTimeHours:
+                            event.target.value === '' ? undefined : Number(event.target.value),
+                        })
+                      }
+                    />
+                    <input
+                      type="number"
+                      className="rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Capacity per slot"
+                      value={service.capacityPerSlot ?? ''}
+                      onChange={(event) =>
+                        updateService(index, {
+                          capacityPerSlot:
+                            event.target.value === '' ? undefined : Number(event.target.value),
                         })
                       }
                     />
@@ -312,6 +388,26 @@ export function BookingSettingsManager({
                         }
                       />
                       Active
+                    </label>
+                    <label className="flex items-center gap-2 text-xs text-gray-600">
+                      <input
+                        type="checkbox"
+                        checked={service.recurringEligible !== false}
+                        onChange={(event) =>
+                          updateService(index, { recurringEligible: event.target.checked })
+                        }
+                      />
+                      Recurring eligible
+                    </label>
+                    <label className="flex items-center gap-2 text-xs text-gray-600">
+                      <input
+                        type="checkbox"
+                        checked={service.commercialEligible === true}
+                        onChange={(event) =>
+                          updateService(index, { commercialEligible: event.target.checked })
+                        }
+                      />
+                      Commercial eligible
                     </label>
                   </div>
                 </div>
@@ -365,6 +461,68 @@ export function BookingSettingsManager({
                   value={settings.maxDaysAhead}
                   onChange={(event) =>
                     updateSettings({ maxDaysAhead: Number(event.target.value) })
+                  }
+                />
+              </div>
+              <div>
+                <label className="block text-xs text-gray-500">Default service type</label>
+                <select
+                  className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                  value={settings.defaultServiceType || 'pickup_delivery'}
+                  onChange={(event) =>
+                    updateSettings({
+                      defaultServiceType: event.target.value as BookingSettings['defaultServiceType'],
+                    })
+                  }
+                >
+                  <option value="pickup_delivery">Pickup & Delivery</option>
+                  <option value="dropoff">Drop-off</option>
+                  <option value="self_service">Self-service</option>
+                  <option value="commercial">Commercial</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-xs text-gray-500">Max orders per slot</label>
+                <input
+                  type="number"
+                  className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                  value={settings.maxOrdersPerSlot ?? 1}
+                  onChange={(event) =>
+                    updateSettings({ maxOrdersPerSlot: Number(event.target.value) })
+                  }
+                />
+              </div>
+              <div>
+                <label className="block text-xs text-gray-500">Rush lead (hours)</label>
+                <input
+                  type="number"
+                  className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                  value={settings.rushLeadHours ?? 6}
+                  onChange={(event) =>
+                    updateSettings({ rushLeadHours: Number(event.target.value) })
+                  }
+                />
+              </div>
+              <label className="flex items-center gap-2 text-xs text-gray-600">
+                <input
+                  type="checkbox"
+                  checked={settings.recurringEnabled !== false}
+                  onChange={(event) => updateSettings({ recurringEnabled: event.target.checked })}
+                />
+                Enable recurring scheduling
+              </label>
+              <div>
+                <label className="block text-xs text-gray-500">Service area ZIPs (comma separated)</label>
+                <input
+                  className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                  value={(settings.serviceAreaZips || []).join(', ')}
+                  onChange={(event) =>
+                    updateSettings({
+                      serviceAreaZips: event.target.value
+                        .split(',')
+                        .map((item) => item.trim())
+                        .filter(Boolean),
+                    })
                   }
                 />
               </div>

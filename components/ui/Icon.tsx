@@ -9,7 +9,13 @@ export interface IconProps extends Omit<LucideProps, 'ref'> {
 
 const Icon = forwardRef<SVGSVGElement, IconProps>(
   ({ name, size = 'md', className, ...props }, ref) => {
-    const LucideIcon = icons[name];
+    const aliasMap: Record<string, keyof typeof icons> = {
+      Certificate: 'BadgeCheck',
+      ShirtIcon: 'Shirt',
+      Grid: 'LayoutGrid',
+    };
+    const resolvedName = (aliasMap[name as string] || name) as keyof typeof icons;
+    const LucideIcon = icons[resolvedName];
     
     if (!LucideIcon) {
       console.warn(`Icon "${name}" not found in lucide-react`);

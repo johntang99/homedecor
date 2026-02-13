@@ -1,0 +1,61 @@
+{
+  "hero": {
+    "variant": "centered",
+    "title": "Blog en desarrollo",
+    "subtitle": "Estamos preparando articulos y recursos de lavanderia.",
+    "backgroundImage": "/uploads/wewash/blog/dr-huang-lecture-20.png"
+  },
+  "introduction": {
+    "text": "El contenido del blog esta actualmente en desarrollo."
+  },
+  "categories": [
+    {
+      "id": "all",
+      "name": "All Posts",
+      "slug": "all"
+    },
+    {
+      "id": "acupuncture",
+      "name": "Acupuncture",
+      "slug": "acupuncture"
+    },
+    {
+      "id": "herbal-medicine",
+      "name": "Herbal Medicine",
+      "slug": "herbal-medicine"
+    },
+    {
+      "id": "wellness",
+      "name": "Wellness & Lifestyle",
+      "slug": "wellness"
+    },
+    {
+      "id": "conditions",
+      "name": "Treating Conditions",
+      "slug": "conditions"
+    },
+    {
+      "id": "patient-education",
+      "name": "Patient Education",
+      "slug": "patient-education"
+    },
+    {
+      "id": "seasonal",
+      "name": "Seasonal Health",
+      "slug": "seasonal"
+    }
+  ],
+  "cta": {
+    "variant": "centered",
+    "title": "¿Necesitas ayuda ahora?",
+    "description": "Contacta a WeWash para soporte y reservas.",
+    "primaryCta": {
+      "text": "Reservar recogida",
+      "link": "/es/book"
+    },
+    "secondaryCta": {
+      "text": "Contactar soporte",
+      "link": "/es/contact"
+    }
+  }
+}

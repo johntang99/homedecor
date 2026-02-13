@@ -4,9 +4,10 @@
 
 import { Locale, SeoConfig } from './types';
 import { headers } from 'next/headers';
-import { getSiteByHost } from './sites';
+import { getDefaultSite, getSiteByHost } from './sites';
 import fs from 'fs';
 import path from 'path';
+import { defaultLocale } from './i18n';
 import {
   canUseContentDb,
   fetchContentEntry,
@@ -15,15 +16,50 @@ import {
 } from './contentDb';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content');
+const SITES_CONFIG_PATH = path.join(CONTENT_DIR, '_sites.json');
+
+async function getLocalDefaultSiteId(): Promise<string | null> {
+  try {
+    const raw = await fs.promises.readFile(SITES_CONFIG_PATH, 'utf-8');
+    const parsed = JSON.parse(raw) as {
+      sites?: Array<{ id?: string; enabled?: boolean }>;
+    };
+    const sites = Array.isArray(parsed.sites) ? parsed.sites : [];
+    const firstEnabled = sites.find((site) => site.enabled !== false && site.id);
+    return firstEnabled?.id ?? sites[0]?.id ?? null;
+  } catch {
+    return null;
+  }
+}
 
 async function resolveSiteId(siteId?: string): Promise<string> {
   if (siteId) return siteId;
   try {
     const host = headers().get('host');
+    const normalizedHost = (host || '').toLowerCase();
+    if (!host) {
+      const localSiteId = await getLocalDefaultSiteId();
+      if (localSiteId) return localSiteId;
+    }
+    const isLocalHost =
+      normalizedHost.includes('localhost') ||
+      normalizedHost.startsWith('127.0.0.1') ||
+      normalizedHost.startsWith('0.0.0.0');
+
+    if (isLocalHost) {
+      const localSiteId = await getLocalDefaultSiteId();
+      if (localSiteId) return localSiteId;
+    }
+
     const site = await getSiteByHost(host);
-    return site?.id || 'dr-huang-clinic';
+    if (site?.id) return site.id;
+    const defaultSite = await getDefaultSite();
+    return defaultSite?.id || 'wewash';
   } catch (error) {
-    return 'dr-huang-clinic';
+    const localSiteId = await getLocalDefaultSiteId();
+    if (localSiteId) return localSiteId;
+    const defaultSite = await getDefaultSite();
+    return defaultSite?.id || 'wewash';
   }
 }
 
@@ -94,7 +130,8 @@ export async function loadNavigation(siteId: string, locale: Locale) {
  */
 export async function loadTheme(siteId: string) {
   if (canUseContentDb()) {
-    const entry = await fetchThemeEntry(siteId);
+    // Theme is site-wide, so always resolve from canonical locale row.
+    const entry = await fetchThemeEntry(siteId, defaultLocale);
     if (entry?.data) {
       return entry.data;
     }

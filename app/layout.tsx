@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import '../styles/globals.css';
 
 export const metadata: Metadata = {
-  title: 'TCM Clinic',
-  description: 'Traditional Chinese Medicine & Acupuncture',
+  title: 'WeWash Laundry Template',
+  description: 'Laundry pickup, delivery, and commercial service template',
 };
 
 export default function RootLayout({

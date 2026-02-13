@@ -84,7 +84,7 @@ export async function generateMetadata({ params }: PageProps) {
   const description =
     content?.hero?.description ||
     siteInfo?.description ||
-    'Traditional Chinese medicine and acupuncture services.';
+    'Laundry pickup, delivery, and commercial garment care services.';
 
   return buildPageMetadata({
     siteId,

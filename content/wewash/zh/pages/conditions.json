@@ -3,7 +3,7 @@
     "variant": "centered",
     "title": "治疗病症",
     "subtitle": "传统中医为各种健康问题提供自然、有效的解决方案",
-    "backgroundImage": "/uploads/dr-huang-clinic/general/tcm-emotion-1.webp"
+    "backgroundImage": "/uploads/wewash/general/tcm-emotion-1.webp"
   },
   "introduction": {
     "text": "在黄医生诊所，我们治疗整个人，而不仅仅是症状。我们的综合方法在提供即时缓解的同时，解决疾病的根本原因。以下是我们常见治疗的一些病症，并取得了良好的效果。",
@@ -13,7 +13,7 @@
     {
       "id": "all",
       "name": "所有病症",
-      "icon": "Grid",
+      "icon": "LayoutGrid",
       "description": "查看所有病症"
     },
     {
@@ -58,7 +58,7 @@
       "id": "back-pain",
       "category": "pain-management",
       "icon": "Activity",
-      "image": "/uploads/dr-huang-clinic/gallery/acupuncture-needles.jpg",
+      "image": "/uploads/wewash/gallery/acupuncture-needles.jpg",
       "title": "腰背痛",
       "description": "无论是急性还是慢性，针灸和中医疗法都能有效缓解下背部疼痛、上背部疼痛和坐骨神经痛，无需药物或手术。",
       "symptoms": [
@@ -128,7 +128,7 @@
       "id": "headaches-migraines",
       "category": "pain-management",
       "icon": "Activity",
-      "image": "/uploads/dr-huang-clinic/general/headache-2.jpeg",
+      "image": "/uploads/wewash/general/headache-2.jpeg",
       "title": "头痛和偏头痛",
       "description": "无需药物即可有效治疗紧张性头痛、偏头痛和慢性头痛。",
       "symptoms": [
@@ -153,7 +153,7 @@
       "id": "anxiety",
       "category": "mental-health",
       "icon": "Brain",
-      "image": "/uploads/dr-huang-clinic/general/anxiate-3.jpeg",
+      "image": "/uploads/wewash/general/anxiate-3.jpeg",
       "title": "焦虑和恐慌症",
       "description": "焦虑、恐慌发作和一般紧张的自然、无药物支持。",
       "symptoms": [

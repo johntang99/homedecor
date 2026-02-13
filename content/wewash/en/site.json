@@ -1,16 +1,16 @@
 {
-  "clinicName": "WeWash",
-  "tagline": "Laundry Service",
-  "description": "Laundry Service in New York",
+  "clinicName": "WeWash Laundry",
+  "tagline": "Pickup, Drop-off, and Commercial Laundry",
+  "description": "Comprehensive laundry services for households and businesses in Middletown, NY.",
   "address": "87 North Street",
   "city": "Middletown",
   "state": "NY",
   "zip": "10940",
   "phone": "(845) 394-0158",
-
+  "email": "hello@wewash99.com",
   "addressMapUrl": "https://maps.google.com/?q=87+North+Street+Middletown+NY+10940",
   "social": {
-    "facebook": "https://facebook.com/",
+    "facebook": "https://facebook.com/wewash99",
     "instagram": "https://instagram.com/wewash99"
   },
   "headerVariant": "stacked"

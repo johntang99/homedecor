@@ -1,47 +1,53 @@
 {
   "timezone": "America/New_York",
-  "bufferMinutes": 10,
-  "minNoticeHours": 12,
+  "bufferMinutes": 15,
+  "minNoticeHours": 4,
   "maxDaysAhead": 60,
+  "defaultServiceType": "pickup_delivery",
+  "serviceAreaZips": ["10940", "10941", "10924", "10918", "10950"],
+  "blackoutWindows": [],
+  "rushLeadHours": 6,
+  "maxOrdersPerSlot": 4,
+  "recurringEnabled": true,
   "businessHours": [
     {
       "day": "Mon",
-      "open": "09:00",
-      "close": "17:00"
+      "open": "08:00",
+      "close": "20:00"
     },
     {
       "day": "Tue",
-      "open": "09:00",
-      "close": "17:00"
+      "open": "08:00",
+      "close": "20:00"
     },
     {
       "day": "Wed",
-      "open": "09:00",
-      "close": "17:00"
+      "open": "08:00",
+      "close": "20:00"
     },
     {
       "day": "Thu",
-      "open": "09:00",
-      "close": "17:00"
+      "open": "08:00",
+      "close": "20:00"
     },
     {
       "day": "Fri",
-      "open": "09:00",
-      "close": "17:00"
+      "open": "08:00",
+      "close": "20:00"
     },
     {
       "day": "Sat",
-      "open": "10:00",
-      "close": "14:00"
+      "open": "09:00",
+      "close": "18:00"
     },
     {
       "day": "Sun",
-      "open": "00:00",
-      "close": "00:00",
-      "closed": true
+      "open": "09:00",
+      "close": "16:00",
+      "closed": false
     }
   ],
   "blockedDates": [],
-  "notificationEmails": ["baamplatform@gmail.com"],
+  "notificationEmails": ["ops@wewash99.com"],
   "notificationPhones": []
 }

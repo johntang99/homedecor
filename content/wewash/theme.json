@@ -1,35 +1,35 @@
 {
   "typography": {
-    "display": "3rem",
-    "heading": "2.25rem",
-    "subheading": "1.25rem",
+    "display": "3.25rem",
+    "heading": "2.5rem",
+    "subheading": "1.375rem",
     "body": "1rem",
-    "small": "0.875rem",
+    "small": "0.925rem",
     "fonts": {
-      "display": "Georgia, 'Times New Roman', serif",
-      "heading": "Georgia, 'Times New Roman', serif",
-      "subheading": "Arial, 'Helvetica Neue', sans-serif",
-      "body": "Arial, 'Helvetica Neue', sans-serif",
-      "small": "Arial, 'Helvetica Neue', sans-serif"
+      "display": "'Playfair Display', Georgia, 'Times New Roman', serif",
+      "heading": "'Playfair Display', Georgia, 'Times New Roman', serif",
+      "subheading": "'Inter', 'Helvetica Neue', Arial, sans-serif",
+      "body": "'Inter', 'Helvetica Neue', Arial, sans-serif",
+      "small": "'Inter', 'Helvetica Neue', Arial, sans-serif"
     }
   },
   "colors": {
     "primary": {
-      "DEFAULT": "#8b1d1d",
-      "dark": "#6e1515",
-      "light": "#c24a4a",
-      "50": "#fcecec",
-      "100": "#f8dada"
+      "DEFAULT": "#14989A",
+      "dark": "#0F7678",
+      "light": "#45B1B3",
+      "50": "#E8F7F7",
+      "100": "#D1EFEF"
     },
     "secondary": {
-      "DEFAULT": "#b7791f",
-      "dark": "#8c5c14",
-      "light": "#e0b05a",
-      "50": "#fff5e0"
+      "DEFAULT": "#C19A5B",
+      "dark": "#9C7C49",
+      "light": "#D2B07A",
+      "50": "#FBF6EE"
     },
     "backdrop": {
-      "primary": "#fff7e8",
-      "secondary": "#fdf1d8"
+      "primary": "#FFFCF7",
+      "secondary": "#F4F8FC"
     }
   }
 }

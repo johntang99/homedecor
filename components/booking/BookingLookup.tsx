@@ -6,7 +6,7 @@ import type { BookingRecord, BookingService } from '@/lib/types';
 import { Button } from '@/components/ui';
 
 interface BookingLookupProps {
-  locale: 'en' | 'zh';
+  locale: 'en' | 'es';
 }
 
 export function BookingLookup({ locale }: BookingLookupProps) {
@@ -57,13 +57,13 @@ export function BookingLookup({ locale }: BookingLookupProps) {
 
   const cancelBooking = async (bookingId: string) => {
     if (!email) {
-      setStatus(locale === 'en' ? 'Enter your email first.' : '请先输入邮箱。');
+      setStatus(locale === 'en' ? 'Enter your email first.' : 'Ingresa tu correo primero.');
       return;
     }
     const confirmed = window.confirm(
       locale === 'en'
         ? 'Are you sure you want to cancel this booking?'
-        : '确认要取消此预约吗？'
+        : 'Seguro que deseas cancelar esta reserva?'
     );
     if (!confirmed) return;
     setStatus(null);
@@ -94,7 +94,9 @@ export function BookingLookup({ locale }: BookingLookupProps) {
   const rescheduleBooking = async (bookingId: string) => {
     const draft = rescheduleDraft[bookingId];
     if (!draft?.date || !draft?.time) {
-      setStatus(locale === 'en' ? 'Select a new date and time.' : '请选择新的日期和时间。');
+      setStatus(
+        locale === 'en' ? 'Select a new date and time.' : 'Selecciona una nueva fecha y hora.'
+      );
       return;
     }
     const response = await fetch('/api/booking/reschedule', {
@@ -119,34 +121,34 @@ export function BookingLookup({ locale }: BookingLookupProps) {
     <div className="bg-white/95 border border-gray-200/80 rounded-3xl p-8 space-y-6 shadow-[0_12px_30px_rgba(15,23,42,0.06)]">
       <div>
         <div className="inline-flex items-center gap-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">
-          {locale === 'en' ? 'Manage' : '管理'}
+          {locale === 'en' ? 'Manage' : 'Gestion'}
         </div>
         <h2 className="text-heading font-semibold text-gray-900 mt-2">
-          {locale === 'en' ? 'Manage Your Booking' : '管理预约'}
+          {locale === 'en' ? 'Manage Your Booking' : 'Gestiona tu reserva'}
         </h2>
         <p className="text-sm text-gray-600 mt-1">
           {locale === 'en'
             ? 'Enter the email and phone used for booking.'
-            : '输入预约时使用的邮箱和电话。'}
+            : 'Ingresa el correo y telefono usados al reservar.'}
         </p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
         <input
           className="rounded-xl border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[color-mix(in_srgb,var(--primary)_20%,transparent)]"
-          placeholder={locale === 'en' ? 'Email' : '邮箱'}
+          placeholder={locale === 'en' ? 'Email' : 'Correo'}
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
         <input
           className="rounded-xl border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[color-mix(in_srgb,var(--primary)_20%,transparent)]"
-          placeholder={locale === 'en' ? 'Phone' : '电话'}
+          placeholder={locale === 'en' ? 'Phone' : 'Telefono'}
           value={phone}
           onChange={(event) => setPhone(event.target.value)}
         />
       </div>
       <Button type="button" onClick={lookup} disabled={loading || !email || !phone}>
-        {locale === 'en' ? 'Find My Bookings' : '查询预约'}
+        {locale === 'en' ? 'Find My Bookings' : 'Buscar mis reservas'}
       </Button>
 
       {status && (
@@ -158,7 +160,7 @@ export function BookingLookup({ locale }: BookingLookupProps) {
       <div className="space-y-4">
         {bookings.length === 0 && !loading && (
           <div className="rounded-xl border border-dashed border-gray-200 px-4 py-6 text-sm text-gray-500 text-center">
-            {locale === 'en' ? 'No bookings found.' : '未找到预约。'}
+            {locale === 'en' ? 'No bookings found.' : 'No se encontraron reservas.'}
           </div>
         )}
         {bookings.map((booking) => {
@@ -183,10 +185,10 @@ export function BookingLookup({ locale }: BookingLookupProps) {
                   {booking.status === 'cancelled'
                     ? locale === 'en'
                       ? 'Cancelled'
-                      : '已取消'
+                      : 'Cancelada'
                     : locale === 'en'
                       ? 'Cancel'
-                      : '取消'}
+                      : 'Cancelar'}
                 </Button>
               </div>
 
@@ -220,7 +222,7 @@ export function BookingLookup({ locale }: BookingLookupProps) {
                     }))
                   }
                 >
-                  <option value="">{locale === 'en' ? 'Select time' : '选择时间'}</option>
+                  <option value="">{locale === 'en' ? 'Select time' : 'Seleccionar hora'}</option>
                   {(draft?.slots || []).map((slot) => (
                     <option key={slot} value={slot}>
                       {slot}
@@ -228,9 +230,32 @@ export function BookingLookup({ locale }: BookingLookupProps) {
                   ))}
                 </select>
                 <Button type="button" onClick={() => rescheduleBooking(booking.id)}>
-                  {locale === 'en' ? 'Reschedule' : '改期'}
+                  {locale === 'en' ? 'Reschedule' : 'Reprogramar'}
                 </Button>
               </div>
+              {(booking.pickupAddress || booking.deliveryAddress || booking.zipCode) && (
+                <div className="mt-3 text-xs text-gray-500">
+                  {booking.pickupAddress && (
+                    <div>
+                      {locale === 'en' ? 'Pickup' : 'Recogida'}: {booking.pickupAddress}
+                    </div>
+                  )}
+                  {booking.deliveryAddress && (
+                    <div>
+                      {locale === 'en' ? 'Delivery' : 'Entrega'}: {booking.deliveryAddress}
+                    </div>
+                  )}
+                  {booking.zipCode && (
+                    <div>
+                      ZIP: {booking.zipCode}
+                      {typeof booking.bags === 'number' ? ` · Bags: ${booking.bags}` : ''}
+                      {typeof booking.estimatedWeightLb === 'number'
+                        ? ` · ${booking.estimatedWeightLb} lb`
+                        : ''}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           );
         })}

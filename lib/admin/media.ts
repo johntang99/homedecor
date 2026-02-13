@@ -31,19 +31,14 @@ async function walkDirectory(dir: string, baseDir: string, items: MediaItem[]) {
 }
 
 export async function listMedia(siteId: string): Promise<MediaItem[]> {
-  if (canUseMediaDb()) {
-    const dbItems = await listMediaDb(siteId);
-    if (dbItems.length) return dbItems;
-  }
-
   const baseDir = path.join(process.cwd(), 'public', 'uploads', siteId);
-  const items: MediaItem[] = [];
+  const filesystemItems: MediaItem[] = [];
   try {
-    await walkDirectory(baseDir, baseDir, items);
+    await walkDirectory(baseDir, baseDir, filesystemItems);
   } catch (error) {
-    return [];
+    // ignore; directory may not exist yet
   }
-  const normalized = items
+  const normalizedFilesystemItems = filesystemItems
     .map((item) => ({
       ...item,
       url: `/uploads/${siteId}/${item.path}`,
@@ -51,12 +46,26 @@ export async function listMedia(siteId: string): Promise<MediaItem[]> {
     .sort((a, b) => a.path.localeCompare(b.path));
 
   if (canUseMediaDb()) {
+    const dbItems = await listMediaDb(siteId);
+    const merged = new Map<string, MediaItem>();
+    for (const item of dbItems) {
+      merged.set(item.path, item);
+    }
+    for (const item of normalizedFilesystemItems) {
+      merged.set(item.path, item);
+    }
+    const mergedItems = Array.from(merged.values()).sort((a, b) =>
+      a.path.localeCompare(b.path)
+    );
+
+    // Ensure filesystem-discovered items are persisted for future queries.
     await Promise.all(
-      normalized.map((item) =>
+      normalizedFilesystemItems.map((item) =>
         upsertMediaDb({ siteId, path: item.path, url: item.url })
       )
     );
+    return mergedItems;
   }
 
-  return normalized;
+  return normalizedFilesystemItems;
 }

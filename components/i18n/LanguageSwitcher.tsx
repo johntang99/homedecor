@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname, useRouter } from 'next/navigation';
-import { Locale, localeNames, switchLocale } from '@/lib/i18n';
+import { Locale, switchLocale } from '@/lib/i18n';
 
 interface LanguageSwitcherProps {
   currentLocale: Locale;
@@ -31,14 +31,14 @@ export default function LanguageSwitcher({ currentLocale }: LanguageSwitcherProp
         EN
       </button>
       <button
-        onClick={() => handleLocaleChange('zh')}
+        onClick={() => handleLocaleChange('es')}
         className={`px-3 py-1.5 text-sm font-medium transition-colors ${
-          currentLocale === 'zh'
+          currentLocale === 'es'
             ? 'bg-primary text-white'
             : 'bg-white text-gray-700 hover:bg-gray-100'
         }`}
       >
-        中文
+        ES
       </button>
     </div>
   );

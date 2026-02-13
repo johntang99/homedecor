@@ -54,7 +54,7 @@ import type { SiteConfig } from '@/lib/types';
          >
            {(selectedSite?.supportedLocales || ['en']).map((item) => (
              <option key={item} value={item}>
-               {item === 'en' ? 'English' : 'Chinese'}
+              {item === 'en' ? 'English' : item === 'es' ? 'Spanish' : item}
              </option>
            ))}
          </select>

@@ -283,7 +283,7 @@ interface PageLayoutConfig {
                      >
                        <span className="font-medium">{hour.day}</span>
                        <span className="text-[var(--brand)] font-semibold">
-                         {hour.isOpen ? hour.time : (locale === 'en' ? 'Closed' : '休息')}
+                        {hour.isOpen ? hour.time : (locale === 'en' ? 'Closed' : 'Cerrado')}
                        </span>
                      </div>
                    ))}
@@ -293,13 +293,13 @@ interface PageLayoutConfig {
  
              <div className="pt-8 border-t border-gray-200">
                <h3 className="text-subheading font-bold text-gray-900 mb-4">
-                 {locale === 'en' ? 'Accessibility Features' : '无障碍设施'}
+                {locale === 'en' ? 'Accessibility Features' : 'Accesibilidad'}
                </h3>
                <div className="grid sm:grid-cols-3 gap-4">
                  {[
-                   locale === 'en' ? 'Wheelchair accessible entrance' : '轮椅无障碍入口',
-                   locale === 'en' ? 'Convenient parking available' : '提供便利停车位',
-                   locale === 'en' ? 'Multilingual services (English, Mandarin)' : '多语言服务（英语、中文）',
+                  locale === 'en' ? 'Wheelchair accessible entrance' : 'Entrada accesible para silla de ruedas',
+                  locale === 'en' ? 'Convenient parking available' : 'Estacionamiento conveniente disponible',
+                  locale === 'en' ? 'Multilingual services (English, Spanish)' : 'Servicio multilingue (ingles y espanol)',
                  ].map((feature) => (
                    <div key={feature} className="flex items-center gap-3 p-3 bg-[var(--primary-50)] rounded-lg">
                      <div className="w-6 h-6 rounded-full bg-[var(--brand)] flex items-center justify-center shrink-0">

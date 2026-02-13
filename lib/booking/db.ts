@@ -5,6 +5,7 @@ interface BookingRow {
   id: string;
   site_id: string;
   service_id: string;
+  service_type?: string | null;
   date: string;
   time: string;
   duration_minutes: number;
@@ -12,16 +13,19 @@ interface BookingRow {
   phone: string;
   email: string;
   note: string | null;
+  details?: Record<string, unknown> | null;
   status: BookingRecord['status'];
   created_at: string;
   updated_at: string;
 }
 
 function mapBookingRow(row: BookingRow): BookingRecord {
+  const details = row.details || {};
   return {
     id: row.id,
     siteId: row.site_id,
     serviceId: row.service_id,
+    serviceType: (row.service_type as BookingRecord['serviceType']) || undefined,
     date: row.date,
     time: row.time,
     durationMinutes: row.duration_minutes,
@@ -29,6 +33,27 @@ function mapBookingRow(row: BookingRow): BookingRecord {
     phone: row.phone,
     email: row.email,
     note: row.note || undefined,
+    pickupAddress:
+      typeof details.pickupAddress === 'string' ? (details.pickupAddress as string) : undefined,
+    deliveryAddress:
+      typeof details.deliveryAddress === 'string' ? (details.deliveryAddress as string) : undefined,
+    unitOrApt: typeof details.unitOrApt === 'string' ? (details.unitOrApt as string) : undefined,
+    zipCode: typeof details.zipCode === 'string' ? (details.zipCode as string) : undefined,
+    bags: typeof details.bags === 'number' ? (details.bags as number) : undefined,
+    estimatedWeightLb:
+      typeof details.estimatedWeightLb === 'number'
+        ? (details.estimatedWeightLb as number)
+        : undefined,
+    addOnIds: Array.isArray(details.addOnIds) ? (details.addOnIds as string[]) : undefined,
+    requestType:
+      details.requestType === 'recurring' || details.requestType === 'one_time'
+        ? (details.requestType as 'one_time' | 'recurring')
+        : undefined,
+    recurringRule:
+      details.recurringRule && typeof details.recurringRule === 'object'
+        ? (details.recurringRule as BookingRecord['recurringRule'])
+        : undefined,
+    details: details || undefined,
     status: row.status,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
@@ -136,27 +161,47 @@ export async function upsertBookingDb(siteId: string, booking: BookingRecord) {
   const supabase = getSupabaseServerClient();
   if (!supabase) return;
 
-  const { error } = await supabase
+  const basePayload = {
+    id: booking.id,
+    site_id: siteId,
+    service_id: booking.serviceId,
+    date: booking.date,
+    time: booking.time,
+    duration_minutes: booking.durationMinutes,
+    name: booking.name,
+    phone: booking.phone,
+    email: booking.email,
+    note: booking.note || null,
+    status: booking.status,
+    created_at: booking.createdAt,
+    updated_at: booking.updatedAt,
+  };
+  const extendedPayload = {
+    ...basePayload,
+    service_type: booking.serviceType || null,
+    details: {
+      ...booking.details,
+      pickupAddress: booking.pickupAddress || null,
+      deliveryAddress: booking.deliveryAddress || null,
+      unitOrApt: booking.unitOrApt || null,
+      zipCode: booking.zipCode || null,
+      bags: typeof booking.bags === 'number' ? booking.bags : null,
+      estimatedWeightLb:
+        typeof booking.estimatedWeightLb === 'number' ? booking.estimatedWeightLb : null,
+      addOnIds: booking.addOnIds || [],
+      requestType: booking.requestType || null,
+      recurringRule: booking.recurringRule || null,
+    },
+  };
+
+  const { error } = await supabase.from('bookings').upsert(extendedPayload, { onConflict: 'id' });
+  if (!error) return;
+
+  console.warn('Supabase upsertBookingDb extended payload failed, retrying basic payload:', error);
+  const { error: retryError } = await supabase
     .from('bookings')
-    .upsert(
-      {
-        id: booking.id,
-        site_id: siteId,
-        service_id: booking.serviceId,
-        date: booking.date,
-        time: booking.time,
-        duration_minutes: booking.durationMinutes,
-        name: booking.name,
-        phone: booking.phone,
-        email: booking.email,
-        note: booking.note || null,
-        status: booking.status,
-        created_at: booking.createdAt,
-        updated_at: booking.updatedAt,
-      },
-      { onConflict: 'id' }
-    );
-  if (error) {
-    console.error('Supabase upsertBookingDb error:', error);
+    .upsert(basePayload, { onConflict: 'id' });
+  if (retryError) {
+    console.error('Supabase upsertBookingDb retry error:', retryError);
   }
 }

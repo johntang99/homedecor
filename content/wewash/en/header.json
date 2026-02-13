@@ -1,40 +1,39 @@
 {
   "topbar": {
-    "phone": "(845) 381-1106",
-    "phoneHref": "tel:8453811106",
-    "address": "71 East Main Street, Middletown, NY 10940",
-    "addressHref": "https://maps.google.com/?q=71+East+Main+Street+Middletown+NY+10940",
-    "hours": "By Appointment",
-    "badge": "Accepting New Patients"
+    "phone": "(845) 394-0158",
+    "phoneHref": "tel:+18453940158",
+    "address": "87 North Street, Middletown, NY 10940",
+    "addressHref": "https://maps.google.com/?q=87+North+Street+Middletown+NY+10940",
+    "hours": "Pickup & Delivery 7 Days",
+    "badge": "Same-Day Rush Available"
   },
   "menu": {
     "logo": {
-      "emoji": "🌿",
-      "text": "Dr Huang Clinic",
-      "subtext": "Traditional Chinese Medicine & Acupuncture",
+      "emoji": "🧺",
+      "text": "WeWash",
+      "subtext": "Laundry Pickup, Drop-off, and Commercial Care",
       "image": {
-        "src": "/uploads/dr-huang-clinic/home/drhuang-2.svg",
-        "alt": "Dr Huang Clinic logo"
+        "src": "/uploads/wewash/home/drhuang-2.svg",
+        "alt": "WeWash logo"
       }
     },
     "items": [
       { "text": "Home", "url": "/en" },
       { "text": "Services", "url": "/en/services" },
-      { "text": "Conditions", "url": "/en/conditions" },
+      { "text": "Pricing", "url": "/en/pricing" },
+      { "text": "Commercial", "url": "/en/case-studies" },
       { "text": "About", "url": "/en/about" },
-      { "text": "Case Studies", "url": "/en/case-studies" },
       { "text": "Gallery", "url": "/en/gallery" },
-      { "text": "New Visit", "url": "/en/new-patients" },
       { "text": "Blog", "url": "/en/blog" },
       { "text": "Contact", "url": "/en/contact" }
     ]
   },
   "languages": [
     { "label": "English", "locale": "en", "url": "/en" },
-    { "label": "中文", "locale": "zh", "url": "/zh" }
+    { "label": "Español", "locale": "es", "url": "/es" }
   ],
   "cta": {
-    "text": "Book Appointment",
+    "text": "Schedule Pickup",
     "link": "/en/contact"
   }
 }

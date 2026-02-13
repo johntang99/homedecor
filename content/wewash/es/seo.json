@@ -1,0 +1,28 @@
+{
+  "title": "WeWash Lavanderia",
+  "description": "Lavado y doblado, tintoreria, recogida y entrega, y servicio comercial en Middletown, NY.",
+
+  "home": {
+    "title": "Recogida, entrega y lavanderia comercial | WeWash",
+    "description": "Programa recogida de ropa, servicio por entrega, o solicita una cotizacion comercial."
+  },
+
+  "pages": {
+    "about": {
+      "title": "Sobre WeWash | Equipo y estandares",
+      "description": "Conoce al equipo de WeWash y nuestros estandares de cuidado de prendas."
+    },
+    "services": {
+      "title": "Servicios de lavanderia | WeWash",
+      "description": "Explora lavado por libra, tintoreria, autoservicio y planes comerciales."
+    },
+    "pricing": {
+      "title": "Precios de lavanderia | WeWash",
+      "description": "Precios claros por libra, por prenda y paquetes para negocios."
+    },
+    "contact": {
+      "title": "Contacto y zonas de servicio | WeWash",
+      "description": "Verifica cobertura por codigo postal y solicita recogida."
+    }
+  }
+}

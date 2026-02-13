@@ -11,7 +11,7 @@ export default async function AdminSiteCreatePage() {
     domain: '',
     enabled: true,
     defaultLocale: 'en',
-    supportedLocales: ['en', 'zh'],
+    supportedLocales: ['en', 'es'],
     createdAt: '',
     updatedAt: '',
   };
@@ -28,7 +28,7 @@ export default async function AdminSiteCreatePage() {
             <span>New Site</span>
           </div>
           <h1 className="text-2xl font-semibold text-gray-900 mt-2">New Site</h1>
-          <p className="text-sm text-gray-600">Create a new clinic site.</p>
+          <p className="text-sm text-gray-600">Create a new laundry site.</p>
         </div>
       </div>
 

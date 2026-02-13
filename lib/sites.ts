@@ -16,6 +16,16 @@ import {
 const CONTENT_DIR = path.join(process.cwd(), 'content');
 const SITES_CONFIG_PATH = path.join(CONTENT_DIR, '_sites.json');
 
+async function getSitesFromFile(): Promise<SiteConfig[]> {
+  try {
+    const data = await fs.promises.readFile(SITES_CONFIG_PATH, 'utf-8');
+    const parsed = JSON.parse(data) as { sites?: SiteConfig[] };
+    return parsed.sites || [];
+  } catch {
+    return [];
+  }
+}
+
 /**
  * Get all registered sites
  */
@@ -48,6 +58,9 @@ export async function getSiteById(siteId: string): Promise<SiteConfig | null> {
     const site = await getSiteByIdDb(siteId);
     if (site) return site;
   }
+  const fileSites = await getSitesFromFile();
+  const fileMatch = fileSites.find((site) => site.id === siteId);
+  if (fileMatch) return fileMatch;
   const sites = await getSites();
   return sites.find(site => site.id === siteId) || null;
 }

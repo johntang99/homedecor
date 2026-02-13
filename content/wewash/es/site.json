@@ -1,0 +1,17 @@
+{
+  "clinicName": "WeWash Lavanderia",
+  "tagline": "Recogida, entrega y servicio comercial",
+  "description": "Servicios completos de lavanderia para hogares y negocios en Middletown, NY.",
+  "address": "87 North Street",
+  "city": "Middletown",
+  "state": "NY",
+  "zip": "10940",
+  "phone": "(845) 394-0158",
+  "email": "hello@wewash99.com",
+  "addressMapUrl": "https://maps.google.com/?q=87+North+Street+Middletown+NY+10940",
+  "social": {
+    "facebook": "https://facebook.com/wewash99",
+    "instagram": "https://instagram.com/wewash99"
+  },
+  "headerVariant": "stacked"
+}

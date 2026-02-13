@@ -10,11 +10,29 @@ import {
 } from '@/lib/booking/storage';
 import { sendBookingEmails } from '@/lib/booking/email';
 import { sendBookingSms } from '@/lib/booking/sms';
-import type { BookingRecord } from '@/lib/types';
+import type { BookingRecord, BookingServiceType } from '@/lib/types';
 
 export async function POST(request: NextRequest) {
   const payload = await request.json();
-  const { serviceId, date, time, name, phone, email, note } = payload || {};
+  const {
+    serviceId,
+    date,
+    time,
+    name,
+    phone,
+    email,
+    note,
+    serviceType,
+    pickupAddress,
+    deliveryAddress,
+    unitOrApt,
+    zipCode,
+    bags,
+    estimatedWeightLb,
+    addOnIds,
+    requestType,
+    recurringRule,
+  } = payload || {};
 
   if (!serviceId || !date || !time || !name || !phone || !email) {
     return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
@@ -33,6 +51,41 @@ export async function POST(request: NextRequest) {
   const service = services.find((item) => item.id === serviceId);
   if (!service || service.active === false) {
     return NextResponse.json({ message: 'Service not available' }, { status: 400 });
+  }
+
+  const allowedServiceTypes: BookingServiceType[] = [
+    'pickup_delivery',
+    'dropoff',
+    'self_service',
+    'commercial',
+  ];
+  const rawServiceType = typeof serviceType === 'string' ? serviceType : service.serviceType;
+  const effectiveServiceType = allowedServiceTypes.includes(
+    rawServiceType as BookingServiceType
+  )
+    ? (rawServiceType as BookingServiceType)
+    : undefined;
+  if (
+    (effectiveServiceType === 'pickup_delivery' || effectiveServiceType === 'commercial') &&
+    (!pickupAddress || !zipCode)
+  ) {
+    return NextResponse.json(
+      { message: 'Pickup address and zip code are required for this service type' },
+      { status: 400 }
+    );
+  }
+  if (
+    (effectiveServiceType === 'pickup_delivery' || effectiveServiceType === 'commercial') &&
+    Array.isArray(settings.serviceAreaZips) &&
+    settings.serviceAreaZips.length > 0
+  ) {
+    const normalizedZip = String(zipCode || '').trim();
+    if (!settings.serviceAreaZips.includes(normalizedZip)) {
+      return NextResponse.json(
+        { message: 'Service is not available in this ZIP code yet' },
+        { status: 400 }
+      );
+    }
   }
 
   if (!isDateWithinRange({ date, settings })) {
@@ -63,9 +116,30 @@ export async function POST(request: NextRequest) {
     phone,
     email,
     note: typeof note === 'string' ? note : undefined,
+    serviceType: effectiveServiceType,
+    pickupAddress: typeof pickupAddress === 'string' ? pickupAddress : undefined,
+    deliveryAddress: typeof deliveryAddress === 'string' ? deliveryAddress : undefined,
+    unitOrApt: typeof unitOrApt === 'string' ? unitOrApt : undefined,
+    zipCode: typeof zipCode === 'string' ? zipCode : undefined,
+    bags: Number.isFinite(Number(bags)) ? Number(bags) : undefined,
+    estimatedWeightLb: Number.isFinite(Number(estimatedWeightLb))
+      ? Number(estimatedWeightLb)
+      : undefined,
+    addOnIds: Array.isArray(addOnIds) ? addOnIds.filter((item) => typeof item === 'string') : [],
+    requestType:
+      requestType === 'recurring' || requestType === 'one_time' ? requestType : undefined,
+    recurringRule:
+      recurringRule && typeof recurringRule === 'object'
+        ? (recurringRule as BookingRecord['recurringRule'])
+        : undefined,
     status: 'confirmed',
     createdAt: now,
     updatedAt: now,
+    details: {
+      source: 'public_booking_form',
+      serviceCategory: service.category || null,
+      pricingModel: service.pricingModel || null,
+    },
   };
 
   await addBooking(siteId, booking);

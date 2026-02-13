@@ -2,7 +2,7 @@
 // TYPE DEFINITIONS FOR TCM SYSTEM
 // ============================================
 
-export type Locale = 'en' | 'zh';
+export type Locale = 'en' | 'es';
 
 export interface SiteConfig {
   id: string;
@@ -340,11 +340,41 @@ export interface FooterSection {
 
 export type BookingStatus = 'confirmed' | 'cancelled' | 'rescheduled';
 
+export type BookingServiceType =
+  | 'pickup_delivery'
+  | 'dropoff'
+  | 'self_service'
+  | 'commercial';
+
+export type BookingPricingModel = 'flat' | 'by_weight' | 'by_item' | 'subscription' | 'quote';
+
 export interface BookingService {
   id: string;
   name: string;
+  serviceType?: BookingServiceType;
+  pricingModel?: BookingPricingModel;
+  category?: string;
   durationMinutes: number;
   price?: number;
+  currency?: string;
+  unitLabel?: string;
+  minOrderValue?: number;
+  leadTimeHours?: number;
+  capacityPerSlot?: number;
+  rushFee?: number;
+  recurringEligible?: boolean;
+  commercialEligible?: boolean;
+  addOns?: Array<{
+    id: string;
+    name: string;
+    price: number;
+    perUnit?: boolean;
+  }>;
+  availableWindows?: Array<{
+    day: string;
+    start: string;
+    end: string;
+  }>;
   description?: string;
   active?: boolean;
 }
@@ -361,6 +391,16 @@ export interface BookingSettings {
   bufferMinutes: number;
   minNoticeHours: number;
   maxDaysAhead: number;
+  defaultServiceType?: BookingServiceType;
+  serviceAreaZips?: string[];
+  blackoutWindows?: Array<{
+    start: string;
+    end: string;
+    reason?: string;
+  }>;
+  rushLeadHours?: number;
+  maxOrdersPerSlot?: number;
+  recurringEnabled?: boolean;
   businessHours: BookingBusinessHour[];
   blockedDates: string[];
   notificationEmails?: string[];
@@ -371,6 +411,7 @@ export interface BookingRecord {
   id: string;
   siteId: string;
   serviceId: string;
+  serviceType?: BookingServiceType;
   date: string;
   time: string;
   durationMinutes: number;
@@ -378,6 +419,21 @@ export interface BookingRecord {
   phone: string;
   email: string;
   note?: string;
+  pickupAddress?: string;
+  deliveryAddress?: string;
+  unitOrApt?: string;
+  zipCode?: string;
+  bags?: number;
+  estimatedWeightLb?: number;
+  addOnIds?: string[];
+  requestType?: 'one_time' | 'recurring';
+  recurringRule?: {
+    frequency: 'weekly' | 'biweekly' | 'monthly';
+    interval?: number;
+    count?: number;
+    until?: string;
+  };
+  details?: Record<string, unknown>;
   status: BookingStatus;
   createdAt: string;
   updatedAt: string;

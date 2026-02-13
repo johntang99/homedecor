@@ -747,7 +747,7 @@ export function ContentEditor({
             >
               {(site?.supportedLocales || ['en']).map((item) => (
                 <option key={item} value={item}>
-                  {item === 'en' ? 'English' : 'Chinese'}
+                  {item === 'en' ? 'English' : item === 'es' ? 'Spanish' : item}
                 </option>
               ))}
             </select>
@@ -806,7 +806,7 @@ export function ContentEditor({
                   {fileFilter === 'blog' && file.publishDate && (
                     <div className="text-[11px] text-gray-500 mt-1">
                       {new Date(file.publishDate).toLocaleDateString(
-                        locale === 'zh' ? 'zh-CN' : 'en-US',
+                        locale === 'es' ? 'es-ES' : 'en-US',
                         { year: 'numeric', month: 'short', day: 'numeric' }
                       )}
                     </div>

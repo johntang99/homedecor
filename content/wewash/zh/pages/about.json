@@ -4,15 +4,15 @@
     "title": "认识黄医生（针灸师，中医硕士）",
     "subtitle": "纽约中城值得信赖的中医与针灸诊所",
     "description": "拥有20年以上临床经验，黄医生融合传统中医与现代临床理念，为您定制个性化方案，调和身心，促进长期健康。",
-    "backgroundImage": "/uploads/dr-huang-clinic/home/drhuang-photo-1.jpg"
+    "backgroundImage": "/uploads/wewash/home/drhuang-photo-1.jpg"
   },
   "profile": {
     "name": "黄医生，针灸师，中医硕士",
     "title": "持牌针灸师和中医执业医师",
-    "image": "/uploads/dr-huang-clinic/about/dr-huang-11.jpg",
+    "image": "/uploads/wewash/about/dr-huang-11.jpg",
     "bio": "黄医生从事传统中医实践已超过20年，通过自然、整体的治疗方法帮助数千名患者实现更好的健康。他对中医的热情始于本科生物学学习期间，当时他对人体的先天愈合能力和中医的优雅智慧深深着迷。",
     "quote": "真正的治愈来自于解决根本原因，而不仅仅是抑制症状。每个患者都是独一无二的，治疗必须反映这种个性。",
-    "signature": "/uploads/dr-huang-clinic/about/signature.png"
+    "signature": "/uploads/wewash/about/signature.png"
   },
   "credentials": {
     "title": "教育和资质",
@@ -32,14 +32,14 @@
         "location": "执照 #12345"
       },
       {
-        "icon": "Certificate",
+        "icon": "BadgeCheck",
         "credential": "针灸国家委员会认证",
         "institution": "NCCAOM（国家认证委员会）",
         "year": "2009",
         "location": "针灸文凭持有者"
       },
       {
-        "icon": "Certificate",
+        "icon": "BadgeCheck",
         "credential": "中药学国家委员会认证",
         "institution": "NCCAOM",
         "year": "2009",

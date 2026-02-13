@@ -3,7 +3,7 @@
     "variant": "centered",
     "title": "患者成功案例",
     "subtitle": "真实案例，真实结果 - 了解传统中医如何改变生活",
-    "backgroundImage": "/uploads/dr-huang-clinic/home/hero-bg.jpg"
+    "backgroundImage": "/uploads/wewash/home/hero-bg.jpg"
   },
   "introduction": {
     "text": "这些案例代表通过我们的中医治疗经历显著健康改善的真实患者。所有姓名都已更改以保护患者隐私，但故事和结果是真实的。",
@@ -13,7 +13,7 @@
     {
       "id": "all",
       "name": "所有案例",
-      "icon": "Grid"
+      "icon": "LayoutGrid"
     },
     {
       "id": "pain-management",
@@ -46,7 +46,7 @@
       "id": "chronic-back-pain-jennifer",
       "category": "pain-management",
       "condition": "慢性下背部疼痛",
-      "image": "/uploads/dr-huang-clinic/case-studies/chronic-pain.jpg",
+      "image": "/uploads/wewash/case-studies/chronic-pain.jpg",
       "beforeImage": "https://images.unsplash.com/photo-1554574004-b5ed96682e9b?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0",
       "afterImage": "https://images.unsplash.com/photo-1768507423533-b87b62769758?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0",
       "summary": "经过8年的衰弱性背痛和不成功的常规治疗后，Jennifer通过针灸和中药找到了持久的缓解。"
@@ -55,14 +55,14 @@
       "id": "fertility-success-lisa",
       "category": "womens-health",
       "condition": "不孕症（不明原因）",
-      "image": "/uploads/dr-huang-clinic/case-studies/fertility.jpg",
+      "image": "/uploads/wewash/case-studies/fertility.jpg",
       "summary": "经过3年不成功的尝试和一次失败的试管婴儿周期后，Lisa通过中医治疗实现了自然怀孕。"
     },
     {
       "id": "anxiety-depression-robert",
       "category": "mental-health",
       "condition": "焦虑和抑郁",
-      "image": "/uploads/dr-huang-clinic/case-studies/migraine.jpg",
+      "image": "/uploads/wewash/case-studies/migraine.jpg",
       "beforeImage": "https://images.unsplash.com/photo-1554574004-b5ed96682e9b?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0",
       "afterImage": "https://images.unsplash.com/photo-1513097847644-f00cfe868607?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0",
       "summary": "Robert通过中医克服了衰弱的焦虑和抑郁，减少了对药物的依赖并重获生活质量。"

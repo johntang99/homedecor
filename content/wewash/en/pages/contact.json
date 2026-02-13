@@ -2,11 +2,11 @@
   "hero": {
     "variant": "centered",
     "title": "Get in Touch",
-    "subtitle": "We're here to answer your questions and help you begin your healing journey",
-    "backgroundImage": "/uploads/dr-huang-clinic/contact/hero-bg.jpg"
+    "subtitle": "Questions about pickup routes, pricing, or commercial onboarding? We are here to help.",
+    "backgroundImage": "/uploads/wewash/contact/hero-bg.jpg"
   },
   "introduction": {
-    "text": "Have questions about Traditional Chinese Medicine or ready to schedule your first appointment? We'd love to hear from you. Reach out by phone, email, or use the form below."
+    "text": "Contact WeWash for pickup scheduling, drop-off service, self-service reservations, or commercial laundry quotes."
   },
   "contactMethods": [
     {

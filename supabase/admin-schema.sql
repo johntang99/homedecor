@@ -49,6 +49,7 @@ create table if not exists public.bookings (
   id text primary key,
   site_id text not null,
   service_id text not null,
+  service_type text,
   date date not null,
   time text not null,
   duration_minutes integer not null,
@@ -56,9 +57,16 @@ create table if not exists public.bookings (
   phone text not null,
   email text not null,
   note text,
+  details jsonb not null default '{}'::jsonb,
   status text not null,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
 
 create index if not exists bookings_site_date_idx on public.bookings (site_id, date);
+
+-- Safe incremental migration for existing projects
+alter table public.bookings
+  add column if not exists service_type text;
+alter table public.bookings
+  add column if not exists details jsonb not null default '{}'::jsonb;

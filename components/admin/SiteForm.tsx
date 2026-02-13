@@ -12,8 +12,8 @@ const siteSchemaBase = z.object({
   name: z.string().min(2, 'Name is required'),
   domain: z.string().optional(),
   enabled: z.boolean(),
-  defaultLocale: z.enum(['en', 'zh']),
-  supportedLocales: z.array(z.enum(['en', 'zh'])).min(1, 'Select at least one locale'),
+  defaultLocale: z.enum(['en', 'es']),
+  supportedLocales: z.array(z.enum(['en', 'es'])).min(1, 'Select at least one locale'),
 });
 
 const createSchema = siteSchemaBase.extend({
@@ -103,7 +103,7 @@ export function SiteForm({ site, mode = 'edit', sites = [] }: SiteFormProps) {
       {isCreate && (
         <div>
           <label className="block text-sm font-medium text-gray-700">Site ID</label>
-          <Input className="mt-1" {...form.register('id' as const)} placeholder="dr-huang-clinic" />
+          <Input className="mt-1" {...form.register('id' as const)} placeholder="wewash" />
           <p className="text-xs text-gray-500 mt-1">
             Used for folder name and URLs. Lowercase letters, numbers, and hyphens only.
           </p>
@@ -172,14 +172,14 @@ export function SiteForm({ site, mode = 'edit', sites = [] }: SiteFormProps) {
            {...form.register('defaultLocale')}
          >
            <option value="en">English</option>
-           <option value="zh">Chinese</option>
+          <option value="es">Spanish</option>
          </select>
        </div>
  
        <div>
          <label className="block text-sm font-medium text-gray-700">Supported Locales</label>
          <div className="mt-2 flex gap-6">
-           {(['en', 'zh'] as const).map((locale) => (
+          {(['en', 'es'] as const).map((locale) => (
              <label key={locale} className="flex items-center gap-2 text-sm text-gray-700">
                <input
                  type="checkbox"
@@ -193,7 +193,7 @@ export function SiteForm({ site, mode = 'edit', sites = [] }: SiteFormProps) {
                    form.setValue('supportedLocales', next, { shouldValidate: true });
                  }}
                />
-               {locale === 'en' ? 'English' : 'Chinese'}
+              {locale === 'en' ? 'English' : 'Spanish'}
              </label>
            ))}
          </div>

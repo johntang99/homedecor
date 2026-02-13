@@ -41,16 +41,34 @@ export async function fetchContentEntry(
 }
 
 export async function fetchThemeEntry(
-  siteId: string
+  siteId: string,
+  locale?: string
 ): Promise<ContentEntryRecord | null> {
   const supabase = getSupabaseServerClient();
   if (!supabase) return null;
+
+  if (locale) {
+    const { data, error } = await supabase
+      .from(table)
+      .select('*')
+      .eq('site_id', siteId)
+      .eq('locale', locale)
+      .eq('path', 'theme.json')
+      .order('updated_at', { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    if (!error && data) {
+      return data as ContentEntryRecord;
+    }
+  }
 
   const { data, error } = await supabase
     .from(table)
     .select('*')
     .eq('site_id', siteId)
     .eq('path', 'theme.json')
+    .in('locale', ['en', 'es'])
     .order('updated_at', { ascending: false })
     .limit(1)
     .maybeSingle();
@@ -60,7 +78,25 @@ export async function fetchThemeEntry(
     return null;
   }
 
-  return data as ContentEntryRecord | null;
+  if (!error && data) {
+    return data as ContentEntryRecord;
+  }
+
+  const { data: fallbackData, error: fallbackError } = await supabase
+    .from(table)
+    .select('*')
+    .eq('site_id', siteId)
+    .eq('path', 'theme.json')
+    .order('updated_at', { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  if (fallbackError) {
+    console.error('Supabase fetchThemeEntry fallback error:', fallbackError);
+    return null;
+  }
+
+  return fallbackData as ContentEntryRecord | null;
 }
 
 export async function listContentEntries(

@@ -3,7 +3,7 @@
     "variant": "centered",
     "title": "我们的诊所与历史照片",
     "subtitle": "了解我们的治疗空间与中医传承",
-    "backgroundImage": "/uploads/dr-huang-clinic/gallery/hero-bg.jpg"
+    "backgroundImage": "/uploads/wewash/gallery/hero-bg.jpg"
   },
   "introduction": {
     "text": "浏览诊所的空间与环境照片，同时欣赏精选历史照片，感受传统中医的文化与根源。这里呈现我们的现在与传承的起点。"
@@ -12,7 +12,7 @@
     {
       "id": "all",
       "name": "所有照片",
-      "icon": "Grid",
+      "icon": "LayoutGrid",
       "description": "查看所有诊所照片"
     },
     {
@@ -55,7 +55,7 @@
   "images": [
     {
       "id": "exterior-1",
-      "src": "/uploads/dr-huang-clinic/gallery/exterior-front.jpg",
+      "src": "/uploads/wewash/gallery/exterior-front.jpg",
       "alt": "Front entrance of Dr. Huang Clinic",
       "title": "Clinic Entrance",
       "category": "exterior",
@@ -65,7 +65,7 @@
     },
     {
       "id": "exterior-2",
-      "src": "/uploads/dr-huang-clinic/gallery/exterior-sign.jpg",
+      "src": "/uploads/wewash/gallery/exterior-sign.jpg",
       "alt": "Clinic signage",
       "title": "Easy to Find",
       "category": "exterior",
@@ -74,7 +74,7 @@
     },
     {
       "id": "exterior-3",
-      "src": "/uploads/dr-huang-clinic/gallery/exterior-parking.jpg",
+      "src": "/uploads/wewash/gallery/exterior-parking.jpg",
       "alt": "Parking area",
       "title": "Convenient Parking",
       "category": "exterior",
@@ -83,7 +83,7 @@
     },
     {
       "id": "reception-1",
-      "src": "/uploads/dr-huang-clinic/gallery/reception-desk.jpg",
+      "src": "/uploads/wewash/gallery/reception-desk.jpg",
       "alt": "Reception desk area",
       "title": "Reception Desk",
       "category": "reception",
@@ -93,7 +93,7 @@
     },
     {
       "id": "reception-2",
-      "src": "/uploads/dr-huang-clinic/gallery/reception-waiting.jpg",
+      "src": "/uploads/wewash/gallery/reception-waiting.jpg",
       "alt": "Comfortable waiting area",
       "title": "Waiting Area",
       "category": "reception",
@@ -102,7 +102,7 @@
     },
     {
       "id": "reception-3",
-      "src": "/uploads/dr-huang-clinic/gallery/reception-decor.jpg",
+      "src": "/uploads/wewash/gallery/reception-decor.jpg",
       "alt": "Reception area decor",
       "title": "Calming Atmosphere",
       "category": "reception",
@@ -111,7 +111,7 @@
     },
     {
       "id": "reception-4",
-      "src": "/uploads/dr-huang-clinic/gallery/reception-reading.jpg",
+      "src": "/uploads/wewash/gallery/reception-reading.jpg",
       "alt": "Reading materials",
       "title": "Educational Resources",
       "category": "reception",
@@ -120,7 +120,7 @@
     },
     {
       "id": "treatment-1",
-      "src": "/uploads/dr-huang-clinic/gallery/treatment-room-1.jpg",
+      "src": "/uploads/wewash/gallery/treatment-room-1.jpg",
       "alt": "Main treatment room",
       "title": "Treatment Room 1",
       "category": "treatment-rooms",
@@ -130,7 +130,7 @@
     },
     {
       "id": "treatment-2",
-      "src": "/uploads/dr-huang-clinic/gallery/treatment-room-2.jpg",
+      "src": "/uploads/wewash/gallery/treatment-room-2.jpg",
       "alt": "Second treatment room",
       "title": "Treatment Room 2",
       "category": "treatment-rooms",
@@ -139,7 +139,7 @@
     },
     {
       "id": "treatment-3",
-      "src": "/uploads/dr-huang-clinic/gallery/treatment-table.jpg",
+      "src": "/uploads/wewash/gallery/treatment-table.jpg",
       "alt": "Comfortable treatment table",
       "title": "Treatment Table",
       "category": "treatment-rooms",
@@ -148,7 +148,7 @@
     },
     {
       "id": "treatment-4",
-      "src": "/uploads/dr-huang-clinic/gallery/treatment-lighting.jpg",
+      "src": "/uploads/wewash/gallery/treatment-lighting.jpg",
       "alt": "Soft lighting in treatment room",
       "title": "Soft Lighting",
       "category": "treatment-rooms",
@@ -157,7 +157,7 @@
     },
     {
       "id": "treatment-5",
-      "src": "/uploads/dr-huang-clinic/gallery/treatment-privacy.jpg",
+      "src": "/uploads/wewash/gallery/treatment-privacy.jpg",
       "alt": "Private treatment space",
       "title": "Your Privacy Matters",
       "category": "treatment-rooms",
@@ -166,7 +166,7 @@
     },
     {
       "id": "herbs-1",
-      "src": "/uploads/dr-huang-clinic/gallery/herbal-wall.jpg",
+      "src": "/uploads/wewash/gallery/herbal-wall.jpg",
       "alt": "Wall of herbal medicine drawers",
       "title": "Herbal Pharmacy",
       "category": "herbal-pharmacy",
@@ -176,7 +176,7 @@
     },
     {
       "id": "herbs-3",
-      "src": "/uploads/dr-huang-clinic/gallery/herbal-preparation.jpg",
+      "src": "/uploads/wewash/gallery/herbal-preparation.jpg",
       "alt": "Herb preparation area",
       "title": "Custom Formulas",
       "category": "herbal-pharmacy",
@@ -185,7 +185,7 @@
     },
     {
       "id": "herbs-4",
-      "src": "/uploads/dr-huang-clinic/gallery/herbal-packages.jpg",
+      "src": "/uploads/wewash/gallery/herbal-packages.jpg",
       "alt": "Packaged herbal formulas",
       "title": "Ready to Take Home",
       "category": "herbal-pharmacy",
@@ -194,7 +194,7 @@
     },
     {
       "id": "herbs-5",
-      "src": "/uploads/dr-huang-clinic/gallery/herbal-books.jpg",
+      "src": "/uploads/wewash/gallery/herbal-books.jpg",
       "alt": "Chinese medicine reference books",
       "title": "Extensive Reference Library",
       "category": "herbal-pharmacy",
@@ -203,7 +203,7 @@
     },
     {
       "id": "equipment-1",
-      "src": "/uploads/dr-huang-clinic/gallery/needles-sterile.jpg",
+      "src": "/uploads/wewash/gallery/needles-sterile.jpg",
       "alt": "Sterile acupuncture needles",
       "title": "Sterile Needles",
       "category": "equipment",
@@ -212,7 +212,7 @@
     },
     {
       "id": "equipment-2",
-      "src": "/uploads/dr-huang-clinic/gallery/cupping-set.jpg",
+      "src": "/uploads/wewash/gallery/cupping-set.jpg",
       "alt": "Cupping therapy equipment",
       "title": "Cupping Equipment",
       "category": "equipment",
@@ -221,7 +221,7 @@
     },
     {
       "id": "equipment-3",
-      "src": "/uploads/dr-huang-clinic/gallery/moxa-supplies.jpg",
+      "src": "/uploads/wewash/gallery/moxa-supplies.jpg",
       "alt": "Moxibustion supplies",
       "title": "Moxibustion Supplies",
       "category": "equipment",
@@ -230,7 +230,7 @@
     },
     {
       "id": "equipment-4",
-      "src": "/uploads/dr-huang-clinic/gallery/gua-sha-tools.jpg",
+      "src": "/uploads/wewash/gallery/gua-sha-tools.jpg",
       "alt": "Gua sha tools",
       "title": "Gua Sha Tools",
       "category": "equipment",
@@ -239,7 +239,7 @@
     },
     {
       "id": "equipment-5",
-      "src": "/uploads/dr-huang-clinic/gallery/tuina-table.jpg",
+      "src": "/uploads/wewash/gallery/tuina-table.jpg",
       "alt": "Tui Na massage table",
       "title": "Massage Table",
       "category": "equipment",
@@ -248,7 +248,7 @@
     },
     {
       "id": "equipment-6",
-      "src": "/uploads/dr-huang-clinic/gallery/diagnostic-tools.jpg",
+      "src": "/uploads/wewash/gallery/diagnostic-tools.jpg",
       "alt": "TCM diagnostic tools",
       "title": "Diagnostic Tools",
       "category": "equipment",
@@ -257,7 +257,7 @@
     },
     {
       "id": "details-1",
-      "src": "/uploads/dr-huang-clinic/gallery/detail-plants.jpg",
+      "src": "/uploads/wewash/gallery/detail-plants.jpg",
       "alt": "Plants throughout the clinic",
       "title": "Natural Elements",
       "category": "details",
@@ -266,7 +266,7 @@
     },
     {
       "id": "details-2",
-      "src": "/uploads/dr-huang-clinic/gallery/detail-art.jpg",
+      "src": "/uploads/wewash/gallery/detail-art.jpg",
       "alt": "Chinese calligraphy art",
       "title": "Traditional Art",
       "category": "details",
@@ -275,7 +275,7 @@
     },
     {
       "id": "details-3",
-      "src": "/uploads/dr-huang-clinic/gallery/detail-fountain.jpg",
+      "src": "/uploads/wewash/gallery/detail-fountain.jpg",
       "alt": "Water fountain",
       "title": "Soothing Sounds",
       "category": "details",
@@ -284,7 +284,7 @@
     },
     {
       "id": "details-4",
-      "src": "/uploads/dr-huang-clinic/gallery/detail-aromatherapy.jpg",
+      "src": "/uploads/wewash/gallery/detail-aromatherapy.jpg",
       "alt": "Essential oil diffuser",
       "title": "Aromatherapy",
       "category": "details",
@@ -293,7 +293,7 @@
     },
     {
       "id": "details-5",
-      "src": "/uploads/dr-huang-clinic/gallery/detail-certificates.jpg",
+      "src": "/uploads/wewash/gallery/detail-certificates.jpg",
       "alt": "Diplomas and certificates",
       "title": "Credentials on Display",
       "category": "details",
@@ -302,7 +302,7 @@
     },
     {
       "id": "details-6",
-      "src": "/uploads/dr-huang-clinic/gallery/detail-tea.jpg",
+      "src": "/uploads/wewash/gallery/detail-tea.jpg",
       "alt": "Herbal tea service",
       "title": "Herbal Tea",
       "category": "details",

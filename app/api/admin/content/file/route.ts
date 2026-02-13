@@ -12,6 +12,7 @@ import {
   upsertContentEntry,
 } from '@/lib/contentDb';
 import { canWriteContent, requireSiteAccess } from '@/lib/admin/permissions';
+import { locales } from '@/lib/i18n';
 
 export async function GET(request: NextRequest) {
   const session = await getSessionFromRequest(request);
@@ -122,13 +123,27 @@ export async function PUT(request: NextRequest) {
       });
     }
     const parsed = JSON.parse(content);
-    await upsertContentEntry({
-      siteId,
-      locale,
-      path: filePath,
-      data: parsed,
-      updatedBy: session.user.email,
-    });
+    if (filePath === 'theme.json') {
+      await Promise.all(
+        locales.map((entryLocale) =>
+          upsertContentEntry({
+            siteId,
+            locale: entryLocale,
+            path: filePath,
+            data: parsed,
+            updatedBy: session.user.email,
+          })
+        )
+      );
+    } else {
+      await upsertContentEntry({
+        siteId,
+        locale,
+        path: filePath,
+        data: parsed,
+        updatedBy: session.user.email,
+      });
+    }
     return NextResponse.json({ success: true });
   }
 

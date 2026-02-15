@@ -1,28 +1,35 @@
 {
-  "typography": {
-    "display": "3rem",
-    "heading": "2.25rem",
-    "subheading": "1.25rem",
-    "body": "1rem",
-    "small": "0.875rem"
-  },
   "colors": {
     "primary": {
-      "DEFAULT": "#8b1d1d",
+      "50": "#fcecec",
+      "100": "#f8dada",
       "dark": "#6e1515",
       "light": "#c24a4a",
-      "50": "#fcecec",
-      "100": "#f8dada"
-    },
-    "secondary": {
-      "DEFAULT": "#b7791f",
-      "dark": "#8c5c14",
-      "light": "#e0b05a",
-      "50": "#fff5e0"
+      "DEFAULT": "#8b1d1d"
     },
     "backdrop": {
       "primary": "#fff7e8",
       "secondary": "#fdf1d8"
+    },
+    "secondary": {
+      "50": "#fff5e0",
+      "dark": "#8c5c14",
+      "light": "#e0b05a",
+      "DEFAULT": "#b7791f"
     }
+  },
+  "typography": {
+    "body": "1rem",
+    "fonts": {
+      "body": "Arial, 'Helvetica Neue', sans-serif",
+      "small": "Arial, 'Helvetica Neue', sans-serif",
+      "display": "Georgia, 'Times New Roman', serif",
+      "heading": "Georgia, 'Times New Roman', serif",
+      "subheading": "Arial, 'Helvetica Neue', sans-serif"
+    },
+    "small": "0.875rem",
+    "display": "3rem",
+    "heading": "2.25rem",
+    "subheading": "1.25rem"
   }
 }

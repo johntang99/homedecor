@@ -1,44 +1,44 @@
 {
+  "cta": {
+    "link": "/zh/contact",
+    "text": "预约"
+  },
   "main": [
     {
-      "text": "首页",
-      "url": "/zh"
+      "url": "/zh",
+      "text": "首页"
     },
     {
-      "text": "服务项目",
-      "url": "/zh/services"
+      "url": "/zh/services",
+      "text": "服务项目"
     },
     {
-      "text": "治疗病症",
-      "url": "/zh/conditions"
+      "url": "/zh/conditions",
+      "text": "治疗病症"
     },
     {
-      "text": "关于我们",
-      "url": "/zh/about"
+      "url": "/zh/about",
+      "text": "关于我们"
     },
     {
-      "text": "案例分享",
-      "url": "/zh/case-studies"
+      "url": "/zh/case-studies",
+      "text": "案例分享"
     },
     {
-      "text": "诊所环境",
-      "url": "/zh/gallery"
+      "url": "/zh/gallery",
+      "text": "诊所环境"
     },
     {
-      "text": "首次就诊",
-      "url": "/zh/new-patients"
+      "url": "/zh/new-patients",
+      "text": "首次就诊"
     },
     {
-      "text": "博客",
-      "url": "/zh/blog"
+      "url": "/zh/blog",
+      "text": "博客"
     },
     {
-      "text": "联系我们",
-      "url": "/zh/contact"
+      "url": "/zh/contact",
+      "text": "联系我们"
     }
-  ],
-  "cta": {
-    "text": "预约",
-    "link": "/zh/contact"
-  }
+  ]
 }

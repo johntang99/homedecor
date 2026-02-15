@@ -1,6 +1,6 @@
-# WeWash Template Runbook
+# Chinese Medicine Template Runbook
 
-Operational runbook for launching a new laundry client from this template.
+Operational runbook for launching a new medical clinic from this template.
 
 ## 1) Required replacements
 
@@ -27,11 +27,11 @@ Create site:
 ```json
 {
   "id": "new-site-id",
-  "name": "New Laundry Site",
+  "name": "New Clinic Site",
   "domain": "example.com",
   "enabled": true,
   "defaultLocale": "en",
-  "supportedLocales": ["en", "es"]
+  "supportedLocales": ["en", "zh"]
 }
 ```
 
@@ -58,7 +58,7 @@ Create booking:
 
 ```json
 {
-  "serviceId": "wash-fold-pickup",
+  "serviceId": "initial-consultation",
   "date": "2026-02-20",
   "time": "10:00",
   "name": "Jane Doe",
@@ -84,7 +84,7 @@ select site_id, count(*) from public.bookings group by site_id order by site_id;
 
 ## 5) Release checklist
 
-- `/en` and `/es` render correctly
+- `/en` and `/zh` render correctly
 - admin role boundaries work
 - booking create/cancel/reschedule works
 - import/export behavior validated

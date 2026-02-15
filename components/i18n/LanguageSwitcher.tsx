@@ -31,14 +31,14 @@ export default function LanguageSwitcher({ currentLocale }: LanguageSwitcherProp
         EN
       </button>
       <button
-        onClick={() => handleLocaleChange('es')}
+        onClick={() => handleLocaleChange('zh')}
         className={`px-3 py-1.5 text-sm font-medium transition-colors ${
-          currentLocale === 'es'
+          currentLocale === 'zh'
             ? 'bg-primary text-white'
             : 'bg-white text-gray-700 hover:bg-gray-100'
         }`}
       >
-        ES
+        中文
       </button>
     </div>
   );

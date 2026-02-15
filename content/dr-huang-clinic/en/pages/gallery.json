@@ -1,340 +1,341 @@
 {
-  "hero": {
+  "cta": {
+    "title": "Ready to Visit in Person?",
     "variant": "centered",
+    "primaryCta": {
+      "link": "/en/contact",
+      "text": "Book Your Visit"
+    },
+    "description": "Schedule your appointment and experience our welcoming environment firsthand",
+    "secondaryCta": {
+      "link": "https://maps.google.com/?q=71+East+Main+Street+Middletown+NY+10940",
+      "text": "Get Directions"
+    }
+  },
+  "hero": {
     "title": "Visit Our Clinic",
+    "variant": "split-photo-left",
     "subtitle": "Take a virtual tour of our peaceful, welcoming healing space",
     "backgroundImage": "/uploads/dr-huang-clinic/gallery/hero-bg.jpg"
   },
-  "introduction": {
-    "text": "Our clinic is designed to be a sanctuary for healing - a peaceful, comfortable environment where you can relax and focus on your wellness. Browse our gallery to get a feel for our space before your first visit."
-  },
+  "images": [
+    {
+      "id": "exterior-1",
+      "alt": "Front entrance of Dr. Huang Clinic",
+      "src": "/uploads/dr-huang-clinic/gallery/hero-bg.jpg",
+      "order": 1,
+      "title": "Clinic Entrance",
+      "category": "exterior",
+      "featured": true,
+      "description": "Our welcoming entrance at 71 East Main Street, Middletown"
+    },
+    {
+      "id": "exterior-2",
+      "alt": "Clinic signage",
+      "src": "/uploads/dr-huang-clinic/gallery/exterior-sign.jpg",
+      "order": 2,
+      "title": "Easy to Find",
+      "category": "exterior",
+      "description": "Clear signage makes us easy to locate"
+    },
+    {
+      "id": "exterior-3",
+      "alt": "Parking area",
+      "src": "/uploads/dr-huang-clinic/gallery/exterior-parking.jpg",
+      "order": 3,
+      "title": "Convenient Parking",
+      "category": "exterior",
+      "description": "Ample parking available for patients"
+    },
+    {
+      "id": "reception-1",
+      "alt": "Reception desk area",
+      "src": "/uploads/dr-huang-clinic/gallery/reception-desk.jpg",
+      "order": 4,
+      "title": "Reception Desk",
+      "category": "reception",
+      "featured": true,
+      "description": "Our friendly front desk where you'll be greeted"
+    },
+    {
+      "id": "reception-2",
+      "alt": "Comfortable waiting area",
+      "src": "/uploads/dr-huang-clinic/gallery/reception-waiting.jpg",
+      "order": 5,
+      "title": "Waiting Area",
+      "category": "reception",
+      "description": "Comfortable seating while you wait"
+    },
+    {
+      "id": "reception-3",
+      "alt": "Reception area decor",
+      "src": "/uploads/dr-huang-clinic/gallery/reception-decor.jpg",
+      "order": 6,
+      "title": "Calming Atmosphere",
+      "category": "reception",
+      "description": "Thoughtful decor creates a peaceful environment"
+    },
+    {
+      "id": "reception-4",
+      "alt": "Reading materials",
+      "src": "/uploads/dr-huang-clinic/gallery/reception-reading.jpg",
+      "order": 7,
+      "title": "Educational Resources",
+      "category": "reception",
+      "description": "TCM books and health magazines available"
+    },
+    {
+      "id": "treatment-1",
+      "alt": "Main treatment room",
+      "src": "/uploads/dr-huang-clinic/gallery/treatment-room-1.jpg",
+      "order": 8,
+      "title": "Treatment Room 1",
+      "category": "treatment-rooms",
+      "featured": true,
+      "description": "Spacious, private treatment rooms for your comfort"
+    },
+    {
+      "id": "treatment-2",
+      "alt": "Second treatment room",
+      "src": "/uploads/dr-huang-clinic/gallery/treatment-room-2.jpg",
+      "order": 9,
+      "title": "Treatment Room 2",
+      "category": "treatment-rooms",
+      "description": "Each room is clean, comfortable, and private"
+    },
+    {
+      "id": "treatment-3",
+      "alt": "Comfortable treatment table",
+      "src": "/uploads/dr-huang-clinic/gallery/treatment-table.jpg",
+      "order": 10,
+      "title": "Treatment Table",
+      "category": "treatment-rooms",
+      "description": "Heated, cushioned tables for your comfort"
+    },
+    {
+      "id": "treatment-4",
+      "alt": "Soft lighting in treatment room",
+      "src": "/uploads/dr-huang-clinic/gallery/treatment-lighting.jpg",
+      "order": 11,
+      "title": "Soft Lighting",
+      "category": "treatment-rooms",
+      "description": "Adjustable lighting to help you relax"
+    },
+    {
+      "id": "treatment-5",
+      "alt": "Private treatment space",
+      "src": "/uploads/dr-huang-clinic/gallery/treatment-privacy.jpg",
+      "order": 12,
+      "title": "Your Privacy Matters",
+      "category": "treatment-rooms",
+      "description": "Fully private rooms with secure doors"
+    },
+    {
+      "id": "herbs-1",
+      "alt": "Wall of herbal medicine drawers",
+      "src": "/uploads/dr-huang-clinic/gallery/herbal-wall.jpg",
+      "order": 13,
+      "title": "Herbal Pharmacy",
+      "category": "herbal-pharmacy",
+      "featured": true,
+      "description": "Over 200 traditional Chinese herbs in stock"
+    },
+    {
+      "id": "herbs-2",
+      "alt": "Glass jars of herbs",
+      "src": "/uploads/dr-huang-clinic/gallery/herbal-jars.jpg",
+      "order": 14,
+      "title": "Premium Quality Herbs",
+      "category": "herbal-pharmacy",
+      "description": "Only the highest quality, tested herbs"
+    },
+    {
+      "id": "herbs-3",
+      "alt": "Herb preparation area",
+      "src": "/uploads/dr-huang-clinic/gallery/herbal-preparation.jpg",
+      "order": 15,
+      "title": "Custom Formulas",
+      "category": "herbal-pharmacy",
+      "description": "Herbs are carefully measured and prepared for each patient"
+    },
+    {
+      "id": "herbs-4",
+      "alt": "Packaged herbal formulas",
+      "src": "/uploads/dr-huang-clinic/gallery/herbal-packages.jpg",
+      "order": 16,
+      "title": "Ready to Take Home",
+      "category": "herbal-pharmacy",
+      "description": "Herbs packaged with clear instructions"
+    },
+    {
+      "id": "herbs-5",
+      "alt": "Chinese medicine reference books",
+      "src": "/uploads/dr-huang-clinic/gallery/herbal-books.jpg",
+      "order": 17,
+      "title": "Extensive Reference Library",
+      "category": "herbal-pharmacy",
+      "description": "Classical and modern TCM texts guide our formulations"
+    },
+    {
+      "id": "equipment-1",
+      "alt": "Sterile acupuncture needles",
+      "src": "/uploads/dr-huang-clinic/gallery/needles-sterile.jpg",
+      "order": 18,
+      "title": "Sterile Needles",
+      "category": "equipment",
+      "description": "We use only single-use, sterile needles"
+    },
+    {
+      "id": "equipment-2",
+      "alt": "Cupping therapy equipment",
+      "src": "/uploads/dr-huang-clinic/gallery/cupping-set.jpg",
+      "order": 19,
+      "title": "Cupping Equipment",
+      "category": "equipment",
+      "description": "Glass and silicone cups for various techniques"
+    },
+    {
+      "id": "equipment-3",
+      "alt": "Moxibustion supplies",
+      "src": "/uploads/dr-huang-clinic/gallery/moxa-supplies.jpg",
+      "order": 20,
+      "title": "Moxibustion Supplies",
+      "category": "equipment",
+      "description": "Premium mugwort for warming therapy"
+    },
+    {
+      "id": "equipment-4",
+      "alt": "Gua sha tools",
+      "src": "/uploads/dr-huang-clinic/gallery/gua-sha-tools.jpg",
+      "order": 21,
+      "title": "Gua Sha Tools",
+      "category": "equipment",
+      "description": "Smooth jade and buffalo horn tools"
+    },
+    {
+      "id": "equipment-5",
+      "alt": "Tui Na massage table",
+      "src": "/uploads/dr-huang-clinic/gallery/tuina-table.jpg",
+      "order": 22,
+      "title": "Massage Table",
+      "category": "equipment",
+      "description": "Professional massage table for Tui Na treatments"
+    },
+    {
+      "id": "equipment-6",
+      "alt": "TCM diagnostic tools",
+      "src": "/uploads/dr-huang-clinic/gallery/diagnostic-tools.jpg",
+      "order": 23,
+      "title": "Diagnostic Tools",
+      "category": "equipment",
+      "description": "Traditional tools for pulse and tongue diagnosis"
+    },
+    {
+      "id": "details-1",
+      "alt": "Plants throughout the clinic",
+      "src": "/uploads/dr-huang-clinic/gallery/detail-plants.jpg",
+      "order": 24,
+      "title": "Natural Elements",
+      "category": "details",
+      "description": "Living plants bring nature into our healing space"
+    },
+    {
+      "id": "details-2",
+      "alt": "Chinese calligraphy art",
+      "src": "/uploads/dr-huang-clinic/gallery/detail-art.jpg",
+      "order": 25,
+      "title": "Traditional Art",
+      "category": "details",
+      "description": "Authentic Chinese art honors our medical heritage"
+    },
+    {
+      "id": "details-3",
+      "alt": "Water fountain",
+      "src": "/uploads/dr-huang-clinic/gallery/detail-fountain.jpg",
+      "order": 26,
+      "title": "Soothing Sounds",
+      "category": "details",
+      "description": "Gentle water features create tranquility"
+    },
+    {
+      "id": "details-4",
+      "alt": "Essential oil diffuser",
+      "src": "/uploads/dr-huang-clinic/gallery/detail-aromatherapy.jpg",
+      "order": 27,
+      "title": "Aromatherapy",
+      "category": "details",
+      "description": "Natural scents enhance the healing environment"
+    },
+    {
+      "id": "details-5",
+      "alt": "Diplomas and certificates",
+      "src": "/uploads/dr-huang-clinic/gallery/detail-certificates.jpg",
+      "order": 28,
+      "title": "Credentials on Display",
+      "category": "details",
+      "description": "Dr. Huang's certifications and licenses"
+    },
+    {
+      "id": "details-6",
+      "alt": "Herbal tea service",
+      "src": "/uploads/dr-huang-clinic/gallery/detail-tea.jpg",
+      "order": 29,
+      "title": "Herbal Tea",
+      "category": "details",
+      "description": "Complimentary herbal tea for patients"
+    }
+  ],
   "categories": [
     {
       "id": "all",
-      "name": "All Photos",
       "icon": "Grid",
+      "name": "All Photos",
       "description": "View all clinic photos"
     },
     {
       "id": "exterior",
-      "name": "Exterior & Entrance",
       "icon": "Home",
+      "name": "Exterior & Entrance",
       "description": "Our building and welcoming entrance"
     },
     {
       "id": "reception",
-      "name": "Reception Area",
       "icon": "Sofa",
+      "name": "Reception Area",
       "description": "Where your healing journey begins"
     },
     {
       "id": "treatment-rooms",
-      "name": "Treatment Rooms",
       "icon": "Bed",
+      "name": "Treatment Rooms",
       "description": "Peaceful spaces for your treatments"
     },
     {
       "id": "herbal-pharmacy",
-      "name": "Herbal Pharmacy",
       "icon": "Leaf",
+      "name": "Herbal Pharmacy",
       "description": "Our extensive herbal medicine collection"
     },
     {
       "id": "equipment",
-      "name": "Equipment & Tools",
       "icon": "Syringe",
+      "name": "Equipment & Tools",
       "description": "The tools of our trade"
     },
     {
       "id": "details",
-      "name": "Details",
       "icon": "Sparkles",
+      "name": "Details",
       "description": "The little touches that make our clinic special"
     }
   ],
-  "images": [
-    {
-      "id": "exterior-1",
-      "src": "/uploads/dr-huang-clinic/gallery/exterior-front.jpg",
-      "alt": "Front entrance of Dr. Huang Clinic",
-      "title": "Clinic Entrance",
-      "category": "exterior",
-      "description": "Our welcoming entrance at 71 East Main Street, Middletown",
-      "featured": true,
-      "order": 1
-    },
-    {
-      "id": "exterior-2",
-      "src": "/uploads/dr-huang-clinic/gallery/exterior-sign.jpg",
-      "alt": "Clinic signage",
-      "title": "Easy to Find",
-      "category": "exterior",
-      "description": "Clear signage makes us easy to locate",
-      "order": 2
-    },
-    {
-      "id": "exterior-3",
-      "src": "/uploads/dr-huang-clinic/gallery/exterior-parking.jpg",
-      "alt": "Parking area",
-      "title": "Convenient Parking",
-      "category": "exterior",
-      "description": "Ample parking available for patients",
-      "order": 3
-    },
-    {
-      "id": "reception-1",
-      "src": "/uploads/dr-huang-clinic/gallery/reception-desk.jpg",
-      "alt": "Reception desk area",
-      "title": "Reception Desk",
-      "category": "reception",
-      "description": "Our friendly front desk where you'll be greeted",
-      "featured": true,
-      "order": 4
-    },
-    {
-      "id": "reception-2",
-      "src": "/uploads/dr-huang-clinic/gallery/reception-waiting.jpg",
-      "alt": "Comfortable waiting area",
-      "title": "Waiting Area",
-      "category": "reception",
-      "description": "Comfortable seating while you wait",
-      "order": 5
-    },
-    {
-      "id": "reception-3",
-      "src": "/uploads/dr-huang-clinic/gallery/reception-decor.jpg",
-      "alt": "Reception area decor",
-      "title": "Calming Atmosphere",
-      "category": "reception",
-      "description": "Thoughtful decor creates a peaceful environment",
-      "order": 6
-    },
-    {
-      "id": "reception-4",
-      "src": "/uploads/dr-huang-clinic/gallery/reception-reading.jpg",
-      "alt": "Reading materials",
-      "title": "Educational Resources",
-      "category": "reception",
-      "description": "TCM books and health magazines available",
-      "order": 7
-    },
-    {
-      "id": "treatment-1",
-      "src": "/uploads/dr-huang-clinic/gallery/treatment-room-1.jpg",
-      "alt": "Main treatment room",
-      "title": "Treatment Room 1",
-      "category": "treatment-rooms",
-      "description": "Spacious, private treatment rooms for your comfort",
-      "featured": true,
-      "order": 8
-    },
-    {
-      "id": "treatment-2",
-      "src": "/uploads/dr-huang-clinic/gallery/treatment-room-2.jpg",
-      "alt": "Second treatment room",
-      "title": "Treatment Room 2",
-      "category": "treatment-rooms",
-      "description": "Each room is clean, comfortable, and private",
-      "order": 9
-    },
-    {
-      "id": "treatment-3",
-      "src": "/uploads/dr-huang-clinic/gallery/treatment-table.jpg",
-      "alt": "Comfortable treatment table",
-      "title": "Treatment Table",
-      "category": "treatment-rooms",
-      "description": "Heated, cushioned tables for your comfort",
-      "order": 10
-    },
-    {
-      "id": "treatment-4",
-      "src": "/uploads/dr-huang-clinic/gallery/treatment-lighting.jpg",
-      "alt": "Soft lighting in treatment room",
-      "title": "Soft Lighting",
-      "category": "treatment-rooms",
-      "description": "Adjustable lighting to help you relax",
-      "order": 11
-    },
-    {
-      "id": "treatment-5",
-      "src": "/uploads/dr-huang-clinic/gallery/treatment-privacy.jpg",
-      "alt": "Private treatment space",
-      "title": "Your Privacy Matters",
-      "category": "treatment-rooms",
-      "description": "Fully private rooms with secure doors",
-      "order": 12
-    },
-    {
-      "id": "herbs-1",
-      "src": "/uploads/dr-huang-clinic/gallery/herbal-wall.jpg",
-      "alt": "Wall of herbal medicine drawers",
-      "title": "Herbal Pharmacy",
-      "category": "herbal-pharmacy",
-      "description": "Over 200 traditional Chinese herbs in stock",
-      "featured": true,
-      "order": 13
-    },
-    {
-      "id": "herbs-2",
-      "src": "/uploads/dr-huang-clinic/gallery/herbal-jars.jpg",
-      "alt": "Glass jars of herbs",
-      "title": "Premium Quality Herbs",
-      "category": "herbal-pharmacy",
-      "description": "Only the highest quality, tested herbs",
-      "order": 14
-    },
-    {
-      "id": "herbs-3",
-      "src": "/uploads/dr-huang-clinic/gallery/herbal-preparation.jpg",
-      "alt": "Herb preparation area",
-      "title": "Custom Formulas",
-      "category": "herbal-pharmacy",
-      "description": "Herbs are carefully measured and prepared for each patient",
-      "order": 15
-    },
-    {
-      "id": "herbs-4",
-      "src": "/uploads/dr-huang-clinic/gallery/herbal-packages.jpg",
-      "alt": "Packaged herbal formulas",
-      "title": "Ready to Take Home",
-      "category": "herbal-pharmacy",
-      "description": "Herbs packaged with clear instructions",
-      "order": 16
-    },
-    {
-      "id": "herbs-5",
-      "src": "/uploads/dr-huang-clinic/gallery/herbal-books.jpg",
-      "alt": "Chinese medicine reference books",
-      "title": "Extensive Reference Library",
-      "category": "herbal-pharmacy",
-      "description": "Classical and modern TCM texts guide our formulations",
-      "order": 17
-    },
-    {
-      "id": "equipment-1",
-      "src": "/uploads/dr-huang-clinic/gallery/needles-sterile.jpg",
-      "alt": "Sterile acupuncture needles",
-      "title": "Sterile Needles",
-      "category": "equipment",
-      "description": "We use only single-use, sterile needles",
-      "order": 18
-    },
-    {
-      "id": "equipment-2",
-      "src": "/uploads/dr-huang-clinic/gallery/cupping-set.jpg",
-      "alt": "Cupping therapy equipment",
-      "title": "Cupping Equipment",
-      "category": "equipment",
-      "description": "Glass and silicone cups for various techniques",
-      "order": 19
-    },
-    {
-      "id": "equipment-3",
-      "src": "/uploads/dr-huang-clinic/gallery/moxa-supplies.jpg",
-      "alt": "Moxibustion supplies",
-      "title": "Moxibustion Supplies",
-      "category": "equipment",
-      "description": "Premium mugwort for warming therapy",
-      "order": 20
-    },
-    {
-      "id": "equipment-4",
-      "src": "/uploads/dr-huang-clinic/gallery/gua-sha-tools.jpg",
-      "alt": "Gua sha tools",
-      "title": "Gua Sha Tools",
-      "category": "equipment",
-      "description": "Smooth jade and buffalo horn tools",
-      "order": 21
-    },
-    {
-      "id": "equipment-5",
-      "src": "/uploads/dr-huang-clinic/gallery/tuina-table.jpg",
-      "alt": "Tui Na massage table",
-      "title": "Massage Table",
-      "category": "equipment",
-      "description": "Professional massage table for Tui Na treatments",
-      "order": 22
-    },
-    {
-      "id": "equipment-6",
-      "src": "/uploads/dr-huang-clinic/gallery/diagnostic-tools.jpg",
-      "alt": "TCM diagnostic tools",
-      "title": "Diagnostic Tools",
-      "category": "equipment",
-      "description": "Traditional tools for pulse and tongue diagnosis",
-      "order": 23
-    },
-    {
-      "id": "details-1",
-      "src": "/uploads/dr-huang-clinic/gallery/detail-plants.jpg",
-      "alt": "Plants throughout the clinic",
-      "title": "Natural Elements",
-      "category": "details",
-      "description": "Living plants bring nature into our healing space",
-      "order": 24
-    },
-    {
-      "id": "details-2",
-      "src": "/uploads/dr-huang-clinic/gallery/detail-art.jpg",
-      "alt": "Chinese calligraphy art",
-      "title": "Traditional Art",
-      "category": "details",
-      "description": "Authentic Chinese art honors our medical heritage",
-      "order": 25
-    },
-    {
-      "id": "details-3",
-      "src": "/uploads/dr-huang-clinic/gallery/detail-fountain.jpg",
-      "alt": "Water fountain",
-      "title": "Soothing Sounds",
-      "category": "details",
-      "description": "Gentle water features create tranquility",
-      "order": 26
-    },
-    {
-      "id": "details-4",
-      "src": "/uploads/dr-huang-clinic/gallery/detail-aromatherapy.jpg",
-      "alt": "Essential oil diffuser",
-      "title": "Aromatherapy",
-      "category": "details",
-      "description": "Natural scents enhance the healing environment",
-      "order": 27
-    },
-    {
-      "id": "details-5",
-      "src": "/uploads/dr-huang-clinic/gallery/detail-certificates.jpg",
-      "alt": "Diplomas and certificates",
-      "title": "Credentials on Display",
-      "category": "details",
-      "description": "Dr. Huang's certifications and licenses",
-      "order": 28
-    },
-    {
-      "id": "details-6",
-      "src": "/uploads/dr-huang-clinic/gallery/detail-tea.jpg",
-      "alt": "Herbal tea service",
-      "title": "Herbal Tea",
-      "category": "details",
-      "description": "Complimentary herbal tea for patients",
-      "order": 29
-    }
-  ],
   "virtualTour": {
-    "available": false,
     "title": "360° Virtual Tour Coming Soon",
+    "available": false,
     "description": "We're working on a full virtual tour so you can explore our clinic from the comfort of your home."
   },
-  "cta": {
-    "variant": "centered",
-    "title": "Ready to Visit in Person?",
-    "description": "Schedule your appointment and experience our welcoming environment firsthand",
-    "primaryCta": {
-      "text": "Book Your Visit",
-      "link": "/en/contact"
-    },
-    "secondaryCta": {
-      "text": "Get Directions",
-      "link": "https://maps.google.com/?q=71+East+Main+Street+Middletown+NY+10940"
-    }
+  "introduction": {
+    "text": "Our clinic is designed to be a sanctuary for healing - a peaceful, comfortable environment where you can relax and focus on your wellness. Browse our gallery to get a feel for our space before your first visit.",
+    "variant": "centered"
   }
 }

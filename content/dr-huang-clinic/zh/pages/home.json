@@ -1,80 +1,88 @@
 {
-  "topBar": {
-    "address": "71 East Main Street, Middletown, NY 10940",
-    "addressMapUrl": "https://maps.google.com/?q=71+East+Main+Street+Middletown+NY+10940",
-    "phone": "(845) 381-1106",
-    "email": "sancai.acu@gmail.com",
-    "badge": {
-      "text": "接受新患者",
-      "visible": true
+  "cta": {
+    "title": "准备开始您的康复之旅吗？",
+    "variant": "centered",
+    "subtitle": "今天迈出自然健康的第一步",
+    "primaryCta": {
+      "link": "/zh/contact",
+      "text": "预约咨询"
+    },
+    "contactInfo": "致电(845) 381-1106或在线预约",
+    "secondaryCta": {
+      "link": "tel:+18453811106",
+      "text": "立即致电"
     }
   },
-  "menu": {
-    "variant": "stacked",
-    "items": [
-      { "text": "首页", "url": "/zh" },
-      { "text": "服务项目", "url": "/zh/services" },
-      { "text": "治疗病症", "url": "/zh/conditions" },
-      { "text": "关于我们", "url": "/zh/about" },
-      { "text": "案例研究", "url": "/zh/case-studies" },
-      { "text": "图库", "url": "/zh/gallery" },
-      { "text": "首次就诊", "url": "/zh/new-patients" },
-      { "text": "博客", "url": "/zh/blog" },
-      { "text": "联系我们", "url": "/zh/contact" }
+  "blog": {
+    "badge": "学习与探索",
+    "posts": [
+      {
+        "slug": "acupuncture-science",
+        "type": "article",
+        "image": "/uploads/dr-huang-clinic/general/acupuncture-10.jpeg",
+        "title": "针灸背后的科学：它如何工作",
+        "excerpt": "了解针灸如何根据现代研究刺激身体的自然康复机制。",
+        "category": "针灸",
+        "readTime": "8分钟阅读"
+      },
+      {
+        "slug": "herbal-medicine-101",
+        "type": "article",
+        "image": "/uploads/dr-huang-clinic/general/chinese-herb-10.webp",
+        "title": "中药101",
+        "excerpt": "了解中药的基础知识以及如何创建定制配方。",
+        "category": "中药",
+        "readTime": "6分钟阅读"
+      },
+      {
+        "slug": "first-visit-video",
+        "type": "video",
+        "image": "/uploads/dr-huang-clinic/general/Acupuncture-14.webp",
+        "title": "首次针灸就诊的期待",
+        "excerpt": "观看此视频以了解初次咨询和治疗期间会发生什么。",
+        "category": "患者教育",
+        "readTime": "5分钟观看"
+      }
     ],
-    "cta": {
-      "text": "在线预约",
-      "link": "/zh/contact"
-    }
+    "title": "博客与媒体最新资讯",
+    "variant": "cards-grid",
+    "moreLink": {
+      "url": "/zh/blog",
+      "text": "浏览所有文章"
+    },
+    "subtitle": "关于中医和健康的教育资源"
   },
   "hero": {
-    "variant": "split-photo-right",
-    "image": "/uploads/dr-huang-clinic/home/hero-bg.jpg",
-    "clinicName": "黄医生诊所",
-    "tagline": "传统中医与针灸",
-    "description": "体验传统中医的治疗力量。我们的整体方法结合针灸、中药和经过时间考验的疗法，恢复平衡并促进自然康复。",
-    "primaryCta": {
-      "text": "预约",
-      "link": "/zh/contact"
-    },
-    "secondaryCta": {
-      "text": "立即致电",
-      "link": "tel:+18453811106"
-    },
-    "floatingTags": [
-      "针灸",
-      "中药",
-      "拔罐疗法",
-      "疼痛管理",
-      "压力缓解"
-    ],
+    "image": "/uploads/dr-huang-clinic/home/drhuang-photo-1.jpg",
     "stats": [
       {
         "icon": "Award",
-        "number": "15+",
-        "label": "年经验"
+        "label": "年经验",
+        "number": "15+"
       },
       {
         "icon": "Heart",
-        "number": "1000+",
-        "label": "帮助患者"
+        "label": "帮助患者",
+        "number": "1000+"
       },
       {
         "icon": "Star",
-        "number": "95%",
-        "label": "满意度"
+        "label": "满意度",
+        "number": "95%"
       },
       {
         "icon": "Sparkles",
-        "number": "8",
-        "label": "中医疗法"
+        "label": "中医疗法",
+        "number": "8"
       }
     ],
-    "trustBadges": [
-      "持牌针灸师",
-      "委员会认证",
-      "20+年经验"
-    ],
+    "tagline": "传统中医与针灸",
+    "variant": "split-photo-right",
+    "clinicName": "黄医生诊所",
+    "primaryCta": {
+      "link": "/zh/contact",
+      "text": "预约"
+    },
     "credentials": [
       {
         "icon": "Award",
@@ -92,297 +100,319 @@
         "icon": "TrendingUp",
         "text": "循证实践"
       }
-    ]
-  },
-  "testimonials": {
-    "variant": "grid",
-    "badge": "患者成功案例",
-    "title": "真实患者的真实效果",
-    "subtitle": "听听我们患者的康复之旅",
-    "testimonials": [
-      {
-        "quote": "经过多年的慢性背痛并尝试了一切方法，黄医生的针灸终于让我得到了缓解。我现在无痛并恢复了活跃的生活方式！",
-        "name": "Jennifer M.",
-        "condition": "慢性背痛",
-        "image": ""
-      },
-      {
-        "quote": "黄医生的整体方法帮助我在不用药物的情况下管理焦虑。针灸和中药的结合改变了我的生活。",
-        "name": "Robert T.",
-        "condition": "压力与焦虑",
-        "image": ""
-      },
-      {
-        "quote": "我们永远感激黄医生。在与不孕症斗争后，我们现在是一个美丽女婴的骄傲父母！",
-        "name": "Lisa K.",
-        "condition": "生育支持",
-        "image": ""
-      }
     ],
-    "moreLink": {
-      "text": "阅读更多成功案例",
-      "url": "/zh/case-studies"
+    "description": "体验传统中医的治疗力量。我们的整体方法结合针灸、中药和经过时间考验的疗法，恢复平衡并促进自然康复。",
+    "trustBadges": [
+      "持牌针灸师",
+      "委员会认证",
+      "20+年经验"
+    ],
+    "floatingTags": [
+      "针灸",
+      "中药",
+      "拔罐疗法",
+      "疼痛管理",
+      "压力缓解"
+    ],
+    "secondaryCta": {
+      "link": "tel:+18453811106",
+      "text": "立即致电"
     }
   },
-  "howItWorks": {
-    "title": "中医如何运作",
-    "subtitle": "整体治疗方法",
-    "variant": "vertical-image-right",
-    "image": "/uploads/dr-huang-clinic/home/welcome-section.jpg",
-    "imageAlt": "黄医生诊所的诊疗服务",
-    "steps": [
+  "menu": {
+    "cta": {
+      "link": "/zh/contact",
+      "text": "在线预约"
+    },
+    "items": [
       {
-        "number": 1,
-        "icon": "ClipboardList",
-        "title": "全面评估",
-        "description": "我们从详细的咨询开始，了解您的健康史、症状和健康目标。"
+        "url": "/zh",
+        "text": "首页"
       },
       {
-        "number": 2,
-        "icon": "Stethoscope",
-        "title": "个性化治疗计划",
-        "description": "使用中医诊断方法，我们创建针对您独特需求的定制治疗计划。"
+        "url": "/zh/services",
+        "text": "服务项目"
       },
       {
-        "number": 3,
-        "icon": "Heart",
-        "title": "持续护理与支持",
-        "description": "定期治疗和调整确保最佳效果和长期健康。"
-      }
-    ]
-  },
-  "conditions": {
-    "variant": "grid-cards",
-    "title": "我们治疗的病症",
-    "subtitle": "传统中医可以帮助治疗多种健康问题",
-    "conditions": [
-      {
-        "id": "back-pain",
-        "icon": "Activity",
-        "image": "https://images.unsplash.com/photo-1768507423533-b87b62769758?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "title": "腰背痛",
-        "category": "疼痛管理",
-        "description": "针灸与中医疗法可缓解急慢性背痛，无需药物或手术",
-        "symptoms": ["下背部疼痛", "上背部僵硬", "坐骨神经痛", "椎间盘突出疼痛"],
-        "link": "/zh/conditions#back-pain"
+        "url": "/zh/conditions",
+        "text": "治疗病症"
       },
       {
-        "id": "headaches-migraines",
-        "icon": "Activity",
-        "image": "https://images.unsplash.com/photo-1554574004-b5ed96682e9b?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "title": "头痛和偏头痛",
-        "category": "疼痛管理",
-        "description": "无需药物即可有效缓解紧张性头痛与偏头痛",
-        "symptoms": ["反复头痛", "偏头痛发作", "太阳穴紧张", "畏光"],
-        "link": "/zh/conditions#headaches-migraines"
+        "url": "/zh/about",
+        "text": "关于我们"
       },
       {
-        "id": "anxiety",
-        "icon": "Brain",
-        "image": "https://images.unsplash.com/photo-1513097847644-f00cfe868607?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "title": "焦虑和恐慌症",
-        "category": "心理与情绪健康",
-        "description": "对焦虑、恐慌发作和紧张的自然、无药物支持",
-        "symptoms": ["过度担忧", "思绪飞驰", "恐慌发作", "坐立不安"],
-        "link": "/zh/conditions#anxiety"
+        "url": "/zh/case-studies",
+        "text": "案例研究"
       },
       {
-        "id": "ibs",
-        "icon": "Apple",
-        "image": "https://images.unsplash.com/photo-1555243896-c709bfa0b564?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "title": "肠易激综合征和消化问题",
-        "category": "消化系统健康",
-        "description": "有效缓解肠易激综合征、腹胀、胀气和消化不适",
-        "symptoms": ["腹痛", "腹胀", "便秘或腹泻", "胀气"],
-        "link": "/zh/conditions#ibs"
+        "url": "/zh/gallery",
+        "text": "图库"
+      },
+      {
+        "url": "/zh/new-patients",
+        "text": "首次就诊"
+      },
+      {
+        "url": "/zh/blog",
+        "text": "博客"
+      },
+      {
+        "url": "/zh/contact",
+        "text": "联系我们"
       }
     ],
+    "variant": "transparent"
+  },
+  "topBar": {
+    "badge": {
+      "text": "接受新患者",
+      "visible": true
+    },
+    "email": "sancai.acu@gmail.com",
+    "phone": "(845) 381-1106",
+    "address": "71 East Main Street, Middletown, NY 10940",
+    "addressMapUrl": "https://maps.google.com/?q=71+East+Main+Street+Middletown+NY+10940"
+  },
+  "gallery": {
+    "badge": "参观我们的诊所",
+    "title": "虚拟参观",
+    "images": [
+      {
+        "alt": "诊所接待区",
+        "src": "/uploads/dr-huang-clinic/gallery/hero-bg.jpg",
+        "label": "接待区"
+      },
+      {
+        "alt": "治疗室",
+        "src": "/uploads/dr-huang-clinic/gallery/acupuncture-11.jpeg",
+        "label": "治疗室"
+      },
+      {
+        "alt": "中药房",
+        "src": "/uploads/dr-huang-clinic/general/chinese-herb-10.webp",
+        "label": "中药房"
+      },
+      {
+        "alt": "诊所外观",
+        "src": "/uploads/dr-huang-clinic/gallery/reception-area.jpg",
+        "label": "我们的位置"
+      }
+    ],
+    "variant": "grid-uniform",
     "moreLink": {
-      "text": "查看所有病症",
-      "url": "/zh/conditions"
-    }
+      "url": "/zh/gallery",
+      "text": "查看完整画廊"
+    },
+    "subtitle": "查看我们温馨、宁静的治疗环境"
   },
   "services": {
-    "variant": "featured-large",
     "badge": "治疗选项",
     "title": "我们的疗法",
-    "subtitle": "现代科学支持的传统治疗方法",
+    "variant": "featured-large",
     "featured": {
       "id": "acupuncture",
       "icon": "Syringe",
+      "link": "/zh/services#acupuncture",
+      "image": "/uploads/dr-huang-clinic/general/Acupuncture-15.webp",
       "title": "针灸",
       "subtitle": "恢复平衡并促进康复",
-      "shortDescription": "我们的主要治疗方式，使用细针恢复平衡并促进康复",
       "fullDescription": "针灸通过细小无菌针刺入穴位，调和气血、疏通经络并促进自然愈合。该疗法可缓解疼痛、改善功能并提升整体健康。",
-      "image": "/uploads/dr-huang-clinic/services/acupuncture.jpg",
-      "link": "/zh/services#acupuncture"
+      "shortDescription": "我们的主要治疗方式，使用细针恢复平衡并促进康复"
+    },
+    "moreLink": {
+      "url": "/zh/services",
+      "text": "查看所有疗法"
     },
     "services": [
       {
         "id": "herbal-medicine",
         "icon": "Leaf",
+        "link": "/zh/services#herbs",
         "title": "中药",
         "subtitle": "自然草本配方，整体调理",
-        "shortDescription": "根据您的需求定制的中药配方",
         "fullDescription": "中药采用天然草本，根据传统配伍原则调配，针对健康问题的根本原因进行整体调理。每一方都结合您的体质与当前状态进行个性化定制。",
-        "link": "/zh/services#herbs"
+        "shortDescription": "根据您的需求定制的中药配方"
       },
       {
         "id": "cupping",
         "icon": "Circle",
+        "link": "/zh/services#cupping",
         "title": "拔罐疗法",
         "subtitle": "缓解紧张，促进循环",
-        "shortDescription": "释放肌肉紧张并改善循环",
         "fullDescription": "拔罐使用玻璃或硅胶罐在皮肤上形成负压，促进血液循环、缓解肌肉紧张并帮助排出淤滞。该疗法历史悠久，常用于疼痛与循环问题。",
-        "link": "/zh/services#cupping"
+        "shortDescription": "释放肌肉紧张并改善循环"
       },
       {
         "id": "moxibustion",
         "icon": "Flame",
+        "link": "/zh/services#moxibustion",
         "title": "艾灸",
         "subtitle": "温热疗法，扶正益气",
-        "shortDescription": "温热疗法以增强和激活能量",
         "fullDescription": "艾灸在穴位附近燃烧艾绒，以温热经络、扶正祛寒、增强气血。温和的热力渗透深层组织，提升身体自我修复能力。",
-        "link": "/zh/services#moxibustion"
+        "shortDescription": "温热疗法以增强和激活能量"
       },
       {
         "id": "tuina",
         "icon": "Hand",
+        "link": "/zh/services#tuina",
         "title": "推拿按摩",
         "subtitle": "经络理疗，舒筋活络",
-        "shortDescription": "传统中医按摩",
         "fullDescription": "推拿通过按、揉、推、拿等手法沿经络运行，调理气血、舒筋活络、缓解疼痛。结合穴位按压，帮助恢复身体平衡。",
-        "link": "/zh/services#tuina"
+        "shortDescription": "传统中医按摩"
       },
       {
         "id": "gua-sha",
         "icon": "Shield",
+        "link": "/zh/services#gua-sha",
         "title": "刮痧",
         "subtitle": "疏通淤滞，缓解不适",
-        "shortDescription": "缓解疼痛和炎症的刮痧疗法",
         "fullDescription": "刮痧使用光滑工具刮拭皮肤，促进血液循环、释放肌肉紧张并疏通淤滞。常用于缓解疼痛、酸胀与炎症不适。",
-        "link": "/zh/services#gua-sha"
+        "shortDescription": "缓解疼痛和炎症的刮痧疗法"
       }
     ],
-    "moreLink": {
-      "text": "查看所有疗法",
-      "url": "/zh/services"
-    }
+    "subtitle": "现代科学支持的传统治疗方法"
   },
-  "blog": {
-    "variant": "cards-grid",
-    "badge": "学习与探索",
-    "title": "博客与媒体最新资讯",
-    "subtitle": "关于中医和健康的教育资源",
-    "posts": [
-      {
-        "slug": "acupuncture-science",
-        "type": "article",
-        "image": "/uploads/dr-huang-clinic/blog/acupuncture-pain.jpg",
-        "category": "针灸",
-        "readTime": "8分钟阅读",
-        "title": "针灸背后的科学：它如何工作",
-        "excerpt": "了解针灸如何根据现代研究刺激身体的自然康复机制。"
-      },
-      {
-        "slug": "herbal-medicine-101",
-        "type": "article",
-        "image": "/uploads/dr-huang-clinic/blog/herbal-medicine.jpg",
-        "category": "中药",
-        "readTime": "6分钟阅读",
-        "title": "中药101",
-        "excerpt": "了解中药的基础知识以及如何创建定制配方。"
-      },
-      {
-        "slug": "first-visit-video",
-        "type": "video",
-        "image": "/uploads/dr-huang-clinic/blog/digestive-health.jpg",
-        "category": "患者教育",
-        "readTime": "5分钟观看",
-        "title": "首次针灸就诊的期待",
-        "excerpt": "观看此视频以了解初次咨询和治疗期间会发生什么。"
-      }
-    ],
+  "conditions": {
+    "title": "我们治疗的病症",
+    "variant": "grid-cards",
     "moreLink": {
-      "text": "浏览所有文章",
-      "url": "/zh/blog"
-    }
-  },
-  "gallery": {
-    "variant": "grid-uniform",
-    "badge": "参观我们的诊所",
-    "title": "虚拟参观",
-    "subtitle": "查看我们温馨、宁静的治疗环境",
-    "images": [
+      "url": "/zh/conditions",
+      "text": "查看所有病症"
+    },
+    "subtitle": "传统中医可以帮助治疗多种健康问题",
+    "conditions": [
       {
-        "src": "/uploads/dr-huang-clinic/gallery/reception-area.jpg",
-        "alt": "诊所接待区",
-        "label": "接待区"
+        "id": "back-pain",
+        "icon": "Activity",
+        "link": "/zh/conditions#back-pain",
+        "image": "/uploads/dr-huang-clinic/gallery/acupuncture-needles.jpg",
+        "title": "腰背痛",
+        "category": "疼痛管理",
+        "symptoms": [
+          "下背部疼痛",
+          "上背部僵硬",
+          "坐骨神经痛",
+          "椎间盘突出疼痛"
+        ],
+        "description": "针灸与中医疗法可缓解急慢性背痛，无需药物或手术"
       },
       {
-        "src": "/uploads/dr-huang-clinic/gallery/treatment-room-1.jpg",
-        "alt": "治疗室",
-        "label": "治疗室"
+        "id": "headaches-migraines",
+        "icon": "Activity",
+        "link": "/zh/conditions#headaches-migraines",
+        "image": "/uploads/dr-huang-clinic/general/acupuncture-12.jpeg",
+        "title": "头痛和偏头痛",
+        "category": "疼痛管理",
+        "symptoms": [
+          "反复头痛",
+          "偏头痛发作",
+          "太阳穴紧张",
+          "畏光"
+        ],
+        "description": "无需药物即可有效缓解紧张性头痛与偏头痛"
       },
       {
-        "src": "/uploads/dr-huang-clinic/gallery/herbal-pharmacy.jpg",
-        "alt": "中药房",
-        "label": "中药房"
+        "id": "anxiety",
+        "icon": "Brain",
+        "link": "/zh/conditions#anxiety",
+        "image": "/uploads/dr-huang-clinic/general/anxiate-3.jpeg",
+        "title": "焦虑和恐慌症",
+        "category": "心理与情绪健康",
+        "symptoms": [
+          "过度担忧",
+          "思绪飞驰",
+          "恐慌发作",
+          "坐立不安"
+        ],
+        "description": "对焦虑、恐慌发作和紧张的自然、无药物支持"
       },
       {
-        "src": "/uploads/dr-huang-clinic/gallery/exterior.jpg",
-        "alt": "诊所外观",
-        "label": "我们的位置"
+        "id": "ibs",
+        "icon": "Apple",
+        "link": "/zh/conditions#ibs",
+        "image": "/uploads/dr-huang-clinic/general/chinese-dietary-10.jpg",
+        "title": "肠易激综合征和消化问题",
+        "category": "消化系统健康",
+        "symptoms": [
+          "腹痛",
+          "腹胀",
+          "便秘或腹泻",
+          "胀气"
+        ],
+        "description": "有效缓解肠易激综合征、腹胀、胀气和消化不适"
       }
-    ],
-    "moreLink": {
-      "text": "查看完整画廊",
-      "url": "/zh/gallery"
-    }
+    ]
   },
   "firstVisit": {
+    "cta": {
+      "link": {
+        "url": "/zh/new-patients",
+        "text": "新患者信息"
+      },
+      "title": "准备开始了吗？",
+      "description": "下载我们的新患者表格或预约您的首次就诊"
+    },
     "badge": "初次了解中医？",
-    "title": "您的首次就诊",
-    "subtitle": "以下是初次咨询时的期待",
     "steps": [
       {
-        "number": 1,
         "title": "咨询",
+        "number": 1,
         "duration": "20-30分钟",
         "description": "详细的健康史和中医诊断"
       },
       {
-        "number": 2,
         "title": "检查",
+        "number": 2,
         "duration": "10分钟",
         "description": "脉诊和舌诊"
       },
       {
-        "number": 3,
         "title": "治疗",
+        "number": 3,
         "duration": "30-40分钟",
         "description": "您的第一次针灸疗程"
       },
       {
-        "number": 4,
         "title": "治疗计划",
+        "number": 4,
         "duration": "10分钟",
         "description": "个性化建议"
       }
     ],
-    "cta": {
-      "title": "准备开始了吗？",
-      "description": "下载我们的新患者表格或预约您的首次就诊",
-      "link": {
-        "text": "新患者信息",
-        "url": "/zh/new-patients"
+    "title": "您的首次就诊",
+    "subtitle": "以下是初次咨询时的期待"
+  },
+  "howItWorks": {
+    "image": "/uploads/dr-huang-clinic/general/acupuncture-16.webp",
+    "steps": [
+      {
+        "icon": "ClipboardList",
+        "title": "全面评估",
+        "number": 1,
+        "description": "我们从详细的咨询开始，了解您的健康史、症状和健康目标。"
+      },
+      {
+        "icon": "Stethoscope",
+        "title": "个性化治疗计划",
+        "number": 2,
+        "description": "使用中医诊断方法，我们创建针对您独特需求的定制治疗计划。"
+      },
+      {
+        "icon": "Heart",
+        "title": "持续护理与支持",
+        "number": 3,
+        "description": "定期治疗和调整确保最佳效果和长期健康。"
       }
-    }
+    ],
+    "title": "中医如何运作",
+    "variant": "vertical-image-right",
+    "imageAlt": "黄医生诊所的诊疗服务",
+    "subtitle": "整体治疗方法"
   },
   "whyChooseUs": {
     "badge": "为什么选择我们",
     "title": "体验不同",
-    "subtitle": "我们的与众不同之处",
     "features": [
       {
         "icon": "Award",
@@ -402,20 +432,37 @@
         "title": "经过验证的结果",
         "description": "数千名满意的患者和95%的满意度"
       }
-    ]
+    ],
+    "subtitle": "我们的与众不同之处"
   },
-  "cta": {
-    "variant": "centered",
-    "title": "准备开始您的康复之旅吗？",
-    "subtitle": "今天迈出自然健康的第一步",
-    "primaryCta": {
-      "text": "预约咨询",
-      "link": "/zh/contact"
+  "testimonials": {
+    "badge": "患者成功案例",
+    "title": "真实患者的真实效果",
+    "variant": "grid",
+    "moreLink": {
+      "url": "/zh/case-studies",
+      "text": "阅读更多成功案例"
     },
-    "secondaryCta": {
-      "text": "立即致电",
-      "link": "tel:+18453811106"
-    },
-    "contactInfo": "致电(845) 381-1106或在线预约"
+    "subtitle": "听听我们患者的康复之旅",
+    "testimonials": [
+      {
+        "name": "Jennifer M.",
+        "image": "",
+        "quote": "经过多年的慢性背痛并尝试了一切方法，黄医生的针灸终于让我得到了缓解。我现在无痛并恢复了活跃的生活方式！",
+        "condition": "慢性背痛"
+      },
+      {
+        "name": "Robert T.",
+        "image": "",
+        "quote": "黄医生的整体方法帮助我在不用药物的情况下管理焦虑。针灸和中药的结合改变了我的生活。",
+        "condition": "压力与焦虑"
+      },
+      {
+        "name": "Lisa K.",
+        "image": "",
+        "quote": "我们永远感激黄医生。在与不孕症斗争后，我们现在是一个美丽女婴的骄傲父母！",
+        "condition": "生育支持"
+      }
+    ]
   }
 }

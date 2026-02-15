@@ -71,7 +71,7 @@ export async function generateMetadata({ params }: PageProps) {
     loadSiteInfo(siteId, locale as Locale) as Promise<SiteInfo | null>,
   ]);
 
-  const clinicName = siteInfo?.clinicName || 'Clinic';
+  const clinicName = siteInfo?.businessName || siteInfo?.clinicName || 'Business';
   const location = siteInfo?.city && siteInfo?.state
     ? `${siteInfo.city}, ${siteInfo.state}`
     : '';
@@ -84,7 +84,7 @@ export async function generateMetadata({ params }: PageProps) {
   const description =
     content?.hero?.description ||
     siteInfo?.description ||
-    'Laundry pickup, delivery, and commercial garment care services.';
+    'Traditional Chinese Medicine clinic for acupuncture, herbal medicine, and wellness care.';
 
   return buildPageMetadata({
     siteId,

@@ -1,9 +1,9 @@
-# Laundry Starter Packs
+# Clinic Starter Packs
 
-This folder provides reusable seed packs for new laundry clients.
+This folder provides reusable seed packs for new medical clinic clients.
 
-- `starter-basic.json`: small local laundry shop (pickup + drop-off + self-service).
-- `starter-pro.json`: hybrid operation with commercial programs and richer operations config.
+- `starter-basic.json`: small local clinic setup.
+- `starter-pro.json`: expanded clinic operations setup.
 
 ## How to use
 
@@ -14,6 +14,6 @@ This folder provides reusable seed packs for new laundry clients.
    - `content/<siteId>/booking/settings.json`
 4. Import bookings/settings/services from JSON via:
    - `POST /api/admin/booking/import` (or use admin button).
-5. Run content import in safe mode (`missing`) and validate routes `/en` and `/es`.
+5. Run content import in safe mode (`missing`) and validate routes `/en` and `/zh`.
 
-These packs are intentionally content-light and operations-heavy, so each client can customize pages while keeping a proven laundry operations baseline.
+These packs are intentionally content-light and operations-heavy, so each clinic can customize pages while keeping a proven operations baseline.

@@ -1,9 +1,9 @@
 {
   "name": "starter-basic",
-  "description": "Small neighborhood laundry with pickup, drop-off, and self-service.",
+  "description": "Small neighborhood clinic with consultation, follow-up, and treatment scheduling.",
   "siteTemplate": {
     "defaultLocale": "en",
-    "supportedLocales": ["en", "es"],
+    "supportedLocales": ["en", "zh"],
     "enabled": true
   },
   "userTemplate": [
@@ -19,7 +19,7 @@
   "bookingServices": [
     {
       "id": "wash-fold-pickup",
-      "name": "Wash & Fold (Pickup + Delivery)",
+      "name": "Initial Consultation",
       "serviceType": "pickup_delivery",
       "pricingModel": "by_weight",
       "unitLabel": "lb",
@@ -34,7 +34,7 @@
     },
     {
       "id": "wash-fold-dropoff",
-      "name": "Wash & Fold (Drop-off)",
+      "name": "Follow-up Visit",
       "serviceType": "dropoff",
       "pricingModel": "by_weight",
       "unitLabel": "lb",
@@ -47,7 +47,7 @@
     },
     {
       "id": "self-service-reservation",
-      "name": "Self-Service Machine Reservation",
+      "name": "Acupuncture Session Reservation",
       "serviceType": "self_service",
       "pricingModel": "flat",
       "unitLabel": "load",

@@ -54,12 +54,12 @@ async function resolveSiteId(siteId?: string): Promise<string> {
     const site = await getSiteByHost(host);
     if (site?.id) return site.id;
     const defaultSite = await getDefaultSite();
-    return defaultSite?.id || 'wewash';
+    return defaultSite?.id || process.env.NEXT_PUBLIC_DEFAULT_SITE || 'default-site';
   } catch (error) {
     const localSiteId = await getLocalDefaultSiteId();
     if (localSiteId) return localSiteId;
     const defaultSite = await getDefaultSite();
-    return defaultSite?.id || 'wewash';
+    return defaultSite?.id || process.env.NEXT_PUBLIC_DEFAULT_SITE || 'default-site';
   }
 }
 

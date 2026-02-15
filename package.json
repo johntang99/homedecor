@@ -1,7 +1,7 @@
 {
-  "name": "laundry-wewash",
+  "name": "medical-chinese-medicine",
   "version": "1.0.0",
-  "description": "Laundry WeWash",
+  "description": "Medical Chinese Medicine Template",
   "private": true,
   "scripts": {
     "dev": "next dev -p 3003",

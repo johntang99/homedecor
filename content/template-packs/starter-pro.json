@@ -1,10 +1,10 @@
 {
   "packId": "starter-pro",
-  "description": "Hybrid laundry template with pickup/delivery, self-service, and commercial accounts.",
+  "description": "Advanced clinic template with consultations, follow-ups, and provider capacity controls.",
   "siteDefaults": {
     "defaultLocale": "en",
-    "supportedLocales": ["en", "es"],
-    "primaryCta": "Schedule Pickup"
+    "supportedLocales": ["en", "zh"],
+    "primaryCta": "Book Consultation"
   },
   "sectionsCatalog": [
     "hero",
@@ -21,7 +21,7 @@
   "bookingServices": [
     {
       "id": "wash-fold-pickup",
-      "name": "Wash & Fold (Pickup + Delivery)",
+      "name": "Initial Consultation",
       "serviceType": "pickup_delivery",
       "pricingModel": "by_weight",
       "unitLabel": "lb",
@@ -35,7 +35,7 @@
     },
     {
       "id": "wash-fold-dropoff",
-      "name": "Wash & Fold (Drop-off)",
+      "name": "Follow-up Visit",
       "serviceType": "dropoff",
       "pricingModel": "by_weight",
       "unitLabel": "lb",
@@ -48,7 +48,7 @@
     },
     {
       "id": "self-service-reservation",
-      "name": "Self-Service Reservation",
+      "name": "Acupuncture Session",
       "serviceType": "self_service",
       "pricingModel": "flat",
       "unitLabel": "load",
@@ -60,7 +60,7 @@
     },
     {
       "id": "commercial-account",
-      "name": "Commercial Laundry Account",
+      "name": "Corporate Wellness Program",
       "serviceType": "commercial",
       "pricingModel": "quote",
       "durationMinutes": 45,

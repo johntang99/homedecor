@@ -1,44 +1,44 @@
 {
+  "cta": {
+    "link": "/en/contact",
+    "text": "Book Appointment"
+  },
   "main": [
     {
-      "text": "Home",
-      "url": "/en"
+      "url": "/en",
+      "text": "Home"
     },
     {
-      "text": "Services",
-      "url": "/en/services"
+      "url": "/en/services",
+      "text": "Services"
     },
     {
-      "text": "Conditions",
-      "url": "/en/conditions"
+      "url": "/en/conditions",
+      "text": "Conditions"
     },
     {
-      "text": "About",
-      "url": "/en/about"
+      "url": "/en/about",
+      "text": "About"
     },
     {
-      "text": "Case Studies",
-      "url": "/en/case-studies"
+      "url": "/en/case-studies",
+      "text": "Case Studies"
     },
     {
-      "text": "Gallery",
-      "url": "/en/gallery"
+      "url": "/en/gallery",
+      "text": "Gallery"
     },
     {
-      "text": "New Visit",
-      "url": "/en/new-patients"
+      "url": "/en/new-patients",
+      "text": "New Visit"
     },
     {
-      "text": "Blog",
-      "url": "/en/blog"
+      "url": "/en/blog",
+      "text": "Blog"
     },
     {
-      "text": "Contact",
-      "url": "/en/contact"
+      "url": "/en/contact",
+      "text": "Contact"
     }
-  ],
-  "cta": {
-    "text": "Book Appointment",
-    "link": "/en/contact"
-  }
+  ]
 }

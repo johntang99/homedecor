@@ -4,11 +4,9 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import { Locale } from '@/lib/types';
-import { getRequestSiteId } from '@/lib/content';
+import { getRequestSiteId, loadAllItems, loadItemBySlug, loadPageContent } from '@/lib/content';
 import { buildPageMetadata } from '@/lib/seo';
 import { Button, Badge, Icon, Card, CardHeader, CardTitle, CardDescription } from '@/components/ui';
-import { promises as fs } from 'fs';
-import path from 'path';
 
 interface BlogContentBlock {
   type: 'paragraph' | 'heading' | 'list' | 'quote' | 'image' | 'video';
@@ -35,6 +33,8 @@ interface BlogPostData {
   contentMarkdown?: string;
   videoUrl?: string;
   relatedPosts?: string[];
+  relatedServices?: string[];
+  relatedConditions?: string[];
 }
 
 interface BlogDetailPageProps {
@@ -49,24 +49,23 @@ async function loadBlogPost(
   slug: string,
   locale: Locale
 ): Promise<BlogPostData | null> {
-  try {
-    const filePath = path.join(process.cwd(), 'content', siteId, locale, 'blog', `${slug}.json`);
-    const fileContents = await fs.readFile(filePath, 'utf8');
-    return JSON.parse(fileContents);
-  } catch (error) {
-    return null;
-  }
+  return loadItemBySlug<BlogPostData>(siteId, locale, 'blog', slug);
 }
 
-async function loadBlogList(siteId: string, locale: Locale) {
-  try {
-    const filePath = path.join(process.cwd(), 'content', siteId, locale, 'pages', 'blog.json');
-    const fileContents = await fs.readFile(filePath, 'utf8');
-    const data = JSON.parse(fileContents);
-    return data.posts || [];
-  } catch (error) {
-    return [];
-  }
+async function loadPageJson(
+  siteId: string,
+  locale: Locale,
+  pageName: string
+): Promise<any | null> {
+  return loadPageContent(pageName, locale, siteId);
+}
+
+function humanizeId(value: string): string {
+  return value
+    .split('-')
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
 }
 
 export async function generateMetadata({ params }: BlogDetailPageProps): Promise<Metadata> {
@@ -107,10 +106,35 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   }
 
   // Load all posts for related posts
-  const allPosts = await loadBlogList(siteId, locale);
+  const allPosts = await loadAllItems<BlogPostData>(siteId, locale, 'blog');
+  const [servicesPage, conditionsPage] = await Promise.all([
+    loadPageJson(siteId, locale, 'services'),
+    loadPageJson(siteId, locale, 'conditions'),
+  ]);
   const relatedPosts = post.relatedPosts 
     ? allPosts.filter((p: any) => post.relatedPosts?.includes(p.slug)).slice(0, 3)
     : allPosts.filter((p: any) => p.category === post.category && p.slug !== post.slug).slice(0, 3);
+  const servicesItems =
+    servicesPage?.servicesList?.items ||
+    servicesPage?.services ||
+    [];
+  const conditionsItems = conditionsPage?.conditions || [];
+  const relatedServices = (post.relatedServices || []).map((serviceId) => {
+    const match = servicesItems.find((service: any) => service?.id === serviceId);
+    return {
+      id: serviceId,
+      title: match?.title || humanizeId(serviceId),
+      link: `/${locale}/services#${serviceId}`,
+    };
+  });
+  const relatedConditions = (post.relatedConditions || []).map((conditionId) => {
+    const match = conditionsItems.find((condition: any) => condition?.id === conditionId);
+    return {
+      id: conditionId,
+      title: match?.title || humanizeId(conditionId),
+      link: `/${locale}/conditions#${conditionId}`,
+    };
+  });
   const postType = post.type || 'article';
 
   const normalizeMarkdown = (text: string) =>
@@ -351,6 +375,42 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                 </div>
               </div>
             </div>
+
+            {(relatedServices.length > 0 || relatedConditions.length > 0) && (
+              <div className="mt-12 p-6 bg-white border border-gray-200 rounded-xl">
+                <h3 className="text-lg font-bold text-gray-900 mb-4">
+                  Related Services & Conditions
+                </h3>
+                {relatedServices.length > 0 && (
+                  <div className="mb-4">
+                    <p className="text-sm font-semibold text-gray-700 mb-2">Services</p>
+                    <div className="flex flex-wrap gap-2">
+                      {relatedServices.map((item) => (
+                        <Link key={item.id} href={item.link}>
+                          <Badge variant="secondary" size="sm" className="cursor-pointer hover:shadow-sm">
+                            {item.title}
+                          </Badge>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {relatedConditions.length > 0 && (
+                  <div>
+                    <p className="text-sm font-semibold text-gray-700 mb-2">Conditions</p>
+                    <div className="flex flex-wrap gap-2">
+                      {relatedConditions.map((item) => (
+                        <Link key={item.id} href={item.link}>
+                          <Badge variant="secondary" size="sm" className="cursor-pointer hover:shadow-sm">
+                            {item.title}
+                          </Badge>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </article>

@@ -7,17 +7,17 @@ import { Locale } from './types';
 // Re-export Locale type
 export type { Locale };
 
-export const locales: Locale[] = ['en', 'es'];
+export const locales: Locale[] = ['en', 'zh'];
 export const defaultLocale: Locale = 'en';
 
 export const localeNames: Record<Locale, string> = {
   en: 'English',
-  es: 'Español',
+  zh: '中文',
 };
 
 export const localeFlags: Record<Locale, string> = {
   en: '🇺🇸',
-  es: '🇪🇸',
+  zh: '🇨🇳',
 };
 
 /**

@@ -1,80 +1,88 @@
 {
-  "topBar": {
-    "address": "71 East Main Street, Middletown, NY 10940",
-    "addressMapUrl": "https://maps.google.com/?q=71+East+Main+Street+Middletown+NY+10940",
-    "phone": "(845) 381-1106",
-    "email": "sancai.acu@gmail.com",
-    "badge": {
-      "text": "Accepting New Patients",
-      "visible": true
+  "cta": {
+    "title": "Ready to Begin Your Healing Journey?",
+    "variant": "centered",
+    "subtitle": "Take the first step towards natural wellness today",
+    "primaryCta": {
+      "link": "/en/contact",
+      "text": "Book Your Consultation"
+    },
+    "contactInfo": "Call us at (845) 381-1106 or book online",
+    "secondaryCta": {
+      "link": "tel:+18453811106",
+      "text": "Call Us Now"
     }
   },
-  "menu": {
-    "variant": "transparent",
-    "items": [
-      { "text": "Home", "url": "/en" },
-      { "text": "Services", "url": "/en/services" },
-      { "text": "Conditions", "url": "/en/conditions" },
-      { "text": "About", "url": "/en/about" },
-      { "text": "Case Studies", "url": "/en/case-studies" },
-      { "text": "Gallery", "url": "/en/gallery" },
-      { "text": "New Visit", "url": "/en/new-patients" },
-      { "text": "Blog", "url": "/en/blog" },
-      { "text": "Contact", "url": "/en/contact" }
+  "blog": {
+    "badge": "LEARN & EXPLORE",
+    "posts": [
+      {
+        "slug": "acupuncture-science",
+        "type": "article",
+        "image": "/uploads/dr-huang-clinic/general/acupuncture-10.jpeg",
+        "title": "The Science Behind Acupuncture: How It Works",
+        "excerpt": "Discover how acupuncture stimulates your body's natural healing mechanisms based on modern research.",
+        "category": "Acupuncture",
+        "readTime": "8 min read"
+      },
+      {
+        "slug": "herbal-medicine-101",
+        "type": "article",
+        "image": "/uploads/dr-huang-clinic/general/chinese-herb-10.webp",
+        "title": "Chinese Herbal Medicine 101",
+        "excerpt": "Learn about the fundamentals of Chinese herbal medicine and how custom formulas are created.",
+        "category": "Herbal Medicine",
+        "readTime": "6 min read"
+      },
+      {
+        "slug": "first-visit-video",
+        "type": "video",
+        "image": "/uploads/dr-huang-clinic/general/Acupuncture-14.webp",
+        "title": "What to Expect at Your First Acupuncture Visit",
+        "excerpt": "Watch this video to learn what happens during your initial consultation and treatment.",
+        "category": "Patient Education",
+        "readTime": "5 min watch"
+      }
     ],
-    "cta": {
-      "text": "Book Online",
-      "link": "/en/contact"
-    }
+    "title": "Latest from Our Blog & Media",
+    "variant": "cards-grid",
+    "moreLink": {
+      "url": "/en/blog",
+      "text": "Explore All Articles"
+    },
+    "subtitle": "Educational resources about TCM and wellness"
   },
   "hero": {
-    "variant": "split-photo-right",
-    "image": "/uploads/dr-huang-clinic/home/hero-bg.jpg",
-    "clinicName": "Welcome to Dr Huang Clinic",
-    "tagline": "Traditional Chinese Medicine, Acupuncture, and More",
-    "description": "Experience the healing power of Traditional Chinese Medicine. Our holistic approach combines acupuncture, herbal medicine, and time-tested therapies to restore balance and promote natural healing.",
-    "primaryCta": {
-      "text": "Book Appointment",
-      "link": "/en/contact"
-    },
-    "secondaryCta": {
-      "text": "Call Now",
-      "link": "tel:+18453811106"
-    },
-    "floatingTags": [
-      "Acupuncture",
-      "Chinese Herbal Medicine",
-      "Cupping Therapy",
-      "Pain Management",
-      "Stress Relief"
-    ],
+    "image": "/uploads/dr-huang-clinic/home/drhuang-photo-1.jpg",
     "stats": [
       {
         "icon": "Award",
-        "number": "15+",
-        "label": "Years Experience"
+        "label": "Years Experience",
+        "number": "20"
       },
       {
         "icon": "Heart",
-        "number": "1000+",
-        "label": "Patients Helped"
+        "label": "Patients Helped",
+        "number": "20,000+"
       },
       {
         "icon": "Star",
-        "number": "95%",
-        "label": "Satisfaction Rate"
+        "label": "Satisfaction Rate",
+        "number": "95%"
       },
       {
         "icon": "Sparkles",
-        "number": "8",
-        "label": "TCM Modalities"
+        "label": "TCM Modalities",
+        "number": "8"
       }
     ],
-    "trustBadges": [
-      "Licensed Acupuncturist",
-      "Board Certified",
-      "20+ Years Experience"
-    ],
+    "tagline": "Holistic Acupuncture & Traditional Chinese Medicine (TCM) Care",
+    "variant": "split-photo-right",
+    "clinicName": "Acupuncture & Traditional Chinese Medicine in Middletown, NY",
+    "primaryCta": {
+      "link": "/en/contact",
+      "text": "Book Appointment"
+    },
     "credentials": [
       {
         "icon": "Award",
@@ -92,317 +100,323 @@
         "icon": "TrendingUp",
         "text": "Evidence-Based Practice"
       }
-    ]
-  },
-  "testimonials": {
-    "variant": "grid",
-    "badge": "PATIENT SUCCESS STORIES",
-    "title": "Real Results from Real People",
-    "subtitle": "Hear from our patients about their healing journey",
-    "testimonials": [
-      {
-        "quote": "After years of chronic back pain and trying everything, acupuncture with Dr. Huang finally gave me relief. I'm pain-free and back to my active lifestyle!",
-        "name": "Jennifer M.",
-        "condition": "Chronic Back Pain",
-        "image": ""
-      },
-      {
-        "quote": "Dr. Huang's holistic approach helped me manage my anxiety without medication. The combination of acupuncture and herbs has been life-changing.",
-        "name": "Robert T.",
-        "condition": "Stress & Anxiety",
-        "image": ""
-      },
-      {
-        "quote": "We are forever grateful to Dr. Huang. After struggling with fertility, we're now proud parents of a beautiful baby girl!",
-        "name": "Lisa K.",
-        "condition": "Fertility Support",
-        "image": ""
-      }
     ],
-    "moreLink": {
-      "text": "Read More Success Stories",
-      "url": "/en/case-studies"
+    "description": "Experience the healing power of Traditional Chinese Medicine in Middletown, NY. Our holistic approach combines acupuncture, herbal medicine, and time-tested therapies to restore balance, relieve pain, and support natural healing",
+    "trustBadges": [
+      "Licensed Acupuncturist",
+      "Board Certified",
+      "20 Years Experience"
+    ],
+    "floatingTags": [
+      "Acupuncture",
+      "Chinese Herbal Medicine",
+      "Cupping Therapy",
+      "Pain Management",
+      "Stress Relief"
+    ],
+    "secondaryCta": {
+      "link": "tel:+18453811106",
+      "text": "Call Now"
     }
   },
-  "howItWorks": {
-    "title": "How Chinese Medicine Works",
-    "subtitle": "A holistic approach to healing",
-    "variant": "vertical-image-right",
-    "image": "/uploads/dr-huang-clinic/home/welcome-section.jpg",
-    "imageAlt": "Patient care at Dr. Huang Clinic",
-    "steps": [
+  "menu": {
+    "cta": {
+      "link": "/en/contact",
+      "text": "Book Online"
+    },
+    "items": [
       {
-        "number": 1,
-        "icon": "ClipboardList",
-        "title": "Comprehensive Assessment",
-        "description": "We begin with a detailed consultation to understand your health history, symptoms, and wellness goals."
+        "url": "/en",
+        "text": "Home"
       },
       {
-        "number": 2,
-        "icon": "Stethoscope",
-        "title": "Personalized Treatment Plan",
-        "description": "Using TCM diagnosis methods, we create a customized treatment plan tailored to your unique needs."
+        "url": "/en/services",
+        "text": "Services"
       },
       {
-        "number": 3,
-        "icon": "Heart",
-        "title": "Ongoing Care & Support",
-        "description": "Regular treatments and adjustments ensure optimal results and long-term wellness."
+        "url": "/en/conditions",
+        "text": "Conditions"
+      },
+      {
+        "url": "/en/about",
+        "text": "About"
+      },
+      {
+        "url": "/en/case-studies",
+        "text": "Case Studies"
+      },
+      {
+        "url": "/en/gallery",
+        "text": "Gallery"
+      },
+      {
+        "url": "/en/new-patients",
+        "text": "New Visit"
+      },
+      {
+        "url": "/en/pricing",
+        "text": "Pricing"
+      },
+      {
+        "url": "/en/blog",
+        "text": "Blog"
+      },
+      {
+        "url": "/en/contact",
+        "text": "Contact"
       }
-    ]
+    ],
+    "variant": "transparent"
+  },
+  "topBar": {
+    "badge": {
+      "text": "Accepting New Patients",
+      "visible": true
+    },
+    "email": "sancai.acu@gmail.com",
+    "phone": "(845) 381-1106",
+    "address": "71 East Main Street, Middletown, NY 10940",
+    "addressMapUrl": "https://maps.google.com/?q=71+East+Main+Street+Middletown+NY+10940"
+  },
+  "gallery": {
+    "badge": "VISIT OUR CLINIC",
+    "title": "Take a Virtual Tour",
+    "images": [
+      {
+        "alt": "Clinic reception area",
+        "src": "/uploads/dr-huang-clinic/gallery/hero-bg.jpg",
+        "label": "Reception Area"
+      },
+      {
+        "alt": "Treatment room",
+        "src": "/uploads/dr-huang-clinic/gallery/acupuncture-11.jpeg",
+        "label": "Treatment Room"
+      },
+      {
+        "alt": "Herbal pharmacy",
+        "src": "/uploads/dr-huang-clinic/general/chinese-herb-10.webp",
+        "label": "Herbal Pharmacy"
+      },
+      {
+        "alt": "Clinic exterior",
+        "src": "/uploads/dr-huang-clinic/gallery/reception-area.jpg",
+        "label": "Our Location"
+      }
+    ],
+    "variant": "grid-uniform",
+    "moreLink": {
+      "url": "/en/gallery",
+      "text": "View Complete Gallery"
+    },
+    "subtitle": "See our welcoming, peaceful treatment environment"
+  },
+  "services": {
+    "badge": "TREATMENT OPTIONS",
+    "title": "Our Modalities",
+    "variant": "featured-large",
+    "featured": {
+      "id": "acupuncture",
+      "icon": "Syringe",
+      "link": "/en/services#acupuncture",
+      "image": "/uploads/dr-huang-clinic/general/Acupuncture-15.webp",
+      "title": "Acupuncture",
+      "subtitle": "Restore balance and stimulate healing",
+      "fullDescription": "Acupuncture involves the insertion of fine, sterile needles at specific points to restore the flow of Qi. This ancient practice stimulates natural healing, reduces pain, and promotes overall wellness.",
+      "shortDescription": "Our primary treatment modality using fine needles to restore balance and promote healing"
+    },
+    "moreLink": {
+      "url": "/en/services",
+      "text": "View All Modalities"
+    },
+    "services": [
+      {
+        "id": "herbal-medicine",
+        "icon": "Leaf",
+        "link": "/en/services#herbs",
+        "title": "Chinese Herbal Medicine",
+        "subtitle": "Nature's pharmacy for holistic healing",
+        "fullDescription": "Chinese herbal medicine uses natural plant-based remedies, carefully combined in traditional formulas, to address the root causes of health concerns. Each formula is customized to your unique constitution and current health needs.",
+        "shortDescription": "Custom herbal formulas tailored to your needs"
+      },
+      {
+        "id": "cupping",
+        "icon": "Circle",
+        "link": "/en/services#cupping",
+        "title": "Cupping Therapy",
+        "subtitle": "Release tension and promote circulation",
+        "fullDescription": "Cupping therapy uses glass or silicone cups to create suction on the skin, promoting blood flow, releasing muscle tension, and drawing out toxins. This technique has been used for thousands of years to treat pain and improve circulation.",
+        "shortDescription": "Release muscle tension and improve circulation"
+      },
+      {
+        "id": "moxibustion",
+        "icon": "Flame",
+        "link": "/en/services#moxibustion",
+        "title": "Moxibustion",
+        "subtitle": "Warming therapy to invigorate Qi",
+        "fullDescription": "Moxibustion involves burning dried mugwort (moxa) near acupuncture points to warm the meridians, strengthen Qi, and promote healing. The gentle heat penetrates deeply to nourish and invigorate the body.",
+        "shortDescription": "Warm therapy to strengthen and energize"
+      },
+      {
+        "id": "tuina",
+        "icon": "Hand",
+        "link": "/en/services#tuina",
+        "title": "Tui Na Massage",
+        "subtitle": "Therapeutic massage along meridians",
+        "fullDescription": "Tui Na is a form of Chinese therapeutic massage that uses rhythmic compression, stretching, and manipulation techniques along the body's meridian channels. It combines massage with acupressure to restore balance and relieve pain.",
+        "shortDescription": "Traditional Chinese medical massage"
+      },
+      {
+        "id": "gua-sha",
+        "icon": "Shield",
+        "link": "/en/services#gua-sha",
+        "title": "Gua Sha",
+        "subtitle": "Scraping therapy to release stagnation",
+        "fullDescription": "Gua Sha involves using a smooth-edged tool to gently scrape the skin, promoting blood flow and releasing stagnation. This technique is particularly effective for releasing muscle tension and supporting recovery.",
+        "shortDescription": "Scraping therapy for pain and inflammation"
+      }
+    ],
+    "subtitle": "Traditional healing methods backed by modern science"
   },
   "conditions": {
-    "variant": "grid-cards",
     "title": "Conditions We Treat",
+    "variant": "grid-cards",
+    "moreLink": {
+      "url": "/en/conditions",
+      "text": "View All Conditions"
+    },
     "subtitle": "Traditional Chinese Medicine can help with a wide range of health concerns",
     "conditions": [
       {
         "id": "back-pain",
         "icon": "Activity",
-        "image": "https://images.unsplash.com/photo-1768507423533-b87b62769758?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "link": "/en/conditions#back-pain",
+        "image": "/uploads/dr-huang-clinic/gallery/acupuncture-needles.jpg",
         "title": "Back Pain",
         "category": "Pain Management",
-        "description": "Whether acute or chronic, acupuncture and TCM therapies provide effective relief without drugs or surgery",
         "symptoms": [
           "Lower back pain",
           "Upper back stiffness",
           "Sciatica",
           "Herniated disc pain"
         ],
-        "link": "/en/conditions#back-pain"
+        "description": "Whether acute or chronic, acupuncture and TCM therapies provide effective relief without drugs or surgery"
       },
       {
         "id": "headaches-migraines",
         "icon": "Activity",
-        "image": "https://images.unsplash.com/photo-1554574004-b5ed96682e9b?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "link": "/en/conditions#headaches-migraines",
+        "image": "/uploads/dr-huang-clinic/general/acupuncture-12.jpeg",
         "title": "Headaches & Migraines",
         "category": "Pain Management",
-        "description": "Effective treatment for tension headaches, migraines, and chronic head pain without medication",
         "symptoms": [
           "Recurring headaches",
           "Migraine attacks",
           "Tension in temples",
           "Light sensitivity"
         ],
-        "link": "/en/conditions#headaches-migraines"
+        "description": "Effective treatment for tension headaches, migraines, and chronic head pain without medication"
       },
       {
         "id": "anxiety",
         "icon": "Brain",
-        "image": "https://images.unsplash.com/photo-1513097847644-f00cfe868607?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "link": "/en/conditions#anxiety",
+        "image": "/uploads/dr-huang-clinic/general/anxiate-3.jpeg",
         "title": "Anxiety & Panic Disorders",
         "category": "Mental & Emotional Health",
-        "description": "Natural, drug-free support for anxiety, panic attacks, and general nervousness",
         "symptoms": [
           "Excessive worry",
           "Racing thoughts",
           "Panic attacks",
           "Restlessness"
         ],
-        "link": "/en/conditions#anxiety"
+        "description": "Natural, drug-free support for anxiety, panic attacks, and general nervousness"
       },
       {
         "id": "ibs",
         "icon": "Apple",
-        "image": "https://images.unsplash.com/photo-1555243896-c709bfa0b564?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "link": "/en/conditions#ibs",
+        "image": "/uploads/dr-huang-clinic/general/chinese-dietary-10.jpg",
         "title": "IBS & Digestive Issues",
         "category": "Digestive Health",
-        "description": "Effective relief for IBS, bloating, gas, and digestive discomfort",
         "symptoms": [
           "Abdominal pain",
           "Bloating",
           "Constipation or diarrhea",
           "Gas"
         ],
-        "link": "/en/conditions#ibs"
+        "description": "Effective relief for IBS, bloating, gas, and digestive discomfort"
       }
-    ],
-    "moreLink": {
-      "text": "View All Conditions",
-      "url": "/en/conditions"
-    }
-  },
-  "services": {
-    "variant": "featured-large",
-    "badge": "TREATMENT OPTIONS",
-    "title": "Our Modalities",
-    "subtitle": "Traditional healing methods backed by modern science",
-    "featured": {
-      "id": "acupuncture",
-      "icon": "Syringe",
-      "title": "Acupuncture",
-      "subtitle": "Restore balance and stimulate healing",
-      "shortDescription": "Our primary treatment modality using fine needles to restore balance and promote healing",
-      "fullDescription": "Acupuncture involves the insertion of fine, sterile needles at specific points to restore the flow of Qi. This ancient practice stimulates natural healing, reduces pain, and promotes overall wellness.",
-      "image": "/uploads/dr-huang-clinic/services/acupuncture.jpg",
-      "link": "/en/services#acupuncture"
-    },
-    "services": [
-      {
-        "id": "herbal-medicine",
-        "icon": "Leaf",
-        "title": "Chinese Herbal Medicine",
-        "subtitle": "Nature's pharmacy for holistic healing",
-        "shortDescription": "Custom herbal formulas tailored to your needs",
-        "fullDescription": "Chinese herbal medicine uses natural plant-based remedies, carefully combined in traditional formulas, to address the root causes of health concerns. Each formula is customized to your unique constitution and current health needs.",
-        "link": "/en/services#herbs"
-      },
-      {
-        "id": "cupping",
-        "icon": "Circle",
-        "title": "Cupping Therapy",
-        "subtitle": "Release tension and promote circulation",
-        "shortDescription": "Release muscle tension and improve circulation",
-        "fullDescription": "Cupping therapy uses glass or silicone cups to create suction on the skin, promoting blood flow, releasing muscle tension, and drawing out toxins. This technique has been used for thousands of years to treat pain and improve circulation.",
-        "link": "/en/services#cupping"
-      },
-      {
-        "id": "moxibustion",
-        "icon": "Flame",
-        "title": "Moxibustion",
-        "subtitle": "Warming therapy to invigorate Qi",
-        "shortDescription": "Warm therapy to strengthen and energize",
-        "fullDescription": "Moxibustion involves burning dried mugwort (moxa) near acupuncture points to warm the meridians, strengthen Qi, and promote healing. The gentle heat penetrates deeply to nourish and invigorate the body.",
-        "link": "/en/services#moxibustion"
-      },
-      {
-        "id": "tuina",
-        "icon": "Hand",
-        "title": "Tui Na Massage",
-        "subtitle": "Therapeutic massage along meridians",
-        "shortDescription": "Traditional Chinese medical massage",
-        "fullDescription": "Tui Na is a form of Chinese therapeutic massage that uses rhythmic compression, stretching, and manipulation techniques along the body's meridian channels. It combines massage with acupressure to restore balance and relieve pain.",
-        "link": "/en/services#tuina"
-      },
-      {
-        "id": "gua-sha",
-        "icon": "Shield",
-        "title": "Gua Sha",
-        "subtitle": "Scraping therapy to release stagnation",
-        "shortDescription": "Scraping therapy for pain and inflammation",
-        "fullDescription": "Gua Sha involves using a smooth-edged tool to gently scrape the skin, promoting blood flow and releasing stagnation. This technique is particularly effective for releasing muscle tension and supporting recovery.",
-        "link": "/en/services#gua-sha"
-      }
-    ],
-    "moreLink": {
-      "text": "View All Modalities",
-      "url": "/en/services"
-    }
-  },
-  "blog": {
-    "variant": "cards-grid",
-    "badge": "LEARN & EXPLORE",
-    "title": "Latest from Our Blog & Media",
-    "subtitle": "Educational resources about TCM and wellness",
-    "posts": [
-      {
-        "slug": "acupuncture-science",
-        "type": "article",
-        "image": "/uploads/dr-huang-clinic/blog/acupuncture-pain.jpg",
-        "category": "Acupuncture",
-        "readTime": "8 min read",
-        "title": "The Science Behind Acupuncture: How It Works",
-        "excerpt": "Discover how acupuncture stimulates your body's natural healing mechanisms based on modern research."
-      },
-      {
-        "slug": "herbal-medicine-101",
-        "type": "article",
-        "image": "/uploads/dr-huang-clinic/blog/herbal-medicine.jpg",
-        "category": "Herbal Medicine",
-        "readTime": "6 min read",
-        "title": "Chinese Herbal Medicine 101",
-        "excerpt": "Learn about the fundamentals of Chinese herbal medicine and how custom formulas are created."
-      },
-      {
-        "slug": "first-visit-video",
-        "type": "video",
-        "image": "/uploads/dr-huang-clinic/blog/digestive-health.jpg",
-        "category": "Patient Education",
-        "readTime": "5 min watch",
-        "title": "What to Expect at Your First Acupuncture Visit",
-        "excerpt": "Watch this video to learn what happens during your initial consultation and treatment."
-      }
-    ],
-    "moreLink": {
-      "text": "Explore All Articles",
-      "url": "/en/blog"
-    }
-  },
-  "gallery": {
-    "variant": "grid-uniform",
-    "badge": "VISIT OUR CLINIC",
-    "title": "Take a Virtual Tour",
-    "subtitle": "See our welcoming, peaceful treatment environment",
-    "images": [
-      {
-        "src": "/uploads/dr-huang-clinic/gallery/reception-area.jpg",
-        "alt": "Clinic reception area",
-        "label": "Reception Area"
-      },
-      {
-        "src": "/uploads/dr-huang-clinic/gallery/treatment-room-1.jpg",
-        "alt": "Treatment room",
-        "label": "Treatment Room"
-      },
-      {
-        "src": "/uploads/dr-huang-clinic/gallery/herbal-pharmacy.jpg",
-        "alt": "Herbal pharmacy",
-        "label": "Herbal Pharmacy"
-      },
-      {
-        "src": "/uploads/dr-huang-clinic/gallery/exterior.jpg",
-        "alt": "Clinic exterior",
-        "label": "Our Location"
-      }
-    ],
-    "moreLink": {
-      "text": "View Complete Gallery",
-      "url": "/en/gallery"
-    }
+    ]
   },
   "firstVisit": {
+    "cta": {
+      "link": {
+        "url": "/en/new-patients",
+        "text": "New Patient Information"
+      },
+      "title": "Ready to Get Started?",
+      "description": "Download our new patient forms or book your first appointment"
+    },
     "badge": "NEW TO TCM?",
-    "title": "Your First Visit",
-    "subtitle": "Here's what to expect during your initial consultation",
     "steps": [
       {
-        "number": 1,
         "title": "Consultation",
+        "number": 1,
         "duration": "20-30 min",
         "description": "Detailed health history and TCM diagnosis"
       },
       {
-        "number": 2,
         "title": "Examination",
+        "number": 2,
         "duration": "10 min",
         "description": "Pulse and tongue diagnosis"
       },
       {
-        "number": 3,
         "title": "Treatment",
+        "number": 3,
         "duration": "30-40 min",
         "description": "Your first acupuncture session"
       },
       {
-        "number": 4,
         "title": "Treatment Plan",
+        "number": 4,
         "duration": "10 min",
         "description": "Personalized recommendations"
       }
     ],
-    "cta": {
-      "title": "Ready to Get Started?",
-      "description": "Download our new patient forms or book your first appointment",
-      "link": {
-        "text": "New Patient Information",
-        "url": "/en/new-patients"
+    "title": "Your First Visit",
+    "subtitle": "Here's what to expect during your initial consultation"
+  },
+  "howItWorks": {
+    "image": "/uploads/dr-huang-clinic/general/acupuncture-16.webp",
+    "steps": [
+      {
+        "icon": "ClipboardList",
+        "title": "Comprehensive Assessment",
+        "number": 1,
+        "description": "We begin with a detailed consultation to understand your health history, symptoms, and wellness goals."
+      },
+      {
+        "icon": "Stethoscope",
+        "title": "Personalized Treatment Plan",
+        "number": 2,
+        "description": "Using TCM diagnosis methods, we create a customized treatment plan tailored to your unique needs."
+      },
+      {
+        "icon": "Heart",
+        "title": "Ongoing Care & Support",
+        "number": 3,
+        "description": "Regular treatments and adjustments ensure optimal results and long-term wellness."
       }
-    }
+    ],
+    "title": "How Chinese Medicine Works",
+    "variant": "vertical-image-right",
+    "imageAlt": "Patient care at Dr. Huang Clinic",
+    "subtitle": "A holistic approach to healing"
   },
   "whyChooseUs": {
     "badge": "WHY CHOOSE US",
     "title": "Experience the Difference",
-    "subtitle": "What sets us apart",
     "features": [
       {
         "icon": "Award",
@@ -422,20 +436,37 @@
         "title": "Proven Results",
         "description": "Thousands of satisfied patients and a 95% satisfaction rate"
       }
-    ]
+    ],
+    "subtitle": "What sets us apart"
   },
-  "cta": {
-    "variant": "centered",
-    "title": "Ready to Begin Your Healing Journey?",
-    "subtitle": "Take the first step towards natural wellness today",
-    "primaryCta": {
-      "text": "Book Your Consultation",
-      "link": "/en/contact"
+  "testimonials": {
+    "badge": "PATIENT SUCCESS STORIES",
+    "title": "Real Results from Real People",
+    "variant": "grid",
+    "moreLink": {
+      "url": "/en/case-studies",
+      "text": "Read More Success Stories"
     },
-    "secondaryCta": {
-      "text": "Call Us Now",
-      "link": "tel:+18453811106"
-    },
-    "contactInfo": "Call us at (845) 381-1106 or book online"
+    "subtitle": "Hear from our patients about their healing journey",
+    "testimonials": [
+      {
+        "name": "Jennifer M.",
+        "image": "",
+        "quote": "After years of chronic back pain and trying everything, acupuncture with Dr. Huang finally gave me relief. I'm pain-free and back to my active lifestyle!",
+        "condition": "Chronic Back Pain"
+      },
+      {
+        "name": "Robert T.",
+        "image": "",
+        "quote": "Dr. Huang's holistic approach helped me manage my anxiety without medication. The combination of acupuncture and herbs has been life-changing.",
+        "condition": "Stress & Anxiety"
+      },
+      {
+        "name": "Lisa K.",
+        "image": "",
+        "quote": "We are forever grateful to Dr. Huang. After struggling with fertility, we're now proud parents of a beautiful baby girl!",
+        "condition": "Fertility Support"
+      }
+    ]
   }
 }

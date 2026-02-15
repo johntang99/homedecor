@@ -99,7 +99,7 @@ export function TemplatesLibrary({ sites, templates }: TemplatesLibraryProps) {
             >
               {(site?.supportedLocales || ['en']).map((item) => (
                 <option key={item} value={item}>
-                  {item === 'en' ? 'English' : item === 'es' ? 'Spanish' : item}
+                  {item === 'en' ? 'English' : item === 'zh' ? 'Chinese' : item}
                 </option>
               ))}
             </select>

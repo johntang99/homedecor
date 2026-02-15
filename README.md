@@ -1,17 +1,17 @@
-# WeWash Industry Template
+# Chinese Medicine Template
 
-Production-ready multi-site laundry template with admin CMS, DB-first content, and EN/ES locale support.
+Production-ready multi-site Traditional Chinese Medicine template with admin CMS, DB-first content, and EN/ZH locale support.
 
 ## What this template includes
 
 - Multi-site architecture with host-based site resolution
 - Admin dashboard (sites, users, content, blog, booking, media)
 - DB-first storage with file fallback
-- Hybrid laundry booking model:
-  - pickup/delivery
-  - drop-off
-  - self-service
-  - commercial accounts
+- Clinic booking model:
+  - consultation booking
+  - follow-up visits
+  - treatment planning
+  - provider operations support
 - Clone-safe docs and starter seed packs
 
 ## Local development
@@ -40,7 +40,7 @@ npm run build
 ## Canonical locales
 
 - `en` (default)
-- `es`
+- `zh`
 
 ## Key docs
 
@@ -59,4 +59,4 @@ Use starter packs as booking data blueprints when launching a new site clone.
 
 ---
 
-This repository is the active hybrid laundry template baseline.
+This repository is the active Chinese Medicine clinic template baseline.

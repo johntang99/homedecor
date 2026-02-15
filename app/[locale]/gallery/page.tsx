@@ -299,7 +299,7 @@ interface PageLayoutConfig {
                  {[
                   locale === 'en' ? 'Wheelchair accessible entrance' : 'Entrada accesible para silla de ruedas',
                   locale === 'en' ? 'Convenient parking available' : 'Estacionamiento conveniente disponible',
-                  locale === 'en' ? 'Multilingual services (English, Spanish)' : 'Servicio multilingue (ingles y espanol)',
+                  locale === 'en' ? 'Multilingual services (English, Chinese)' : '多语言服务（中文、英文）',
                  ].map((feature) => (
                    <div key={feature} className="flex items-center gap-3 p-3 bg-[var(--primary-50)] rounded-lg">
                      <div className="w-6 h-6 rounded-full bg-[var(--brand)] flex items-center justify-center shrink-0">

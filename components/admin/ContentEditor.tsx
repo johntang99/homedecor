@@ -39,7 +39,9 @@ const SECTION_VARIANT_OPTIONS: Record<string, string[]> = {
   testimonials: ['carousel', 'grid', 'masonry', 'slider-vertical', 'featured-single'],
   howItWorks: ['horizontal', 'vertical', 'cards', 'vertical-image-right'],
   conditions: ['grid-cards', 'categories-tabs', 'list-detailed', 'icon-grid'],
-  services: ['grid-cards', 'featured-large', 'list-horizontal', 'accordion', 'tabs'],
+  services: ['grid-cards', 'featured-large', 'list-horizontal', 'accordion', 'tabs', 'detail-alternating'],
+  servicesList: ['grid-cards', 'featured-large', 'list-horizontal', 'accordion', 'tabs', 'detail-alternating'],
+  overview: ['centered', 'left'],
   blog: ['cards-grid', 'featured-side', 'list-detailed', 'carousel'],
   gallery: ['grid-masonry', 'grid-uniform', 'carousel', 'lightbox-grid'],
   cta: ['centered', 'split', 'banner', 'card-elevated'],
@@ -243,7 +245,8 @@ export function ContentEditor({
       return;
     }
 
-    setStatus('Saved');
+    const payload = await response.json();
+    setStatus(payload.message || 'Saved');
   };
 
   const handleImport = async (mode: 'missing' | 'overwrite' = 'missing') => {
@@ -298,7 +301,16 @@ export function ContentEditor({
       if (!response.ok) {
         throw new Error(payload.message || 'Export failed');
       }
-      setStatus(`Exported to ${payload.exportPath}`);
+      const details = [];
+      if (typeof payload.backfilled === 'number') {
+        details.push(`backfilled ${payload.backfilled}`);
+      }
+      if (typeof payload.backfillErrors === 'number' && payload.backfillErrors > 0) {
+        details.push(`backfill errors ${payload.backfillErrors}`);
+      }
+      setStatus(
+        `${payload.message || 'Export completed'}${details.length ? ` (${details.join(', ')})` : ''}`
+      );
     } catch (error: any) {
       setStatus(error?.message || 'Export failed');
     } finally {
@@ -535,6 +547,7 @@ export function ContentEditor({
   const isBlogPostFile = activeFile?.path.startsWith('blog/');
   const isHeaderFile = activeFile?.path === 'header.json';
   const isThemeFile = activeFile?.path === 'theme.json';
+  const isHomePageFile = activeFile?.path === 'pages/home.json';
   const allowCreateOrDuplicate = fileFilter !== 'siteSettings';
   const variantSections = formData
     ? Object.entries(SECTION_VARIANT_OPTIONS).filter(
@@ -552,6 +565,84 @@ export function ContentEditor({
         }))
         .filter((category: any) => category.id && category.name)
     : [];
+  const homePhotoFields = useMemo(() => {
+    if (!isHomePageFile || !formData) return [] as Array<{ path: string[]; label: string }>;
+
+    const fields: Array<{ path: string[]; label: string }> = [];
+    const IMAGE_KEYS = new Set(['image', 'backgroundImage', 'beforeImage', 'afterImage', 'src']);
+    const EXCLUDED_ROOT_KEYS = new Set(['menu', 'topBar', 'topbar']);
+    const DISPLAY_KEYS = [
+      'title',
+      'name',
+      'label',
+      'condition',
+      'clinicName',
+      'tagline',
+      'text',
+      'id',
+      'slug',
+    ];
+
+    const getNodeDisplayLabel = (node: any, fallbackIndex?: number) => {
+      if (!node || typeof node !== 'object') {
+        return typeof fallbackIndex === 'number' ? `Item ${fallbackIndex + 1}` : '';
+      }
+
+      for (const key of DISPLAY_KEYS) {
+        const value = node?.[key];
+        if (typeof value === 'string' && value.trim()) {
+          return key === 'id' || key === 'slug' ? toTitleCase(value) : value.trim();
+        }
+      }
+
+      if (typeof fallbackIndex === 'number') {
+        return `Item ${fallbackIndex + 1}`;
+      }
+      return '';
+    };
+
+    const collectFields = (node: any, path: string[] = [], contextHint = '') => {
+      if (Array.isArray(node)) {
+        node.forEach((item, index) => {
+          const itemHint = getNodeDisplayLabel(item, index);
+          collectFields(item, [...path, String(index)], itemHint);
+        });
+        return;
+      }
+
+      if (!node || typeof node !== 'object') {
+        return;
+      }
+
+      Object.entries(node).forEach(([key, value]) => {
+        if (path.length === 0 && EXCLUDED_ROOT_KEYS.has(key)) {
+          return;
+        }
+
+        const nextPath = [...path, key];
+        const isImageField = IMAGE_KEYS.has(key);
+
+        if (isImageField && typeof value === 'string') {
+          const sectionLabel = nextPath
+            .filter((part) => !/^\d+$/.test(part))
+            .map((part) => toTitleCase(part))
+            .join(' > ');
+          const localHint = getNodeDisplayLabel(node);
+          const hint = localHint || contextHint;
+          const label = hint ? `${sectionLabel} (${hint})` : sectionLabel;
+          fields.push({ path: nextPath, label });
+          return;
+        }
+
+        if (typeof value === 'object' && value !== null) {
+          collectFields(value, nextPath, contextHint);
+        }
+      });
+    };
+
+    collectFields(formData);
+    return fields;
+  }, [isHomePageFile, formData]);
 
   const addSeoPage = () => {
     if (!formData) return;
@@ -747,7 +838,7 @@ export function ContentEditor({
             >
               {(site?.supportedLocales || ['en']).map((item) => (
                 <option key={item} value={item}>
-                  {item === 'en' ? 'English' : item === 'es' ? 'Spanish' : item}
+                  {item === 'en' ? 'English' : item === 'zh' ? 'Chinese' : item}
                 </option>
               ))}
             </select>
@@ -806,7 +897,7 @@ export function ContentEditor({
                   {fileFilter === 'blog' && file.publishDate && (
                     <div className="text-[11px] text-gray-500 mt-1">
                       {new Date(file.publishDate).toLocaleDateString(
-                        locale === 'es' ? 'es-ES' : 'en-US',
+                        locale === 'zh' ? 'zh-CN' : 'en-US',
                         { year: 'numeric', month: 'short', day: 'numeric' }
                       )}
                     </div>
@@ -1168,6 +1259,21 @@ export function ContentEditor({
                     <div>
                       <div className="text-xs font-semibold text-gray-500 uppercase mb-2">
                         Logo
+                      </div>
+                      <div className="mb-3">
+                        <label className="block text-xs text-gray-500">Menu Variant</label>
+                        <select
+                          className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                          value={formData.menu?.variant || 'default'}
+                          onChange={(event) =>
+                            updateFormValue(['menu', 'variant'], event.target.value)
+                          }
+                        >
+                          <option value="default">Default</option>
+                          <option value="centered">Centered</option>
+                          <option value="transparent">Transparent</option>
+                          <option value="stacked">Stacked</option>
+                        </select>
                       </div>
                       <div className="grid gap-3 md:grid-cols-3">
                         <div>
@@ -1545,6 +1651,46 @@ export function ContentEditor({
                 </div>
               )}
 
+              {isHomePageFile && homePhotoFields.length > 0 && (
+                <div className="border border-gray-200 rounded-lg p-4">
+                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
+                    Home Section Photos
+                  </div>
+                  <div className="space-y-3">
+                    {homePhotoFields.map((field) => (
+                      <div
+                        key={field.path.join('.')}
+                        className="grid gap-2 md:grid-cols-[220px_1fr_auto_auto] items-center"
+                      >
+                        <label className="text-xs text-gray-600">{field.label}</label>
+                        <input
+                          className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                          value={String(getPathValue(field.path) || '')}
+                          onChange={(event) =>
+                            updateFormValue(field.path, event.target.value)
+                          }
+                          placeholder="/uploads/..."
+                        />
+                        <button
+                          type="button"
+                          onClick={() => openImagePicker(field.path)}
+                          className="px-3 py-2 rounded-md border border-gray-200 text-xs"
+                        >
+                          Choose
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => updateFormValue(field.path, '')}
+                          className="px-3 py-2 rounded-md border border-gray-200 text-xs"
+                        >
+                          Clear
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {formData?.hero && (
                 <div className="border border-gray-200 rounded-lg p-4">
                   <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
@@ -1655,6 +1801,104 @@ export function ContentEditor({
                         <button
                           type="button"
                           onClick={() => openImagePicker(['hero', 'image'])}
+                          className="px-3 rounded-md border border-gray-200 text-xs"
+                        >
+                          Choose
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {formData?.profile && (
+                <div className="border border-gray-200 rounded-lg p-4">
+                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
+                    Profile
+                  </div>
+                  {'name' in formData.profile && (
+                    <div className="mb-3">
+                      <label className="block text-xs text-gray-500">Name</label>
+                      <input
+                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                        value={formData.profile.name || ''}
+                        onChange={(event) =>
+                          updateFormValue(['profile', 'name'], event.target.value)
+                        }
+                      />
+                    </div>
+                  )}
+                  {'title' in formData.profile && (
+                    <div className="mb-3">
+                      <label className="block text-xs text-gray-500">Title</label>
+                      <input
+                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                        value={formData.profile.title || ''}
+                        onChange={(event) =>
+                          updateFormValue(['profile', 'title'], event.target.value)
+                        }
+                      />
+                    </div>
+                  )}
+                  {'bio' in formData.profile && (
+                    <div className="mb-3">
+                      <label className="block text-xs text-gray-500">Bio</label>
+                      <textarea
+                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                        value={formData.profile.bio || ''}
+                        onChange={(event) =>
+                          updateFormValue(['profile', 'bio'], event.target.value)
+                        }
+                      />
+                    </div>
+                  )}
+                  {'quote' in formData.profile && (
+                    <div className="mb-3">
+                      <label className="block text-xs text-gray-500">Quote</label>
+                      <textarea
+                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                        value={formData.profile.quote || ''}
+                        onChange={(event) =>
+                          updateFormValue(['profile', 'quote'], event.target.value)
+                        }
+                      />
+                    </div>
+                  )}
+                  {'image' in formData.profile && (
+                    <div className="mb-3">
+                      <label className="block text-xs text-gray-500">Profile Photo</label>
+                      <div className="mt-1 flex gap-2">
+                        <input
+                          className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                          value={formData.profile.image || ''}
+                          onChange={(event) =>
+                            updateFormValue(['profile', 'image'], event.target.value)
+                          }
+                        />
+                        <button
+                          type="button"
+                          onClick={() => openImagePicker(['profile', 'image'])}
+                          className="px-3 rounded-md border border-gray-200 text-xs"
+                        >
+                          Choose
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                  {'signature' in formData.profile && (
+                    <div>
+                      <label className="block text-xs text-gray-500">Signature Image</label>
+                      <div className="mt-1 flex gap-2">
+                        <input
+                          className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                          value={formData.profile.signature || ''}
+                          onChange={(event) =>
+                            updateFormValue(['profile', 'signature'], event.target.value)
+                          }
+                        />
+                        <button
+                          type="button"
+                          onClick={() => openImagePicker(['profile', 'signature'])}
                           className="px-3 rounded-md border border-gray-200 text-xs"
                         >
                           Choose
@@ -2006,6 +2250,108 @@ export function ContentEditor({
                       </div>
                     ))}
                   </div>
+                </div>
+              )}
+
+              {formData?.servicesList && (
+                <div className="border border-gray-200 rounded-lg p-4">
+                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
+                    Services List
+                  </div>
+                  {Array.isArray(formData.servicesList.items) && (
+                    <div className="space-y-4 mt-4">
+                      {formData.servicesList.items.map((service: any, index: number) => (
+                        <div key={service.id || index} className="border rounded-md p-3 bg-white">
+                          <div className="text-xs text-gray-500 mb-2">
+                            {service.title || `Service ${index + 1}`}
+                          </div>
+                          <input
+                            className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                            placeholder="Title"
+                            value={service.title || ''}
+                            onChange={(event) =>
+                              updateFormValue(
+                                ['servicesList', 'items', String(index), 'title'],
+                                event.target.value
+                              )
+                            }
+                          />
+                          <textarea
+                            className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                            placeholder="Short description"
+                            value={service.shortDescription || ''}
+                            onChange={(event) =>
+                              updateFormValue(
+                                ['servicesList', 'items', String(index), 'shortDescription'],
+                                event.target.value
+                              )
+                            }
+                          />
+                          <div className="grid grid-cols-2 gap-2 mb-2">
+                            <input
+                              className="rounded-md border border-gray-200 px-3 py-2 text-sm"
+                              placeholder="Price"
+                              value={service.price || ''}
+                              onChange={(event) =>
+                                updateFormValue(
+                                  ['servicesList', 'items', String(index), 'price'],
+                                  event.target.value
+                                )
+                              }
+                            />
+                            <input
+                              className="rounded-md border border-gray-200 px-3 py-2 text-sm"
+                              placeholder="Duration (min)"
+                              type="number"
+                              value={service.durationMinutes || ''}
+                              onChange={(event) =>
+                                updateFormValue(
+                                  ['servicesList', 'items', String(index), 'durationMinutes'],
+                                  parseInt(event.target.value) || 0
+                                )
+                              }
+                            />
+                          </div>
+                          <div className="flex gap-2 mb-2">
+                            <input
+                              className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                              placeholder="Image"
+                              value={service.image || ''}
+                              onChange={(event) =>
+                                updateFormValue(
+                                  ['servicesList', 'items', String(index), 'image'],
+                                  event.target.value
+                                )
+                              }
+                            />
+                            <button
+                              type="button"
+                              onClick={() =>
+                                openImagePicker(['servicesList', 'items', String(index), 'image'])
+                              }
+                              className="px-3 rounded-md border border-gray-200 text-xs"
+                            >
+                              Choose
+                            </button>
+                          </div>
+                          <label className="flex items-center gap-2 text-sm">
+                            <input
+                              type="checkbox"
+                              checked={Boolean(service.featured)}
+                              onChange={(event) =>
+                                updateFormValue(
+                                  ['servicesList', 'items', String(index), 'featured'],
+                                  event.target.checked
+                                )
+                              }
+                              className="rounded border-gray-300"
+                            />
+                            <span className="text-gray-700">Featured (for featured-large variant)</span>
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               )}
 

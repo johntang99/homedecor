@@ -14,6 +14,42 @@ import {
 import { canWriteContent, requireSiteAccess } from '@/lib/admin/permissions';
 import { locales } from '@/lib/i18n';
 
+function isEmptyHeaderPayload(filePath: string, data: any): boolean {
+  if (filePath !== 'header.json' || !data || typeof data !== 'object') return false;
+  const topbar = data.topbar || {};
+  const menu = data.menu || {};
+  const logo = menu.logo || {};
+  const cta = data.cta || {};
+  const items = Array.isArray(menu.items) ? menu.items : [];
+
+  const isBlank = (value: unknown) => typeof value !== 'string' || value.trim() === '';
+  return (
+    isBlank(topbar.phone) &&
+    isBlank(topbar.address) &&
+    isBlank(topbar.badge) &&
+    isBlank(logo.text) &&
+    items.length === 0 &&
+    isBlank(cta.text) &&
+    isBlank(cta.link)
+  );
+}
+
+function parseBooleanEnv(value: string | undefined): boolean | null {
+  if (typeof value !== 'string') return null;
+  const normalized = value.trim().toLowerCase();
+  if (['1', 'true', 'yes', 'on'].includes(normalized)) return true;
+  if (['0', 'false', 'no', 'off'].includes(normalized)) return false;
+  return null;
+}
+
+function shouldWriteThroughFile(): boolean {
+  const override = parseBooleanEnv(process.env.CONTENT_WRITE_THROUGH_FILE);
+  if (override !== null) {
+    return override;
+  }
+  return process.env.NODE_ENV !== 'production';
+}
+
 export async function GET(request: NextRequest) {
   const session = await getSessionFromRequest(request);
   if (!session) {
@@ -46,7 +82,7 @@ export async function GET(request: NextRequest) {
   try {
     if (canUseContentDb()) {
       const entry = await fetchContentEntry(siteId, locale, filePath);
-      if (entry?.data) {
+      if (entry?.data && !isEmptyHeaderPayload(filePath, entry.data)) {
         return NextResponse.json({ content: JSON.stringify(entry.data, null, 2) });
       }
     }
@@ -144,7 +180,30 @@ export async function PUT(request: NextRequest) {
         updatedBy: session.user.email,
       });
     }
-    return NextResponse.json({ success: true });
+
+    if (!shouldWriteThroughFile()) {
+      return NextResponse.json({
+        success: true,
+        fileSync: 'skipped',
+        message: 'Saved to DB (JSON sync disabled in production).',
+      });
+    }
+
+    try {
+      await fs.mkdir(path.dirname(resolved), { recursive: true });
+      await fs.writeFile(resolved, content);
+      return NextResponse.json({
+        success: true,
+        fileSync: 'synced',
+        message: 'Saved to DB + JSON.',
+      });
+    } catch (error: any) {
+      return NextResponse.json({
+        success: true,
+        fileSync: 'failed',
+        message: `Saved to DB (JSON sync failed: ${error?.message || 'unknown error'}).`,
+      });
+    }
   }
 
   await fs.mkdir(path.dirname(resolved), { recursive: true });
@@ -166,7 +225,7 @@ export async function PUT(request: NextRequest) {
   }
 
   await fs.writeFile(resolved, content);
-  return NextResponse.json({ success: true });
+  return NextResponse.json({ success: true, fileSync: 'synced', message: 'Saved to JSON.' });
 }
 
 export async function POST(request: NextRequest) {

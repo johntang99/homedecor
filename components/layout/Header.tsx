@@ -18,6 +18,7 @@ export interface HeaderConfig {
     badge?: string;
   };
   menu?: {
+    variant?: 'default' | 'centered' | 'transparent' | 'stacked';
     logo?: {
       emoji?: string;
       text?: string;
@@ -79,6 +80,7 @@ export default function Header({
           { text: locale === 'en' ? 'Case Studies' : '案例研究', url: `/${locale}/case-studies` },
           { text: locale === 'en' ? 'Gallery' : '图库', url: `/${locale}/gallery` },
           { text: locale === 'en' ? 'New Visit' : '首次就诊', url: `/${locale}/new-patients` },
+          { text: locale === 'en' ? 'Pricing' : '收费', url: `/${locale}/pricing` },
           { text: locale === 'en' ? 'Blog' : '博客', url: `/${locale}/blog` },
           { text: locale === 'en' ? 'Contact' : '联系我们', url: `/${locale}/contact` },
         ];
@@ -89,11 +91,11 @@ export default function Header({
   };
 
   const renderLogo = (sizeClass: string, width: number, height: number) => {
-    if (logoImage?.src) {
+    if (logoImage?.src && logoImage.src.trim()) {
       return (
         <Image
           src={logoImage.src}
-          alt={logoImage.alt || logoConfig?.text || siteInfo?.clinicName || 'Logo'}
+          alt={logoImage.alt || logoConfig?.text || siteInfo?.businessName || siteInfo?.clinicName || 'Logo'}
           width={width}
           height={height}
           className={`${sizeClass} hover:opacity-90 transition-opacity`}
@@ -101,7 +103,7 @@ export default function Header({
       );
     }
 
-    const text = logoConfig?.text || siteInfo?.clinicName || 'Dr. Huang Clinic';
+    const text = logoConfig?.text || siteInfo?.businessName || siteInfo?.clinicName || 'Site';
     const emoji = logoConfig?.emoji;
     return (
       <div className="inline-flex items-center gap-2 text-primary">

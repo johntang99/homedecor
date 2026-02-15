@@ -18,11 +18,11 @@ export async function generateMetadata({ params }: BookingPageProps): Promise<Me
     siteId,
     locale: params.locale,
     slug: 'book',
-    title: params.locale === 'en' ? 'Book Laundry Service' : 'Reservar servicio de lavanderia',
+    title: params.locale === 'en' ? 'Book Consultation' : '预约咨询',
     description:
       params.locale === 'en'
-        ? 'Schedule pickup, drop-off, self-service, or commercial laundry in a few steps.'
-        : 'Programa recogida, entrega o servicio comercial en pocos pasos.',
+        ? 'Schedule your appointment in a few steps.'
+        : '几步完成在线预约。',
   });
 }
 
@@ -38,12 +38,12 @@ export default function BookingPage({ params }: BookingPageProps) {
               <CalendarCheck className="w-6 h-6" />
             </div>
             <h1 className="text-display font-bold text-gray-900">
-              {locale === 'en' ? 'Book Laundry Service' : 'Reservar servicio de lavanderia'}
+              {locale === 'en' ? 'Book Consultation' : '预约咨询'}
             </h1>
             <p className="text-subheading text-gray-600 mt-3">
               {locale === 'en'
-                ? 'Choose service type, select a time slot, and confirm your order.'
-                : 'Selecciona el servicio, el horario y confirma tu pedido.'}
+                ? 'Choose treatment type, select a time slot, and confirm your appointment.'
+                : '选择疗法、预约时段并确认就诊。'}
             </p>
           </div>
           <BookingWidget locale={locale} />

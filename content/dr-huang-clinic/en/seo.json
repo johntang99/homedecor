@@ -1,12 +1,8 @@
 {
-  "title": "Dr Huang Clinic",
-  "description": "Traditional Chinese Medicine & Acupuncture in Middletown, NY.",
-
   "home": {
     "title": "Traditional Chinese Medicine & Acupuncture in Middletown, NY | Dr Huang Clinic",
     "description": "Offering acupuncture, herbal medicine, and holistic care in Middletown, NY. Book an appointment today."
   },
-
   "pages": {
     "about": {
       "title": "About Dr. Huang | Dr Huang Clinic",
@@ -16,5 +12,7 @@
       "title": "Acupuncture & Herbal Medicine | Dr Huang Clinic",
       "description": "Personalized treatments for pain, stress, and wellness."
     }
-  }
+  },
+  "title": "Dr Huang Clinic",
+  "description": "Traditional Chinese Medicine & Acupuncture in Middletown, NY."
 }

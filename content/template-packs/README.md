@@ -1,9 +1,9 @@
-## Laundry Starter Packs
+## Clinic Starter Packs
 
-These seed packs are designed for fast cloning of laundry-industry sites.
+These seed packs are designed for fast cloning of medical clinic sites.
 
-- `starter-basic.json`: Small neighborhood laundry shop.
-- `starter-pro.json`: Hybrid operation (pickup/delivery + self-service + commercial).
+- `starter-basic.json`: Small clinic launch baseline.
+- `starter-pro.json`: Expanded clinic operations baseline.
 
 ### How to use
 
@@ -22,5 +22,5 @@ These seed packs are designed for fast cloning of laundry-industry sites.
 ### Notes
 
 - Packs are intentionally template-safe (no personal PII).
-- Keep locale pair aligned with project defaults (`en`, `es`).
+- Keep locale pair aligned with project defaults (`en`, `zh`).
 - For production, validate domain/locale/user mappings in admin and DB.

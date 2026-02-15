@@ -6,12 +6,11 @@ import {
   getRequestSiteId,
   loadContent,
   loadFooter,
-  loadPageContent,
   loadSeo,
   loadTheme,
   loadSiteInfo,
 } from '@/lib/content';
-import type { FooterSection, HomePage, SeoConfig, SiteInfo } from '@/lib/types';
+import type { FooterSection, SeoConfig, SiteInfo } from '@/lib/types';
 import Header, { type HeaderConfig } from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { getBaseUrlFromHost } from '@/lib/seo';
@@ -34,8 +33,8 @@ export async function generateMetadata({
   if (!site) {
     return {
       metadataBase: baseUrl,
-      title: 'Clinic Website',
-      description: 'Laundry and garment care services',
+      title: 'Business Website',
+      description: 'Multi-site business website',
     };
   }
 
@@ -43,11 +42,11 @@ export async function generateMetadata({
     loadSiteInfo(site.id, locale) as Promise<SiteInfo | null>,
     loadSeo(site.id, locale) as Promise<SeoConfig | null>,
   ]);
-  const titleBase = siteInfo?.clinicName || site.name;
+  const titleBase = siteInfo?.businessName || siteInfo?.clinicName || site.name;
   const description =
     seo?.description ||
     siteInfo?.description ||
-    'Laundry pickup, delivery, and commercial garment care services.';
+    'Professional services, scheduling, and customer support.';
   const titleDefault = seo?.title || titleBase;
   const canonical = new URL(`/${locale}`, baseUrl).toString();
   const languageAlternates = locales.reduce<Record<string, string>>((acc, entry) => {
@@ -113,8 +112,6 @@ export default async function LocaleLayout({
     loadFooter<FooterSection>(site.id, locale as Locale),
     loadContent<HeaderConfig>(site.id, locale as Locale, 'header.json'),
   ]);
-  const homeContent = await loadPageContent<HomePage>('home', locale as Locale);
-  const menuConfig = homeContent?.menu;
   const baseUrl = getBaseUrlFromHost(host);
   
   // Generate inline style for theme variables
@@ -165,7 +162,7 @@ export default async function LocaleLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'LocalBusiness',
-              name: siteInfo.clinicName,
+              name: siteInfo.businessName || siteInfo.clinicName,
               url: new URL(`/${locale}`, baseUrl).toString(),
               description: siteInfo.description,
               telephone: siteInfo.phone,
@@ -188,9 +185,8 @@ export default async function LocaleLayout({
           locale={locale as Locale}
           siteId={site.id}
           siteInfo={siteInfo ?? undefined}
-          variant={menuConfig?.variant || siteInfo?.headerVariant || 'default'}
+          variant={headerConfig?.menu?.variant || siteInfo?.headerVariant || 'default'}
           headerConfig={headerConfig ?? undefined}
-          menu={menuConfig}
         />
         <main className="flex-grow">{children}</main>
         <Footer

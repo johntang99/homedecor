@@ -1,10 +1,10 @@
 {
   "packId": "starter-basic",
-  "description": "Local laundry starter for wash-and-fold + drop-off + limited delivery.",
+  "description": "Local clinic starter for consultations, follow-ups, and treatment visits.",
   "siteDefaults": {
     "defaultLocale": "en",
-    "supportedLocales": ["en", "es"],
-    "primaryCta": "Schedule Pickup"
+    "supportedLocales": ["en", "zh"],
+    "primaryCta": "Book Consultation"
   },
   "sectionsCatalog": [
     "hero",
@@ -18,7 +18,7 @@
   "bookingServices": [
     {
       "id": "wash-fold-dropoff",
-      "name": "Wash & Fold (Drop-off)",
+      "name": "Follow-up Visit",
       "serviceType": "dropoff",
       "pricingModel": "by_weight",
       "unitLabel": "lb",
@@ -30,7 +30,7 @@
     },
     {
       "id": "wash-fold-pickup",
-      "name": "Wash & Fold (Pickup + Delivery)",
+      "name": "Initial Consultation",
       "serviceType": "pickup_delivery",
       "pricingModel": "by_weight",
       "unitLabel": "lb",
@@ -43,7 +43,7 @@
     },
     {
       "id": "dry-cleaning",
-      "name": "Dry Cleaning",
+      "name": "Herbal Medicine Consultation",
       "serviceType": "dropoff",
       "pricingModel": "by_item",
       "unitLabel": "item",

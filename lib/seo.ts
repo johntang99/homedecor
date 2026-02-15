@@ -63,7 +63,7 @@ export async function buildPageMetadata({
   ]);
 
   const pageSeo = getPageSeo(seo, slug);
-  const fallbackTitle = siteInfo?.clinicName || 'Clinic';
+  const fallbackTitle = siteInfo?.businessName || siteInfo?.clinicName || 'Business';
   const resolvedTitle = title || pageSeo?.title || seo?.title || fallbackTitle;
   const resolvedDescription =
     description ||

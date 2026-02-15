@@ -1,9 +1,9 @@
 # Starter Basic Seed Pack
 
-Use this pack for a small local laundry shop launching with:
-- one primary residential pickup service
-- optional drop-off
-- no heavy commercial requirements
+Use this pack for a small local clinic launching with:
+- one primary consultation service
+- optional follow-up booking
+- no heavy enterprise requirements
 
 ## Includes
 - `booking/services.json`

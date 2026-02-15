@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
       domain: payload.domain,
       enabled: payload.enabled ?? true,
       defaultLocale: payload.defaultLocale ?? 'en',
-      supportedLocales: payload.supportedLocales ?? ['en', 'es'],
+      supportedLocales: payload.supportedLocales ?? ['en', 'zh'],
     });
 
     if (payload.cloneFrom) {
@@ -151,17 +151,15 @@ export async function POST(request: NextRequest) {
       const settingsPath = path.join(bookingRoot, 'settings.json');
       const defaultServices: BookingService[] = [
         {
-          id: 'wash-fold-pickup',
-          name: 'Wash & Fold (Pickup + Delivery)',
-          serviceType: 'pickup_delivery',
-          pricingModel: 'by_weight',
-          unitLabel: 'lb',
+          id: 'default-service',
+          name: 'Default Service',
+          serviceType: 'appointment',
+          pricingModel: 'flat',
           durationMinutes: 60,
-          price: 1.95,
-          minOrderValue: 35,
+          price: 0,
           leadTimeHours: 12,
           capacityPerSlot: 4,
-          recurringEligible: true,
+          recurringEligible: false,
           active: true,
         },
       ];
@@ -170,7 +168,7 @@ export async function POST(request: NextRequest) {
         bufferMinutes: 15,
         minNoticeHours: 4,
         maxDaysAhead: 60,
-        defaultServiceType: 'pickup_delivery',
+        defaultServiceType: 'appointment',
         serviceAreaZips: [],
         blackoutWindows: [],
         rushLeadHours: 6,

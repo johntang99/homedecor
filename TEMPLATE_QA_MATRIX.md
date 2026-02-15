@@ -1,47 +1,54 @@
-# Laundry Template QA Matrix
+# Medical Template QA Matrix
 
-Use this matrix before publishing a template release or cloning to a new client.
+Use this matrix before publishing `chinese-medicine` template updates or cloning to a new client.
+
+Supported locales for this template: `en`, `zh`.
 
 ## 1) Public Experience
 
-- [ ] `GET /en` renders laundry messaging (not clinic wording).
-- [ ] `GET /es` renders Spanish navigation and CTA labels.
-- [ ] Header language switch includes only `en` and `es`.
-- [ ] Core pages load: `/services`, `/pricing`, `/contact`, `/blog`, `/case-studies`.
+- [x] `GET /en` renders content.
+- [x] `GET /zh` renders content.
+- [x] Header language switch includes only `en` and `zh`.
+- [x] Core pages build and route: `/services`, `/pricing`, `/contact`, `/blog`, `/case-studies`.
+- [ ] Manual browser spot-check for medical copy quality and translation consistency.
 
-## 2) Booking Flows (Hybrid)
+## 2) Services Variants
 
-- [ ] Service types available in admin: `pickup_delivery`, `dropoff`, `self_service`, `commercial`.
-- [ ] Slot generation respects:
-  - [ ] `minNoticeHours`
-  - [ ] per-service `leadTimeHours`
-  - [ ] per-slot capacity (`capacityPerSlot` or global max)
-- [ ] Public booking create endpoint accepts optional hybrid fields without error.
-- [ ] Cancel and reschedule still work on existing records.
+- [x] `services.json` supports `servicesList.variant` and keeps legacy `services` fallback.
+- [x] Services page uses variant-aware rendering via `ServicesSection`.
+- [x] Services variant union includes `detail-alternating`.
+- [x] Admin Form supports editing `servicesList.items` (title/description/image/price/duration/featured).
+- [ ] Manual check in Admin: change variant and confirm frontend layout updates.
 
-## 3) Admin + RBAC
+## 3) Content Variant Coverage
 
-- [ ] `super_admin` can manage all sites/users/modules.
-- [ ] `site_admin` only manages assigned sites.
-- [ ] `editor` can edit content but cannot manage users/sites.
-- [ ] `viewer` has read-only behavior where expected.
-- [ ] Site and locale selectors are consistent in content/blog/template managers.
+- [x] Missing `variant` fields auto-filled for medical page JSON files (`en`/`zh`).
+- [x] Coverage check result: `en` missing variant count = `0`.
+- [x] Coverage check result: `zh` missing variant count = `0`.
 
-## 4) Data Safety
+## 4) Data Safety (DB <-> JSON)
 
-- [ ] Import `missing` mode does not overwrite existing DB rows.
-- [ ] Overwrite import requires explicit action.
-- [ ] Export returns current DB-backed content.
-- [ ] `sites` and `admin_users` rows match intended clone identity.
+- [x] Import supports safe mode (`missing`) and skips existing DB rows.
+- [x] Overwrite mode is explicit (`mode = overwrite`).
+- [x] Export writes DB content to source files under `content/<siteId>/<locale>/`.
+- [x] `theme.json` export writes to site-level `content/<siteId>/theme.json`.
+- [ ] Manual roundtrip check: edit DB -> Export JSON -> verify expected file diff.
 
-## 5) Starter Seed Packs
+## 5) Admin + RBAC
 
-- [ ] `content/starter-packs/starter-basic/` reviewed and usable.
-- [ ] `content/starter-packs/starter-pro/` reviewed and usable.
-- [ ] Pack fields align with current booking/content schema.
+- [x] Site/locale selectors use `en`/`zh` labels consistently in content/blog/template managers.
+- [ ] `super_admin` full access verified with real accounts.
+- [ ] `site_admin` scope restrictions verified with assigned sites.
+- [ ] `editor` and `viewer` permission boundaries verified.
 
 ## 6) Build and Runtime
 
-- [ ] `npm run build` succeeds.
-- [ ] No locale label regressions in admin (`Chinese` should not appear for this template).
-- [ ] No 404s for default locale route.
+- [x] `npm run build` succeeds after updates.
+- [x] Build routes generate for `/en/*` and `/zh/*`.
+- [ ] Runtime smoke test in browser for Admin login and CRUD actions.
+
+## 7) Clone Readiness
+
+- [x] Site creation defaults now use `supportedLocales: ['en', 'zh']`.
+- [x] i18n locale registry set to `en`/`zh`.
+- [ ] Confirm cloned site has expected `sites` and `admin_users` rows in DB.

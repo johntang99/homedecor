@@ -1,66 +1,75 @@
 {
-  "hero": {
+  "cta": {
+    "title": "不确定我们能否帮助您？",
     "variant": "centered",
-    "title": "治疗病症",
-    "subtitle": "传统中医为各种健康问题提供自然、有效的解决方案",
-    "backgroundImage": "/uploads/dr-huang-clinic/conditions/hero-bg.jpg"
+    "primaryCta": {
+      "link": "/zh/contact",
+      "text": "预约免费咨询"
+    },
+    "description": "安排免费咨询以讨论您的具体健康问题",
+    "secondaryCta": {
+      "link": "tel:+18453811106",
+      "text": "致电我们"
+    }
   },
-  "introduction": {
-    "text": "在黄医生诊所，我们治疗整个人，而不仅仅是症状。我们的综合方法在提供即时缓解的同时，解决疾病的根本原因。以下是我们常见治疗的一些病症，并取得了良好的效果。",
-    "note": "没有看到您的病症？请联系我们 - 我们可能仍然可以帮助您！"
+  "hero": {
+    "title": "治疗病症",
+    "variant": "split-photo-right",
+    "subtitle": "传统中医为各种健康问题提供自然、有效的解决方案",
+    "backgroundImage": "/uploads/dr-huang-clinic/gallery/needles-sterile.jpg"
   },
   "categories": [
     {
       "id": "all",
-      "name": "所有病症",
       "icon": "Grid",
+      "name": "所有病症",
       "description": "查看所有病症"
     },
     {
       "id": "pain-management",
-      "name": "疼痛管理",
       "icon": "Activity",
+      "name": "疼痛管理",
       "description": "急性和慢性疼痛的自然缓解"
     },
     {
       "id": "mental-health",
-      "name": "心理与情绪健康",
       "icon": "Brain",
+      "name": "心理与情绪健康",
       "description": "压力、焦虑、抑郁和情绪健康的支持"
     },
     {
       "id": "digestive",
-      "name": "消化系统健康",
       "icon": "Apple",
+      "name": "消化系统健康",
       "description": "消化系统疾病和肠道健康的解决方案"
     },
     {
       "id": "womens-health",
-      "name": "妇女健康",
       "icon": "Heart",
+      "name": "妇女健康",
       "description": "妇女健康问题的综合护理"
     },
     {
       "id": "respiratory",
-      "name": "呼吸系统问题",
       "icon": "Wind",
+      "name": "呼吸系统问题",
       "description": "呼吸和呼吸系统的支持"
     },
     {
       "id": "immune-system",
-      "name": "免疫系统",
       "icon": "Shield",
+      "name": "免疫系统",
       "description": "增强身体的自然防御"
     }
   ],
   "conditions": [
     {
       "id": "back-pain",
-      "category": "pain-management",
       "icon": "Activity",
-      "image": "https://images.unsplash.com/photo-1768507423533-b87b62769758?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "image": "/uploads/dr-huang-clinic/home/welcome-section.jpg",
       "title": "腰背痛",
-      "description": "无论是急性还是慢性，针灸和中医疗法都能有效缓解下背部疼痛、上背部疼痛和坐骨神经痛，无需药物或手术。",
+      "category": "pain-management",
+      "featured": true,
       "symptoms": [
         "下背部疼痛",
         "上背部僵硬",
@@ -69,6 +78,7 @@
         "肌肉痉挛",
         "活动受限"
       ],
+      "description": "无论是急性还是慢性，针灸和中医疗法都能有效缓解下背部疼痛、上背部疼痛和坐骨神经痛，无需药物或手术。",
       "tcmApproach": "中医认为背痛是经络中气血流动的阻塞。我们使用针灸来释放阻塞，拔罐来改善循环，以及中药来减少炎症和增强背部。",
       "treatmentMethods": [
         "针灸",
@@ -76,15 +86,13 @@
         "推拿",
         "中药",
         "艾灸"
-      ],
-      "featured": true
+      ]
     },
     {
       "id": "neck-shoulder-pain",
-      "category": "pain-management",
       "icon": "Activity",
       "title": "颈肩疼痛",
-      "description": "缓解由压力、姿势不良或受伤引起的颈肩紧张、僵硬和疼痛。",
+      "category": "pain-management",
       "symptoms": [
         "颈部僵硬",
         "肩部紧张",
@@ -93,6 +101,7 @@
         "肌肉结节",
         "疼痛放射到手臂"
       ],
+      "description": "缓解由压力、姿势不良或受伤引起的颈肩紧张、僵硬和疼痛。",
       "tcmApproach": "颈肩疼痛通常由气滞和血瘀引起。我们用针灸释放触发点，用推拿放松紧张的肌肉，用拔罐改善循环。",
       "treatmentMethods": [
         "针灸",
@@ -104,10 +113,9 @@
     },
     {
       "id": "arthritis",
-      "category": "pain-management",
       "icon": "Activity",
       "title": "关节炎和关节疼痛",
-      "description": "骨关节炎、类风湿性关节炎和一般关节炎症的自然疼痛管理。",
+      "category": "pain-management",
       "symptoms": [
         "关节疼痛和肿胀",
         "晨僵",
@@ -115,6 +123,7 @@
         "炎症",
         "天气变化时疼痛加剧"
       ],
+      "description": "骨关节炎、类风湿性关节炎和一般关节炎症的自然疼痛管理。",
       "tcmApproach": "关节炎通常被视为'痹症'，涉及风、寒、湿或热等致病因素阻塞关节。治疗侧重于驱除这些因素，减少炎症和增强身体。",
       "treatmentMethods": [
         "针灸",
@@ -126,11 +135,11 @@
     },
     {
       "id": "headaches-migraines",
-      "category": "pain-management",
       "icon": "Activity",
-      "image": "https://images.unsplash.com/photo-1554574004-b5ed96682e9b?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "image": "/uploads/dr-huang-clinic/general/acupuncture-12.jpeg",
       "title": "头痛和偏头痛",
-      "description": "无需药物即可有效治疗紧张性头痛、偏头痛和慢性头痛。",
+      "category": "pain-management",
+      "featured": true,
       "symptoms": [
         "反复头痛",
         "偏头痛发作",
@@ -139,6 +148,7 @@
         "头痛伴恶心",
         "颈部紧张"
       ],
+      "description": "无需药物即可有效治疗紧张性头痛、偏头痛和慢性头痛。",
       "tcmApproach": "头痛在中医中有各种证型，包括肝阳上亢、血虚或外邪因素。我们识别您的具体证型并相应地用针灸和中药治疗。",
       "treatmentMethods": [
         "针灸",
@@ -146,16 +156,15 @@
         "刮痧",
         "食疗",
         "压力管理"
-      ],
-      "featured": true
+      ]
     },
     {
       "id": "anxiety",
-      "category": "mental-health",
       "icon": "Brain",
-      "image": "https://images.unsplash.com/photo-1513097847644-f00cfe868607?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "image": "/uploads/dr-huang-clinic/general/anxiate-3.jpeg",
       "title": "焦虑和恐慌症",
-      "description": "焦虑、恐慌发作和一般紧张的自然、无药物支持。",
+      "category": "mental-health",
+      "featured": true,
       "symptoms": [
         "过度担忧",
         "思绪飞驰",
@@ -165,6 +174,7 @@
         "身体紧张",
         "睡眠问题"
       ],
+      "description": "焦虑、恐慌发作和一般紧张的自然、无药物支持。",
       "tcmApproach": "焦虑通常涉及心肾不和、肝气郁结或神不安。我们安神、调节气流、滋养脏腑以恢复情绪平衡。",
       "treatmentMethods": [
         "针灸",
@@ -172,15 +182,13 @@
         "呼吸练习",
         "生活方式咨询",
         "饮食建议"
-      ],
-      "featured": true
+      ]
     },
     {
       "id": "depression",
-      "category": "mental-health",
       "icon": "Brain",
       "title": "抑郁和情绪低落",
-      "description": "抑郁、低能量和缺乏动力的整体支持。",
+      "category": "mental-health",
       "symptoms": [
         "持续悲伤",
         "失去兴趣",
@@ -190,6 +198,7 @@
         "注意力难以集中",
         "绝望感"
       ],
+      "description": "抑郁、低能量和缺乏动力的整体支持。",
       "tcmApproach": "抑郁可能涉及肝气郁结、心血虚或脾气虚。治疗侧重于疏通郁结的气、滋养虚弱和振奋精神。",
       "treatmentMethods": [
         "针灸",
@@ -201,10 +210,9 @@
     },
     {
       "id": "insomnia",
-      "category": "mental-health",
       "icon": "Brain",
       "title": "失眠和睡眠障碍",
-      "description": "难以入睡、保持睡眠或睡眠质量差的自然解决方案。",
+      "category": "mental-health",
       "symptoms": [
         "难以入睡",
         "夜间醒来",
@@ -213,6 +221,7 @@
         "白天疲劳",
         "睡前思绪飞驰"
       ],
+      "description": "难以入睡、保持睡眠或睡眠质量差的自然解决方案。",
       "tcmApproach": "睡眠问题通常源于心肾不平衡、阴虚有热或神不安。我们滋阴、安心和镇定神以获得安宁的睡眠。",
       "treatmentMethods": [
         "针灸",
@@ -224,10 +233,9 @@
     },
     {
       "id": "stress",
-      "category": "mental-health",
       "icon": "Brain",
       "title": "压力和倦怠",
-      "description": "面对慢性压力或倦怠时恢复平衡和韧性。",
+      "category": "mental-health",
       "symptoms": [
         "感到不知所措",
         "精疲力竭",
@@ -237,6 +245,7 @@
         "消化问题",
         "睡眠问题"
       ],
+      "description": "面对慢性压力或倦怠时恢复平衡和韧性。",
       "tcmApproach": "慢性压力耗气并导致肝郁。我们调节肝、补虚并提供压力管理技巧以恢复平衡并建立韧性。",
       "treatmentMethods": [
         "针灸",
@@ -248,11 +257,11 @@
     },
     {
       "id": "ibs",
-      "category": "digestive",
       "icon": "Apple",
-      "image": "https://images.unsplash.com/photo-1555243896-c709bfa0b564?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "image": "/uploads/dr-huang-clinic/blog/digestive-health.jpg",
       "title": "肠易激综合征和消化问题",
-      "description": "有效缓解肠易激综合征、腹胀、胀气和消化不适。",
+      "category": "digestive",
+      "featured": true,
       "symptoms": [
         "腹痛",
         "腹胀",
@@ -261,6 +270,7 @@
         "痉挛",
         "食物敏感"
       ],
+      "description": "有效缓解肠易激综合征、腹胀、胀气和消化不适。",
       "tcmApproach": "IBS通常涉及肝脾不和，即压力影响消化。我们调节肝气、增强脾功能和协调消化系统。",
       "treatmentMethods": [
         "针灸",
@@ -268,15 +278,13 @@
         "食疗",
         "压力管理",
         "生活方式调整"
-      ],
-      "featured": true
+      ]
     },
     {
       "id": "acid-reflux",
-      "category": "digestive",
       "icon": "Apple",
       "title": "胃酸反流和胃食管反流病",
-      "description": "烧心、胃酸反流和胃食管反流病的自然治疗。",
+      "category": "digestive",
       "symptoms": [
         "烧心",
         "胃酸反流",
@@ -285,6 +293,7 @@
         "慢性咳嗽",
         "声音嘶哑"
       ],
+      "description": "烧心、胃酸反流和胃食管反流病的自然治疗。",
       "tcmApproach": "反流涉及胃气上逆，通常伴有热或痰。我们将胃气向下引导，清热并增强消化功能。",
       "treatmentMethods": [
         "针灸",
@@ -296,10 +305,9 @@
     },
     {
       "id": "constipation",
-      "category": "digestive",
       "icon": "Apple",
       "title": "便秘",
-      "description": "慢性便秘和不规则排便的温和、有效缓解。",
+      "category": "digestive",
       "symptoms": [
         "排便不频繁",
         "大便干硬",
@@ -308,6 +316,7 @@
         "腹部不适",
         "腹胀"
       ],
+      "description": "慢性便秘和不规则排便的温和、有效缓解。",
       "tcmApproach": "便秘可能由气滞、血虚、阴虚或脾气虚引起。治疗根据您的具体证型量身定制，以恢复正常肠道功能。",
       "treatmentMethods": [
         "针灸",
@@ -319,11 +328,11 @@
     },
     {
       "id": "fertility",
-      "category": "womens-health",
       "icon": "Heart",
-      "image": "https://images.unsplash.com/photo-1721222143419-3a9665c6ca2a?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "image": "/uploads/dr-huang-clinic/general/fertility-2.jpg",
       "title": "生育支持",
-      "description": "为自然受孕和试管婴儿成功提供全面支持，适用于女性和男性。",
+      "category": "womens-health",
+      "featured": true,
       "symptoms": [
         "难以受孕",
         "月经不规律",
@@ -332,6 +341,7 @@
         "荷尔蒙失衡",
         "既往流产"
       ],
+      "description": "为自然受孕和试管婴儿成功提供全面支持，适用于女性和男性。",
       "tcmApproach": "我们专注于调节月经周期、滋养肾精、改善生殖器官血流和减轻压力。治疗根据每个伴侣的需求定制。",
       "treatmentMethods": [
         "针灸",
@@ -339,15 +349,13 @@
         "食疗",
         "生活方式咨询",
         "减压"
-      ],
-      "featured": true
+      ]
     },
     {
       "id": "menstrual-issues",
-      "category": "womens-health",
       "icon": "Heart",
       "title": "月经失调",
-      "description": "痛经、月经不规律、经前综合症和月经相关问题的自然治疗。",
+      "category": "womens-health",
       "symptoms": [
         "痛经",
         "月经不规律",
@@ -356,6 +364,7 @@
         "情绪波动",
         "腹胀和痉挛"
       ],
+      "description": "痛经、月经不规律、经前综合症和月经相关问题的自然治疗。",
       "tcmApproach": "月经问题通常涉及肝气郁结、血虚或子宫寒。我们调节周期、养血、行气和驱除致病因素。",
       "treatmentMethods": [
         "针灸",
@@ -367,10 +376,9 @@
     },
     {
       "id": "menopause",
-      "category": "womens-health",
       "icon": "Heart",
       "title": "更年期症状",
-      "description": "潮热、盗汗、情绪变化和其他更年期症状的自然缓解。",
+      "category": "womens-health",
       "symptoms": [
         "潮热",
         "盗汗",
@@ -380,6 +388,7 @@
         "性欲低下",
         "体重增加"
       ],
+      "description": "潮热、盗汗、情绪变化和其他更年期症状的自然缓解。",
       "tcmApproach": "更年期涉及肾阴阳衰退。我们滋养肾阴、协调阴阳和安神以缓解过渡并减少症状。",
       "treatmentMethods": [
         "针灸",
@@ -391,10 +400,9 @@
     },
     {
       "id": "pcos",
-      "category": "womens-health",
       "icon": "Heart",
       "title": "多囊卵巢综合症",
-      "description": "调节荷尔蒙、恢复月经周期和管理多囊卵巢综合症症状的整体治疗。",
+      "category": "womens-health",
       "symptoms": [
         "月经不规律或闭经",
         "体重增加",
@@ -403,6 +411,7 @@
         "难以受孕",
         "胰岛素抵抗"
       ],
+      "description": "调节荷尔蒙、恢复月经周期和管理多囊卵巢综合症症状的整体治疗。",
       "tcmApproach": "多囊卵巢综合症涉及肾虚、痰湿蓄积和肝气郁结。治疗侧重于化痰、调气和滋养肾功能。",
       "treatmentMethods": [
         "针灸",
@@ -414,10 +423,9 @@
     },
     {
       "id": "allergies",
-      "category": "respiratory",
       "icon": "Wind",
       "title": "过敏和花粉症",
-      "description": "季节性过敏、花粉症和环境敏感的自然缓解。",
+      "category": "respiratory",
       "symptoms": [
         "打喷嚏",
         "流鼻涕或鼻塞",
@@ -426,6 +434,7 @@
         "鼻窦压力",
         "疲劳"
       ],
+      "description": "季节性过敏、花粉症和环境敏感的自然缓解。",
       "tcmApproach": "过敏由卫气虚弱和内部失衡引起。我们增强卫气、清除致病因素并减少炎症反应。",
       "treatmentMethods": [
         "针灸",
@@ -437,10 +446,9 @@
     },
     {
       "id": "asthma",
-      "category": "respiratory",
       "icon": "Wind",
       "title": "哮喘",
-      "description": "哮喘管理的补充支持，减少发作的频率和严重程度。",
+      "category": "respiratory",
       "symptoms": [
         "喘息",
         "呼吸急促",
@@ -449,6 +457,7 @@
         "呼吸困难",
         "运动诱发的症状"
       ],
+      "description": "哮喘管理的补充支持，减少发作的频率和严重程度。",
       "tcmApproach": "哮喘涉及肺肾虚伴痰蓄积。我们增强肺肾功能、化痰并减少反应性。",
       "treatmentMethods": [
         "针灸",
@@ -460,10 +469,9 @@
     },
     {
       "id": "chronic-cough",
-      "category": "respiratory",
       "icon": "Wind",
       "title": "慢性咳嗽",
-      "description": "治疗对常规方法无反应的持续咳嗽。",
+      "category": "respiratory",
       "symptoms": [
         "持续干咳",
         "有痰咳嗽",
@@ -472,6 +480,7 @@
         "说话时加重",
         "病毒感染后咳嗽"
       ],
+      "description": "治疗对常规方法无反应的持续咳嗽。",
       "tcmApproach": "慢性咳嗽有各种证型，包括肺阴虚、肺热或痰蓄积。我们识别具体证型并相应治疗。",
       "treatmentMethods": [
         "针灸",
@@ -483,10 +492,9 @@
     },
     {
       "id": "frequent-colds",
-      "category": "immune-system",
       "icon": "Shield",
       "title": "频繁感冒和流感",
-      "description": "增强免疫力以减少感冒和呼吸道感染的频率和严重程度。",
+      "category": "immune-system",
       "symptoms": [
         "容易感冒",
         "恢复缓慢",
@@ -495,6 +503,7 @@
         "免疫反应弱",
         "频繁喉咙痛"
       ],
+      "description": "增强免疫力以减少感冒和呼吸道感染的频率和严重程度。",
       "tcmApproach": "频繁生病表明卫气虚弱。我们增强卫气、补肺脾功能并建立整体免疫韧性。",
       "treatmentMethods": [
         "针灸",
@@ -506,10 +515,9 @@
     },
     {
       "id": "fatigue",
-      "category": "immune-system",
       "icon": "Shield",
       "title": "慢性疲劳",
-      "description": "在经历持续疲倦和低能量时恢复能量和活力。",
+      "category": "immune-system",
       "symptoms": [
         "持续精疲力竭",
         "低能量",
@@ -518,6 +526,7 @@
         "睡眠不解乏",
         "难以完成日常任务"
       ],
+      "description": "在经历持续疲倦和低能量时恢复能量和活力。",
       "tcmApproach": "慢性疲劳通常涉及脾、肾或两者的气虚，可能伴有血虚。我们补虚并恢复活力。",
       "treatmentMethods": [
         "针灸",
@@ -528,17 +537,9 @@
       ]
     }
   ],
-  "cta": {
-    "variant": "centered",
-    "title": "不确定我们能否帮助您？",
-    "description": "安排免费咨询以讨论您的具体健康问题",
-    "primaryCta": {
-      "text": "预约免费咨询",
-      "link": "/zh/contact"
-    },
-    "secondaryCta": {
-      "text": "致电我们",
-      "link": "tel:+18453811106"
-    }
+  "introduction": {
+    "note": "没有看到您的病症？请联系我们 - 我们可能仍然可以帮助您！",
+    "text": "在黄医生诊所，我们治疗整个人，而不仅仅是症状。我们的综合方法在提供即时缓解的同时，解决疾病的根本原因。以下是我们常见治疗的一些病症，并取得了良好的效果。",
+    "variant": "centered"
   }
 }

@@ -7,6 +7,7 @@ import { buildPageMetadata } from '@/lib/seo';
 import { ServicesPage, Locale } from '@/lib/types';
 import { Badge, Card, CardHeader, CardTitle, CardDescription, CardContent, Icon, Accordion } from '@/components/ui';
 import CTASection from '@/components/sections/CTASection';
+import ServicesSection from '@/components/sections/ServicesSection';
 import { Award, Users, Shield } from 'lucide-react';
 
 interface ServicesPageProps {
@@ -27,6 +28,12 @@ interface BlogListItem {
 interface PageLayoutConfig {
   sections: Array<{ id: string }>;
 }
+
+const trustIconMap = {
+  Award,
+  Users,
+  Shield,
+} as const;
 
 export async function generateMetadata({ params }: ServicesPageProps): Promise<Metadata> {
   const { locale } = params;
@@ -55,12 +62,13 @@ export default async function ServicesPageComponent({ params }: ServicesPageProp
     notFound();
   }
 
-  const { hero, overview, services, faq, cta } = content;
+  const { hero, overview, servicesList, services: servicesLegacy, faq, cta } = content;
+  const services = servicesList?.items || servicesLegacy || [];
   const blogBySlug = new Map(blogPosts.map((post) => [post.slug, post]));
-  const preferredSlugs = [
-    'laundry-turnaround-planning',
-    'fabric-care-basics',
-    'commercial-laundry-checklist',
+  const preferredSlugs = content.relatedReading?.preferredSlugs || [
+    'acupuncture-pain-relief-science',
+    'chinese-herbal-formulas',
+    'first-visit-acupuncture-guide',
   ];
   const preferredPosts = preferredSlugs
     .map((slug) => blogBySlug.get(slug))
@@ -70,23 +78,45 @@ export default async function ServicesPageComponent({ params }: ServicesPageProp
     : [...blogPosts]
         .sort((a, b) => (b.publishDate || '').localeCompare(a.publishDate || ''))
         .slice(0, 3);
-  const trustItems = [
+  const trustItemsDefault = [
     {
-      icon: Award,
-      title: locale === 'en' ? 'Quality Process' : 'Proceso de calidad',
-      description: locale === 'en' ? 'Inspected before delivery' : 'Inspeccion antes de entregar',
+      icon: 'Award',
+      title: locale === 'en' ? 'Licensed Expertise' : '持牌专业团队',
+      description: locale === 'en' ? 'Evidence-informed TCM care' : '循证结合传统中医',
     },
     {
-      icon: Users,
-      title: locale === 'en' ? 'Flexible Plans' : 'Planes flexibles',
-      description: locale === 'en' ? 'Built for your schedule' : 'Adaptados a tu horario',
+      icon: 'Users',
+      title: locale === 'en' ? 'Personalized Plans' : '个性化调理方案',
+      description: locale === 'en' ? 'Tailored by your constitution' : '按体质与症状定制',
     },
     {
-      icon: Shield,
-      title: locale === 'en' ? 'Reliable Operations' : 'Operacion confiable',
-      description: locale === 'en' ? 'Route and SLA controls' : 'Control por rutas y SLA',
+      icon: 'Shield',
+      title: locale === 'en' ? 'Safe & Trusted' : '安全规范治疗',
+      description: locale === 'en' ? 'Clean, professional treatment standards' : '严格卫生与流程标准',
     },
   ];
+  const trustItems = (content.trustBar?.items && content.trustBar.items.length > 0
+    ? content.trustBar.items
+    : trustItemsDefault
+  ).map((item) => ({
+    ...item,
+    icon: trustIconMap[item.icon as keyof typeof trustIconMap] || Shield,
+  }));
+  const heroPlaceholder = content.heroPlaceholder || {
+    emoji: '🧘',
+    title: locale === 'en' ? 'Professional Services' : '专业服务',
+    subtitle: locale === 'en' ? 'Customized plans tailored to your goals' : '根据您的目标定制方案',
+  };
+  const overviewTitle = overview.title || (locale === 'en' ? 'Benefits of Our Care Model' : '我们的服务优势');
+  const servicesBadge = content.servicesList?.badge || (locale === 'en' ? 'OUR SERVICES' : '服务项目');
+  const servicesTitleFallback = locale === 'en' ? 'Our Services' : '服务项目';
+  const legacyLabels = content.legacyLabels || {};
+  const faqSubtitle =
+    faq.subtitle ||
+    (locale === 'en'
+      ? 'Common questions about services, safety, and expected outcomes'
+      : '关于服务、安全与预期结果的常见问题');
+  const relatedReading = content.relatedReading || {};
   const layoutOrder = new Map<string, number>(
     layout?.sections?.map((section, index) => [section.id, index]) || []
   );
@@ -172,12 +202,12 @@ export default async function ServicesPageComponent({ params }: ServicesPageProp
                     <div className="absolute top-1/3 right-12 w-16 h-16 bg-primary-100/20 rounded-full"></div>
 
                     <div className="relative z-10 text-center">
-                      <div className="text-8xl mb-6">🧘</div>
+                      <div className="text-8xl mb-6">{heroPlaceholder.emoji || '🧘'}</div>
                       <p className="text-gray-700 font-semibold text-subheading mb-2">
-                        {locale === 'en' ? 'Hybrid Laundry Services' : 'Servicios de lavanderia hibridos'}
+                        {heroPlaceholder.title}
                       </p>
                       <p className="text-gray-600 text-sm">
-                        {locale === 'en' ? 'Pickup, drop-off, and commercial-ready' : 'Recogida, entrega y listo para comercial'}
+                        {heroPlaceholder.subtitle}
                       </p>
                     </div>
                   </div>
@@ -201,9 +231,7 @@ export default async function ServicesPageComponent({ params }: ServicesPageProp
 
             <div className="bg-gradient-to-br from-primary/5 to-backdrop-primary rounded-2xl p-8 lg:p-12">
               <h2 className="text-heading font-bold text-gray-900 mb-6">
-                {locale === 'en'
-                  ? 'Benefits of the WeWash Service Model'
-                  : 'Beneficios del modelo de servicio WeWash'}
+                {overviewTitle}
               </h2>
               <div className="grid sm:grid-cols-2 gap-4">
                 {overview.benefits.map((benefit, index) => (
@@ -219,8 +247,24 @@ export default async function ServicesPageComponent({ params }: ServicesPageProp
         </section>
       )}
 
-      {/* Services Grid */}
-      {isEnabled('services') && (
+      {/* Services Section - Variant-aware */}
+      {isEnabled('services') && content.servicesList && (
+        <div style={sectionStyle('services')}>
+          <ServicesSection
+            variant={content.servicesList.variant || 'grid-cards'}
+            badge={servicesBadge}
+            title={
+              content.servicesList.title ||
+              servicesTitleFallback
+            }
+            subtitle={content.servicesList.subtitle || ''}
+            services={services}
+          />
+        </div>
+      )}
+
+      {/* Fallback: Legacy services array rendering */}
+      {isEnabled('services') && !content.servicesList && services.length > 0 && (
         <section
           className="py-16 lg:py-24 bg-gradient-to-br from-backdrop-secondary to-white"
           style={sectionStyle('services')}
@@ -265,7 +309,9 @@ export default async function ServicesPageComponent({ params }: ServicesPageProp
                         <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                           <Icon name={service.icon as any} className="text-primary" />
                         </div>
-                        <Badge variant="primary">{`Modality ${service.order}`}</Badge>
+                        <Badge variant="primary">
+                          {`${legacyLabels.servicePrefix || (locale === 'en' ? 'Service' : '服务')} ${service.order || index + 1}`}
+                        </Badge>
                       </div>
 
                       <h2 className="text-heading font-bold text-gray-900 mb-4">
@@ -279,7 +325,7 @@ export default async function ServicesPageComponent({ params }: ServicesPageProp
                       {/* Benefits */}
                       <div className="mb-6">
                         <h3 className="text-subheading font-semibold text-gray-900 mb-4">
-                          Key Benefits
+                          {legacyLabels.keyBenefitsTitle || (locale === 'en' ? 'Key Benefits' : '核心亮点')}
                         </h3>
                         <div className="grid sm:grid-cols-2 gap-3">
                           {service.benefits?.slice(0, 6).map((benefit, idx) => (
@@ -296,7 +342,7 @@ export default async function ServicesPageComponent({ params }: ServicesPageProp
                         <div className="bg-white rounded-xl p-6 border border-gray-100">
                           <h4 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
                             <Icon name="Info" size="sm" className="text-primary" />
-                            {locale === 'en' ? 'What to Expect' : 'Que esperar'}
+                            {legacyLabels.whatToExpectTitle || (locale === 'en' ? 'What to Expect' : '服务说明')}
                           </h4>
                           <p className="text-sm text-gray-600 leading-relaxed">
                             {service.whatToExpect}
@@ -322,9 +368,7 @@ export default async function ServicesPageComponent({ params }: ServicesPageProp
                 {faq.title}
               </h2>
               <p className="text-gray-600">
-                {locale === 'en'
-                  ? 'Common questions about service, pricing, and turnaround'
-                  : 'Preguntas comunes sobre servicio, precios y tiempos'}
+                {faqSubtitle}
               </p>
             </div>
 
@@ -351,19 +395,20 @@ export default async function ServicesPageComponent({ params }: ServicesPageProp
               <div className="flex items-center justify-between gap-4 mb-10">
                 <div>
                   <h2 className="text-heading font-bold text-gray-900">
-                    {locale === 'en' ? 'Related Reading' : 'Lecturas relacionadas'}
+                    {relatedReading.title || (locale === 'en' ? 'Related Reading' : '相关阅读')}
                   </h2>
                   <p className="text-gray-600">
-                    {locale === 'en'
-                      ? 'Learn more about laundry operations and garment care.'
-                      : 'Aprende mas sobre operaciones y cuidado de prendas.'}
+                    {relatedReading.subtitle ||
+                      (locale === 'en'
+                        ? 'Explore practical guides related to these services.'
+                        : '了解与本页服务相关的实用内容。')}
                   </p>
                 </div>
                 <Link
                   href={`/${locale}/blog`}
                   className="text-primary font-semibold hover:text-primary-dark"
                 >
-                  {locale === 'en' ? 'View all' : 'Ver todo'}
+                  {relatedReading.viewAllText || (locale === 'en' ? 'View all' : '查看全部')}
                 </Link>
               </div>
 
@@ -373,7 +418,7 @@ export default async function ServicesPageComponent({ params }: ServicesPageProp
                     <Card className="h-full hover:shadow-lg transition-shadow">
                       <CardHeader>
                         <Badge variant="secondary" size="sm">
-                          {post.category || (locale === 'en' ? 'Laundry' : 'Lavanderia')}
+                          {post.category || relatedReading.defaultCategory || (locale === 'en' ? 'Guide' : '指南')}
                         </Badge>
                         <CardTitle className="text-base mt-3 line-clamp-2">
                           {post.title}

@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import '../styles/globals.css';
 
 export const metadata: Metadata = {
-  title: 'WeWash Laundry Template',
-  description: 'Laundry pickup, delivery, and commercial service template',
+  title: 'Multi-Site Business Template',
+  description: 'Multi-site, multi-language template with booking and admin CMS',
 };
 
 export default function RootLayout({

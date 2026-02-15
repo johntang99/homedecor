@@ -2,6 +2,8 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import fs from 'fs/promises';
+import path from 'path';
 import { getRequestSiteId, loadPageContent, loadSiteInfo } from '@/lib/content';
 import { buildPageMetadata } from '@/lib/seo';
 import { Locale, SiteInfo } from '@/lib/types';
@@ -127,6 +129,34 @@ interface PageLayoutConfig {
   sections: Array<{ id: string }>;
 }
 
+function isSparseAboutContent(content: AboutPageData | null): boolean {
+  if (!content) return true;
+
+  const hasProfileBio = Boolean(content.profile?.bio?.trim());
+  const hasCredentials = Array.isArray(content.credentials?.items) && content.credentials.items.length > 0;
+  const hasSpecializations =
+    Array.isArray(content.specializations?.areas) && content.specializations.areas.length > 0;
+  const hasPhilosophy =
+    Array.isArray(content.philosophy?.principles) && content.philosophy.principles.length > 0;
+  const hasJourney = Boolean(content.journey?.story?.trim());
+  const hasAffiliations =
+    Array.isArray(content.affiliations?.organizations) && content.affiliations.organizations.length > 0;
+  const hasContinuingEducation =
+    Array.isArray(content.continuingEducation?.items) && content.continuingEducation.items.length > 0;
+  const hasClinicValues = Array.isArray(content.clinic?.values) && content.clinic.values.length > 0;
+
+  return !(
+    hasProfileBio &&
+    hasCredentials &&
+    hasSpecializations &&
+    hasPhilosophy &&
+    hasJourney &&
+    hasAffiliations &&
+    hasContinuingEducation &&
+    hasClinicValues
+  );
+}
+
 export async function generateMetadata({ params }: AboutPageProps): Promise<Metadata> {
   const { locale } = params;
   const siteId = await getRequestSiteId();
@@ -148,7 +178,26 @@ export default async function AboutPage({ params }: AboutPageProps) {
   
   // Load page content
   const siteId = await getRequestSiteId();
-  const content = await loadPageContent<AboutPageData>('about', locale, siteId);
+  let content = await loadPageContent<AboutPageData>('about', locale, siteId);
+  if (isSparseAboutContent(content)) {
+    try {
+      const localPath = path.join(
+        process.cwd(),
+        'content',
+        siteId,
+        locale,
+        'pages',
+        'about.json'
+      );
+      const raw = await fs.readFile(localPath, 'utf-8');
+      const localContent = JSON.parse(raw) as AboutPageData;
+      if (!isSparseAboutContent(localContent)) {
+        content = localContent;
+      }
+    } catch {
+      // Ignore local fallback read errors; keep DB content.
+    }
+  }
   const layout = await loadPageContent<PageLayoutConfig>('about.layout', locale, siteId);
   const contactContent = await loadPageContent<ContactPageData>('contact', locale, siteId);
   const siteInfo = await loadSiteInfo(siteId, locale) as SiteInfo | null;
@@ -157,7 +206,76 @@ export default async function AboutPage({ params }: AboutPageProps) {
     notFound();
   }
 
-  const { hero, profile, credentials, specializations, philosophy, journey, affiliations, continuingEducation, clinic, cta } = content;
+  const hero = content.hero || {
+    variant: 'split-photo-right',
+    title: locale === 'en' ? 'About Us' : '关于我们',
+    subtitle: '',
+    description: '',
+    backgroundImage: '',
+  };
+  const profile = content.profile || {
+    variant: 'split',
+    name: siteInfo?.businessName || siteInfo?.clinicName || 'Our Team',
+    title: siteInfo?.tagline || '',
+    image: '',
+    bio: '',
+    quote: '',
+    signature: '',
+  };
+  const credentials = content.credentials || {
+    variant: 'list',
+    title: locale === 'en' ? 'Credentials' : '资质',
+    items: [],
+  };
+  const specializations = content.specializations || {
+    variant: 'grid-2',
+    title: locale === 'en' ? 'Specializations' : '专业领域',
+    description: '',
+    areas: [],
+  };
+  const philosophy = content.philosophy || {
+    variant: 'cards',
+    title: locale === 'en' ? 'Philosophy' : '理念',
+    introduction: '',
+    principles: [],
+  };
+  const journey = content.journey || {
+    variant: 'prose',
+    title: locale === 'en' ? 'Journey' : '经历',
+    story: '',
+  };
+  const affiliations = content.affiliations || {
+    variant: 'compact',
+    title: locale === 'en' ? 'Affiliations' : '协会会员',
+    organizations: [],
+  };
+  const continuingEducation = content.continuingEducation || {
+    variant: 'compact',
+    title: locale === 'en' ? 'Continuing Education' : '继续教育',
+    description: '',
+    items: [],
+  };
+  const clinic = content.clinic || {
+    variant: 'split',
+    title: locale === 'en' ? 'About Our Clinic' : '关于诊所',
+    description: '',
+    features: [],
+    values: [],
+    environment: '',
+  };
+  const cta = {
+    variant: content.cta?.variant || 'centered',
+    title: content.cta?.title || (locale === 'en' ? 'Ready to get started?' : '准备好开始了吗？'),
+    description: content.cta?.description || '',
+    primaryCta: {
+      text: content.cta?.primaryCta?.text || (locale === 'en' ? 'Book Appointment' : '预约'),
+      link: content.cta?.primaryCta?.link || `/${locale}/book`,
+    },
+    secondaryCta: {
+      text: content.cta?.secondaryCta?.text || (locale === 'en' ? 'Call Now' : '立即致电'),
+      link: content.cta?.secondaryCta?.link || 'tel:+18453811106',
+    },
+  };
   const layoutOrder = new Map<string, number>(
     layout?.sections?.map((section, index) => [section.id, index]) || []
   );
@@ -237,10 +355,10 @@ export default async function AboutPage({ params }: AboutPageProps) {
                     <div className="relative z-10 text-center">
                       <div className="text-8xl mb-6">🏥</div>
                       <p className="text-gray-700 font-semibold text-subheading mb-2">
-                        {siteInfo?.clinicName || 'WeWash Laundry'}
+                        {siteInfo?.businessName || siteInfo?.clinicName || 'Our Team'}
                       </p>
                       <p className="text-gray-600 text-sm">
-                        {siteInfo?.tagline || 'Traditional Chinese Medicine'}
+                        {siteInfo?.tagline || 'Professional Services'}
                       </p>
                     </div>
                   </div>

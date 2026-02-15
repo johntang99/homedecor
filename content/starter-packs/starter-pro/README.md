@@ -1,9 +1,9 @@
 # Starter Pro Seed Pack
 
-Use this pack for hybrid laundry operations:
-- residential pickup and drop-off
-- self-service reservations
-- commercial accounts with recurring schedules
+Use this pack for advanced clinic operations:
+- consultation and follow-up scheduling
+- recurring treatment plans
+- corporate wellness programs
 
 ## Includes
 - `booking/services.json`

@@ -1,7 +1,7 @@
 [
   {
     "id": "wash-fold-pickup",
-    "name": "Wash & Fold (Pickup + Delivery)",
+    "name": "Initial Consultation",
     "serviceType": "pickup_delivery",
     "pricingModel": "by_weight",
     "durationMinutes": 45,
@@ -15,7 +15,7 @@
   },
   {
     "id": "wash-fold-dropoff",
-    "name": "Wash & Fold (Drop-off)",
+    "name": "Follow-up Visit",
     "serviceType": "dropoff",
     "pricingModel": "by_weight",
     "durationMinutes": 30,

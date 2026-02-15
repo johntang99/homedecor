@@ -88,8 +88,13 @@ export default async function BlogPage({ params, searchParams }: BlogPageProps) 
   }
 
   const { hero, introduction, categories, cta } = content;
-  const sortedPosts = [...posts].sort((a, b) =>
-    (b.publishDate || '').localeCompare(a.publishDate || '')
+  const parseDateValue = (value?: string) => {
+    const parsed = Date.parse(value || '');
+    return Number.isNaN(parsed) ? 0 : parsed;
+  };
+  const dedupedPosts = Array.from(new Map(posts.map((post) => [post.slug, post])).values());
+  const sortedPosts = [...dedupedPosts].sort(
+    (a, b) => parseDateValue(b.publishDate) - parseDateValue(a.publishDate)
   );
   const featuredPost = sortedPosts.find((post) => post.featured) || sortedPosts[0];
   const featuredImage =

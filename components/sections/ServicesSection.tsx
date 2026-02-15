@@ -45,6 +45,11 @@ const servicesVariantConfig = {
     layout: 'container' as const,
     padding: 'lg' as const,
   },
+  'detail-alternating': {
+    variant: 'detail-alternating',
+    layout: 'full-width' as const,
+    padding: 'lg' as const,
+  },
 };
 
 export default function ServicesSection({
@@ -52,13 +57,17 @@ export default function ServicesSection({
   badge,
   title,
   subtitle,
-  featured,
+  featured: featuredProp,
   services,
   moreLink,
   className,
 }: ServicesSectionProps) {
   const config = servicesVariantConfig[variant];
   const sectionClasses = getSectionClasses(config);
+  const featured = featuredProp || services.find((s) => s.featured) || services[0];
+  const nonFeaturedServices = featuredProp
+    ? services
+    : services.filter((s) => s.id !== featured?.id);
   
   return (
     <section className={cn('bg-white', sectionClasses, className)}>
@@ -133,7 +142,7 @@ export default function ServicesSection({
           
           {/* Other Services Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.slice(0, 6).map((service) => (
+            {nonFeaturedServices.slice(0, 6).map((service) => (
               <ServiceCard key={service.id} service={service} compact />
             ))}
           </div>
@@ -204,6 +213,84 @@ export default function ServicesSection({
           }))}
           variant="pills"
         />
+      )}
+
+      {variant === 'detail-alternating' && (
+        <div className="max-w-6xl mx-auto space-y-12 lg:space-y-16">
+          {services
+            .sort((a, b) => (a.order || 0) - (b.order || 0))
+            .map((service, index) => (
+              <div
+                key={service.id}
+                id={service.id}
+                className={`grid lg:grid-cols-2 gap-8 items-center ${
+                  index % 2 === 1 ? 'lg:grid-flow-dense' : ''
+                }`}
+              >
+                <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
+                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">
+                    {service.image ? (
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
+                        <Icon name={service.icon as any} size="xl" className="text-primary/30" />
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className={index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                      <Icon name={service.icon as any} className="text-primary" />
+                    </div>
+                    <Badge variant="primary">{`Service ${service.order || index + 1}`}</Badge>
+                  </div>
+
+                  <h2 className="text-heading font-bold text-gray-900 mb-4">{service.title}</h2>
+                  <p className="text-gray-700 leading-relaxed mb-6">
+                    {service.fullDescription || service.shortDescription}
+                  </p>
+
+                  {service.benefits && service.benefits.length > 0 && (
+                    <div className="mb-6">
+                      <h3 className="text-subheading font-semibold text-gray-900 mb-4">
+                        Key Benefits
+                      </h3>
+                      <div className="grid sm:grid-cols-2 gap-3">
+                        {service.benefits.slice(0, 6).map((benefit, idx) => (
+                          <div key={idx} className="flex items-start gap-2">
+                            <Icon
+                              name="Check"
+                              className="text-primary mt-0.5 flex-shrink-0"
+                              size="sm"
+                            />
+                            <span className="text-sm text-gray-600">{benefit}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {service.whatToExpect && (
+                    <div className="bg-white rounded-xl p-6 border border-gray-100">
+                      <h4 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                        <Icon name="Info" size="sm" className="text-primary" />
+                        What to Expect
+                      </h4>
+                      <p className="text-sm text-gray-600 leading-relaxed">
+                        {service.whatToExpect}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+        </div>
       )}
       
       {/* More Link */}

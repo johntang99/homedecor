@@ -1,110 +1,111 @@
 {
-  "hero": {
+  "cta": {
+    "title": "中医能帮助您吗？",
     "variant": "centered",
+    "primaryCta": {
+      "link": "/zh/contact",
+      "text": "预约咨询"
+    },
+    "description": "安排咨询以讨论您的具体健康问题并创建个性化治疗计划",
+    "secondaryCta": {
+      "link": "/zh/services",
+      "text": "了解我们的服务"
+    }
+  },
+  "hero": {
     "title": "患者成功案例",
+    "variant": "centered",
     "subtitle": "真实案例，真实结果 - 了解传统中医如何改变生活",
     "backgroundImage": "/uploads/dr-huang-clinic/home/hero-bg.jpg"
-  },
-  "introduction": {
-    "text": "这些案例代表通过我们的中医治疗经历显著健康改善的真实患者。所有姓名都已更改以保护患者隐私，但故事和结果是真实的。",
-    "note": "个人结果可能有所不同。这些案例代表典型结果，但不能保证任何个人的具体结果。"
   },
   "categories": [
     {
       "id": "all",
-      "name": "所有案例",
-      "icon": "Grid"
+      "icon": "Grid",
+      "name": "所有案例"
     },
     {
       "id": "pain-management",
-      "name": "疼痛管理",
-      "icon": "Activity"
+      "icon": "Activity",
+      "name": "疼痛管理"
     },
     {
       "id": "womens-health",
-      "name": "妇女健康",
-      "icon": "Heart"
+      "icon": "Heart",
+      "name": "妇女健康"
     },
     {
       "id": "mental-health",
-      "name": "心理健康",
-      "icon": "Brain"
+      "icon": "Brain",
+      "name": "心理健康"
     },
     {
       "id": "digestive",
-      "name": "消化健康",
-      "icon": "Apple"
+      "icon": "Apple",
+      "name": "消化健康"
     },
     {
       "id": "other",
-      "name": "其他病症",
-      "icon": "Sparkles"
-    }
-  ],
-  "caseStudies": [
-    {
-      "id": "chronic-back-pain-jennifer",
-      "category": "pain-management",
-      "condition": "慢性下背部疼痛",
-      "image": "/uploads/dr-huang-clinic/case-studies/chronic-pain.jpg",
-      "beforeImage": "https://images.unsplash.com/photo-1554574004-b5ed96682e9b?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0",
-      "afterImage": "https://images.unsplash.com/photo-1768507423533-b87b62769758?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0",
-      "summary": "经过8年的衰弱性背痛和不成功的常规治疗后，Jennifer通过针灸和中药找到了持久的缓解。"
-    },
-    {
-      "id": "fertility-success-lisa",
-      "category": "womens-health",
-      "condition": "不孕症（不明原因）",
-      "image": "/uploads/dr-huang-clinic/case-studies/fertility.jpg",
-      "summary": "经过3年不成功的尝试和一次失败的试管婴儿周期后，Lisa通过中医治疗实现了自然怀孕。"
-    },
-    {
-      "id": "anxiety-depression-robert",
-      "category": "mental-health",
-      "condition": "焦虑和抑郁",
-      "image": "/uploads/dr-huang-clinic/case-studies/migraine.jpg",
-      "beforeImage": "https://images.unsplash.com/photo-1554574004-b5ed96682e9b?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0",
-      "afterImage": "https://images.unsplash.com/photo-1513097847644-f00cfe868607?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0",
-      "summary": "Robert通过中医克服了衰弱的焦虑和抑郁，减少了对药物的依赖并重获生活质量。"
+      "icon": "Sparkles",
+      "name": "其他病症"
     }
   ],
   "statistics": {
-    "variant": "grid-2x2",
-    "title": "我们的记录",
     "stats": [
       {
-        "number": "1000+",
+        "icon": "Users",
         "label": "治疗患者",
-        "icon": "Users"
+        "number": "1000+"
       },
       {
-        "number": "95%",
+        "icon": "Star",
         "label": "满意率",
-        "icon": "Star"
+        "number": "95%"
       },
       {
-        "number": "15+",
+        "icon": "Award",
         "label": "年经验",
-        "icon": "Award"
+        "number": "15+"
       },
       {
-        "number": "85%",
+        "icon": "TrendingUp",
         "label": "报告显著改善",
-        "icon": "TrendingUp"
+        "number": "85%"
       }
-    ]
+    ],
+    "title": "我们的记录",
+    "variant": "grid-2x2"
   },
-  "cta": {
-    "variant": "centered",
-    "title": "中医能帮助您吗？",
-    "description": "安排咨询以讨论您的具体健康问题并创建个性化治疗计划",
-    "primaryCta": {
-      "text": "预约咨询",
-      "link": "/zh/contact"
+  "caseStudies": [
+    {
+      "id": "chronic-back-pain-jennifer",
+      "image": "/uploads/dr-huang-clinic/case-studies/chronic-pain.jpg",
+      "summary": "经过8年的衰弱性背痛和不成功的常规治疗后，Jennifer通过针灸和中药找到了持久的缓解。",
+      "category": "pain-management",
+      "condition": "慢性下背部疼痛",
+      "afterImage": "https://images.unsplash.com/photo-1768507423533-b87b62769758?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0",
+      "beforeImage": "https://images.unsplash.com/photo-1554574004-b5ed96682e9b?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0"
     },
-    "secondaryCta": {
-      "text": "了解我们的服务",
-      "link": "/zh/services"
+    {
+      "id": "fertility-success-lisa",
+      "image": "/uploads/dr-huang-clinic/case-studies/fertility.jpg",
+      "summary": "经过3年不成功的尝试和一次失败的试管婴儿周期后，Lisa通过中医治疗实现了自然怀孕。",
+      "category": "womens-health",
+      "condition": "不孕症（不明原因）"
+    },
+    {
+      "id": "anxiety-depression-robert",
+      "image": "/uploads/dr-huang-clinic/case-studies/migraine.jpg",
+      "summary": "Robert通过中医克服了衰弱的焦虑和抑郁，减少了对药物的依赖并重获生活质量。",
+      "category": "mental-health",
+      "condition": "焦虑和抑郁",
+      "afterImage": "https://images.unsplash.com/photo-1513097847644-f00cfe868607?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0",
+      "beforeImage": "https://images.unsplash.com/photo-1554574004-b5ed96682e9b?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0"
     }
+  ],
+  "introduction": {
+    "note": "个人结果可能有所不同。这些案例代表典型结果，但不能保证任何个人的具体结果。",
+    "text": "这些案例代表通过我们的中医治疗经历显著健康改善的真实患者。所有姓名都已更改以保护患者隐私，但故事和结果是真实的。",
+    "variant": "centered"
   }
 }

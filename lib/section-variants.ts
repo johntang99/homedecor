@@ -24,7 +24,8 @@ export type ServicesVariant =
   | 'featured-large'        // One large + smaller cards
   | 'list-horizontal'       // Horizontal scrolling list
   | 'accordion'             // Expandable accordion
-  | 'tabs';                 // Tabbed interface
+  | 'tabs'                  // Tabbed interface
+  | 'detail-alternating';   // Alternating detail rows
 
 export type ConditionsVariant =
   | 'grid-cards'            // Card grid

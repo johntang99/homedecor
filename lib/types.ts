@@ -2,7 +2,7 @@
 // TYPE DEFINITIONS FOR TCM SYSTEM
 // ============================================
 
-export type Locale = 'en' | 'es';
+export type Locale = 'en' | 'zh';
 
 export interface SiteConfig {
   id: string;
@@ -69,6 +69,7 @@ export interface NavigationLink {
 }
 
 export interface SiteInfo {
+  businessName?: string;
   clinicName: string;
   tagline: string;
   description: string;
@@ -204,15 +205,18 @@ export interface Service {
   subtitle?: string;
   shortDescription: string;
   fullDescription?: string;
+  price?: string;
+  durationMinutes?: number;
   benefits?: string[];
   whatToExpect?: string;
   image?: string;
   link?: string;
   order?: number;
+  featured?: boolean;
 }
 
 export interface ServicesSection {
-  variant?: 'grid-cards' | 'featured-large' | 'list-horizontal' | 'accordion' | 'tabs';
+  variant?: 'grid-cards' | 'featured-large' | 'list-horizontal' | 'accordion' | 'tabs' | 'detail-alternating';
   badge: string;
   title: string;
   subtitle: string;
@@ -341,6 +345,10 @@ export interface FooterSection {
 export type BookingStatus = 'confirmed' | 'cancelled' | 'rescheduled';
 
 export type BookingServiceType =
+  | 'appointment'
+  | 'onsite'
+  | 'remote'
+  | 'delivery'
   | 'pickup_delivery'
   | 'dropoff'
   | 'self_service'
@@ -376,6 +384,10 @@ export interface BookingService {
     end: string;
   }>;
   description?: string;
+  // Generic flags for clone-safe booking forms; legacy behavior still supported.
+  requiresAddress?: boolean;
+  requiresZipCode?: boolean;
+  requiresLoadMetrics?: boolean;
   active?: boolean;
 }
 
@@ -489,16 +501,57 @@ export interface ServicesPage {
     backgroundImage?: string;
   };
   overview: {
+    variant?: 'centered' | 'left';
     introduction: string;
     benefits: string[];
+    title?: string;
   };
-  services: Service[];
+  trustBar?: {
+    items: Array<{
+      icon?: string;
+      title: string;
+      description: string;
+    }>;
+  };
+  heroPlaceholder?: {
+    emoji?: string;
+    title?: string;
+    subtitle?: string;
+  };
+  servicesList?: {
+    variant?:
+      | 'grid-cards'
+      | 'featured-large'
+      | 'list-horizontal'
+      | 'accordion'
+      | 'tabs'
+      | 'detail-alternating';
+    title?: string;
+    subtitle?: string;
+    badge?: string;
+    items: Service[];
+  };
+  legacyLabels?: {
+    servicePrefix?: string;
+    keyBenefitsTitle?: string;
+    whatToExpectTitle?: string;
+  };
+  services?: Service[];
   faq: {
+    variant?: 'accordion' | 'simple' | 'card';
     title: string;
+    subtitle?: string;
     faqs: Array<{
       question: string;
       answer: string;
     }>;
+  };
+  relatedReading?: {
+    title?: string;
+    subtitle?: string;
+    viewAllText?: string;
+    defaultCategory?: string;
+    preferredSlugs?: string[];
   };
   cta: {
     variant?: 'centered' | 'split' | 'banner' | 'card-elevated';

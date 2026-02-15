@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { loadSiteInfo } from '@/lib/content';
+import { getDefaultSite, getSiteByHost } from '@/lib/sites';
+import type { Locale, SiteInfo } from '@/lib/types';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -9,24 +12,41 @@ interface ContactFormData {
   phone: string;
   reason: string;
   message: string;
+  locale?: string;
+}
+
+interface ContactEmailContext {
+  locale: Locale;
+  clinicName: string;
+  phone: string;
+  addressLine: string;
+}
+
+function toLocale(rawLocale: unknown): Locale {
+  return rawLocale === 'zh' ? 'zh' : 'en';
+}
+
+async function resolveRequestSiteInfo(request: NextRequest, locale: Locale): Promise<SiteInfo | null> {
+  const host = request.headers.get('host');
+  const site = (await getSiteByHost(host)) || (await getDefaultSite());
+  if (!site) return null;
+  return loadSiteInfo(site.id, locale) as Promise<SiteInfo | null>;
 }
 
 function getReasonLabel(reason: string): string {
-  const labels: Record<string, string> = {
-    'new-appointment': 'Book Laundry Service',
-    'followup-appointment': 'Modify Existing Laundry Booking',
-    'treatment-question': 'Question About Services',
-    'pricing-question': 'Question About Pricing',
-    'information': 'Request Information',
-    'other': 'Other',
-  };
-  return labels[reason] || reason;
+  return reason?.trim() || 'General inquiry';
 }
 
-function createEmailHTML(data: ContactFormData): string {
+function getAddressLine(siteInfo: SiteInfo | null): string {
+  if (!siteInfo) return '';
+  return [siteInfo.address, siteInfo.city, siteInfo.state, siteInfo.zip].filter(Boolean).join(', ');
+}
+
+function createEmailHTML(data: ContactFormData, context: ContactEmailContext): string {
   const { name, email, phone, reason, message } = data;
+  const { clinicName, locale } = context;
   const reasonLabel = getReasonLabel(reason);
-  const timestamp = new Date().toLocaleString('en-US', { 
+  const timestamp = new Date().toLocaleString(locale === 'zh' ? 'zh-CN' : 'en-US', { 
     timeZone: 'America/New_York',
     dateStyle: 'full',
     timeStyle: 'short'
@@ -49,7 +69,7 @@ function createEmailHTML(data: ContactFormData): string {
                 <tr>
                   <td style="padding: 32px 32px 24px; background: linear-gradient(135deg, #059669 0%, #047857 100%); border-radius: 8px 8px 0 0;">
                     <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 700;">📧 New Contact Form Submission</h1>
-                    <p style="margin: 8px 0 0; color: rgba(255,255,255,0.9); font-size: 14px;">WeWash Website</p>
+                    <p style="margin: 8px 0 0; color: rgba(255,255,255,0.9); font-size: 14px;">${clinicName} Website</p>
                   </td>
                 </tr>
                 
@@ -114,8 +134,8 @@ function createEmailHTML(data: ContactFormData): string {
                 <tr>
                   <td style="padding: 24px 32px; background-color: #f9fafb; border-radius: 0 0 8px 8px; border-top: 1px solid #e5e7eb;">
                     <p style="margin: 0; color: #6b7280; font-size: 12px; text-align: center;">
-                      This email was sent from the WeWash contact form.<br>
-                      <strong>Remember:</strong> Respond quickly for best customer experience.
+                      This email was sent from the ${clinicName} contact form.<br>
+                      <strong>Remember:</strong> Respond quickly for best patient experience.
                     </p>
                   </td>
                 </tr>
@@ -128,14 +148,15 @@ function createEmailHTML(data: ContactFormData): string {
   `;
 }
 
-function createAutoReplyHTML(name: string): string {
+function createAutoReplyHTML(name: string, context: ContactEmailContext): string {
+  const { clinicName, phone, addressLine } = context;
   return `
     <!DOCTYPE html>
     <html>
       <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Thank You for Contacting WeWash</title>
+        <title>Thank You for Contacting ${clinicName}</title>
       </head>
       <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f9fafb; color: #111827;">
         <table role="presentation" style="width: 100%; border-collapse: collapse;">
@@ -155,24 +176,24 @@ function createAutoReplyHTML(name: string): string {
                     <p style="margin: 0 0 16px; color: #111827; font-size: 16px; line-height: 1.6;">Dear ${name},</p>
                     
                     <p style="margin: 0 0 16px; color: #111827; font-size: 16px; line-height: 1.6;">
-                      Thank you for contacting <strong>WeWash</strong>. We've received your message and will respond shortly.
+                      Thank you for contacting <strong>${clinicName}</strong>. We've received your message and will respond shortly.
                     </p>
 
                     <div style="margin: 24px 0; padding: 20px; background-color: #f0fdf4; border-left: 4px solid #059669; border-radius: 4px;">
                       <p style="margin: 0; color: #065f46; font-size: 14px; line-height: 1.6;">
                         <strong>🕐 Need immediate assistance?</strong><br>
-                        Call us at <a href="tel:+18453940158" style="color: #059669; text-decoration: none; font-weight: 600;">(845) 394-0158</a><br>
+                        Call us at <a href="tel:${phone.replace(/\D/g, '')}" style="color: #059669; text-decoration: none; font-weight: 600;">${phone}</a><br>
                         <span style="color: #6b7280; font-size: 13px;">Mon-Fri: 8am-8pm | Sat-Sun: 9am-6pm</span>
                       </p>
                     </div>
 
                     <p style="margin: 24px 0 0; color: #6b7280; font-size: 14px; line-height: 1.6;">
-                      We look forward to supporting your laundry needs.
+                      We look forward to supporting your health and wellness journey.
                     </p>
 
                     <p style="margin: 16px 0 0; color: #111827; font-size: 16px;">
-                      <strong>WeWash Support Team</strong><br>
-                      <span style="color: #6b7280; font-size: 14px;">Laundry Operations & Customer Care</span>
+                      <strong>${clinicName} Support Team</strong><br>
+                      <span style="color: #6b7280; font-size: 14px;">Traditional Chinese Medicine & Patient Care</span>
                     </p>
                   </td>
                 </tr>
@@ -183,14 +204,13 @@ function createAutoReplyHTML(name: string): string {
                     <table role="presentation" style="width: 100%;">
                       <tr>
                         <td style="text-align: center; padding-bottom: 16px;">
-                          <p style="margin: 0; color: #111827; font-size: 14px; font-weight: 600;">WeWash</p>
-                          <p style="margin: 4px 0 0; color: #6b7280; font-size: 13px;">Laundry Pickup, Delivery, and Commercial Service</p>
+                          <p style="margin: 0; color: #111827; font-size: 14px; font-weight: 600;">${clinicName}</p>
+                          <p style="margin: 4px 0 0; color: #6b7280; font-size: 13px;">Traditional Chinese Medicine & Acupuncture</p>
                         </td>
                       </tr>
                       <tr>
                         <td style="text-align: center; color: #6b7280; font-size: 12px; line-height: 1.5;">
-                          📍 87 North Street, Middletown, NY 10940<br>
-                          📞 (845) 394-0158 | ✉️ hello@wewash99.com
+                          ${addressLine ? `📍 ${addressLine}<br>` : ''}📞 ${phone}
                         </td>
                       </tr>
                     </table>
@@ -208,7 +228,18 @@ function createAutoReplyHTML(name: string): string {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, email, phone, reason, message } = body as ContactFormData;
+    const { name, email, phone, reason, message, locale: rawLocale } = body as ContactFormData;
+    const locale = toLocale(rawLocale);
+    const siteInfo = await resolveRequestSiteInfo(request, locale);
+    const clinicName = siteInfo?.businessName || siteInfo?.clinicName || 'Business';
+    const clinicPhone = siteInfo?.phone || process.env.CONTACT_PHONE_FALLBACK || '(845) 381-1106';
+    const clinicEmail = siteInfo?.email || process.env.CONTACT_FALLBACK_TO || 'support@baamplatform.com';
+    const context: ContactEmailContext = {
+      locale,
+      clinicName,
+      phone: clinicPhone,
+      addressLine: getAddressLine(siteInfo),
+    };
 
     // Validate required fields
     if (!name || !email || !phone || !reason || !message) {
@@ -237,16 +268,16 @@ export async function POST(request: NextRequest) {
 
     // Prepare email data
     const reasonLabel = getReasonLabel(reason);
-    const emailHTML = createEmailHTML({ name, email, phone, reason, message });
-    const autoReplyHTML = createAutoReplyHTML(name);
+    const emailHTML = createEmailHTML({ name, email, phone, reason, message, locale }, context);
+    const autoReplyHTML = createAutoReplyHTML(name, context);
 
     // Send notification email to clinic
     const notificationEmail = await resend.emails.send({
       from: process.env.RESEND_FROM || 'No-Reply<no-reply@baamplatform.com>',
-      to: process.env.CONTACT_FALLBACK_TO || 'support@baamplatform.com',
+      to: process.env.CONTACT_FALLBACK_TO || clinicEmail,
       cc: process.env.ALERT_TO ? [process.env.ALERT_TO] : undefined,
       reply_to: email,
-      subject: `🧺 New Contact: ${reasonLabel} - ${name}`,
+      subject: `🌿 New Contact: ${reasonLabel} - ${name}`,
       html: emailHTML,
     });
 
@@ -254,7 +285,7 @@ export async function POST(request: NextRequest) {
     const autoReplyEmail = await resend.emails.send({
       from: process.env.RESEND_FROM || 'No-Reply<no-reply@baamplatform.com>',
       to: email,
-      subject: 'Thank you for contacting WeWash',
+      subject: locale === 'zh' ? `感谢联系${clinicName}` : `Thank you for contacting ${clinicName}`,
       html: autoReplyHTML,
     });
 
@@ -267,7 +298,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       { 
         success: true, 
-        message: 'Your message has been sent successfully. Our team will contact you soon. Please check your email for confirmation.' 
+        message: locale === 'zh'
+          ? '您的消息已发送成功。我们的团队将尽快与您联系，并请留意邮箱确认邮件。'
+          : 'Your message has been sent successfully. Our team will contact you soon. Please check your email for confirmation.',
       },
       { status: 200 }
     );
@@ -277,7 +310,7 @@ export async function POST(request: NextRequest) {
     // Return user-friendly error
     return NextResponse.json(
       { 
-        error: 'An error occurred while sending your message. Please try calling us directly at (845) 394-0158.',
+        error: 'An error occurred while sending your message. Please try calling us directly.',
         details: process.env.NODE_ENV === 'development' ? String(error) : undefined
       },
       { status: 500 }

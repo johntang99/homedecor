@@ -62,6 +62,12 @@ interface ContactPageContent {
     title: string;
     items: Array<{ question: string; answer: string }>;
   };
+  cta?: {
+    title: string;
+    subtitle: string;
+    buttonText: string;
+    buttonLink: string;
+  };
 }
 
 interface ContactPageProps {
@@ -101,7 +107,7 @@ export default async function ContactPage({ params }: ContactPageProps) {
     notFound();
   }
 
-  const { hero, introduction, contactMethods, hours, form, map, emergency, faq } = content;
+  const { hero, introduction, contactMethods, hours, form, map, emergency, faq, cta } = content;
   const heroVariant = hero.variant || 'centered';
   const isCenteredHero = heroVariant === 'centered';
   const backgroundHero = heroVariant === 'photo-background' && Boolean(hero.backgroundImage);
@@ -186,7 +192,7 @@ export default async function ContactPage({ params }: ContactPageProps) {
         >
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-3 gap-6 mb-16">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
               {contactMethods.map((method, index) => (
                 <Card key={index} className="text-center hover:shadow-lg transition-shadow">
                   <CardHeader>
@@ -330,17 +336,20 @@ export default async function ContactPage({ params }: ContactPageProps) {
         >
         <div className="container mx-auto max-w-4xl text-center text-white">
           <h2 className="text-heading text-white mb-4">
-            {locale === 'en' ? 'New to TCM?' : '新手指南'}
+            {cta?.title || (locale === 'en' ? 'Need help getting started?' : '初次了解服务？')}
           </h2>
           <p className="text-subheading mb-10 leading-relaxed max-w-3xl mx-auto text-white/95">
-            {locale === 'en' ? 'Learn what to expect during your first visit' : '了解您的首次就诊'}
+            {cta?.subtitle ||
+              (locale === 'en'
+                ? 'Learn what to expect before your first appointment'
+                : '了解首次预约前需要准备的内容')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href={`/${locale}/new-patients`}
+              href={cta?.buttonLink || `/${locale}/new-patients`}
               className="bg-white text-[var(--primary)] px-8 py-4 rounded-lg hover:bg-gray-50 font-semibold text-subheading transition-all shadow-lg"
             >
-              {locale === 'en' ? 'New Patient Information' : '新患者信息'}
+              {cta?.buttonText || (locale === 'en' ? 'Getting Started Guide' : '新手指南')}
             </Link>
           </div>
         </div>

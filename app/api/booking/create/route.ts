@@ -54,6 +54,10 @@ export async function POST(request: NextRequest) {
   }
 
   const allowedServiceTypes: BookingServiceType[] = [
+    'appointment',
+    'onsite',
+    'remote',
+    'delivery',
     'pickup_delivery',
     'dropoff',
     'self_service',
@@ -65,17 +69,21 @@ export async function POST(request: NextRequest) {
   )
     ? (rawServiceType as BookingServiceType)
     : undefined;
-  if (
-    (effectiveServiceType === 'pickup_delivery' || effectiveServiceType === 'commercial') &&
-    (!pickupAddress || !zipCode)
-  ) {
+  const requiresAddress =
+    service.requiresAddress ??
+    (effectiveServiceType === 'pickup_delivery' ||
+      effectiveServiceType === 'commercial' ||
+      effectiveServiceType === 'delivery');
+  const requiresZipCode = service.requiresZipCode ?? requiresAddress;
+
+  if ((requiresAddress && !pickupAddress) || (requiresZipCode && !zipCode)) {
     return NextResponse.json(
-      { message: 'Pickup address and zip code are required for this service type' },
+      { message: 'Address details are required for this service type' },
       { status: 400 }
     );
   }
   if (
-    (effectiveServiceType === 'pickup_delivery' || effectiveServiceType === 'commercial') &&
+    requiresZipCode &&
     Array.isArray(settings.serviceAreaZips) &&
     settings.serviceAreaZips.length > 0
   ) {

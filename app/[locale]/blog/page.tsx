@@ -158,7 +158,7 @@ export default async function BlogPage({ params, searchParams }: BlogPageProps) 
                     className="object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-green-600/10 to-amber-600/10">
+                  <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-[color-mix(in_srgb,var(--primary)_10%,transparent)] to-[color-mix(in_srgb,var(--secondary)_16%,transparent)]">
                     <div className="text-8xl mb-6">📝</div>
                     <p className="text-gray-700 font-semibold text-subheading mb-2">
                       {locale === 'en' ? 'Insights Blog' : '精选博客'}
@@ -170,7 +170,7 @@ export default async function BlogPage({ params, searchParams }: BlogPageProps) 
                 )}
               </div>
               <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-[var(--primary)] rounded-3xl opacity-10 -z-10"></div>
-              <div className="absolute -top-6 -left-6 w-48 h-48 bg-amber-600 rounded-3xl opacity-10 -z-10"></div>
+              <div className="absolute -top-6 -left-6 w-48 h-48 bg-[var(--secondary)] rounded-3xl opacity-10 -z-10"></div>
             </div>
           </div>
         </div>

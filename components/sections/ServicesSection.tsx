@@ -21,28 +21,37 @@ export interface ServicesSectionProps {
 const servicesVariantConfig = {
   'grid-cards': {
     variant: 'grid-cards',
-    layout: 'container' as const,
+    layout: 'full-width' as const,
     padding: 'lg' as const,
-    className: 'grid md:grid-cols-2 lg:grid-cols-3 gap-6',
+  },
+  'grid-cards-2x': {
+    variant: 'grid-cards-2x',
+    layout: 'full-width' as const,
+    padding: 'lg' as const,
+  },
+  'grid-cards-3x': {
+    variant: 'grid-cards-3x',
+    layout: 'full-width' as const,
+    padding: 'lg' as const,
   },
   'featured-large': {
     variant: 'featured-large',
-    layout: 'container' as const,
+    layout: 'full-width' as const,
     padding: 'lg' as const,
   },
   'list-horizontal': {
     variant: 'list-horizontal',
-    layout: 'container' as const,
+    layout: 'full-width' as const,
     padding: 'lg' as const,
   },
   'accordion': {
     variant: 'accordion',
-    layout: 'container' as const,
+    layout: 'full-width' as const,
     padding: 'lg' as const,
   },
   'tabs': {
     variant: 'tabs',
-    layout: 'container' as const,
+    layout: 'full-width' as const,
     padding: 'lg' as const,
   },
   'detail-alternating': {
@@ -50,10 +59,15 @@ const servicesVariantConfig = {
     layout: 'full-width' as const,
     padding: 'lg' as const,
   },
+  'detail-image-right': {
+    variant: 'detail-image-right',
+    layout: 'full-width' as const,
+    padding: 'lg' as const,
+  },
 };
 
 export default function ServicesSection({
-  variant = 'grid-cards',
+  variant = 'detail-alternating',
   badge,
   title,
   subtitle,
@@ -62,36 +76,64 @@ export default function ServicesSection({
   moreLink,
   className,
 }: ServicesSectionProps) {
-  const config = servicesVariantConfig[variant];
+  // Backward compatibility: old "grid-cards" should behave like detail-alternating.
+  const normalizedVariant = variant === 'grid-cards' ? 'detail-alternating' : variant;
+  const config = servicesVariantConfig[normalizedVariant];
   const sectionClasses = getSectionClasses(config);
+  const isShowcaseGridVariant =
+    normalizedVariant === 'grid-cards-2x' || normalizedVariant === 'grid-cards-3x';
+  const contentContainerClass = 'container-custom';
   const featured = featuredProp || services.find((s) => s.featured) || services[0];
   const nonFeaturedServices = featuredProp
     ? services
     : services.filter((s) => s.id !== featured?.id);
   
   return (
-    <section className={cn('bg-white', sectionClasses, className)}>
+    <section className={cn('bg-gray-50', sectionClasses, className)}>
+      <div className={contentContainerClass}>
       {/* Section Header */}
-      <div className="text-center mb-12">
+      <div className={cn('text-center', isShowcaseGridVariant ? 'mb-16' : 'mb-12')}>
         {badge && (
-          <Badge variant="primary" className="mb-4">
+          <Badge variant="primary" className={cn(isShowcaseGridVariant ? 'mb-6' : 'mb-4')}>
             {badge}
           </Badge>
         )}
-        <h2 className="text-heading font-bold mb-4">{title}</h2>
-        {subtitle && <p className="text-gray-600 max-w-2xl mx-auto">{subtitle}</p>}
+        <h2
+          className={cn(
+            isShowcaseGridVariant ? 'text-display font-bold mb-6' : 'text-heading font-bold mb-4'
+          )}
+        >
+          {title}
+        </h2>
+        {subtitle && (
+          <p
+            className={cn(
+              'text-gray-600 mx-auto',
+              isShowcaseGridVariant ? 'text-subheading max-w-3xl' : 'max-w-2xl'
+            )}
+          >
+            {subtitle}
+          </p>
+        )}
       </div>
       
       {/* Variant-specific rendering */}
-      {variant === 'grid-cards' && (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {(normalizedVariant === 'grid-cards-2x' || normalizedVariant === 'grid-cards-3x') && (
+        <div
+          className={cn(
+            'gap-[2.25rem]',
+            normalizedVariant === 'grid-cards-2x'
+              ? 'grid md:grid-cols-2 lg:grid-cols-2'
+              : 'grid md:grid-cols-2 lg:grid-cols-3'
+          )}
+        >
           {services.map((service) => (
-            <ServiceCard key={service.id} service={service} />
+            <ServiceDetailCard key={service.id} service={service} />
           ))}
         </div>
       )}
       
-      {variant === 'featured-large' && (
+      {normalizedVariant === 'featured-large' && (
         <div className="space-y-8">
           {/* Featured Service */}
           {featured && (
@@ -149,7 +191,7 @@ export default function ServicesSection({
         </div>
       )}
       
-      {variant === 'list-horizontal' && (
+      {normalizedVariant === 'list-horizontal' && (
         <div className="flex gap-6 overflow-x-auto pb-4 hide-scrollbar">
           {services.map((service) => (
             <div key={service.id} className="flex-shrink-0 w-80">
@@ -159,7 +201,7 @@ export default function ServicesSection({
         </div>
       )}
       
-      {variant === 'accordion' && (
+      {normalizedVariant === 'accordion' && (
         <Accordion
           items={services.map((service) => ({
             id: service.id,
@@ -188,7 +230,7 @@ export default function ServicesSection({
         />
       )}
       
-      {variant === 'tabs' && (
+      {normalizedVariant === 'tabs' && (
         <Tabs
           tabs={services.map((service) => ({
             id: service.id,
@@ -215,7 +257,7 @@ export default function ServicesSection({
         />
       )}
 
-      {variant === 'detail-alternating' && (
+      {(normalizedVariant === 'detail-alternating' || normalizedVariant === 'detail-image-right') && (
         <div className="max-w-6xl mx-auto space-y-12 lg:space-y-16">
           {services
             .sort((a, b) => (a.order || 0) - (b.order || 0))
@@ -223,70 +265,94 @@ export default function ServicesSection({
               <div
                 key={service.id}
                 id={service.id}
-                className={`grid lg:grid-cols-2 gap-8 items-center ${
-                  index % 2 === 1 ? 'lg:grid-flow-dense' : ''
-                }`}
+                className="rounded-2xl bg-white shadow-md border border-gray-100 p-4 md:p-6"
               >
-                <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
-                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">
-                    {service.image ? (
-                      <img
-                        src={service.image}
-                        alt={service.title}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
-                        <Icon name={service.icon as any} size="xl" className="text-primary/30" />
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                <div className={index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <Icon name={service.icon as any} className="text-primary" />
+                <div
+                  className={`grid lg:grid-cols-2 gap-8 items-center ${
+                    normalizedVariant === 'detail-alternating' && index % 2 === 1
+                      ? 'lg:grid-flow-dense'
+                      : ''
+                  }`}
+                >
+                  <div
+                    className={
+                      normalizedVariant === 'detail-image-right'
+                        ? 'lg:order-2'
+                        : index % 2 === 1
+                          ? 'lg:col-start-2'
+                          : ''
+                    }
+                  >
+                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-white">
+                      {service.image ? (
+                        <img
+                          src={service.image}
+                          alt={service.title}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-white flex items-center justify-center">
+                          <Icon name={service.icon as any} size="xl" className="text-primary/30" />
+                        </div>
+                      )}
                     </div>
-                    <Badge variant="primary">{`Service ${service.order || index + 1}`}</Badge>
                   </div>
 
-                  <h2 className="text-heading font-bold text-gray-900 mb-4">{service.title}</h2>
-                  <p className="text-gray-700 leading-relaxed mb-6">
-                    {service.fullDescription || service.shortDescription}
-                  </p>
-
-                  {service.benefits && service.benefits.length > 0 && (
-                    <div className="mb-6">
-                      <h3 className="text-subheading font-semibold text-gray-900 mb-4">
-                        Key Benefits
-                      </h3>
-                      <div className="grid sm:grid-cols-2 gap-3">
-                        {service.benefits.slice(0, 6).map((benefit, idx) => (
-                          <div key={idx} className="flex items-start gap-2">
-                            <Icon
-                              name="Check"
-                              className="text-primary mt-0.5 flex-shrink-0"
-                              size="sm"
-                            />
-                            <span className="text-sm text-gray-600">{benefit}</span>
-                          </div>
-                        ))}
+                  <div
+                    className={
+                      normalizedVariant === 'detail-image-right'
+                        ? 'lg:order-1'
+                        : index % 2 === 1
+                          ? 'lg:col-start-1 lg:row-start-1'
+                          : ''
+                    }
+                  >
+                    <div className="rounded-2xl bg-white border border-gray-100 p-6 lg:p-8">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                          <Icon name={service.icon as any} className="text-primary" />
+                        </div>
+                        <Badge variant="primary">{`Service ${service.order || index + 1}`}</Badge>
                       </div>
-                    </div>
-                  )}
 
-                  {service.whatToExpect && (
-                    <div className="bg-white rounded-xl p-6 border border-gray-100">
-                      <h4 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
-                        <Icon name="Info" size="sm" className="text-primary" />
-                        What to Expect
-                      </h4>
-                      <p className="text-sm text-gray-600 leading-relaxed">
-                        {service.whatToExpect}
+                      <h2 className="text-heading font-bold text-gray-900 mb-4">{service.title}</h2>
+                      <p className="text-gray-700 leading-relaxed mb-6">
+                        {service.fullDescription || service.shortDescription}
                       </p>
+
+                      {service.benefits && service.benefits.length > 0 && (
+                        <div className="mb-6">
+                          <h3 className="text-subheading font-semibold text-gray-900 mb-4">
+                            Key Benefits
+                          </h3>
+                          <div className="grid sm:grid-cols-2 gap-3">
+                            {service.benefits.slice(0, 6).map((benefit, idx) => (
+                              <div key={idx} className="flex items-start gap-2">
+                                <Icon
+                                  name="Check"
+                                  className="text-primary mt-0.5 flex-shrink-0"
+                                  size="sm"
+                                />
+                                <span className="text-sm text-gray-600">{benefit}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {service.whatToExpect && (
+                        <div className="bg-white rounded-xl p-6 border border-gray-100">
+                          <h4 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                            <Icon name="Info" size="sm" className="text-primary" />
+                            What to Expect
+                          </h4>
+                          <p className="text-sm text-gray-600 leading-relaxed">
+                            {service.whatToExpect}
+                          </p>
+                        </div>
+                      )}
                     </div>
-                  )}
+                  </div>
                 </div>
               </div>
             ))}
@@ -307,6 +373,7 @@ export default function ServicesSection({
           </Link>
         </div>
       )}
+      </div>
     </section>
   );
 }
@@ -318,6 +385,69 @@ export default function ServicesSection({
 interface ServiceCardProps {
   service: Service;
   compact?: boolean;
+}
+
+function ServiceDetailCard({ service }: { service: Service }) {
+  const CardWrapper = service.link ? Link : 'div';
+
+  return (
+    <CardWrapper href={service.link || '#'} className={service.link ? 'block h-full' : 'h-full'}>
+      <article className="h-full rounded-2xl bg-white shadow-md border border-gray-100 hover:shadow-xl transition-shadow overflow-hidden">
+        {service.image && (
+          <div className="relative aspect-[3/2] bg-white">
+            <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
+          </div>
+        )}
+        <div className="p-6">
+          <h3 className="text-subheading font-bold text-gray-900 mb-3">{service.title}</h3>
+
+          {(service.fullDescription || service.shortDescription) && (
+            <p className="text-sm text-gray-700 leading-relaxed mb-4">
+              {service.fullDescription || service.shortDescription}
+            </p>
+          )}
+
+          {(service.price || service.durationMinutes) && (
+            <div className="grid grid-cols-2 gap-2 mb-4 text-xs">
+              {service.price && (
+                <div className="rounded-md bg-white border border-gray-100 px-2 py-1">
+                  <span className="text-gray-500">Price</span>
+                  <p className="text-gray-800 font-semibold">{service.price}</p>
+                </div>
+              )}
+              {service.durationMinutes ? (
+                <div className="rounded-md bg-white border border-gray-100 px-2 py-1">
+                  <span className="text-gray-500">Duration</span>
+                  <p className="text-gray-800 font-semibold">{service.durationMinutes} min</p>
+                </div>
+              ) : null}
+            </div>
+          )}
+
+          {service.benefits && service.benefits.length > 0 && (
+            <div className="mb-4">
+              <h4 className="text-xs font-semibold text-gray-900 mb-2">Key Benefits</h4>
+              <ul className="space-y-1.5">
+                {service.benefits.map((benefit, index) => (
+                  <li key={index} className="flex items-start gap-2 text-xs text-gray-600">
+                    <Icon name="Check" size="sm" className="text-primary mt-0.5 flex-shrink-0" />
+                    <span>{benefit}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {service.whatToExpect && (
+            <div className="rounded-xl border border-gray-100 bg-white p-3">
+              <h5 className="text-xs font-semibold text-gray-900 mb-1">What to Expect</h5>
+              <p className="text-xs text-gray-600 leading-relaxed">{service.whatToExpect}</p>
+            </div>
+          )}
+        </div>
+      </article>
+    </CardWrapper>
+  );
 }
 
 function ServiceCard({ service, compact }: ServiceCardProps) {

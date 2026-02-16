@@ -57,13 +57,20 @@ export default function HeroSection({
   const config = heroVariantConfig[variant];
   const sectionClasses = getSectionClasses(config);
   const displayName = businessName || legacyName || '';
+  const backdropGradientStyle = {
+    backgroundImage:
+      'linear-gradient(135deg, var(--backdrop-primary), var(--backdrop-secondary), var(--backdrop-primary))',
+  };
   
   // Render based on variant
   switch (variant) {
     case 'split-photo-right':
       return (
         <>
-          <section className={cn('gradient-backdrop py-20 md:py-28', className)}>
+          <section
+            className={cn('py-20 md:py-28', className)}
+            style={backdropGradientStyle}
+          >
             <div className="container-custom">
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 {/* Text Content - Left */}
@@ -105,7 +112,10 @@ export default function HeroSection({
     
     case 'split-photo-left':
       return (
-        <section className={cn('gradient-backdrop', sectionClasses, className)}>
+        <section
+          className={cn(sectionClasses, className)}
+          style={backdropGradientStyle}
+        >
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Image - Left */}
             {image && (
@@ -275,7 +285,10 @@ export default function HeroSection({
     case 'centered':
     default:
       return (
-        <section className={cn('gradient-backdrop', sectionClasses, className)}>
+        <section
+          className={cn(sectionClasses, className)}
+          style={backdropGradientStyle}
+        >
           <div className="max-w-4xl mx-auto">
             <HeroContent
               businessName={displayName}

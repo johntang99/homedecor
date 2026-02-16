@@ -219,7 +219,14 @@ export interface Service {
 }
 
 export interface ServicesSection {
-  variant?: 'grid-cards' | 'featured-large' | 'list-horizontal' | 'accordion' | 'tabs' | 'detail-alternating';
+  variant?:
+    | 'grid-cards'
+    | 'featured-large'
+    | 'list-horizontal'
+    | 'accordion'
+    | 'tabs'
+    | 'detail-alternating'
+    | 'detail-image-right';
   badge: string;
   title: string;
   subtitle: string;
@@ -525,11 +532,14 @@ export interface ServicesPage {
   servicesList?: {
     variant?:
       | 'grid-cards'
+      | 'grid-cards-2x'
+      | 'grid-cards-3x'
       | 'featured-large'
       | 'list-horizontal'
       | 'accordion'
       | 'tabs'
-      | 'detail-alternating';
+      | 'detail-alternating'
+      | 'detail-image-right';
     title?: string;
     subtitle?: string;
     badge?: string;

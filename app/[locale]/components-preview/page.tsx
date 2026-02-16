@@ -64,7 +64,7 @@ export default function ComponentsPreview() {
       <h3 className="text-3xl font-bold mb-2">Slide 2</h3>
       <p>Another amazing slide</p>
     </div>,
-    <div key="3" className="bg-gradient-to-r from-blue-500 to-blue-700 text-white p-12 text-center rounded-xl">
+    <div key="3" className="bg-gradient-to-r from-[var(--secondary)] to-[var(--secondary-dark)] text-white p-12 text-center rounded-xl">
       <h3 className="text-3xl font-bold mb-2">Slide 3</h3>
       <p>One more slide</p>
     </div>,
@@ -321,10 +321,10 @@ export default function ComponentsPreview() {
             <h2 className="text-heading font-bold mb-6">Icons (Lucide React)</h2>
             <div className="flex gap-6 items-center">
               <Heart size={24} className="text-red-500" />
-              <Star size={24} className="text-amber-500" />
-              <Sparkles size={24} className="text-blue-500" />
+              <Star size={24} className="text-[var(--secondary)]" />
+              <Sparkles size={24} className="text-[var(--secondary-dark)]" />
               <Mail size={24} className="text-gray-700" />
-              <Phone size={24} className="text-green-500" />
+              <Phone size={24} className="text-[var(--secondary)]" />
             </div>
           </section>
         </div>

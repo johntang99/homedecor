@@ -361,7 +361,7 @@ export default async function ConditionsPage({ params }: ConditionsPageProps) {
                           <div
                             key={condition.id}
                             id={condition.id}
-                            className="bg-white border border-gray-100 rounded-xl p-6 hover:border-primary/30 hover:shadow-md transition-all"
+                            className="bg-white border border-gray-100 rounded-xl p-6 shadow-md hover:border-primary/30 hover:shadow-xl transition-all"
                           >
                             <div className="grid lg:grid-cols-3 gap-6">
                               {/* Title and Description */}
@@ -434,7 +434,7 @@ export default async function ConditionsPage({ params }: ConditionsPageProps) {
                             <div
                               key={condition.id}
                               id={condition.id}
-                              className="bg-white border border-gray-100 rounded-xl p-6 hover:border-primary/30 hover:shadow-md transition-all"
+                              className="bg-white border border-gray-100 rounded-xl p-6 shadow-md hover:border-primary/30 hover:shadow-xl transition-all"
                             >
                               <div className="grid lg:grid-cols-3 gap-6">
                                 {/* Title and Description */}

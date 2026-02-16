@@ -88,11 +88,11 @@
     },
     {
       "id": "fertility-success-lisa",
-      "image": "/uploads/dr-huang-clinic/case-studies/fertility.jpg",
+      "image": "",
       "summary": "After 3 years of unsuccessful attempts to conceive and one failed IVF cycle, Lisa achieved natural pregnancy through TCM treatment.",
       "category": "womens-health",
       "condition": "Infertility (Unexplained)",
-      "afterImage": "/uploads/dr-huang-clinic/gallery/treatment-room-2.jpg"
+      "afterImage": "/uploads/dr-huang-clinic/general/fertility-2.jpg"
     },
     {
       "id": "anxiety-depression-robert",
@@ -119,10 +119,11 @@
     },
     {
       "id": "menopause-patricia",
-      "image": "/uploads/dr-huang-clinic/case-studies/fertility.jpg",
+      "image": "",
       "summary": "Patricia eliminated severe hot flashes and night sweats and improved sleep and mood through TCM treatment.",
       "category": "womens-health",
-      "condition": "Menopause Symptoms"
+      "condition": "Menopause Symptoms",
+      "afterImage": "/uploads/dr-huang-clinic/blog/stress-management.jpg"
     }
   ],
   "introduction": {

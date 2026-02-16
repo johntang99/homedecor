@@ -41,7 +41,10 @@ export default function BlogPreviewSection({
         {/* Section Header */}
         <div className="text-center mb-12">
           {badge && (
-            <Badge variant="primary" className="mb-4">
+            <Badge
+              variant="primary"
+              className="mb-4 bg-transparent border-transparent shadow-none px-0 py-0 rounded-none"
+            >
               {badge}
             </Badge>
           )}

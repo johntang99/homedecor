@@ -39,8 +39,8 @@ const SECTION_VARIANT_OPTIONS: Record<string, string[]> = {
   testimonials: ['carousel', 'grid', 'masonry', 'slider-vertical', 'featured-single'],
   howItWorks: ['horizontal', 'vertical', 'cards', 'vertical-image-right'],
   conditions: ['grid-cards', 'categories-tabs', 'list-detailed', 'icon-grid'],
-  services: ['grid-cards', 'featured-large', 'list-horizontal', 'accordion', 'tabs', 'detail-alternating'],
-  servicesList: ['grid-cards', 'featured-large', 'list-horizontal', 'accordion', 'tabs', 'detail-alternating'],
+  services: ['grid-cards-2x', 'grid-cards-3x', 'featured-large', 'list-horizontal', 'accordion', 'tabs', 'detail-alternating', 'detail-image-right'],
+  servicesList: ['grid-cards-2x', 'grid-cards-3x', 'featured-large', 'list-horizontal', 'accordion', 'tabs', 'detail-alternating', 'detail-image-right'],
   overview: ['centered', 'left'],
   blog: ['cards-grid', 'featured-side', 'list-detailed', 'carousel'],
   gallery: ['grid-masonry', 'grid-uniform', 'carousel', 'lightbox-grid'],
@@ -632,6 +632,14 @@ export function ContentEditor({
       )
     : [];
   const galleryCategories = Array.isArray(formData?.categories)
+    ? formData.categories
+        .map((category: any) => ({
+          id: typeof category?.id === 'string' ? category.id : '',
+          name: typeof category?.name === 'string' ? category.name : '',
+        }))
+        .filter((category: any) => category.id && category.name)
+    : [];
+  const caseStudyCategories = Array.isArray(formData?.categories)
     ? formData.categories
         .map((category: any) => ({
           id: typeof category?.id === 'string' ? category.id : '',
@@ -2291,7 +2299,7 @@ export function ContentEditor({
                 </div>
               )}
 
-              {Array.isArray(formData?.services) && (
+              {Array.isArray(formData?.services) && !formData?.servicesList && (
                 <div className="border border-gray-200 rounded-lg p-4">
                   <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
                     Services
@@ -2537,6 +2545,26 @@ export function ContentEditor({
                             )
                           }
                         />
+                      <div className="mb-2">
+                        <label className="block text-xs text-gray-500 mb-1">Category</label>
+                        <select
+                          className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                          value={item.category || ''}
+                          onChange={(event) =>
+                            updateFormValue(
+                              ['caseStudies', String(index), 'category'],
+                              event.target.value
+                            )
+                          }
+                        >
+                          <option value="">Select category</option>
+                          {caseStudyCategories.map((category: any) => (
+                            <option key={category.id} value={category.id}>
+                              {category.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-xs text-gray-500">Summary (Markdown)</span>
                         <button

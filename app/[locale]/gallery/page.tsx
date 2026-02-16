@@ -187,7 +187,7 @@ interface HeaderMenuConfig {
                     className="w-full h-auto object-contain"
                   />
                 ) : (
-                  <div className="w-full aspect-square flex flex-col items-center justify-center bg-gradient-to-br from-green-600/10 to-amber-600/10">
+                  <div className="w-full aspect-square flex flex-col items-center justify-center bg-gradient-to-br from-[color-mix(in_srgb,var(--primary)_10%,transparent)] to-[color-mix(in_srgb,var(--secondary)_16%,transparent)]">
                     <div className="text-8xl mb-6">🏛️</div>
                     <p className="text-gray-700 font-semibold text-subheading mb-2">
                       {locale === 'en' ? 'Our Workspace' : '我们的空间'}

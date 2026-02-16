@@ -20,12 +20,15 @@ export type TestimonialsVariant =
   | 'featured-single';      // One large testimonial
 
 export type ServicesVariant =
-  | 'grid-cards'            // Equal-sized cards in grid
+  | 'grid-cards'            // Legacy grid-cards (mapped to detail-alternating)
+  | 'grid-cards-2x'         // Card grid, 2 columns
+  | 'grid-cards-3x'         // Card grid, 3 columns
   | 'featured-large'        // One large + smaller cards
   | 'list-horizontal'       // Horizontal scrolling list
   | 'accordion'             // Expandable accordion
   | 'tabs'                  // Tabbed interface
-  | 'detail-alternating';   // Alternating detail rows
+  | 'detail-alternating'    // Alternating detail rows
+  | 'detail-image-right';   // Detail rows with image always on right
 
 export type ConditionsVariant =
   | 'grid-cards'            // Card grid

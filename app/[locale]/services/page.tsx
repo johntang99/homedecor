@@ -256,7 +256,7 @@ export default async function ServicesPageComponent({ params }: ServicesPageProp
       {isEnabled('services') && content.servicesList && (
         <div style={sectionStyle('services')}>
           <ServicesSection
-            variant={content.servicesList.variant || 'grid-cards'}
+            variant={content.servicesList.variant || 'detail-alternating'}
             badge={servicesBadge}
             title={
               content.servicesList.title ||

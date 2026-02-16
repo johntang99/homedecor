@@ -18,6 +18,50 @@
     "subtitle": "Take a virtual tour of our peaceful, welcoming healing space",
     "backgroundImage": "/uploads/dr-huang-clinic/gallery/hero-bg.jpg"
   },
+  "categories": [
+    {
+      "id": "all",
+      "icon": "Grid",
+      "name": "All Photos",
+      "description": "View all clinic photos"
+    },
+    {
+      "id": "exterior",
+      "icon": "Home",
+      "name": "Exterior & Entrance",
+      "description": "Our building and welcoming entrance"
+    },
+    {
+      "id": "reception",
+      "icon": "Sofa",
+      "name": "Reception Area",
+      "description": "Where your healing journey begins"
+    },
+    {
+      "id": "treatment-rooms",
+      "icon": "Bed",
+      "name": "Treatment Rooms",
+      "description": "Peaceful spaces for your treatments"
+    },
+    {
+      "id": "herbal-pharmacy",
+      "icon": "Leaf",
+      "name": "Herbal Pharmacy",
+      "description": "Our extensive herbal medicine collection"
+    },
+    {
+      "id": "equipment",
+      "icon": "Syringe",
+      "name": "Equipment & Tools",
+      "description": "The tools of our trade"
+    },
+    {
+      "id": "details",
+      "icon": "Sparkles",
+      "name": "Details",
+      "description": "The little touches that make our clinic special"
+    }
+  ],
   "images": [
     {
       "id": "exterior-1",
@@ -283,50 +327,6 @@
       "title": "Herbal Tea",
       "category": "details",
       "description": "Complimentary herbal tea for patients"
-    }
-  ],
-  "categories": [
-    {
-      "id": "all",
-      "icon": "Grid",
-      "name": "All Photos",
-      "description": "View all clinic photos"
-    },
-    {
-      "id": "exterior",
-      "icon": "Home",
-      "name": "Exterior & Entrance",
-      "description": "Our building and welcoming entrance"
-    },
-    {
-      "id": "reception",
-      "icon": "Sofa",
-      "name": "Reception Area",
-      "description": "Where your healing journey begins"
-    },
-    {
-      "id": "treatment-rooms",
-      "icon": "Bed",
-      "name": "Treatment Rooms",
-      "description": "Peaceful spaces for your treatments"
-    },
-    {
-      "id": "herbal-pharmacy",
-      "icon": "Leaf",
-      "name": "Herbal Pharmacy",
-      "description": "Our extensive herbal medicine collection"
-    },
-    {
-      "id": "equipment",
-      "icon": "Syringe",
-      "name": "Equipment & Tools",
-      "description": "The tools of our trade"
-    },
-    {
-      "id": "details",
-      "icon": "Sparkles",
-      "name": "Details",
-      "description": "The little touches that make our clinic special"
     }
   ],
   "virtualTour": {

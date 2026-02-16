@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { Menu, X, Phone, Mail, MapPin, Facebook, Instagram, Youtube, MessageCircle } from 'lucide-react';
 import { Locale } from '@/lib/i18n';
 import { SiteInfo } from '@/lib/types';
@@ -65,6 +66,7 @@ export default function Header({
 }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
   const topbarConfig = headerConfig?.topbar;
   const logoConfig = headerConfig?.menu?.logo;
   const logoImage = logoConfig?.image;
@@ -96,6 +98,26 @@ export default function Header({
     (menu?.fontWeight || headerConfig?.menu?.fontWeight || 'semibold') === 'regular'
       ? 'font-normal'
       : 'font-semibold';
+
+  const normalizePath = (value?: string | null) => {
+    if (!value) return '';
+    const noHash = value.split('#')[0];
+    const noQuery = noHash.split('?')[0];
+    if (!noQuery) return '';
+    return noQuery.length > 1 ? noQuery.replace(/\/+$/, '') : noQuery;
+  };
+
+  const isMenuItemActive = (itemUrl: string) => {
+    // External links should not be treated as active route tabs.
+    if (!itemUrl.startsWith('/')) return false;
+    const current = normalizePath(pathname);
+    const target = normalizePath(itemUrl);
+    if (!current || !target) return false;
+    if (current === target) return true;
+    // Highlight parent section for nested routes (e.g. /en/blog/[slug]).
+    if (target !== `/${locale}` && current.startsWith(`${target}/`)) return true;
+    return false;
+  };
 
   const renderLogo = (sizeClass: string, width: number, height: number) => {
     const siteDisplayName = getSiteDisplayName(siteInfo, 'Site');
@@ -231,7 +253,9 @@ export default function Header({
                 <Link
                   key={item.url}
                   href={item.url}
-                  className={`text-gray-700 hover:text-primary ${menuFontWeightClass} transition-colors text-sm`}
+                  className={`${
+                    isMenuItemActive(item.url) ? 'text-primary' : 'text-gray-700'
+                  } hover:text-primary ${menuFontWeightClass} transition-colors text-sm`}
                 >
                   {item.text}
                 </Link>
@@ -275,7 +299,9 @@ export default function Header({
                   <Link
                     key={item.url}
                     href={item.url}
-                    className={`text-gray-700 hover:text-primary ${menuFontWeightClass} transition-colors text-sm whitespace-nowrap`}
+                    className={`${
+                      isMenuItemActive(item.url) ? 'text-primary' : 'text-gray-700'
+                    } hover:text-primary ${menuFontWeightClass} transition-colors text-sm whitespace-nowrap`}
                   >
                     {item.text}
                   </Link>
@@ -316,7 +342,9 @@ export default function Header({
                   <Link
                     key={item.url}
                     href={item.url}
-                    className={`text-gray-700 hover:text-primary ${menuFontWeightClass} py-1`}
+                    className={`${
+                      isMenuItemActive(item.url) ? 'text-primary' : 'text-gray-700'
+                    } hover:text-primary ${menuFontWeightClass} py-1`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.text}

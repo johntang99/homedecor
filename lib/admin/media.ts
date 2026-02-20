@@ -15,6 +15,12 @@ export interface MediaItem {
 
 const IMAGE_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif']);
 
+function shouldIncludeFilesystem(storageBucket: string) {
+  if (!storageBucket) return true;
+  const override = (process.env.MEDIA_INCLUDE_FILESYSTEM || '').trim().toLowerCase();
+  return ['1', 'true', 'yes', 'on'].includes(override);
+}
+
 function getStorageBucket() {
   return (
     process.env.SUPABASE_STORAGE_BUCKET ||
@@ -102,19 +108,25 @@ async function walkDirectory(dir: string, baseDir: string, items: MediaItem[]) {
 
 export async function listMedia(siteId: string): Promise<MediaItem[]> {
   const storageBucket = getStorageBucket();
-  const baseDir = path.join(process.cwd(), 'public', 'uploads', siteId);
-  const filesystemItems: MediaItem[] = [];
-  try {
-    await walkDirectory(baseDir, baseDir, filesystemItems);
-  } catch (error) {
-    // ignore; directory may not exist yet
+  const includeFilesystem = shouldIncludeFilesystem(storageBucket);
+  const normalizedFilesystemItems: MediaItem[] = [];
+  if (includeFilesystem) {
+    const baseDir = path.join(process.cwd(), 'public', 'uploads', siteId);
+    const filesystemItems: MediaItem[] = [];
+    try {
+      await walkDirectory(baseDir, baseDir, filesystemItems);
+    } catch (error) {
+      // ignore; directory may not exist yet
+    }
+    normalizedFilesystemItems.push(
+      ...filesystemItems
+        .map((item) => ({
+          ...item,
+          url: `/uploads/${siteId}/${item.path}`,
+        }))
+        .sort((a, b) => a.path.localeCompare(b.path))
+    );
   }
-  const normalizedFilesystemItems = filesystemItems
-    .map((item) => ({
-      ...item,
-      url: `/uploads/${siteId}/${item.path}`,
-    }))
-    .sort((a, b) => a.path.localeCompare(b.path));
 
   if (canUseMediaDb()) {
     const dbItems = await listMediaDb(siteId);

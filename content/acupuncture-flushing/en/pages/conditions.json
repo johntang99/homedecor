@@ -16,7 +16,7 @@
     "title": "Conditions We Treat",
     "variant": "split-photo-right",
     "subtitle": "Traditional Chinese Medicine offers natural, effective solutions for a wide range of health concerns",
-    "backgroundImage": "/uploads/dr-huang-clinic/gallery/needles-sterile.jpg"
+    "backgroundImage": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/gallery/needles-sterile.jpg"
   },
   "categories": [
     {
@@ -60,7 +60,7 @@
     {
       "id": "back-pain",
       "icon": "Activity",
-      "image": "/uploads/dr-huang-clinic/home/welcome-section.jpg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/home/welcome-section.jpg",
       "title": "Back Pain",
       "category": "pain-management",
       "featured": true,
@@ -85,7 +85,7 @@
     {
       "id": "neck-shoulder-pain",
       "icon": "Activity",
-      "image": "/uploads/dr-huang-clinic/blog/gua-sha-22.png",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/blog/gua-sha-22.png",
       "title": "Neck & Shoulder Pain",
       "category": "pain-management",
       "symptoms": [
@@ -131,7 +131,7 @@
     {
       "id": "headaches-migraines",
       "icon": "Activity",
-      "image": "/uploads/dr-huang-clinic/general/acupuncture-12.jpeg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/acupuncture-12.jpeg",
       "title": "Headaches & Migraines",
       "category": "pain-management",
       "featured": true,
@@ -156,7 +156,7 @@
     {
       "id": "anxiety",
       "icon": "Brain",
-      "image": "/uploads/dr-huang-clinic/general/anxiate-3.jpeg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/anxiate-3.jpeg",
       "title": "Anxiety & Panic Disorders",
       "category": "mental-health",
       "featured": true,
@@ -253,7 +253,7 @@
     {
       "id": "ibs",
       "icon": "Apple",
-      "image": "/uploads/dr-huang-clinic/blog/digestive-health.jpg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/blog/digestive-health.jpg",
       "title": "IBS & Digestive Issues",
       "category": "digestive",
       "featured": true,
@@ -324,7 +324,7 @@
     {
       "id": "fertility",
       "icon": "Heart",
-      "image": "/uploads/dr-huang-clinic/general/fertility-2.jpg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/fertility-2.jpg",
       "title": "Fertility Support",
       "category": "womens-health",
       "featured": true,

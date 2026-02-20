@@ -83,7 +83,7 @@
     "title": "Get in Touch",
     "variant": "centered",
     "subtitle": "We're here to answer your questions and help you begin your healing journey",
-    "backgroundImage": "/uploads/dr-huang-clinic/contact/hero-bg.jpg"
+    "backgroundImage": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/contact/hero-bg.jpg"
   },
   "hours": {
     "note": "Last appointment starts 1 hour before closing. Please call ahead for same-day appointments.",

@@ -51,7 +51,7 @@
     "title": "Transparent Pricing",
     "variant": "centered",
     "subtitle": "Affordable, high-quality Traditional Chinese Medicine care with flexible payment options",
-    "backgroundImage": "/uploads/dr-huang-clinic/pricing/hero-bg.jpg"
+    "backgroundImage": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/pricing/hero-bg.jpg"
   },
   "packages": {
     "items": [

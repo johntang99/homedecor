@@ -16,7 +16,7 @@
     "title": "TCM Blog, Lifestyle & Resources",
     "variant": "split-photo-right",
     "subtitle": "Educational articles and videos about Traditional Chinese Medicine, wellness, and natural health",
-    "backgroundImage": "/uploads/dr-huang-clinic/blog/dr-huang-lecture-20.png"
+    "backgroundImage": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/blog/dr-huang-lecture-20.png"
   },
   "categories": [
     {

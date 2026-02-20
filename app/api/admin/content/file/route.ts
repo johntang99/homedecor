@@ -13,6 +13,7 @@ import {
 } from '@/lib/contentDb';
 import { canWriteContent, requireSiteAccess } from '@/lib/admin/permissions';
 import { locales } from '@/lib/i18n';
+import { normalizeMediaUrlsInData } from '@/lib/media-url';
 
 function isEmptyHeaderPayload(filePath: string, data: any): boolean {
   if (filePath !== 'header.json' || !data || typeof data !== 'object') return false;
@@ -142,11 +143,14 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({ message: 'Invalid path' }, { status: 400 });
   }
 
+  let parsed: any;
   try {
-    JSON.parse(content);
+    parsed = JSON.parse(content);
   } catch (error) {
     return NextResponse.json({ message: 'Invalid JSON' }, { status: 400 });
   }
+  const normalizedParsed = normalizeMediaUrlsInData(parsed, siteId);
+  const normalizedContent = JSON.stringify(normalizedParsed, null, 2);
 
   if (canUseContentDb()) {
     const existing = await fetchContentEntry(siteId, locale, filePath);
@@ -158,7 +162,6 @@ export async function PUT(request: NextRequest) {
         note: 'Admin update',
       });
     }
-    const parsed = JSON.parse(content);
     if (filePath === 'theme.json') {
       await Promise.all(
         locales.map((entryLocale) =>
@@ -166,7 +169,7 @@ export async function PUT(request: NextRequest) {
             siteId,
             locale: entryLocale,
             path: filePath,
-            data: parsed,
+            data: normalizedParsed,
             updatedBy: session.user.email,
           })
         )
@@ -176,7 +179,7 @@ export async function PUT(request: NextRequest) {
         siteId,
         locale,
         path: filePath,
-        data: parsed,
+        data: normalizedParsed,
         updatedBy: session.user.email,
       });
     }
@@ -191,7 +194,7 @@ export async function PUT(request: NextRequest) {
 
     try {
       await fs.mkdir(path.dirname(resolved), { recursive: true });
-      await fs.writeFile(resolved, content);
+      await fs.writeFile(resolved, normalizedContent);
       return NextResponse.json({
         success: true,
         fileSync: 'synced',
@@ -224,7 +227,7 @@ export async function PUT(request: NextRequest) {
     // ignore missing existing file
   }
 
-  await fs.writeFile(resolved, content);
+  await fs.writeFile(resolved, normalizedContent);
   return NextResponse.json({ success: true, fileSync: 'synced', message: 'Saved to JSON.' });
 }
 

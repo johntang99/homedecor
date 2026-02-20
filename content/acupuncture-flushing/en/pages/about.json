@@ -66,11 +66,11 @@
   "profile": {
     "bio": "Acupuncturist Jiang is a New York State licensed acupuncturist with many years of experience. She received her degree in traditional Chinese medicine from Beijing University of Chinese Medicine and a Masters in Molecular Biology and Biostatistics from the University of Illinois.\n\nHer lifelong interest in health, nutrition, and treatment began at a young age. Through acupuncture and Chinese medicine, she delivers the natural healing and health augmentation her patients need, specializing in pain relief and long-term wellness.",
     "name": "Acupuncturist Jiang, L.Ac., M.S.",
-    "image": "/uploads/dr-huang-clinic/about/dr-huang-11.png",
+    "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/acupuncture-flushing/general/acupuncture-11.jpeg",
     "quote": "I believe in treating the root cause of imbalance rather than just symptoms, helping patients achieve sustainable health improvements.",
     "title": "Licensed Acupuncturist & TCM Practitioner",
     "variant": "split",
-    "signature": "/uploads/dr-huang-clinic/about/signature.png"
+    "signature": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/about/signature.png"
   },
   "philosophy": {
     "title": "Treatment Philosophy",

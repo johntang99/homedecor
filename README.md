@@ -1,5 +1,27 @@
 # Chinese Medicine Template
 
+
+lsof -ti:3003 | xargs kill -9
+rm -rf .next
+npm run dev
+
+npm install
+npm run build
+
+git add .
+git commit -m "Update: describe your changes"
+git push
+
+
+curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_djRlq5PsWfKq75nViJDtyg3gzsBH/nWJg1rsYkt
+
+
+
+
+
+
+
+
 Production-ready multi-site Traditional Chinese Medicine template with admin CMS, DB-first content, and EN/ZH locale support.
 
 ## What this template includes

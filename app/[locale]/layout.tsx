@@ -36,6 +36,11 @@ export async function generateMetadata({
       metadataBase: baseUrl,
       title: 'Business Website',
       description: 'Multi-site business website',
+      icons: {
+        icon: '/icon',
+        shortcut: '/icon',
+        apple: '/icon',
+      },
     };
   }
 
@@ -77,6 +82,11 @@ export async function generateMetadata({
       locale,
       type: 'website',
       images: seo?.ogImage ? [{ url: seo.ogImage }] : undefined,
+    },
+    icons: {
+      icon: '/icon',
+      shortcut: '/icon',
+      apple: '/icon',
     },
   };
 }

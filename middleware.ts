@@ -25,6 +25,10 @@ export function middleware(request: NextRequest) {
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
     pathname.startsWith('/uploads') ||
+    pathname === '/icon' ||
+    pathname.startsWith('/icon/') ||
+    pathname === '/apple-icon' ||
+    pathname.startsWith('/apple-icon/') ||
     pathname === '/robots.txt' ||
     pathname === '/sitemap.xml' ||
     pathname.match(/\.(ico|png|jpg|jpeg|svg|css|js)$/)
@@ -56,6 +60,6 @@ export const config = {
      * - favicon.ico (favicon file)
      * - uploads (uploaded media)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico|uploads).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|icon|apple-icon|uploads).*)',
   ],
 };

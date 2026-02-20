@@ -9,7 +9,7 @@
       "emoji": "",
       "image": {
         "alt": "黄医生诊所",
-        "src": "/uploads/dr-huang-clinic/home/drhuang-2.svg"
+        "src": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/home/drhuang-2.svg"
       },
       "subtext": "传统中医与针灸"
     },

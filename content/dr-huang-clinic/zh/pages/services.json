@@ -55,7 +55,7 @@
     "title": "传统中医疗法",
     "variant": "split-photo-right",
     "subtitle": "为您量身定制的综合治疗方案",
-    "backgroundImage": "/uploads/dr-huang-clinic/general/tcm-emotion-1.webp"
+    "backgroundImage": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/tcm-emotion-1.webp"
   },
   "overview": {
     "title": "我们的服务优势",
@@ -76,7 +76,7 @@
     {
       "id": "acupuncture",
       "icon": "Syringe",
-      "image": "/uploads/dr-huang-clinic/general/acupuncture-10.jpeg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/acupuncture-10.jpeg",
       "order": 1,
       "title": "针灸",
       "benefits": [
@@ -96,7 +96,7 @@
     {
       "id": "chinese-herbal-medicine",
       "icon": "Leaf",
-      "image": "/uploads/dr-huang-clinic/general/chinese-herb-10.webp",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/chinese-herb-10.webp",
       "order": 2,
       "title": "中药",
       "benefits": [
@@ -116,7 +116,7 @@
     {
       "id": "cupping-therapy",
       "icon": "Circle",
-      "image": "/uploads/dr-huang-clinic/general/cupping-10.jpg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/cupping-10.jpg",
       "order": 3,
       "title": "拔罐",
       "benefits": [
@@ -136,7 +136,7 @@
     {
       "id": "moxibustion",
       "icon": "Flame",
-      "image": "/uploads/dr-huang-clinic/blog/moxibustion-2.jpeg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/blog/moxibustion-2.jpeg",
       "order": 4,
       "title": "艾灸",
       "benefits": [
@@ -156,7 +156,7 @@
     {
       "id": "tuina-massage",
       "icon": "Hand",
-      "image": "/uploads/dr-huang-clinic/blog/acupuncture-pain.jpg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/blog/acupuncture-pain.jpg",
       "order": 5,
       "title": "推拿",
       "benefits": [
@@ -176,7 +176,7 @@
     {
       "id": "gua-sha",
       "icon": "Shield",
-      "image": "/uploads/dr-huang-clinic/blog/gua-sha-22.png",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/blog/gua-sha-22.png",
       "order": 6,
       "title": "刮痧",
       "benefits": [
@@ -196,7 +196,7 @@
     {
       "id": "dietary-therapy",
       "icon": "Apple",
-      "image": "/uploads/dr-huang-clinic/general/chinese-dietary-10.jpg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/chinese-dietary-10.jpg",
       "order": 7,
       "title": "食疗",
       "benefits": [
@@ -216,7 +216,7 @@
     {
       "id": "lifestyle-counseling",
       "icon": "Heart",
-      "image": "/uploads/dr-huang-clinic/about/dr-huang-lecture-20.png",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/about/dr-huang-lecture-20.png",
       "order": 8,
       "title": "生活方式咨询",
       "benefits": [
@@ -264,7 +264,7 @@
       {
         "id": "acupuncture",
         "icon": "Syringe",
-        "image": "/uploads/dr-huang-clinic/general/acupuncture-10.jpeg",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/acupuncture-10.jpeg",
         "order": 1,
         "title": "针灸",
         "benefits": [
@@ -284,7 +284,7 @@
       {
         "id": "chinese-herbal-medicine",
         "icon": "Leaf",
-        "image": "/uploads/dr-huang-clinic/general/chinese-herb-10.webp",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/chinese-herb-10.webp",
         "order": 2,
         "title": "中药",
         "benefits": [
@@ -304,7 +304,7 @@
       {
         "id": "cupping-therapy",
         "icon": "Circle",
-        "image": "/uploads/dr-huang-clinic/general/cupping-10.jpg",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/cupping-10.jpg",
         "order": 3,
         "title": "拔罐",
         "benefits": [
@@ -324,7 +324,7 @@
       {
         "id": "moxibustion",
         "icon": "Flame",
-        "image": "/uploads/dr-huang-clinic/blog/moxibustion-2.jpeg",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/blog/moxibustion-2.jpeg",
         "order": 4,
         "title": "艾灸",
         "benefits": [
@@ -344,7 +344,7 @@
       {
         "id": "tuina-massage",
         "icon": "Hand",
-        "image": "/uploads/dr-huang-clinic/blog/acupuncture-pain.jpg",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/blog/acupuncture-pain.jpg",
         "order": 5,
         "title": "推拿",
         "benefits": [
@@ -364,7 +364,7 @@
       {
         "id": "gua-sha",
         "icon": "Shield",
-        "image": "/uploads/dr-huang-clinic/blog/gua-sha-22.png",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/blog/gua-sha-22.png",
         "order": 6,
         "title": "刮痧",
         "benefits": [
@@ -384,7 +384,7 @@
       {
         "id": "dietary-therapy",
         "icon": "Apple",
-        "image": "/uploads/dr-huang-clinic/general/chinese-dietary-10.jpg",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/chinese-dietary-10.jpg",
         "order": 7,
         "title": "食疗",
         "benefits": [
@@ -404,7 +404,7 @@
       {
         "id": "lifestyle-counseling",
         "icon": "Heart",
-        "image": "/uploads/dr-huang-clinic/about/dr-huang-lecture-20.png",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/about/dr-huang-lecture-20.png",
         "order": 8,
         "title": "生活方式咨询",
         "benefits": [

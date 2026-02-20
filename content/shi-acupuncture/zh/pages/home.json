@@ -19,7 +19,7 @@
       {
         "slug": "acupuncture-science",
         "type": "article",
-        "image": "/uploads/dr-huang-clinic/general/acupuncture-10.jpeg",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/acupuncture-10.jpeg",
         "title": "针灸背后的科学：它如何工作",
         "excerpt": "了解针灸如何根据现代研究刺激身体的自然康复机制。",
         "category": "针灸",
@@ -28,7 +28,7 @@
       {
         "slug": "herbal-medicine-101",
         "type": "article",
-        "image": "/uploads/dr-huang-clinic/general/chinese-herb-10.webp",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/chinese-herb-10.webp",
         "title": "中药101",
         "excerpt": "了解中药的基础知识以及如何创建定制配方。",
         "category": "中药",
@@ -37,7 +37,7 @@
       {
         "slug": "first-visit-video",
         "type": "video",
-        "image": "/uploads/dr-huang-clinic/general/Acupuncture-14.webp",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/Acupuncture-14.webp",
         "title": "首次针灸就诊的期待",
         "excerpt": "观看此视频以了解初次咨询和治疗期间会发生什么。",
         "category": "患者教育",
@@ -53,7 +53,7 @@
     "subtitle": "关于中医和健康的教育资源"
   },
   "hero": {
-    "image": "/uploads/dr-huang-clinic/home/drhuang-photo-1.jpg",
+    "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/home/drhuang-photo-1.jpg",
     "stats": [
       {
         "icon": "Award",
@@ -180,22 +180,22 @@
     "images": [
       {
         "alt": "诊所接待区",
-        "src": "/uploads/dr-huang-clinic/gallery/hero-bg.jpg",
+        "src": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/gallery/hero-bg.jpg",
         "label": "接待区"
       },
       {
         "alt": "治疗室",
-        "src": "/uploads/dr-huang-clinic/gallery/acupuncture-11.jpeg",
+        "src": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/gallery/acupuncture-11.jpeg",
         "label": "治疗室"
       },
       {
         "alt": "中药房",
-        "src": "/uploads/dr-huang-clinic/general/chinese-herb-10.webp",
+        "src": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/chinese-herb-10.webp",
         "label": "中药房"
       },
       {
         "alt": "诊所外观",
-        "src": "/uploads/dr-huang-clinic/gallery/reception-area.jpg",
+        "src": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/gallery/reception-area.jpg",
         "label": "我们的位置"
       }
     ],
@@ -214,7 +214,7 @@
       "id": "acupuncture",
       "icon": "Syringe",
       "link": "/zh/services#acupuncture",
-      "image": "/uploads/dr-huang-clinic/general/Acupuncture-15.webp",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/Acupuncture-15.webp",
       "title": "针灸",
       "subtitle": "恢复平衡并促进康复",
       "fullDescription": "针灸通过细小无菌针刺入穴位，调和气血、疏通经络并促进自然愈合。该疗法可缓解疼痛、改善功能并提升整体健康。",
@@ -286,7 +286,7 @@
         "id": "back-pain",
         "icon": "Activity",
         "link": "/zh/conditions#back-pain",
-        "image": "/uploads/dr-huang-clinic/gallery/acupuncture-needles.jpg",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/gallery/acupuncture-needles.jpg",
         "title": "腰背痛",
         "category": "疼痛管理",
         "symptoms": [
@@ -301,7 +301,7 @@
         "id": "headaches-migraines",
         "icon": "Activity",
         "link": "/zh/conditions#headaches-migraines",
-        "image": "/uploads/dr-huang-clinic/general/acupuncture-12.jpeg",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/acupuncture-12.jpeg",
         "title": "头痛和偏头痛",
         "category": "疼痛管理",
         "symptoms": [
@@ -316,7 +316,7 @@
         "id": "anxiety",
         "icon": "Brain",
         "link": "/zh/conditions#anxiety",
-        "image": "/uploads/dr-huang-clinic/general/anxiate-3.jpeg",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/anxiate-3.jpeg",
         "title": "焦虑和恐慌症",
         "category": "心理与情绪健康",
         "symptoms": [
@@ -331,7 +331,7 @@
         "id": "ibs",
         "icon": "Apple",
         "link": "/zh/conditions#ibs",
-        "image": "/uploads/dr-huang-clinic/general/chinese-dietary-10.jpg",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/chinese-dietary-10.jpg",
         "title": "肠易激综合征和消化问题",
         "category": "消化系统健康",
         "symptoms": [
@@ -384,7 +384,7 @@
     "subtitle": "以下是初次咨询时的期待"
   },
   "howItWorks": {
-    "image": "/uploads/dr-huang-clinic/general/acupuncture-16.webp",
+    "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/acupuncture-16.webp",
     "steps": [
       {
         "icon": "ClipboardList",
@@ -416,19 +416,19 @@
     "features": [
       {
         "icon": "Award",
-        "image": "/uploads/dr-huang-clinic/home/why-tcm.jpg",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/home/why-tcm.jpg",
         "title": "专业医师",
         "description": "拥有15年以上经验和高级中医培训及认证"
       },
       {
         "icon": "Heart",
-        "image": "/uploads/dr-huang-clinic/home/welcome-section.jpg",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/home/welcome-section.jpg",
         "title": "个性化护理",
         "description": "每次治疗都根据您的独特需求和健康目标量身定制"
       },
       {
         "icon": "Users",
-        "image": "/uploads/dr-huang-clinic/home/testimonials-bg.jpg",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/home/testimonials-bg.jpg",
         "title": "经过验证的结果",
         "description": "数千名满意的患者和95%的满意度"
       }

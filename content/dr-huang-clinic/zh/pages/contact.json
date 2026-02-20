@@ -83,7 +83,7 @@
     "title": "联系我们",
     "variant": "centered",
     "subtitle": "我们在这里回答您的问题并帮助您开始康复之旅",
-    "backgroundImage": "/uploads/dr-huang-clinic/contact/hero-bg.jpg"
+    "backgroundImage": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/contact/hero-bg.jpg"
   },
   "hours": {
     "note": "最后一次预约在关闭前1小时开始。请提前致电当天预约。",

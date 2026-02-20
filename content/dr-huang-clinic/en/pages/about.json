@@ -17,7 +17,7 @@
     "variant": "split-photo-right",
     "subtitle": "Dedicated to Your Health & Wellness Through Traditional Chinese Medicine (TCM)",
     "description": "Committed to healing through time-tested wisdom and personalized care.",
-    "backgroundImage": "/uploads/dr-huang-clinic/about/dr-huang-lecture-20.png"
+    "backgroundImage": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/about/dr-huang-lecture-20.png"
   },
   "clinic": {
     "title": "About Our Clinic",
@@ -64,13 +64,13 @@
     "variant": "prose"
   },
   "profile": {
-    "bio": "Dr. Michael Huang has dedicated over 15 years to the practice of Traditional Chinese Medicine, helping thousands of patients achieve better health through natural, holistic healing methods. His passion for TCM began during his undergraduate studies in biology, where he became fascinated by the body's innate healing abilities and the elegant wisdom of Chinese medicine.",
-    "name": "Dr. Michael Huang, L.Ac., MSTCM",
-    "image": "/uploads/dr-huang-clinic/about/dr-huang-11.png",
+    "bio": "Dr. Huang has dedicated over 15 years to the practice of Traditional Chinese Medicine, helping thousands of patients achieve better health through natural, holistic healing methods. Her passion for TCM began during his undergraduate studies in biology, where she became fascinated by the body's innate healing abilities and the elegant wisdom of Chinese medicine.",
+    "name": "Dr. Huang, L.Ac., MSTCM",
+    "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/about/dr-huang-11.png",
     "quote": "True healing comes from addressing the root cause, not just suppressing symptoms. Every patient is unique, and treatment must reflect that individuality.",
     "title": "Licensed Acupuncturist & TCM Practitioner",
     "variant": "split",
-    "signature": "/uploads/dr-huang-clinic/about/signature.png"
+    "signature": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/about/signature.png"
   },
   "philosophy": {
     "title": "Treatment Philosophy",

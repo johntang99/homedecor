@@ -47,7 +47,7 @@
     "title": "欢迎新患者",
     "variant": "split-photo-right",
     "subtitle": "首次访问黄医生诊所前您需要了解的一切",
-    "backgroundImage": "/uploads/dr-huang-clinic/general/welcome-clinic-10.png"
+    "backgroundImage": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/welcome-clinic-10.png"
   },
   "insurance": {
     "link": {

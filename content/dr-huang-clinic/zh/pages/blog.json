@@ -16,7 +16,7 @@
     "title": "中医博客和资源",
     "variant": "split-photo-right",
     "subtitle": "关于传统中医、健康和自然疗法的教育文章和视频",
-    "backgroundImage": "/uploads/dr-huang-clinic/blog/dr-huang-lecture-20.png"
+    "backgroundImage": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/blog/dr-huang-lecture-20.png"
   },
   "posts": [
     {
@@ -27,7 +27,7 @@
         "慢性疼痛"
       ],
       "type": "article",
-      "image": "/uploads/dr-huang-clinic/blog/acupuncture-pain.jpg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/blog/acupuncture-pain.jpg",
       "title": "针灸缓解疼痛背后的科学",
       "author": "黄迈克医生",
       "excerpt": "针灸实际上是如何工作的？了解针灸疼痛缓解机制的最新研究。",
@@ -45,7 +45,7 @@
         "配方"
       ],
       "type": "article",
-      "image": "/uploads/dr-huang-clinic/blog/herbal-medicine.jpg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/blog/herbal-medicine.jpg",
       "title": "中药101：了解定制配方",
       "author": "黄迈克医生",
       "excerpt": "了解如何创建中药配方，是什么使它们有效，以及它们如何补充针灸治疗。",
@@ -63,7 +63,7 @@
         "新患者"
       ],
       "type": "video",
-      "image": "/uploads/dr-huang-clinic/blog/digestive-health.jpg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/blog/digestive-health.jpg",
       "title": "首次针灸访问期间会发生什么",
       "author": "黄迈克医生",
       "excerpt": "新手针灸？观看此视频演示典型的首次访问，从咨询到治疗。",
@@ -83,7 +83,7 @@
         "整体"
       ],
       "type": "article",
-      "image": "/uploads/dr-huang-clinic/blog/stress-management.jpg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/blog/stress-management.jpg",
       "title": "用传统中医治疗焦虑和抑郁",
       "author": "黄迈克医生",
       "excerpt": "了解中医如何以不同方式看待心理健康，以及为什么针灸和中药对焦虑和抑郁有效。",
@@ -102,7 +102,7 @@
         "季节性"
       ],
       "type": "article",
-      "image": "/uploads/dr-huang-clinic/blog/spring-health.jpg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/blog/spring-health.jpg",
       "title": "春季肝脏排毒：中医更新提示",
       "author": "黄迈克医生",
       "excerpt": "在中医中，春季是肝脏的季节。了解如何通过饮食、中药和生活方式改变支持肝脏的自然排毒。",
@@ -121,7 +121,7 @@
         "妇女健康"
       ],
       "type": "article",
-      "image": "/uploads/dr-huang-clinic/blog/immune-system.jpg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/blog/immune-system.jpg",
       "title": "生育针灸完整指南",
       "author": "黄迈克医生",
       "excerpt": "针灸如何支持自然受孕和试管婴儿成功。期待什么、治疗方案和成功率。",
@@ -178,7 +178,7 @@
       "机制"
     ],
     "type": "article",
-    "image": "/uploads/dr-huang-clinic/blog/acupuncture-pain.jpg",
+    "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/blog/acupuncture-pain.jpg",
     "title": "针灸缓解疼痛背后的科学",
     "author": "黄迈克医生",
     "excerpt": "针灸实际上是如何工作的？了解现代科学支持的针灸疼痛缓解机制和数千年的临床证据。",

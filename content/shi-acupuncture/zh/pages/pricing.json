@@ -39,7 +39,7 @@
     "title": "透明定价",
     "variant": "centered",
     "subtitle": "价格实惠、高质量的传统中医护理，灵活的付款选项",
-    "backgroundImage": "/uploads/dr-huang-clinic/pricing/hero-bg.jpg"
+    "backgroundImage": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/pricing/hero-bg.jpg"
   },
   "packages": {
     "items": [

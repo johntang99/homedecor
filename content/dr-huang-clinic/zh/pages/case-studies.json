@@ -16,7 +16,7 @@
     "title": "患者成功案例",
     "variant": "centered",
     "subtitle": "真实案例，真实结果 - 了解传统中医如何改变生活",
-    "backgroundImage": "/uploads/dr-huang-clinic/home/hero-bg.jpg"
+    "backgroundImage": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/home/hero-bg.jpg"
   },
   "categories": [
     {
@@ -79,7 +79,7 @@
   "caseStudies": [
     {
       "id": "chronic-back-pain-jennifer",
-      "image": "/uploads/dr-huang-clinic/case-studies/chronic-pain.jpg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/case-studies/chronic-pain.jpg",
       "summary": "经过8年的衰弱性背痛和不成功的常规治疗后，Jennifer通过针灸和中药找到了持久的缓解。",
       "category": "pain-management",
       "condition": "慢性下背部疼痛",
@@ -88,14 +88,14 @@
     },
     {
       "id": "fertility-success-lisa",
-      "image": "/uploads/dr-huang-clinic/case-studies/fertility.jpg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/case-studies/fertility.jpg",
       "summary": "经过3年不成功的尝试和一次失败的试管婴儿周期后，Lisa通过中医治疗实现了自然怀孕。",
       "category": "womens-health",
       "condition": "不孕症（不明原因）"
     },
     {
       "id": "anxiety-depression-robert",
-      "image": "/uploads/dr-huang-clinic/case-studies/migraine.jpg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/case-studies/migraine.jpg",
       "summary": "Robert通过中医克服了衰弱的焦虑和抑郁，减少了对药物的依赖并重获生活质量。",
       "category": "mental-health",
       "condition": "焦虑和抑郁",

@@ -16,7 +16,7 @@
     "title": "Patient Success Stories",
     "variant": "centered",
     "subtitle": "Real cases, real results - see how Traditional Chinese Medicine has transformed lives",
-    "backgroundImage": "/uploads/dr-huang-clinic/home/hero-bg.jpg"
+    "backgroundImage": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/home/hero-bg.jpg"
   },
   "categories": [
     {
@@ -79,7 +79,7 @@
   "caseStudies": [
     {
       "id": "chronic-back-pain-jennifer",
-      "image": "/uploads/dr-huang-clinic/case-studies/chronic-pain.jpg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/case-studies/chronic-pain.jpg",
       "summary": "After 8 years of debilitating back pain and unsuccessful conventional treatments, **Jennifer** found lasting relief through acupuncture and herbal medicine.\n\n- Patient presented with persistent lower back pain that had been affecting her daily activities for over 5 years. \n- The pain was worse in the morning and after prolonged sitting or standing. She had tried physical therapy and pain medications with minimal long-term relief.",
       "category": "pain-management",
       "condition": "Chronic Lower Back Pain",
@@ -92,11 +92,11 @@
       "summary": "After 3 years of unsuccessful attempts to conceive and one failed IVF cycle, Lisa achieved natural pregnancy through TCM treatment.",
       "category": "womens-health",
       "condition": "Infertility (Unexplained)",
-      "afterImage": "/uploads/dr-huang-clinic/general/fertility-2.jpg"
+      "afterImage": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/fertility-2.jpg"
     },
     {
       "id": "anxiety-depression-robert",
-      "image": "/uploads/dr-huang-clinic/case-studies/migraine.jpg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/case-studies/migraine.jpg",
       "summary": "Robert overcame debilitating anxiety and depression through TCM, reducing his reliance on medication and regaining quality of life.",
       "category": "mental-health",
       "condition": "Anxiety & Depression",
@@ -105,14 +105,14 @@
     },
     {
       "id": "ibs-sarah",
-      "image": "/uploads/dr-huang-clinic/case-studies/chronic-pain.jpg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/case-studies/chronic-pain.jpg",
       "summary": "Sarah found relief from severe IBS symptoms that had limited her life for years through targeted TCM treatment.",
       "category": "digestive",
       "condition": "Irritable Bowel Syndrome (IBS)"
     },
     {
       "id": "migraines-michael",
-      "image": "/uploads/dr-huang-clinic/case-studies/migraine.jpg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/case-studies/migraine.jpg",
       "summary": "After 15 years of debilitating migraines, Michael reduced frequency and severity by 85% through acupuncture and herbal medicine.",
       "category": "pain-management",
       "condition": "Chronic Migraines"
@@ -123,7 +123,7 @@
       "summary": "Patricia eliminated severe hot flashes and night sweats and improved sleep and mood through TCM treatment.",
       "category": "womens-health",
       "condition": "Menopause Symptoms",
-      "afterImage": "/uploads/dr-huang-clinic/blog/stress-management.jpg"
+      "afterImage": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/blog/stress-management.jpg"
     }
   ],
   "introduction": {

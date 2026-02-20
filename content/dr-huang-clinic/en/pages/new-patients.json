@@ -55,7 +55,7 @@
     "title": "Welcome New Patients",
     "variant": "split-photo-right",
     "subtitle": "Everything you need to know before your first visit to Dr. Huang Clinic",
-    "backgroundImage": "/uploads/dr-huang-clinic/general/welcome-clinic-10.png"
+    "backgroundImage": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/welcome-clinic-10.png"
   },
   "insurance": {
     "link": {

@@ -4,6 +4,15 @@ import path from 'path';
 import { getSessionFromRequest } from '@/lib/admin/auth';
 import { deleteMediaDb } from '@/lib/admin/mediaDb';
 import { canManageMedia, requireSiteAccess } from '@/lib/admin/permissions';
+import { getSupabaseServerClient } from '@/lib/supabase/server';
+
+function getStorageBucket() {
+  return (
+    process.env.SUPABASE_STORAGE_BUCKET ||
+    process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET ||
+    ''
+  );
+}
 
 export async function DELETE(request: NextRequest) {
   const session = await getSessionFromRequest(request);
@@ -35,13 +44,37 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ message: 'Invalid path' }, { status: 400 });
   }
 
-  const absolute = path.join(process.cwd(), 'public', 'uploads', siteId, normalized);
-  const uploadsRoot = path.join(process.cwd(), 'public', 'uploads', siteId);
-  if (!absolute.startsWith(uploadsRoot)) {
-    return NextResponse.json({ message: 'Invalid path' }, { status: 400 });
+  const storageBucket = getStorageBucket();
+  if (storageBucket) {
+    const supabase = getSupabaseServerClient();
+    if (!supabase) {
+      return NextResponse.json(
+        { message: 'Supabase server client is not configured' },
+        { status: 500 }
+      );
+    }
+
+    const objectPath = `${siteId}/${normalized}`;
+    const { error } = await supabase.storage.from(storageBucket).remove([objectPath]);
+    if (error) {
+      console.error('Supabase storage delete error:', error);
+      return NextResponse.json({ message: 'Delete failed' }, { status: 500 });
+    }
+  } else {
+    const absolute = path.join(process.cwd(), 'public', 'uploads', siteId, normalized);
+    const uploadsRoot = path.join(process.cwd(), 'public', 'uploads', siteId);
+    if (!absolute.startsWith(uploadsRoot)) {
+      return NextResponse.json({ message: 'Invalid path' }, { status: 400 });
+    }
+    try {
+      await fs.unlink(absolute);
+    } catch (error: any) {
+      if (error?.code !== 'ENOENT') {
+        throw error;
+      }
+    }
   }
 
-  await fs.unlink(absolute);
   await deleteMediaDb(siteId, normalized);
   return NextResponse.json({ success: true });
 }

@@ -16,7 +16,7 @@
     "title": "治疗病症",
     "variant": "split-photo-right",
     "subtitle": "传统中医为各种健康问题提供自然、有效的解决方案",
-    "backgroundImage": "/uploads/dr-huang-clinic/gallery/needles-sterile.jpg"
+    "backgroundImage": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/gallery/needles-sterile.jpg"
   },
   "categories": [
     {
@@ -66,7 +66,7 @@
     {
       "id": "back-pain",
       "icon": "Activity",
-      "image": "/uploads/dr-huang-clinic/home/welcome-section.jpg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/home/welcome-section.jpg",
       "title": "腰背痛",
       "category": "pain-management",
       "featured": true,
@@ -136,7 +136,7 @@
     {
       "id": "headaches-migraines",
       "icon": "Activity",
-      "image": "/uploads/dr-huang-clinic/general/acupuncture-12.jpeg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/acupuncture-12.jpeg",
       "title": "头痛和偏头痛",
       "category": "pain-management",
       "featured": true,
@@ -161,7 +161,7 @@
     {
       "id": "anxiety",
       "icon": "Brain",
-      "image": "/uploads/dr-huang-clinic/general/anxiate-3.jpeg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/anxiate-3.jpeg",
       "title": "焦虑和恐慌症",
       "category": "mental-health",
       "featured": true,
@@ -258,7 +258,7 @@
     {
       "id": "ibs",
       "icon": "Apple",
-      "image": "/uploads/dr-huang-clinic/blog/digestive-health.jpg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/blog/digestive-health.jpg",
       "title": "肠易激综合征和消化问题",
       "category": "digestive",
       "featured": true,
@@ -329,7 +329,7 @@
     {
       "id": "fertility",
       "icon": "Heart",
-      "image": "/uploads/dr-huang-clinic/general/fertility-2.jpg",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/fertility-2.jpg",
       "title": "生育支持",
       "category": "womens-health",
       "featured": true,

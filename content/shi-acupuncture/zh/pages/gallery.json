@@ -16,8 +16,50 @@
     "title": "参观我们的诊所",
     "variant": "split-photo-left",
     "subtitle": "虚拟参观我们宁静、温馨的治疗空间",
-    "backgroundImage": "/uploads/dr-huang-clinic/gallery/hero-bg.jpg"
+    "backgroundImage": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/gallery/hero-bg.jpg"
   },
+  "images": [
+    {
+      "id": "exterior-1",
+      "alt": "黄医生诊所正门",
+      "src": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/gallery/hero-bg.jpg",
+      "order": 1,
+      "title": "诊所入口",
+      "category": "exterior",
+      "featured": true,
+      "description": "我们在米德尔敦东大街71号的温馨入口"
+    },
+    {
+      "id": "reception-1",
+      "alt": "接待台区域",
+      "src": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/gallery/exterior-sign.jpg",
+      "order": 4,
+      "title": "接待台",
+      "category": "reception",
+      "featured": true,
+      "description": "您将在我们友好的前台受到欢迎"
+    },
+    {
+      "id": "treatment-1",
+      "alt": "主治疗室",
+      "src": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/gallery/exterior-parking.jpg",
+      "order": 8,
+      "title": "治疗室1",
+      "category": "treatment-rooms",
+      "featured": true,
+      "description": "宽敞、私密的治疗室为您提供舒适"
+    },
+    {
+      "id": "herbs-1",
+      "alt": "中药抽屉墙",
+      "src": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/gallery/reception-desk.jpg",
+      "order": 13,
+      "title": "中药房",
+      "category": "herbal-pharmacy",
+      "featured": true,
+      "description": "库存超过200种传统中药"
+    }
+  ],
   "categories": [
     {
       "id": "all",
@@ -60,48 +102,6 @@
       "icon": "Sparkles",
       "name": "细节",
       "description": "使我们诊所特别的小细节"
-    }
-  ],
-  "images": [
-    {
-      "id": "exterior-1",
-      "alt": "黄医生诊所正门",
-      "src": "/uploads/dr-huang-clinic/gallery/hero-bg.jpg",
-      "order": 1,
-      "title": "诊所入口",
-      "category": "exterior",
-      "featured": true,
-      "description": "我们在米德尔敦东大街71号的温馨入口"
-    },
-    {
-      "id": "reception-1",
-      "alt": "接待台区域",
-      "src": "/uploads/dr-huang-clinic/gallery/exterior-sign.jpg",
-      "order": 4,
-      "title": "接待台",
-      "category": "reception",
-      "featured": true,
-      "description": "您将在我们友好的前台受到欢迎"
-    },
-    {
-      "id": "treatment-1",
-      "alt": "主治疗室",
-      "src": "/uploads/dr-huang-clinic/gallery/exterior-parking.jpg",
-      "order": 8,
-      "title": "治疗室1",
-      "category": "treatment-rooms",
-      "featured": true,
-      "description": "宽敞、私密的治疗室为您提供舒适"
-    },
-    {
-      "id": "herbs-1",
-      "alt": "中药抽屉墙",
-      "src": "/uploads/dr-huang-clinic/gallery/reception-desk.jpg",
-      "order": 13,
-      "title": "中药房",
-      "category": "herbal-pharmacy",
-      "featured": true,
-      "description": "库存超过200种传统中药"
     }
   ],
   "virtualTour": {

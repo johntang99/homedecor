@@ -19,7 +19,7 @@
       {
         "slug": "acupuncture-science",
         "type": "article",
-        "image": "/uploads/dr-huang-clinic/general/acupuncture-10.jpeg",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/acupuncture-10.jpeg",
         "title": "The Science Behind Acupuncture: How It Works",
         "excerpt": "Discover how acupuncture stimulates your body's natural healing mechanisms based on modern research.",
         "category": "Acupuncture",
@@ -28,7 +28,7 @@
       {
         "slug": "herbal-medicine-101",
         "type": "article",
-        "image": "/uploads/dr-huang-clinic/general/chinese-herb-10.webp",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/chinese-herb-10.webp",
         "title": "Chinese Herbal Medicine 101",
         "excerpt": "Learn about the fundamentals of Chinese herbal medicine and how custom formulas are created.",
         "category": "Herbal Medicine",
@@ -37,7 +37,7 @@
       {
         "slug": "first-visit-video",
         "type": "video",
-        "image": "/uploads/dr-huang-clinic/general/Acupuncture-14.webp",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/Acupuncture-14.webp",
         "title": "What to Expect at Your First Acupuncture Visit",
         "excerpt": "Watch this video to learn what happens during your initial consultation and treatment.",
         "category": "Patient Education",
@@ -53,7 +53,7 @@
     "subtitle": "Educational resources about TCM and wellness"
   },
   "hero": {
-    "image": "/uploads/dr-huang-clinic/home/drhuang-photo-1.jpg",
+    "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/home/drhuang-photo-1.jpg",
     "stats": [
       {
         "icon": "Award",
@@ -184,22 +184,22 @@
     "images": [
       {
         "alt": "Clinic reception area",
-        "src": "/uploads/dr-huang-clinic/gallery/hero-bg.jpg",
+        "src": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/gallery/hero-bg.jpg",
         "label": "Reception Area"
       },
       {
         "alt": "Treatment room",
-        "src": "/uploads/dr-huang-clinic/general/acupuncture-11.jpeg",
+        "src": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/acupuncture-11.jpeg",
         "label": "Treatment Room"
       },
       {
         "alt": "Herbal pharmacy",
-        "src": "/uploads/dr-huang-clinic/general/chinese-herb-10.webp",
+        "src": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/chinese-herb-10.webp",
         "label": "Herbal Pharmacy"
       },
       {
         "alt": "Clinic exterior",
-        "src": "/uploads/dr-huang-clinic/gallery/reception-area.jpg",
+        "src": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/gallery/reception-area.jpg",
         "label": "Our Location"
       }
     ],
@@ -218,7 +218,7 @@
       "id": "acupuncture",
       "icon": "Syringe",
       "link": "/en/services#acupuncture",
-      "image": "/uploads/dr-huang-clinic/general/Acupuncture-15.webp",
+      "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/Acupuncture-15.webp",
       "title": "Acupuncture",
       "subtitle": "Restore balance and stimulate healing",
       "fullDescription": "Acupuncture involves the insertion of fine, sterile needles at specific points to restore the flow of Qi. This ancient practice stimulates natural healing, reduces pain, and promotes overall wellness.",
@@ -290,7 +290,7 @@
         "id": "back-pain",
         "icon": "Activity",
         "link": "/en/conditions#back-pain",
-        "image": "/uploads/dr-huang-clinic/gallery/acupuncture-needles.jpg",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/gallery/acupuncture-needles.jpg",
         "title": "Back Pain",
         "category": "Pain Management",
         "symptoms": [
@@ -305,7 +305,7 @@
         "id": "headaches-migraines",
         "icon": "Activity",
         "link": "/en/conditions#headaches-migraines",
-        "image": "/uploads/dr-huang-clinic/general/acupuncture-12.jpeg",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/acupuncture-12.jpeg",
         "title": "Headaches & Migraines",
         "category": "Pain Management",
         "symptoms": [
@@ -320,7 +320,7 @@
         "id": "anxiety",
         "icon": "Brain",
         "link": "/en/conditions#anxiety",
-        "image": "/uploads/dr-huang-clinic/general/anxiate-3.jpeg",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/anxiate-3.jpeg",
         "title": "Anxiety & Panic Disorders",
         "category": "Mental & Emotional Health",
         "symptoms": [
@@ -335,7 +335,7 @@
         "id": "ibs",
         "icon": "Apple",
         "link": "/en/conditions#ibs",
-        "image": "/uploads/dr-huang-clinic/general/chinese-dietary-10.jpg",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/chinese-dietary-10.jpg",
         "title": "IBS & Digestive Issues",
         "category": "Digestive Health",
         "symptoms": [
@@ -388,7 +388,7 @@
     "subtitle": "Here's what to expect during your initial consultation"
   },
   "howItWorks": {
-    "image": "/uploads/dr-huang-clinic/general/acupuncture-16.webp",
+    "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/acupuncture-16.webp",
     "steps": [
       {
         "icon": "ClipboardList",
@@ -420,19 +420,19 @@
     "features": [
       {
         "icon": "Award",
-        "image": "/uploads/dr-huang-clinic/general/Acupuncture-15.webp",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/general/Acupuncture-15.webp",
         "title": "Expert Practitioner",
         "description": "Over 15 years of experience with advanced TCM training and certifications"
       },
       {
         "icon": "Heart",
-        "image": "/uploads/dr-huang-clinic/home/welcome-section.jpg",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/home/welcome-section.jpg",
         "title": "Personalized Care",
         "description": "Every treatment is tailored to your unique needs and health goals"
       },
       {
         "icon": "Users",
-        "image": "/uploads/dr-huang-clinic/about/dr-huang-14.jpg",
+        "image": "https://oakahkxpbmmodpcpocio.supabase.co/storage/v1/object/public/chinesemedicine-media/dr-huang-clinic/about/dr-huang-14.jpg",
         "title": "Proven Results",
         "description": "Thousands of satisfied patients and a 95% satisfaction rate"
       }

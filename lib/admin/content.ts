@@ -12,6 +12,46 @@ export interface ContentFileItem {
 }
 
 const CONTENT_DIR = path.join(process.cwd(), 'content');
+const COLLECTION_PREFIXES = [
+  'portfolio/',
+  'shop-products/',
+  'journal/',
+  'collections/',
+  'testimonials/',
+];
+const COLLECTION_DIRS = ['portfolio', 'shop-products', 'journal', 'collections', 'testimonials'];
+
+function getTitleFromData(data: unknown): string {
+  if (!data || typeof data !== 'object') return '';
+  const record = data as Record<string, unknown>;
+  const candidates = ['title', 'headline', 'name', 'label', 'slug'];
+  for (const key of candidates) {
+    const value = record[key];
+    if (typeof value === 'string' && value.trim()) return value.trim();
+  }
+  return '';
+}
+
+function getCollectionLabel(filePath: string, data?: unknown): string {
+  const slug = filePath.split('/').pop()?.replace('.json', '') || filePath;
+  const title = getTitleFromData(data);
+  if (filePath.startsWith('portfolio/')) {
+    return `Portfolio: ${title || titleCase(slug)}`;
+  }
+  if (filePath.startsWith('shop-products/')) {
+    return `Product: ${title || titleCase(slug)}`;
+  }
+  if (filePath.startsWith('journal/')) {
+    return `Journal: ${title || titleCase(slug)}`;
+  }
+  if (filePath.startsWith('collections/')) {
+    return `Collection: ${title || titleCase(slug)}`;
+  }
+  if (filePath.startsWith('testimonials/')) {
+    return `Testimonial: ${title || titleCase(slug)}`;
+  }
+  return title || titleCase(slug);
+}
 
 function titleCase(value: string) {
   return value
@@ -150,6 +190,29 @@ export async function listContentFiles(
         return;
       }
 
+      if (
+        COLLECTION_PREFIXES.some((prefix) => entry.path.startsWith(prefix)) &&
+        entry.path.endsWith('.json')
+      ) {
+        addItem({
+          id: `collection-${entry.path.replace(/\//g, '-').replace('.json', '')}`,
+          label: getCollectionLabel(entry.path, entry.data),
+          path: entry.path,
+          scope: 'locale',
+        });
+        return;
+      }
+
+      if (entry.path === 'testimonials.json') {
+        addItem({
+          id: 'testimonials',
+          label: 'Client Testimonials',
+          path: entry.path,
+          scope: 'locale',
+        });
+        return;
+      }
+
       if (entry.path === 'navigation.json') {
         addItem({ id: 'navigation', label: 'Navigation', path: entry.path, scope: 'locale' });
       }
@@ -219,6 +282,50 @@ export async function listContentFiles(
     );
   } catch (error) {
     // ignore missing blog directory
+  }
+
+  await Promise.all(
+    COLLECTION_DIRS.map(async (dirName) => {
+      const dirPath = path.join(CONTENT_DIR, siteId, locale, dirName);
+      try {
+        const files = await fs.readdir(dirPath);
+        await Promise.all(
+          files
+            .filter((file) => file.endsWith('.json'))
+            .map(async (file) => {
+              const filePath = `${dirName}/${file}`;
+              let parsed: unknown = null;
+              try {
+                const raw = await fs.readFile(path.join(dirPath, file), 'utf-8');
+                parsed = JSON.parse(raw);
+              } catch {
+                // ignore parse errors and fallback to slug label
+              }
+              addItem({
+                id: `collection-${dirName}-${file.replace('.json', '')}`,
+                label: getCollectionLabel(filePath, parsed),
+                path: filePath,
+                scope: 'locale',
+              });
+            })
+        );
+      } catch {
+        // ignore missing collection directories
+      }
+    })
+  );
+
+  const testimonialsPath = path.join(CONTENT_DIR, siteId, locale, 'testimonials.json');
+  try {
+    await fs.access(testimonialsPath);
+    addItem({
+      id: 'testimonials',
+      label: 'Client Testimonials',
+      path: 'testimonials.json',
+      scope: 'locale',
+    });
+  } catch {
+    // ignore missing testimonials.json
   }
 
   addItem({
@@ -291,6 +398,13 @@ export function resolveContentPath(siteId: string, locale: string, filePath: str
   }
 
   if (filePath.startsWith('blog/')) {
+    return path.join(CONTENT_DIR, siteId, locale, filePath);
+  }
+
+  if (
+    filePath === 'testimonials.json' ||
+    COLLECTION_PREFIXES.some((prefix) => filePath.startsWith(prefix))
+  ) {
     return path.join(CONTENT_DIR, siteId, locale, filePath);
   }
 

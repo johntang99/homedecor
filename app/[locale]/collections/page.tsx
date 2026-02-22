@@ -55,7 +55,7 @@ export default function CollectionsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {collections.map(col => (
                 <Link key={col.slug} href={`/${locale}/collections/${col.slug}`} className="group">
-                  <div className="relative aspect-[3/2] overflow-hidden mb-5 bg-[var(--primary-50)]">
+                  <div className="relative aspect-[3/2] image-frame mb-5 bg-[var(--primary-50)]">
                     {col.coverImage ? (
                       <Image src={col.coverImage} alt={tx(col.title, col.titleCn)} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width:768px) 100vw, 50vw" />
                     ) : (

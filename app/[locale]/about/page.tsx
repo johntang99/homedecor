@@ -39,10 +39,25 @@ export default async function AboutPage({ params }: PageProps) {
   return (
     <>
       {/* Hero */}
-      <section className="relative h-[50vh] min-h-[400px] overflow-hidden" style={{ background: 'var(--primary)' }}>
-        {data.hero?.backgroundImage && <><div className="absolute inset-0"><Image src={data.hero.backgroundImage} alt="" fill className="object-cover opacity-50" sizes="100vw" priority /></div><div className="absolute inset-0 bg-[var(--primary)]/50" /></>}
-        <div className="relative z-10 flex items-end h-full container-custom pb-12">
-          <h1 className="font-serif text-4xl md:text-6xl font-semibold text-white">
+      <section className="relative h-[50vh] overflow-hidden" style={{ background: 'var(--primary)', minHeight: 'var(--about-hero-min-h, 400px)' }}>
+        {data.hero?.backgroundImage && (
+          <>
+            <div className="absolute inset-0">
+              <Image
+                src={data.hero.backgroundImage}
+                alt=""
+                fill
+                className="object-cover"
+                style={{ opacity: 'var(--media-dim-heavy, 0.5)' }}
+                sizes="100vw"
+                priority
+              />
+            </div>
+            <div className="absolute inset-0" style={{ background: 'rgb(var(--hero-overlay-rgb, 26 26 26) / var(--overlay-light, 0.5))' }} />
+          </>
+        )}
+        <div className="relative z-10 flex items-end h-full container-custom" style={{ paddingBottom: 'var(--about-hero-content-pb, 3rem)' }}>
+          <h1 className="font-serif text-4xl md:text-6xl font-semibold" style={{ color: 'var(--text-on-dark, #FAF8F5)' }}>
             {tx(data.hero?.headline, data.hero?.headlineCn, locale) || (isCn?'关于 Julia Studio':'About Julia Studio')}
           </h1>
         </div>
@@ -56,7 +71,7 @@ export default async function AboutPage({ params }: PageProps) {
               {i === 0 && <h2 className="font-serif text-2xl md:text-3xl font-semibold mb-6" style={{ color: 'var(--primary)' }}>{tx(data.story?.headline, data.story?.headlineCn, locale)}</h2>}
               <p className="text-base leading-loose" style={{ color: 'var(--text-secondary)', maxWidth: '52ch' }}>{tx(block.body, block.bodyCn, locale)}</p>
             </div>
-            <div className={`relative aspect-[4/3] overflow-hidden ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
+            <div className={`relative aspect-[4/3] image-frame ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
               {block.image ? <Image src={block.image} alt="" fill className="object-cover" sizes="(max-width:1024px) 100vw, 50vw" /> : <div className="w-full h-full bg-[var(--primary-50)]" />}
             </div>
           </div>
@@ -99,7 +114,7 @@ export default async function AboutPage({ params }: PageProps) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
               {data.team.members.map((member, i) => (
                 <div key={i}>
-                  <div className="relative aspect-[3/4] overflow-hidden mb-5">
+                  <div className="relative aspect-[3/4] image-frame mb-5">
                     {member.image ? <Image src={member.image} alt={member.name || ''} fill className="object-cover" sizes="(max-width:768px) 100vw, 33vw" /> : <div className="w-full h-full bg-[var(--primary-50)]" />}
                   </div>
                   <p className="font-serif text-lg font-semibold" style={{ color: 'var(--primary)' }}>{member.name}</p>
@@ -153,7 +168,7 @@ export default async function AboutPage({ params }: PageProps) {
       {/* CTA */}
       <section className="section-padding" style={{ background: 'var(--primary)' }}>
         <div className="container-custom text-center">
-          <p className="font-serif text-3xl text-white mb-6">{tx(data.cta?.headline, data.cta?.headlineCn, locale)}</p>
+          <p className="font-serif text-3xl mb-6" style={{ color: 'var(--text-on-dark, #FAF8F5)' }}>{tx(data.cta?.headline, data.cta?.headlineCn, locale)}</p>
           <Link href={`/${locale}${data.cta?.ctaHref || '/contact'}`} className="btn-gold">{tx(data.cta?.ctaLabel, data.cta?.ctaLabelCn, locale) || (isCn?'预约咨询':'Book Consultation')}</Link>
         </div>
       </section>

@@ -15,6 +15,18 @@ import { canWriteContent, requireSiteAccess } from '@/lib/admin/permissions';
 import { locales } from '@/lib/i18n';
 import { normalizeMediaUrlsInData } from '@/lib/media-url';
 
+const ALLOWED_TARGET_DIRS = [
+  'pages',
+  'blog',
+  'portfolio',
+  'shop-products',
+  'journal',
+  'collections',
+  'testimonials',
+] as const;
+
+type TargetDir = (typeof ALLOWED_TARGET_DIRS)[number];
+
 function isEmptyHeaderPayload(filePath: string, data: any): boolean {
   if (filePath !== 'header.json' || !data || typeof data !== 'object') return false;
   const topbar = data.topbar || {};
@@ -261,11 +273,11 @@ export async function POST(request: NextRequest) {
   if (action === 'create') {
     const slug = payload.slug as string | undefined;
     const templateId = (payload.templateId as string | undefined) || 'basic';
-    const targetDir = (payload.targetDir as string | undefined) || 'pages';
+    const targetDir = ((payload.targetDir as string | undefined) || 'pages') as TargetDir;
     if (!slug) {
       return NextResponse.json({ message: 'slug is required' }, { status: 400 });
     }
-    if (!['pages', 'blog'].includes(targetDir)) {
+    if (!ALLOWED_TARGET_DIRS.includes(targetDir)) {
       return NextResponse.json({ message: 'Invalid target directory' }, { status: 400 });
     }
     const normalized = slug.trim().toLowerCase();
@@ -283,6 +295,10 @@ export async function POST(request: NextRequest) {
     const template =
       CONTENT_TEMPLATES.find((item) => item.id === templateId) ||
       CONTENT_TEMPLATES[0];
+    const initialContent = payload.initialContent && typeof payload.initialContent === 'object'
+      ? payload.initialContent
+      : null;
+    const contentToCreate = initialContent || template.content;
     if (canUseContentDb()) {
       const existing = await fetchContentEntry(siteId, locale, filePath);
       if (existing) {
@@ -292,21 +308,21 @@ export async function POST(request: NextRequest) {
         siteId,
         locale,
         path: filePath,
-        data: template.content,
+        data: contentToCreate,
         updatedBy: session.user.email,
       });
       return NextResponse.json({ path: filePath });
     }
 
     await fs.mkdir(path.dirname(resolved), { recursive: true });
-    await fs.writeFile(resolved, JSON.stringify(template.content, null, 2));
+    await fs.writeFile(resolved, JSON.stringify(contentToCreate, null, 2));
     return NextResponse.json({ path: filePath });
   }
 
   if (action === 'duplicate') {
     const sourcePath = payload.path as string | undefined;
     const slug = payload.slug as string | undefined;
-    const targetDir = payload.targetDir as string | undefined;
+    const targetDir = payload.targetDir as TargetDir | undefined;
     if (!sourcePath || !slug) {
       return NextResponse.json(
         { message: 'path and slug are required' },
@@ -314,12 +330,26 @@ export async function POST(request: NextRequest) {
       );
     }
     const normalized = slug.trim().toLowerCase();
-    const sourceDir = sourcePath.startsWith('blog/') ? 'blog' : 'pages';
-    const resolvedTargetDir =
-      sourceDir === 'blog' ? 'blog' : targetDir && ['pages', 'blog'].includes(targetDir) ? targetDir : 'pages';
-    if (sourceDir === 'blog' && resolvedTargetDir !== 'blog') {
+    const sourceDir = sourcePath.includes('/') ? sourcePath.split('/')[0] : '';
+    if (!sourceDir || !ALLOWED_TARGET_DIRS.includes(sourceDir as TargetDir)) {
+      return NextResponse.json(
+        { message: 'Only page/blog/collection files can be duplicated' },
+        { status: 400 }
+      );
+    }
+    const resolvedSourceDir = sourceDir as TargetDir;
+    const resolvedTargetDir = targetDir && ALLOWED_TARGET_DIRS.includes(targetDir)
+      ? targetDir
+      : resolvedSourceDir;
+    if (resolvedSourceDir === 'blog' && resolvedTargetDir !== 'blog') {
       return NextResponse.json(
         { message: 'Blog posts must be duplicated into blog/' },
+        { status: 400 }
+      );
+    }
+    if (resolvedSourceDir !== 'blog' && resolvedTargetDir !== resolvedSourceDir) {
+      return NextResponse.json(
+        { message: 'Collection/page files must be duplicated within the same directory' },
         { status: 400 }
       );
     }
@@ -341,7 +371,7 @@ export async function POST(request: NextRequest) {
     }
 
     let nextContent = content;
-    if (sourceDir === 'blog') {
+    if (resolvedSourceDir === 'blog') {
       try {
         const parsed = JSON.parse(content);
         parsed.slug = normalized;

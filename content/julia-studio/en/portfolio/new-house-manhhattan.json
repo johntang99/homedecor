@@ -1,0 +1,34 @@
+{
+  "slug": "new-house-manhhattan",
+  "year": "",
+  "style": "",
+  "title": "Manhattan New House",
+  "details": {
+    "rooms": [],
+    "scope": "",
+    "roomsCn": [],
+    "scopeCn": "",
+    "duration": "",
+    "durationCn": "",
+    "keyMaterials": [],
+    "keyMaterialsCn": []
+  },
+  "gallery": [
+    {
+      "image": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771737053093-photo-1507452786732-f2dc0a2e7b7f.jpg",
+      "alt": "House",
+      "altCn": "",
+      "layout": "full"
+    }
+  ],
+  "titleCn": "Manhattan New House",
+  "category": "residential",
+  "location": "",
+  "overview": {
+    "body": "Manhattan New House ",
+    "bodyCn": ""
+  },
+  "coverImage": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771737780224-photo-1613643043796-a370ee99ecbe.jpg",
+  "shopThisLook": [],
+  "relatedProjects": []
+}

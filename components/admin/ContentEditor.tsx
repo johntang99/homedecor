@@ -113,11 +113,28 @@ export function ContentEditor({
   const [blogConditionOptions, setBlogConditionOptions] = useState<
     Array<{ id: string; title: string }>
   >([]);
+  const [portfolioCategoryOptions, setPortfolioCategoryOptions] = useState<
+    Array<{ value: string; label: string; labelCn?: string }>
+  >([]);
+  const [portfolioStyleOptions, setPortfolioStyleOptions] = useState<
+    Array<{ value: string; label: string; labelCn?: string }>
+  >([]);
+  const [journalCategoryOptions, setJournalCategoryOptions] = useState<
+    Array<{ value: string; label: string; labelCn?: string }>
+  >([]);
   const COLLECTION_PREFIXES: Record<string, string> = {
     portfolio: 'portfolio/',
     shopProducts: 'shop-products/',
     journal: 'journal/',
     collections: 'collections/',
+    testimonials: 'testimonials',
+  };
+  const TARGET_DIR_BY_FILTER: Record<string, string> = {
+    blog: 'blog',
+    portfolio: 'portfolio',
+    shopProducts: 'shop-products',
+    journal: 'journal',
+    collections: 'collections',
     testimonials: 'testimonials',
   };
   const isCollectionFilter = fileFilter && fileFilter in COLLECTION_PREFIXES;
@@ -237,6 +254,12 @@ export function ContentEditor({
     if (!activeFile) return;
     if (activeFile.path.startsWith('blog/')) {
       loadBlogLinkOptions();
+    }
+    if (activeFile.path.startsWith('portfolio/')) {
+      loadPortfolioFilterOptions();
+    }
+    if (activeFile.path.startsWith('journal/')) {
+      loadJournalFilterOptions();
     }
   }, [activeFile, siteId, locale]);
 
@@ -414,16 +437,121 @@ export function ContentEditor({
   };
 
   const handleCreate = async () => {
-    const isBlog = fileFilter === 'blog';
+    const targetDir = TARGET_DIR_BY_FILTER[fileFilter] || 'pages';
+    const isBlog = targetDir === 'blog';
+    const isCollection = ['portfolio', 'shop-products', 'journal', 'collections', 'testimonials'].includes(targetDir);
     const slug = window.prompt(
-      isBlog ? 'New blog slug (example: my-post)' : 'New page slug (example: faq)'
+      isBlog
+        ? 'New blog slug (example: my-post)'
+        : isCollection
+          ? `New item slug for ${targetDir} (example: my-item)`
+          : 'New page slug (example: faq)'
     );
     if (!slug) return;
-    const templateId =
-      window.prompt(
-        `Template: ${CONTENT_TEMPLATES.map((t) => t.id).join(', ')}`,
-        CONTENT_TEMPLATES[0]?.id || 'basic'
-      ) || CONTENT_TEMPLATES[0]?.id;
+    const normalizedSlug = slug.trim().toLowerCase();
+
+    const getCollectionInitialContent = () => {
+      if (targetDir === 'portfolio') {
+        return {
+          slug: normalizedSlug,
+          title: '',
+          titleCn: '',
+          category: 'residential',
+          style: '',
+          location: '',
+          year: '',
+          coverImage: '',
+          overview: { body: '', bodyCn: '' },
+          details: {
+            scope: '',
+            scopeCn: '',
+            duration: '',
+            durationCn: '',
+            rooms: [],
+            roomsCn: [],
+            keyMaterials: [],
+            keyMaterialsCn: [],
+          },
+          gallery: [],
+          shopThisLook: [],
+          relatedProjects: [],
+        };
+      }
+
+      if (targetDir === 'shop-products') {
+        return {
+          slug: normalizedSlug,
+          title: '',
+          titleCn: '',
+          category: '',
+          room: '',
+          price: 0,
+          status: 'available',
+          featured: false,
+          description: '',
+          descriptionCn: '',
+          images: [{ src: '', alt: '' }],
+          specifications: {
+            dimensions: '',
+            material: '',
+            materialCn: '',
+            finish: '',
+            finishCn: '',
+            leadTime: '',
+            leadTimeCn: '',
+          },
+          seenInProjects: [],
+          relatedProducts: [],
+        };
+      }
+
+      if (targetDir === 'journal') {
+        return {
+          slug: normalizedSlug,
+          title: '',
+          titleCn: '',
+          excerpt: '',
+          excerptCn: '',
+          coverImage: '',
+          body: '',
+          bodyCn: '',
+          category: 'design-tips',
+          type: 'article',
+          date: new Date().toISOString().slice(0, 10),
+          author: '',
+          featured: false,
+          relatedPosts: [],
+          relatedProducts: [],
+        };
+      }
+
+      if (targetDir === 'collections') {
+        return {
+          slug: normalizedSlug,
+          title: '',
+          titleCn: '',
+          description: '',
+          descriptionCn: '',
+          coverImage: '',
+          moodImages: [],
+          portfolioProjects: [],
+          shopProducts: [],
+        };
+      }
+
+      return null;
+    };
+
+    const templateId = isCollection
+      ? 'empty'
+      : (
+          window.prompt(
+            `Template: ${CONTENT_TEMPLATES.map((t) => t.id).join(', ')}`,
+            CONTENT_TEMPLATES[0]?.id || 'basic'
+          ) || CONTENT_TEMPLATES[0]?.id
+        );
+
+    const initialContent = isCollection ? getCollectionInitialContent() : null;
     const response = await fetch('/api/admin/content/file', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -431,9 +559,10 @@ export function ContentEditor({
         siteId,
         locale,
         action: 'create',
-        slug,
+        slug: normalizedSlug,
         templateId,
-        targetDir: isBlog ? 'blog' : 'pages',
+        targetDir,
+        initialContent,
       }),
     });
 
@@ -449,11 +578,15 @@ export function ContentEditor({
 
   const handleDuplicate = async () => {
     if (!activeFile) return;
-    const isBlog = activeFile.path.startsWith('blog/');
+    const sourceDir = activeFile.path.includes('/') ? activeFile.path.split('/')[0] : 'pages';
+    const isBlog = sourceDir === 'blog';
+    const isCollection = ['portfolio', 'shop-products', 'journal', 'collections', 'testimonials'].includes(sourceDir);
     const slug = window.prompt(
       isBlog
         ? 'Duplicate blog slug (example: my-post-copy)'
-        : 'Duplicate page slug (example: faq-copy)'
+        : isCollection
+          ? `Duplicate item slug for ${sourceDir} (example: my-item-copy)`
+          : 'Duplicate page slug (example: faq-copy)'
     );
     if (!slug) return;
     const response = await fetch('/api/admin/content/file', {
@@ -465,7 +598,7 @@ export function ContentEditor({
         action: 'duplicate',
         path: activeFile.path,
         slug,
-        targetDir: isBlog ? 'blog' : 'pages',
+        targetDir: sourceDir,
       }),
     });
 
@@ -561,12 +694,104 @@ export function ContentEditor({
     }
   };
 
+  const loadPortfolioFilterOptions = async () => {
+    if (!siteId || !locale) return;
+    try {
+      const response = await fetch(
+        `/api/admin/content/file?siteId=${siteId}&locale=${locale}&path=${encodeURIComponent(
+          'pages/portfolio.json'
+        )}`
+      );
+      if (!response.ok) {
+        setPortfolioCategoryOptions([]);
+        setPortfolioStyleOptions([]);
+        return;
+      }
+      const payload = await response.json();
+      const parsed = payload?.content ? JSON.parse(payload.content) : {};
+
+      const categories = Array.isArray(parsed?.filters?.categories)
+        ? parsed.filters.categories
+            .map((item: any) => ({
+              value: String(item?.value || ''),
+              label: String(item?.label || item?.value || ''),
+              labelCn: typeof item?.labelCn === 'string' ? item.labelCn : undefined,
+            }))
+            .filter((item: any) => item.value)
+        : [];
+
+      const styles = Array.isArray(parsed?.filters?.styles)
+        ? parsed.filters.styles
+            .map((item: any) => ({
+              value: String(item?.value || ''),
+              label: String(item?.label || item?.value || ''),
+              labelCn: typeof item?.labelCn === 'string' ? item.labelCn : undefined,
+            }))
+            .filter((item: any) => item.value)
+        : [];
+
+      setPortfolioCategoryOptions(categories);
+      setPortfolioStyleOptions(styles);
+    } catch {
+      setPortfolioCategoryOptions([]);
+      setPortfolioStyleOptions([]);
+    }
+  };
+
+  const loadJournalFilterOptions = async () => {
+    if (!siteId || !locale) return;
+    try {
+      const response = await fetch(
+        `/api/admin/content/file?siteId=${siteId}&locale=${locale}&path=${encodeURIComponent(
+          'pages/journal.json'
+        )}`
+      );
+      if (!response.ok) {
+        setJournalCategoryOptions([]);
+        return;
+      }
+      const payload = await response.json();
+      const parsed = payload?.content ? JSON.parse(payload.content) : {};
+      const categories = Array.isArray(parsed?.filters?.categories)
+        ? parsed.filters.categories
+            .map((item: any) => ({
+              value: String(item?.value || ''),
+              label: String(item?.label || item?.value || ''),
+              labelCn: typeof item?.labelCn === 'string' ? item.labelCn : undefined,
+            }))
+            .filter((item: any) => item.value)
+        : [];
+      setJournalCategoryOptions(categories);
+    } catch {
+      setJournalCategoryOptions([]);
+    }
+  };
+
   const getPreviewPath = () => {
     if (!activeFile) return `/${locale}`;
     if (activeFile.path.startsWith('pages/')) {
       const slug = activeFile.path.replace('pages/', '').replace('.json', '');
       if (slug === 'home') return `/${locale}`;
       return `/${locale}/${slug}`;
+    }
+    if (activeFile.path.startsWith('portfolio/')) {
+      const slug = activeFile.path.replace('portfolio/', '').replace('.json', '');
+      return `/${locale}/portfolio/${slug}`;
+    }
+    if (activeFile.path.startsWith('shop-products/')) {
+      const slug = activeFile.path.replace('shop-products/', '').replace('.json', '');
+      return `/${locale}/shop/${slug}`;
+    }
+    if (activeFile.path.startsWith('journal/')) {
+      const slug = activeFile.path.replace('journal/', '').replace('.json', '');
+      return `/${locale}/journal/${slug}`;
+    }
+    if (activeFile.path.startsWith('collections/')) {
+      const slug = activeFile.path.replace('collections/', '').replace('.json', '');
+      return `/${locale}/collections/${slug}`;
+    }
+    if (activeFile.path === 'testimonials.json') {
+      return `/${locale}/testimonials`;
     }
     return `/${locale}`;
   };
@@ -639,10 +864,13 @@ export function ContentEditor({
 
   const isSeoFile = activeFile?.path === 'seo.json';
   const isBlogPostFile = activeFile?.path.startsWith('blog/');
+  const isPortfolioItemFile = activeFile?.path.startsWith('portfolio/');
+  const isJournalItemFile = activeFile?.path.startsWith('journal/');
+  const isCollectionItemFile = activeFile?.path.startsWith('collections/');
   const isHeaderFile = activeFile?.path === 'header.json';
   const isThemeFile = activeFile?.path === 'theme.json';
   const isHomePageFile = activeFile?.path === 'pages/home.json';
-  const allowCreateOrDuplicate = fileFilter !== 'siteSettings';
+  const allowCreateOrDuplicate = fileFilter !== 'siteSettings' && fileFilter !== 'testimonials';
   const variantSections = formData
     ? Object.entries(SECTION_VARIANT_OPTIONS).filter(
         ([key]) =>
@@ -746,6 +974,42 @@ export function ContentEditor({
     collectFields(formData);
     return fields;
   }, [isHomePageFile, formData]);
+  const homeSectionImageFields = useMemo(() => {
+    if (!isHomePageFile || !formData) return [] as Array<{ path: string[]; label: string }>;
+
+    const fields: Array<{ path: string[]; label: string }> = [
+      { path: ['featuredCollection', 'image'], label: 'Featured Collection > Image' },
+      { path: ['portfolioPreview', 'image1'], label: 'Portfolio Preview > Image 1' },
+      { path: ['portfolioPreview', 'image2'], label: 'Portfolio Preview > Image 2' },
+      { path: ['portfolioPreview', 'image3'], label: 'Portfolio Preview > Image 3' },
+      { path: ['portfolioPreview', 'image4'], label: 'Portfolio Preview > Image 4' },
+      { path: ['portfolioPreview', 'image5'], label: 'Portfolio Preview > Image 5' },
+      { path: ['portfolioPreview', 'image6'], label: 'Portfolio Preview > Image 6' },
+      { path: ['shopPreview', 'image1'], label: 'Shop Preview > Image 1' },
+      { path: ['shopPreview', 'image2'], label: 'Shop Preview > Image 2' },
+      { path: ['shopPreview', 'image3'], label: 'Shop Preview > Image 3' },
+      { path: ['shopPreview', 'image4'], label: 'Shop Preview > Image 4' },
+      { path: ['shopPreview', 'image5'], label: 'Shop Preview > Image 5' },
+      { path: ['shopPreview', 'image6'], label: 'Shop Preview > Image 6' },
+      { path: ['journalPreview', 'image1'], label: 'Journal Preview > Image 1' },
+      { path: ['journalPreview', 'image2'], label: 'Journal Preview > Image 2' },
+      { path: ['journalPreview', 'image3'], label: 'Journal Preview > Image 3' },
+    ];
+
+    if (Array.isArray(formData?.servicesOverview?.services)) {
+      formData.servicesOverview.services.forEach((service: any, index: number) => {
+        const serviceName =
+          String(service?.title || service?.titleCn || `Service ${index + 1}`).trim() ||
+          `Service ${index + 1}`;
+        fields.push({
+          path: ['servicesOverview', 'services', String(index), 'image'],
+          label: `Services Overview > ${serviceName} > Image`,
+        });
+      });
+    }
+
+    return fields;
+  }, [isHomePageFile, formData]);
 
   const addSeoPage = () => {
     if (!formData) return;
@@ -794,6 +1058,39 @@ export function ContentEditor({
     const images = [...formData.images];
     images.splice(index, 1);
     updateFormValue(['images'], images);
+  };
+
+  const addPortfolioGalleryItem = () => {
+    if (!formData) return;
+    const gallery = Array.isArray(formData.gallery) ? [...formData.gallery] : [];
+    gallery.push({
+      image: '',
+      alt: '',
+      altCn: '',
+      layout: 'full',
+    });
+    updateFormValue(['gallery'], gallery);
+  };
+
+  const removePortfolioGalleryItem = (index: number) => {
+    if (!formData || !Array.isArray(formData.gallery)) return;
+    const gallery = [...formData.gallery];
+    gallery.splice(index, 1);
+    updateFormValue(['gallery'], gallery);
+  };
+
+  const addCollectionMoodImage = () => {
+    if (!formData) return;
+    const moodImages = Array.isArray(formData.moodImages) ? [...formData.moodImages] : [];
+    moodImages.push('');
+    updateFormValue(['moodImages'], moodImages);
+  };
+
+  const removeCollectionMoodImage = (index: number) => {
+    if (!formData || !Array.isArray(formData.moodImages)) return;
+    const moodImages = [...formData.moodImages];
+    moodImages.splice(index, 1);
+    updateFormValue(['moodImages'], moodImages);
   };
 
   const addHeaderMenuItem = () => {
@@ -1048,7 +1345,7 @@ export function ContentEditor({
               onClick={handleCreate}
               className="px-3 py-2 rounded-lg border border-gray-200 text-xs text-gray-700 hover:bg-gray-50"
             >
-              {fileFilter === 'blog' ? 'New Post' : 'New Page'}
+              {fileFilter === 'blog' ? 'New Post' : fileFilter === 'all' ? 'New Page' : 'New Item'}
             </button>
           )}
           {allowCreateOrDuplicate && (
@@ -1784,9 +2081,19 @@ export function ContentEditor({
                     {homePhotoFields.map((field) => (
                       <div
                         key={field.path.join('.')}
-                        className="grid gap-2 md:grid-cols-[220px_1fr_auto_auto] items-center"
+                        className="grid gap-2 md:grid-cols-[220px_72px_1fr_auto_auto] items-center"
                       >
                         <label className="text-xs text-gray-600">{field.label}</label>
+                        {String(getPathValue(field.path) || '').trim() ? (
+                          <img
+                            src={String(getPathValue(field.path) || '')}
+                            alt={`${field.label} preview`}
+                            className="h-12 w-12 rounded border border-gray-200 object-cover bg-gray-50"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className="h-12 w-12 rounded border border-dashed border-gray-200 bg-gray-50" />
+                        )}
                         <input
                           className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
                           value={String(getPathValue(field.path) || '')}
@@ -1810,6 +2117,88 @@ export function ContentEditor({
                           Clear
                         </button>
                       </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {isHomePageFile && homeSectionImageFields.length > 0 && (
+                <div className="border border-gray-200 rounded-lg p-4">
+                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
+                    Home Section Visuals
+                  </div>
+                  <div className="space-y-3">
+                    {homeSectionImageFields.map((field) => (
+                      (() => {
+                        const lastKey = field.path[field.path.length - 1] || '';
+                        const isShopPreviewSlot =
+                          field.path[0] === 'shopPreview' && /^image\d+$/.test(lastKey);
+                        const slotMatch = lastKey.match(/^image(\d+)$/);
+                        const slot = slotMatch ? Number(slotMatch[1]) : 0;
+                        const itemNamePath = ['shopPreview', `itemName${slot}`];
+                        const itemPricePath = ['shopPreview', `itemPrice${slot}`];
+
+                        return (
+                      <div
+                        key={field.path.join('.')}
+                        className={
+                          isShopPreviewSlot
+                            ? 'grid gap-2 md:grid-cols-[260px_72px_1fr_180px_120px_auto_auto] items-center'
+                            : 'grid gap-2 md:grid-cols-[260px_72px_1fr_auto_auto] items-center'
+                        }
+                      >
+                        <label className="text-xs text-gray-600">{field.label}</label>
+                        {String(getPathValue(field.path) || '').trim() ? (
+                          <img
+                            src={String(getPathValue(field.path) || '')}
+                            alt={`${field.label} preview`}
+                            className="h-12 w-12 rounded border border-gray-200 object-cover bg-gray-50"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className="h-12 w-12 rounded border border-dashed border-gray-200 bg-gray-50" />
+                        )}
+                        <input
+                          className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                          value={String(getPathValue(field.path) || '')}
+                          onChange={(event) =>
+                            updateFormValue(field.path, event.target.value)
+                          }
+                          placeholder="/uploads/..."
+                        />
+                        {isShopPreviewSlot && (
+                          <input
+                            className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                            value={String(getPathValue(itemNamePath) || '')}
+                            onChange={(event) => updateFormValue(itemNamePath, event.target.value)}
+                            placeholder="Item name"
+                          />
+                        )}
+                        {isShopPreviewSlot && (
+                          <input
+                            className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                            value={String(getPathValue(itemPricePath) || '')}
+                            onChange={(event) => updateFormValue(itemPricePath, event.target.value)}
+                            placeholder="Price"
+                          />
+                        )}
+                        <button
+                          type="button"
+                          onClick={() => openImagePicker(field.path)}
+                          className="px-3 py-2 rounded-md border border-gray-200 text-xs"
+                        >
+                          Choose
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => updateFormValue(field.path, '')}
+                          className="px-3 py-2 rounded-md border border-gray-200 text-xs"
+                        >
+                          Clear
+                        </button>
+                      </div>
+                        );
+                      })()
                     ))}
                   </div>
                 </div>
@@ -1869,6 +2258,21 @@ export function ContentEditor({
                           updateFormValue(['hero', 'tagline'], event.target.value)
                         }
                       />
+                    </div>
+                  )}
+                  {isHomePageFile && (
+                    <div className="mb-3">
+                      <label className="block text-xs text-gray-500">Overlay Mode</label>
+                      <select
+                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm bg-white"
+                        value={String(formData.hero.overlayMode || 'focus-text')}
+                        onChange={(event) =>
+                          updateFormValue(['hero', 'overlayMode'], event.target.value)
+                        }
+                      >
+                        <option value="focus-text">Focus Text (images stay bright)</option>
+                        <option value="soft-full">Soft Full Overlay (slightly dark)</option>
+                      </select>
                     </div>
                   )}
                   {'description' in formData.hero && (
@@ -2041,6 +2445,129 @@ export function ContentEditor({
                   <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
                     Introduction
                   </div>
+                  {'headline' in formData.introduction && (
+                    <div className="mb-3">
+                      <label className="block text-xs text-gray-500">Headline</label>
+                      <input
+                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                        value={formData.introduction.headline || ''}
+                        onChange={(event) =>
+                          updateFormValue(['introduction', 'headline'], event.target.value)
+                        }
+                      />
+                    </div>
+                  )}
+                  {'headlineCn' in formData.introduction && (
+                    <div className="mb-3">
+                      <label className="block text-xs text-gray-500">Headline (Chinese)</label>
+                      <input
+                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                        value={formData.introduction.headlineCn || ''}
+                        onChange={(event) =>
+                          updateFormValue(['introduction', 'headlineCn'], event.target.value)
+                        }
+                      />
+                    </div>
+                  )}
+                  {'body' in formData.introduction && (
+                    <div className="mb-3">
+                      <label className="block text-xs text-gray-500">Body</label>
+                      <textarea
+                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                        value={formData.introduction.body || ''}
+                        onChange={(event) =>
+                          updateFormValue(['introduction', 'body'], event.target.value)
+                        }
+                      />
+                    </div>
+                  )}
+                  {'bodyCn' in formData.introduction && (
+                    <div className="mb-3">
+                      <label className="block text-xs text-gray-500">Body (Chinese)</label>
+                      <textarea
+                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                        value={formData.introduction.bodyCn || ''}
+                        onChange={(event) =>
+                          updateFormValue(['introduction', 'bodyCn'], event.target.value)
+                        }
+                      />
+                    </div>
+                  )}
+                  {'ctaLabel' in formData.introduction && (
+                    <div className="mb-3">
+                      <label className="block text-xs text-gray-500">CTA Label</label>
+                      <input
+                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                        value={formData.introduction.ctaLabel || ''}
+                        onChange={(event) =>
+                          updateFormValue(['introduction', 'ctaLabel'], event.target.value)
+                        }
+                      />
+                    </div>
+                  )}
+                  {'ctaLabelCn' in formData.introduction && (
+                    <div className="mb-3">
+                      <label className="block text-xs text-gray-500">CTA Label (Chinese)</label>
+                      <input
+                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                        value={formData.introduction.ctaLabelCn || ''}
+                        onChange={(event) =>
+                          updateFormValue(['introduction', 'ctaLabelCn'], event.target.value)
+                        }
+                      />
+                    </div>
+                  )}
+                  {'ctaHref' in formData.introduction && (
+                    <div className="mb-3">
+                      <label className="block text-xs text-gray-500">CTA Link</label>
+                      <input
+                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                        value={formData.introduction.ctaHref || ''}
+                        onChange={(event) =>
+                          updateFormValue(['introduction', 'ctaHref'], event.target.value)
+                        }
+                      />
+                    </div>
+                  )}
+                  {'image' in formData.introduction && (
+                    <div className="mb-3">
+                      <label className="block text-xs text-gray-500">Image</label>
+                      <div className="mt-1 grid gap-2 md:grid-cols-[72px_1fr_auto_auto] items-center">
+                        {String(formData.introduction.image || '').trim() ? (
+                          <img
+                            src={String(formData.introduction.image || '')}
+                            alt="Introduction image preview"
+                            className="h-12 w-12 rounded border border-gray-200 object-cover bg-gray-50"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className="h-12 w-12 rounded border border-dashed border-gray-200 bg-gray-50" />
+                        )}
+                        <input
+                          className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                          value={formData.introduction.image || ''}
+                          onChange={(event) =>
+                            updateFormValue(['introduction', 'image'], event.target.value)
+                          }
+                          placeholder="/uploads/..."
+                        />
+                        <button
+                          type="button"
+                          onClick={() => openImagePicker(['introduction', 'image'])}
+                          className="px-3 py-2 rounded-md border border-gray-200 text-xs"
+                        >
+                          Choose
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => updateFormValue(['introduction', 'image'], '')}
+                          className="px-3 py-2 rounded-md border border-gray-200 text-xs"
+                        >
+                          Clear
+                        </button>
+                      </div>
+                    </div>
+                  )}
                   {'text' in formData.introduction && (
                     <div>
                       <label className="block text-xs text-gray-500">Text</label>
@@ -2048,10 +2575,7 @@ export function ContentEditor({
                         className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
                         value={formData.introduction.text || ''}
                         onChange={(event) =>
-                          updateFormValue(
-                            ['introduction', 'text'],
-                            event.target.value
-                          )
+                          updateFormValue(['introduction', 'text'], event.target.value)
                         }
                       />
                     </div>
@@ -2810,7 +3334,7 @@ export function ContentEditor({
                 </div>
               )}
 
-              {formData?.slug && (
+              {isBlogPostFile && formData?.slug && (
                 <div className="border border-gray-200 rounded-lg p-4">
                   <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
                     Blog Article
@@ -2977,7 +3501,517 @@ export function ContentEditor({
                 </div>
               )}
 
-              {formData && !formData.hero && !formData.introduction && !formData.cta && (
+              {isPortfolioItemFile && formData && (
+                <div className="border border-gray-200 rounded-lg p-4 space-y-4">
+                  <div className="text-xs font-semibold text-gray-500 uppercase">
+                    Portfolio Project
+                  </div>
+
+                  <div className="grid gap-2 md:grid-cols-2">
+                    <input
+                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Title"
+                      value={formData.title || ''}
+                      onChange={(event) => updateFormValue(['title'], event.target.value)}
+                    />
+                    <input
+                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Title (Chinese)"
+                      value={formData.titleCn || ''}
+                      onChange={(event) => updateFormValue(['titleCn'], event.target.value)}
+                    />
+                  </div>
+
+                  <div className="grid gap-2 md:grid-cols-4">
+                    <select
+                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      value={formData.category || ''}
+                      onChange={(event) => updateFormValue(['category'], event.target.value)}
+                    >
+                      <option value="">Select category</option>
+                      {formData.category && !portfolioCategoryOptions.some((item) => item.value === formData.category) && (
+                        <option value={formData.category}>{formData.category}</option>
+                      )}
+                      {portfolioCategoryOptions.map((item) => (
+                        <option key={item.value} value={item.value}>
+                          {locale === 'zh' ? (item.labelCn || item.label) : item.label}
+                        </option>
+                      ))}
+                    </select>
+                    <select
+                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      value={formData.style || ''}
+                      onChange={(event) => updateFormValue(['style'], event.target.value)}
+                    >
+                      <option value="">Select style</option>
+                      {formData.style && !portfolioStyleOptions.some((item) => item.value === formData.style) && (
+                        <option value={formData.style}>{formData.style}</option>
+                      )}
+                      {portfolioStyleOptions.map((item) => (
+                        <option key={item.value} value={item.value}>
+                          {locale === 'zh' ? (item.labelCn || item.label) : item.label}
+                        </option>
+                      ))}
+                    </select>
+                    <input
+                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Location"
+                      value={formData.location || ''}
+                      onChange={(event) => updateFormValue(['location'], event.target.value)}
+                    />
+                    <input
+                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Year"
+                      value={formData.year || ''}
+                      onChange={(event) => updateFormValue(['year'], event.target.value)}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="block text-xs text-gray-500">Hero / Cover Image</label>
+                    <div className="flex gap-2">
+                      <input
+                        className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                        placeholder="Cover image URL"
+                        value={formData.coverImage || ''}
+                        onChange={(event) => updateFormValue(['coverImage'], event.target.value)}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => openImagePicker(['coverImage'])}
+                        className="px-3 rounded-md border border-gray-200 text-xs"
+                      >
+                        Choose
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="block text-xs text-gray-500">Overview (EN)</label>
+                    <textarea
+                      className="w-full min-h-[90px] rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      value={formData.overview?.body || ''}
+                      onChange={(event) => updateFormValue(['overview', 'body'], event.target.value)}
+                    />
+                    <label className="block text-xs text-gray-500">Overview (ZH)</label>
+                    <textarea
+                      className="w-full min-h-[90px] rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      value={formData.overview?.bodyCn || ''}
+                      onChange={(event) => updateFormValue(['overview', 'bodyCn'], event.target.value)}
+                    />
+                  </div>
+
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-semibold text-gray-500 uppercase">Gallery Images</span>
+                      <button
+                        type="button"
+                        onClick={addPortfolioGalleryItem}
+                        className="px-3 py-1.5 rounded-md border border-gray-200 text-xs text-gray-700 hover:bg-gray-50"
+                      >
+                        Add Image
+                      </button>
+                    </div>
+
+                    {(Array.isArray(formData.gallery) ? formData.gallery : []).map((item: any, index: number) => (
+                      <div key={index} className="rounded-md border border-gray-200 p-3 space-y-2">
+                        <div className="flex gap-2">
+                          <input
+                            className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                            placeholder="Image URL"
+                            value={item?.image || ''}
+                            onChange={(event) =>
+                              updateFormValue(['gallery', String(index), 'image'], event.target.value)
+                            }
+                          />
+                          <button
+                            type="button"
+                            onClick={() => openImagePicker(['gallery', String(index), 'image'])}
+                            className="px-3 rounded-md border border-gray-200 text-xs"
+                          >
+                            Choose
+                          </button>
+                        </div>
+
+                        <div className="grid gap-2 md:grid-cols-3">
+                          <input
+                            className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                            placeholder="Alt (EN)"
+                            value={item?.alt || ''}
+                            onChange={(event) =>
+                              updateFormValue(['gallery', String(index), 'alt'], event.target.value)
+                            }
+                          />
+                          <input
+                            className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                            placeholder="Alt (ZH)"
+                            value={item?.altCn || ''}
+                            onChange={(event) =>
+                              updateFormValue(['gallery', String(index), 'altCn'], event.target.value)
+                            }
+                          />
+                          <select
+                            className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                            value={item?.layout || 'full'}
+                            onChange={(event) =>
+                              updateFormValue(['gallery', String(index), 'layout'], event.target.value)
+                            }
+                          >
+                            <option value="full">Full Width</option>
+                            <option value="half">Half Width</option>
+                          </select>
+                        </div>
+
+                        <div>
+                          <button
+                            type="button"
+                            onClick={() => removePortfolioGalleryItem(index)}
+                            className="px-3 py-1.5 rounded-md border border-red-200 text-xs text-red-600 hover:bg-red-50"
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {isJournalItemFile && formData && (
+                <div className="border border-gray-200 rounded-lg p-4 space-y-4">
+                  <div className="text-xs font-semibold text-gray-500 uppercase">
+                    Journal Post
+                  </div>
+
+                  <div className="grid gap-2 md:grid-cols-2">
+                    <input
+                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Title"
+                      value={formData.title || ''}
+                      onChange={(event) => updateFormValue(['title'], event.target.value)}
+                    />
+                    <input
+                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Title (Chinese)"
+                      value={formData.titleCn || ''}
+                      onChange={(event) => updateFormValue(['titleCn'], event.target.value)}
+                    />
+                  </div>
+
+                  <div className="grid gap-2 md:grid-cols-2">
+                    <textarea
+                      className="w-full min-h-[80px] rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Excerpt (EN)"
+                      value={formData.excerpt || ''}
+                      onChange={(event) => updateFormValue(['excerpt'], event.target.value)}
+                    />
+                    <textarea
+                      className="w-full min-h-[80px] rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Excerpt (ZH)"
+                      value={formData.excerptCn || ''}
+                      onChange={(event) => updateFormValue(['excerptCn'], event.target.value)}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="block text-xs text-gray-500">Cover Image</label>
+                    <div className="flex gap-2">
+                      <input
+                        className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                        placeholder="Cover image URL"
+                        value={formData.coverImage || ''}
+                        onChange={(event) => updateFormValue(['coverImage'], event.target.value)}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => openImagePicker(['coverImage'])}
+                        className="px-3 rounded-md border border-gray-200 text-xs"
+                      >
+                        Choose
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="grid gap-2 md:grid-cols-5">
+                    <input
+                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Author"
+                      value={formData.author || ''}
+                      onChange={(event) => updateFormValue(['author'], event.target.value)}
+                    />
+                    <input
+                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Date (YYYY-MM-DD)"
+                      value={formData.date || ''}
+                      onChange={(event) => updateFormValue(['date'], event.target.value)}
+                    />
+                    <select
+                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      value={formData.category || ''}
+                      onChange={(event) => updateFormValue(['category'], event.target.value)}
+                    >
+                      <option value="">Select category</option>
+                      {formData.category && !journalCategoryOptions.some((item) => item.value === formData.category) && (
+                        <option value={formData.category}>{formData.category}</option>
+                      )}
+                      {journalCategoryOptions.map((item) => (
+                        <option key={item.value} value={item.value}>
+                          {locale === 'zh' ? (item.labelCn || item.label) : item.label}
+                        </option>
+                      ))}
+                    </select>
+                    <select
+                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      value={formData.type || 'article'}
+                      onChange={(event) => updateFormValue(['type'], event.target.value)}
+                    >
+                      <option value="article">article</option>
+                      <option value="video">video</option>
+                    </select>
+                    <div className="flex items-center gap-2 px-2">
+                      <input
+                        id="journal-featured"
+                        type="checkbox"
+                        className="h-4 w-4 rounded border-gray-300"
+                        checked={Boolean(formData.featured)}
+                        onChange={(event) => updateFormValue(['featured'], event.target.checked)}
+                      />
+                      <label htmlFor="journal-featured" className="text-sm text-gray-700">
+                        Featured
+                      </label>
+                    </div>
+                  </div>
+
+                  <div className="grid gap-2 md:grid-cols-2">
+                    <input
+                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Video URL (optional)"
+                      value={formData.videoUrl || ''}
+                      onChange={(event) => updateFormValue(['videoUrl'], event.target.value)}
+                    />
+                    <input
+                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Video Duration (optional)"
+                      value={formData.videoDuration || ''}
+                      onChange={(event) => updateFormValue(['videoDuration'], event.target.value)}
+                    />
+                  </div>
+
+                  <div className="grid gap-2 md:grid-cols-2">
+                    <textarea
+                      className="w-full min-h-[90px] rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Body (EN, Markdown supported)"
+                      value={formData.body || ''}
+                      onChange={(event) => updateFormValue(['body'], event.target.value)}
+                    />
+                    <textarea
+                      className="w-full min-h-[90px] rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Body (ZH, Markdown supported)"
+                      value={formData.bodyCn || ''}
+                      onChange={(event) => updateFormValue(['bodyCn'], event.target.value)}
+                    />
+                  </div>
+
+                  <div className="grid gap-2 md:grid-cols-2">
+                    <textarea
+                      className="w-full min-h-[72px] rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Related Post Slugs (one per line)"
+                      value={Array.isArray(formData.relatedPosts) ? formData.relatedPosts.join('\n') : ''}
+                      onChange={(event) =>
+                        updateFormValue(
+                          ['relatedPosts'],
+                          event.target.value
+                            .split('\n')
+                            .map((s) => s.trim())
+                            .filter(Boolean)
+                        )
+                      }
+                    />
+                    <textarea
+                      className="w-full min-h-[72px] rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Related Product Slugs (one per line)"
+                      value={Array.isArray(formData.relatedProducts) ? formData.relatedProducts.join('\n') : ''}
+                      onChange={(event) =>
+                        updateFormValue(
+                          ['relatedProducts'],
+                          event.target.value
+                            .split('\n')
+                            .map((s) => s.trim())
+                            .filter(Boolean)
+                        )
+                      }
+                    />
+                  </div>
+                </div>
+              )}
+
+              {isCollectionItemFile && formData && (
+                <div className="border border-gray-200 rounded-lg p-4 space-y-4">
+                  <div className="text-xs font-semibold text-gray-500 uppercase">
+                    Collection
+                  </div>
+
+                  <div className="grid gap-2 md:grid-cols-2">
+                    <input
+                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Slug"
+                      value={formData.slug || ''}
+                      onChange={(event) => updateFormValue(['slug'], event.target.value)}
+                    />
+                    <div className="flex items-center gap-2 px-2">
+                      <input
+                        id="collection-featured"
+                        type="checkbox"
+                        className="h-4 w-4 rounded border-gray-300"
+                        checked={Boolean(formData.featured)}
+                        onChange={(event) => updateFormValue(['featured'], event.target.checked)}
+                      />
+                      <label htmlFor="collection-featured" className="text-sm text-gray-700">
+                        Featured
+                      </label>
+                    </div>
+                  </div>
+
+                  <div className="grid gap-2 md:grid-cols-2">
+                    <input
+                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Title"
+                      value={formData.title || ''}
+                      onChange={(event) => updateFormValue(['title'], event.target.value)}
+                    />
+                    <input
+                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Title (Chinese)"
+                      value={formData.titleCn || ''}
+                      onChange={(event) => updateFormValue(['titleCn'], event.target.value)}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="block text-xs text-gray-500">Cover Image</label>
+                    <div className="flex gap-2">
+                      <input
+                        className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                        placeholder="Cover image URL"
+                        value={formData.coverImage || ''}
+                        onChange={(event) => updateFormValue(['coverImage'], event.target.value)}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => openImagePicker(['coverImage'])}
+                        className="px-3 rounded-md border border-gray-200 text-xs"
+                      >
+                        Choose
+                      </button>
+                    </div>
+                    {formData.coverImage && (
+                      <img
+                        src={formData.coverImage}
+                        alt={formData.title || 'Collection cover'}
+                        className="h-32 w-full rounded-md object-cover border border-gray-200"
+                      />
+                    )}
+                  </div>
+
+                  <div className="grid gap-2 md:grid-cols-2">
+                    <textarea
+                      className="w-full min-h-[90px] rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Description (EN)"
+                      value={formData.description || ''}
+                      onChange={(event) => updateFormValue(['description'], event.target.value)}
+                    />
+                    <textarea
+                      className="w-full min-h-[90px] rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Description (ZH)"
+                      value={formData.descriptionCn || ''}
+                      onChange={(event) => updateFormValue(['descriptionCn'], event.target.value)}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <label className="block text-xs text-gray-500">Mood Images</label>
+                      <button
+                        type="button"
+                        onClick={addCollectionMoodImage}
+                        className="px-2.5 py-1 rounded-md border border-gray-200 text-xs hover:bg-gray-50"
+                      >
+                        Add Mood Image
+                      </button>
+                    </div>
+                    <div className="space-y-3">
+                      {(Array.isArray(formData.moodImages) ? formData.moodImages : []).map((image: string, index: number) => (
+                        <div key={`mood-image-${index}`} className="rounded-md border border-gray-200 p-3 space-y-2">
+                          <div className="flex gap-2">
+                            <input
+                              className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                              placeholder={`Mood image URL #${index + 1}`}
+                              value={image || ''}
+                              onChange={(event) =>
+                                updateFormValue(['moodImages', String(index)], event.target.value)
+                              }
+                            />
+                            <button
+                              type="button"
+                              onClick={() => openImagePicker(['moodImages', String(index)])}
+                              className="px-3 rounded-md border border-gray-200 text-xs"
+                            >
+                              Choose
+                            </button>
+                          </div>
+                          {image && (
+                            <img
+                              src={image}
+                              alt={`Mood ${index + 1}`}
+                              className="h-24 w-full rounded-md object-cover border border-gray-200"
+                            />
+                          )}
+                          <button
+                            type="button"
+                            onClick={() => removeCollectionMoodImage(index)}
+                            className="px-3 py-1.5 rounded-md border border-red-200 text-xs text-red-600 hover:bg-red-50"
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="grid gap-2 md:grid-cols-2">
+                    <textarea
+                      className="w-full min-h-[72px] rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Portfolio Project Slugs (one per line)"
+                      value={Array.isArray(formData.portfolioProjects) ? formData.portfolioProjects.join('\n') : ''}
+                      onChange={(event) =>
+                        updateFormValue(
+                          ['portfolioProjects'],
+                          event.target.value
+                            .split('\n')
+                            .map((s) => s.trim())
+                            .filter(Boolean)
+                        )
+                      }
+                    />
+                    <textarea
+                      className="w-full min-h-[72px] rounded-md border border-gray-200 px-3 py-2 text-sm"
+                      placeholder="Shop Product Slugs (one per line)"
+                      value={Array.isArray(formData.shopProducts) ? formData.shopProducts.join('\n') : ''}
+                      onChange={(event) =>
+                        updateFormValue(
+                          ['shopProducts'],
+                          event.target.value
+                            .split('\n')
+                            .map((s) => s.trim())
+                            .filter(Boolean)
+                        )
+                      }
+                    />
+                  </div>
+                </div>
+              )}
+
+              {formData && !formData.hero && !formData.introduction && !formData.cta && !isBlogPostFile && !isPortfolioItemFile && !isJournalItemFile && !isCollectionItemFile && (
                 <div className="text-sm text-gray-500">
                   No schema panels available for this file yet. Use the JSON tab.
                 </div>

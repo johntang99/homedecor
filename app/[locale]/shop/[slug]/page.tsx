@@ -57,9 +57,9 @@ export default async function ShopProductPage({ params }: PageProps) {
   return (
     <>
       {/* Back */}
-      <div className="pt-20 border-b border-[var(--border)] bg-white">
-        <div className="container-custom py-3">
-          <Link href={`/${locale}/shop`} className="inline-flex items-center gap-1.5 text-sm text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors">
+      <div className="detail-backbar border-b border-[var(--border)] bg-white">
+        <div className="container-custom detail-backbar-row">
+          <Link href={`/${locale}/shop`} className="detail-back-link">
             <ArrowLeft className="w-4 h-4" /> {isCn ? '返回商店' : 'Back to Shop'}
           </Link>
         </div>
@@ -67,16 +67,16 @@ export default async function ShopProductPage({ params }: PageProps) {
 
       {/* Product */}
       <section className="section-padding bg-white">
-        <div className="container-custom grid grid-cols-1 lg:grid-cols-2 gap-14">
+        <div className="container-custom grid grid-cols-1 lg:grid-cols-2 detail-gap-main-columns">
           {/* Images */}
           <div>
-            <div className="relative aspect-square overflow-hidden mb-3 bg-[var(--primary-50)]">
+            <div className="relative aspect-square image-frame detail-card-media bg-[var(--primary-50)]">
               {images[0]?.src ? <Image src={images[0].src} alt={tx(product.title, product.titleCn, locale)} fill className="object-cover" priority sizes="(max-width:1024px) 100vw, 50vw" /> : <div className="w-full h-full" />}
             </div>
             {images.length > 1 && (
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-4 detail-gap-thumb-grid">
                 {images.slice(1).map((img, i) => (
-                  <div key={i} className="relative aspect-square overflow-hidden bg-[var(--primary-50)]">
+                  <div key={i} className="relative aspect-square image-frame bg-[var(--primary-50)]">
                     {img.src && <Image src={img.src} alt={img.alt || ''} fill className="object-cover" sizes="100px" />}
                   </div>
                 ))}
@@ -85,31 +85,31 @@ export default async function ShopProductPage({ params }: PageProps) {
           </div>
 
           {/* Info */}
-          <div className="lg:sticky lg:top-24 h-fit">
-            <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--secondary)' }}>{product.category}</p>
-            <h1 className="font-serif text-3xl font-semibold mb-4" style={{ color: 'var(--primary)' }}>{tx(product.title, product.titleCn, locale)}</h1>
+          <div className="lg:sticky h-fit" style={{ top: 'var(--detail-sticky-top, 6rem)' }}>
+            <p className="text-xs font-semibold uppercase tracking-widest detail-mb-xs" style={{ color: 'var(--secondary)' }}>{product.category}</p>
+            <h1 className="font-serif text-3xl font-semibold detail-mb-md" style={{ color: 'var(--primary)' }}>{tx(product.title, product.titleCn, locale)}</h1>
             {product.price && (
-              <p className="text-2xl font-semibold mb-6" style={{ color: 'var(--primary)' }}>${product.price.toLocaleString()}</p>
+              <p className="text-2xl font-semibold detail-mb-xl" style={{ color: 'var(--primary)' }}>${product.price.toLocaleString()}</p>
             )}
-            <p className="text-sm leading-loose mb-8" style={{ color: 'var(--text-secondary)' }}>
+            <p className="text-sm leading-loose detail-mb-xxl" style={{ color: 'var(--text-secondary)' }}>
               {tx(product.description, product.descriptionCn, locale)}
             </p>
 
             {/* Specs */}
             {specs && (
-              <div className="border-t border-[var(--border)] pt-6 mb-8 space-y-3">
-                {specs.dimensions && <div className="flex gap-4"><span className="text-xs font-semibold uppercase tracking-wider w-24 flex-shrink-0" style={{ color: 'var(--text-secondary)' }}>{isCn ? '尺寸' : 'Dimensions'}</span><span className="text-sm" style={{ color: 'var(--primary)' }}>{specs.dimensions}</span></div>}
-                {specs.material && <div className="flex gap-4"><span className="text-xs font-semibold uppercase tracking-wider w-24 flex-shrink-0" style={{ color: 'var(--text-secondary)' }}>{isCn ? '材料' : 'Material'}</span><span className="text-sm" style={{ color: 'var(--primary)' }}>{tx(specs.material, specs.materialCn, locale)}</span></div>}
-                {specs.finish && <div className="flex gap-4"><span className="text-xs font-semibold uppercase tracking-wider w-24 flex-shrink-0" style={{ color: 'var(--text-secondary)' }}>{isCn ? '表面处理' : 'Finish'}</span><span className="text-sm" style={{ color: 'var(--primary)' }}>{tx(specs.finish, specs.finishCn, locale)}</span></div>}
-                {specs.leadTime && <div className="flex gap-4"><span className="text-xs font-semibold uppercase tracking-wider w-24 flex-shrink-0" style={{ color: 'var(--text-secondary)' }}>{isCn ? '交货时间' : 'Lead Time'}</span><span className="text-sm" style={{ color: 'var(--primary)' }}>{tx(specs.leadTime, specs.leadTimeCn, locale)}</span></div>}
+              <div className="border-t border-[var(--border)] detail-pt-xl detail-mb-xxl detail-space-y-sm">
+                {specs.dimensions && <div className="flex detail-gap-spec-row"><span className="text-xs font-semibold uppercase tracking-wider w-24 flex-shrink-0" style={{ color: 'var(--text-secondary)' }}>{isCn ? '尺寸' : 'Dimensions'}</span><span className="text-sm" style={{ color: 'var(--primary)' }}>{specs.dimensions}</span></div>}
+                {specs.material && <div className="flex detail-gap-spec-row"><span className="text-xs font-semibold uppercase tracking-wider w-24 flex-shrink-0" style={{ color: 'var(--text-secondary)' }}>{isCn ? '材料' : 'Material'}</span><span className="text-sm" style={{ color: 'var(--primary)' }}>{tx(specs.material, specs.materialCn, locale)}</span></div>}
+                {specs.finish && <div className="flex detail-gap-spec-row"><span className="text-xs font-semibold uppercase tracking-wider w-24 flex-shrink-0" style={{ color: 'var(--text-secondary)' }}>{isCn ? '表面处理' : 'Finish'}</span><span className="text-sm" style={{ color: 'var(--primary)' }}>{tx(specs.finish, specs.finishCn, locale)}</span></div>}
+                {specs.leadTime && <div className="flex detail-gap-spec-row"><span className="text-xs font-semibold uppercase tracking-wider w-24 flex-shrink-0" style={{ color: 'var(--text-secondary)' }}>{isCn ? '交货时间' : 'Lead Time'}</span><span className="text-sm" style={{ color: 'var(--primary)' }}>{tx(specs.leadTime, specs.leadTimeCn, locale)}</span></div>}
               </div>
             )}
 
             {/* CTA */}
-            <Link href={`/${locale}/contact?product=${slug}`} className="btn-gold w-full justify-center text-center block py-4 text-base">
+            <Link href={`/${locale}/contact?product=${slug}`} className="btn-gold btn-gold-lg w-full justify-center text-center block text-base">
               {isCn ? '咨询此商品' : 'Inquire About This Piece'}
             </Link>
-            <p className="text-xs text-center mt-3" style={{ color: 'var(--text-secondary)' }}>
+            <p className="text-xs text-center detail-mt-sm" style={{ color: 'var(--text-secondary)' }}>
               {isCn ? '我们将在24小时内回复' : 'We respond within 24 hours'}
             </p>
           </div>
@@ -120,16 +120,16 @@ export default async function ShopProductPage({ params }: PageProps) {
       {seenProjects.length > 0 && (
         <section className="section-padding" style={{ background: 'var(--backdrop-primary)' }}>
           <div className="container-custom">
-            <h2 className="font-serif text-2xl font-semibold mb-8" style={{ color: 'var(--primary)' }}>
+            <h2 className="detail-section-title">
               {isCn ? '相关项目' : 'Seen in These Projects'}
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-3 detail-gap-related-md">
               {seenProjects.map(p => (
                 <Link key={p.slug} href={`/${locale}/portfolio/${p.slug}`} className="group">
-                  <div className="relative aspect-[4/3] overflow-hidden mb-3 bg-[var(--primary-50)]">
+                  <div className="relative aspect-[4/3] image-frame detail-card-media bg-[var(--primary-50)]">
                     {p.coverImage && <Image src={p.coverImage} alt={tx(p.title, p.titleCn, locale)} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="33vw" />}
                   </div>
-                  <p className="font-serif text-sm font-medium" style={{ color: 'var(--primary)' }}>{tx(p.title, p.titleCn, locale)}</p>
+                  <p className="detail-card-title">{tx(p.title, p.titleCn, locale)}</p>
                 </Link>
               ))}
             </div>
@@ -141,16 +141,16 @@ export default async function ShopProductPage({ params }: PageProps) {
       {related.length > 0 && (
         <section className="section-padding bg-white">
           <div className="container-custom">
-            <h2 className="font-serif text-2xl font-semibold mb-8" style={{ color: 'var(--primary)' }}>
+            <h2 className="detail-section-title">
               {isCn ? '相关产品' : 'You May Also Like'}
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+            <div className="grid grid-cols-2 md:grid-cols-4 detail-gap-related-md">
               {related.map(p => (
                 <Link key={p.slug} href={`/${locale}/shop/${p.slug}`} className="group">
-                  <div className="relative aspect-square overflow-hidden mb-3 bg-[var(--primary-50)]">
+                  <div className="relative aspect-square image-frame detail-card-media bg-[var(--primary-50)]">
                     {p.images?.[0]?.src && <Image src={p.images[0].src} alt={tx(p.title, p.titleCn, locale)} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="25vw" />}
                   </div>
-                  <p className="font-serif text-sm font-medium" style={{ color: 'var(--primary)' }}>{tx(p.title, p.titleCn, locale)}</p>
+                  <p className="detail-card-title">{tx(p.title, p.titleCn, locale)}</p>
                 </Link>
               ))}
             </div>

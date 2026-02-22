@@ -89,6 +89,7 @@ export default function Header({ locale, headerConfig }: HeaderProps) {
             className={`font-serif text-xl font-semibold tracking-wide transition-colors ${
               isDark ? 'text-white' : 'text-[var(--primary)]'
             }`}
+            style={isDark ? { color: 'var(--text-on-dark, #FAF8F5)' } : undefined}
           >
             {logoText}
           </Link>
@@ -102,6 +103,7 @@ export default function Header({ locale, headerConfig }: HeaderProps) {
                 className={`text-sm font-medium transition-colors hover:opacity-70 ${
                   isDark ? 'text-white/90' : 'text-[var(--primary)]'
                 } ${pathname === item.href ? 'opacity-60' : ''}`}
+                style={isDark ? { color: 'var(--on-dark-high, rgba(250,248,245,0.9))' } : undefined}
               >
                 {item.label}
               </Link>
@@ -119,10 +121,24 @@ export default function Header({ locale, headerConfig }: HeaderProps) {
                       ? (isDark ? 'text-white' : 'text-[var(--primary)]')
                       : (isDark ? 'text-white/50' : 'text-[var(--text-secondary)]')
                   }`}
+                  style={
+                    isDark
+                      ? {
+                          color: locale === 'en'
+                            ? 'var(--text-on-dark, #FAF8F5)'
+                            : 'var(--on-dark-medium, rgba(250,248,245,0.6))',
+                        }
+                      : undefined
+                  }
                 >
                   EN
                 </button>
-                <span className={`text-xs ${isDark ? 'text-white/30' : 'text-[var(--border)]'}`}>|</span>
+                <span
+                  className={`text-xs ${isDark ? 'text-white/30' : 'text-[var(--border)]'}`}
+                  style={isDark ? { color: 'var(--on-dark-subtle, rgba(250,248,245,0.3))' } : undefined}
+                >
+                  |
+                </span>
                 <button
                   onClick={() => handleLocaleSwitch('zh')}
                   className={`text-xs font-semibold px-2 py-1 transition-opacity ${
@@ -130,6 +146,15 @@ export default function Header({ locale, headerConfig }: HeaderProps) {
                       ? (isDark ? 'text-white' : 'text-[var(--primary)]')
                       : (isDark ? 'text-white/50' : 'text-[var(--text-secondary)]')
                   }`}
+                  style={
+                    isDark
+                      ? {
+                          color: locale === 'zh'
+                            ? 'var(--text-on-dark, #FAF8F5)'
+                            : 'var(--on-dark-medium, rgba(250,248,245,0.6))',
+                        }
+                      : undefined
+                  }
                 >
                   中文
                 </button>
@@ -157,7 +182,7 @@ export default function Header({ locale, headerConfig }: HeaderProps) {
 
       {/* Mobile overlay */}
       {mobileOpen && (
-        <div className="lg:hidden fixed inset-0 top-16 bg-[#1A1A1A] z-40 flex flex-col">
+        <div className="lg:hidden fixed inset-0 top-16 z-40 flex flex-col" style={{ background: 'var(--backdrop-secondary, #1A1A1A)' }}>
           <div className="flex flex-col px-8 py-10 gap-6">
             {navItems.map(item => (
               <Link
@@ -165,15 +190,28 @@ export default function Header({ locale, headerConfig }: HeaderProps) {
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
                 className="font-serif text-2xl text-white/90 hover:text-[var(--secondary)] transition-colors"
+                style={{ color: 'var(--on-dark-high, rgba(250,248,245,0.9))' }}
               >
                 {item.label}
               </Link>
             ))}
-            <div className="mt-6 pt-6 border-t border-white/10 flex items-center gap-6">
+            <div className="mt-6 pt-6 border-t flex items-center gap-6" style={{ borderColor: 'rgb(var(--on-dark-rgb, 250 248 245) / 0.1)' }}>
               {showLangSwitcher && (
                 <div className="flex gap-4">
-                  <button onClick={() => { handleLocaleSwitch('en'); setMobileOpen(false); }} className={`text-sm font-semibold ${locale === 'en' ? 'text-[var(--secondary)]' : 'text-white/50'}`}>EN</button>
-                  <button onClick={() => { handleLocaleSwitch('zh'); setMobileOpen(false); }} className={`text-sm font-semibold ${locale === 'zh' ? 'text-[var(--secondary)]' : 'text-white/50'}`}>中文</button>
+                  <button
+                    onClick={() => { handleLocaleSwitch('en'); setMobileOpen(false); }}
+                    className="text-sm font-semibold"
+                    style={{ color: locale === 'en' ? 'var(--secondary)' : 'var(--on-dark-medium, rgba(250,248,245,0.6))' }}
+                  >
+                    EN
+                  </button>
+                  <button
+                    onClick={() => { handleLocaleSwitch('zh'); setMobileOpen(false); }}
+                    className="text-sm font-semibold"
+                    style={{ color: locale === 'zh' ? 'var(--secondary)' : 'var(--on-dark-medium, rgba(250,248,245,0.6))' }}
+                  >
+                    中文
+                  </button>
                 </div>
               )}
               <Link

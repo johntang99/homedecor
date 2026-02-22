@@ -80,7 +80,7 @@ export default function ShopPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-32 pb-12 md:pt-40 md:pb-16" style={{ background: 'var(--backdrop-primary)' }}>
+      <section className="hero-pad-compact" style={{ background: 'var(--backdrop-primary)' }}>
         <div className="container-custom">
           <h1 className="font-serif text-4xl md:text-5xl font-semibold mb-3" style={{ color: 'var(--primary)' }}>
             {tx(pageData.hero?.headline, pageData.hero?.headlineCn) || (isCn ? '选购 Julia Studio' : 'Shop Julia Studio')}
@@ -92,11 +92,14 @@ export default function ShopPage() {
       </section>
 
       {/* Filters */}
-      <div className="sticky top-16 md:top-20 z-30 border-b border-[var(--border)] bg-[var(--backdrop-primary)]/90 backdrop-blur-sm">
-        <div className="container-custom py-3 flex gap-2 overflow-x-auto hide-scrollbar">
+      <div
+        className="sticky-page-filter z-30 border-b border-[var(--border)] backdrop-blur-sm"
+        style={{ background: 'rgb(var(--backdrop-primary-rgb, 250 248 245) / 0.9)' }}
+      >
+        <div className="container-custom filter-bar-row flex gap-2 overflow-x-auto hide-scrollbar">
           {categories.map(cat => (
             <button key={cat.value} onClick={() => { setActiveCategory(cat.value); setVisibleCount(16); }}
-              className={`flex-shrink-0 px-4 py-1.5 text-sm font-medium rounded-full border transition-colors ${
+              className={`flex-shrink-0 filter-chip text-sm font-medium border transition-colors ${
                 activeCategory === cat.value
                   ? 'border-[var(--secondary)] text-[var(--primary)]'
                   : 'border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--primary)]'
@@ -120,7 +123,7 @@ export default function ShopPage() {
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
                 {displayed.map(product => (
                   <Link key={product.slug} href={`/${locale}/shop/${product.slug}`} className="group bg-white">
-                    <div className="relative aspect-square overflow-hidden">
+                    <div className="relative aspect-square image-frame">
                       {product.images?.[0]?.src ? (
                         <Image src={product.images[0].src} alt={tx(product.title, product.titleCn) || ''} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width:768px) 50vw, (max-width:1024px) 33vw, 25vw" />
                       ) : (
@@ -140,7 +143,7 @@ export default function ShopPage() {
               {displayed.length < sorted.length && (
                 <div className="text-center mt-12">
                   <button onClick={() => setVisibleCount(v => v + 16)}
-                    className="px-8 py-3 border border-[var(--primary)] text-sm font-semibold text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition-colors">
+                    className="btn-load-more border border-[var(--primary)] text-sm font-semibold text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition-colors">
                     {tx(pageData.grid?.loadMoreLabel, pageData.grid?.loadMoreLabelCn) || (isCn ? '加载更多' : 'Load More')}
                   </button>
                 </div>

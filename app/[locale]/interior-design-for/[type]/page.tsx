@@ -79,7 +79,7 @@ export default async function ServiceTypePage({ params }: PageProps) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {displayProjects.map(p => (
                 <Link key={p.slug} href={`/${locale}/portfolio/${p.slug}`} className="group">
-                  <div className="relative aspect-[4/3] overflow-hidden mb-3 bg-[var(--primary-50)]">
+                  <div className="relative aspect-[4/3] image-frame mb-3 bg-[var(--primary-50)]">
                     {p.coverImage && <Image src={p.coverImage} alt={tx(p.title || '', p.titleCn || '', locale)} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="33vw" />}
                   </div>
                   <p className="font-serif text-sm font-medium" style={{ color: 'var(--primary)' }}>{tx(p.title || '', p.titleCn || '', locale)}</p>

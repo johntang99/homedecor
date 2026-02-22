@@ -47,45 +47,45 @@ export default async function JournalPostPage({ params }: PageProps) {
     return md
       .split('\n\n')
       .map(para => {
-        if (para.startsWith('## ')) return `<h2 class="font-serif text-xl font-semibold mt-10 mb-4" style="color:var(--primary)">${para.replace('## ', '')}</h2>`;
-        if (para.startsWith('# ')) return `<h1 class="font-serif text-2xl font-semibold mt-10 mb-4" style="color:var(--primary)">${para.replace('# ', '')}</h1>`;
+        if (para.startsWith('## ')) return `<h2 class="font-serif text-xl font-semibold detail-mt-hero detail-mb-md" style="color:var(--primary)">${para.replace('## ', '')}</h2>`;
+        if (para.startsWith('# ')) return `<h1 class="font-serif text-2xl font-semibold detail-mt-hero detail-mb-md" style="color:var(--primary)">${para.replace('# ', '')}</h1>`;
         if (para.startsWith('- ')) {
-          const items = para.split('\n').map(l => `<li class="mb-1">${l.replace('- ', '')}</li>`).join('');
-          return `<ul class="list-disc pl-6 my-4 space-y-1">${items}</ul>`;
+          const items = para.split('\n').map(l => `<li class="detail-mb-xxs">${l.replace('- ', '')}</li>`).join('');
+          return `<ul class="list-disc pl-6 detail-my-md detail-space-y-xxs">${items}</ul>`;
         }
-        return `<p class="mb-4 leading-loose" style="color:var(--text-secondary)">${para.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')}</p>`;
+        return `<p class="detail-mb-md leading-loose" style="color:var(--text-secondary)">${para.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')}</p>`;
       }).join('');
   }
 
   return (
     <>
       {/* Back */}
-      <div className="pt-20 border-b border-[var(--border)] bg-white">
-        <div className="container-custom py-3">
-          <Link href={`/${locale}/journal`} className="inline-flex items-center gap-1.5 text-sm text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors">
+      <div className="detail-backbar border-b border-[var(--border)] bg-white">
+        <div className="container-custom detail-backbar-row">
+          <Link href={`/${locale}/journal`} className="detail-back-link">
             <ArrowLeft className="w-4 h-4" /> {isCn ? '返回日志' : 'Back to Journal'}
           </Link>
         </div>
       </div>
 
       {/* Header */}
-      <section className="bg-white pt-10 pb-6">
+      <section className="bg-white" style={{ paddingTop: 'var(--detail-article-header-pt, 2.5rem)', paddingBottom: 'var(--detail-article-header-pb, 1.5rem)' }}>
         <div className="container-custom max-w-3xl mx-auto">
           <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--secondary)' }}>{post.category}</span>
-          <h1 className="font-serif text-3xl md:text-4xl font-semibold mt-3 mb-4" style={{ color: 'var(--primary)' }}>{tx(post.title, post.titleCn, locale)}</h1>
+          <h1 className="font-serif text-3xl md:text-4xl font-semibold detail-mt-sm detail-mb-md" style={{ color: 'var(--primary)' }}>{tx(post.title, post.titleCn, locale)}</h1>
           <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>{post.author} · {post.date}</p>
         </div>
       </section>
 
       {/* Cover image or video */}
-      <div className="bg-white pb-10">
+      <div className="bg-white" style={{ paddingBottom: 'var(--detail-article-media-pb, 2.5rem)' }}>
         <div className="container-custom max-w-3xl mx-auto">
           {post.type === 'video' && post.videoUrl ? (
-            <div className="relative aspect-video overflow-hidden mb-8">
+            <div className="relative aspect-video image-frame detail-mb-xxl">
               <iframe src={post.videoUrl} className="w-full h-full" allowFullScreen title={post.title} />
             </div>
           ) : post.coverImage ? (
-            <div className="relative aspect-[16/9] overflow-hidden mb-10">
+            <div className="relative aspect-[16/9] image-frame detail-mb-hero">
               <Image src={post.coverImage} alt={tx(post.title, post.titleCn, locale)} fill className="object-cover" priority sizes="100vw" />
             </div>
           ) : null}
@@ -104,17 +104,17 @@ export default async function JournalPostPage({ params }: PageProps) {
       {relatedProducts.length > 0 && (
         <section className="section-padding" style={{ background: 'var(--backdrop-primary)' }}>
           <div className="container-custom">
-            <h2 className="font-serif text-2xl font-semibold mb-8" style={{ color: 'var(--primary)' }}>
+            <h2 className="detail-section-title">
               {isCn ? '选购本文商品' : 'Shop This Story'}
             </h2>
-            <div className="flex gap-6 overflow-x-auto hide-scrollbar pb-2">
+            <div className="flex detail-gap-hscroll-cards overflow-x-auto hide-scrollbar detail-pb-xs">
               {relatedProducts.map(p => (
-                <Link key={p.slug} href={`/${locale}/shop/${p.slug}`} className="group flex-shrink-0 w-52">
-                  <div className="relative aspect-square overflow-hidden mb-3 bg-[var(--primary-50)]">
+                <Link key={p.slug} href={`/${locale}/shop/${p.slug}`} className="group flex-shrink-0 detail-card-md">
+                  <div className="relative aspect-square image-frame detail-card-media bg-[var(--primary-50)]">
                     {p.images?.[0]?.src && <Image src={p.images[0].src} alt={tx(p.title, p.titleCn, locale)} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="208px" />}
                   </div>
-                  <p className="font-serif text-sm font-medium" style={{ color: 'var(--primary)' }}>{tx(p.title, p.titleCn, locale)}</p>
-                  {p.price && <p className="text-sm mt-0.5" style={{ color: 'var(--text-secondary)' }}>${p.price.toLocaleString()}</p>}
+                  <p className="detail-card-title">{tx(p.title, p.titleCn, locale)}</p>
+                  {p.price && <p className="detail-card-price">${p.price.toLocaleString()}</p>}
                 </Link>
               ))}
             </div>
@@ -126,17 +126,17 @@ export default async function JournalPostPage({ params }: PageProps) {
       {relatedPosts.length > 0 && (
         <section className="section-padding bg-white">
           <div className="container-custom">
-            <h2 className="font-serif text-2xl font-semibold mb-8" style={{ color: 'var(--primary)' }}>
+            <h2 className="detail-section-title">
               {isCn ? '相关文章' : 'Related Articles'}
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
+            <div className="grid grid-cols-1 md:grid-cols-3 detail-gap-related-lg">
               {relatedPosts.map(p => (
                 <Link key={p.slug} href={`/${locale}/journal/${p.slug}`} className="group">
-                  <div className="relative aspect-[4/3] overflow-hidden mb-3 bg-[var(--primary-50)]">
+                  <div className="relative aspect-[4/3] image-frame detail-card-media bg-[var(--primary-50)]">
                     {p.coverImage && <Image src={p.coverImage} alt={tx(p.title, p.titleCn, locale)} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="33vw" />}
                   </div>
-                  <p className="font-serif text-sm font-medium group-hover:opacity-70 transition-opacity" style={{ color: 'var(--primary)' }}>{tx(p.title, p.titleCn, locale)}</p>
-                  <p className="text-xs mt-1" style={{ color: 'var(--text-secondary)' }}>{p.date}</p>
+                  <p className="detail-card-title group-hover:opacity-70 transition-opacity">{tx(p.title, p.titleCn, locale)}</p>
+                  <p className="text-xs detail-mt-xxs" style={{ color: 'var(--text-secondary)' }}>{p.date}</p>
                 </Link>
               ))}
             </div>
@@ -147,7 +147,7 @@ export default async function JournalPostPage({ params }: PageProps) {
       {/* CTA */}
       <section className="py-16 border-t border-[var(--border)]" style={{ background: 'var(--backdrop-primary)' }}>
         <div className="container-custom text-center">
-          <p className="font-serif text-xl mb-5" style={{ color: 'var(--primary)' }}>{isCn ? '预约免费咨询' : 'Inspired? Book a complimentary consultation.'}</p>
+          <p className="font-serif text-xl detail-mb-lg" style={{ color: 'var(--primary)' }}>{isCn ? '预约免费咨询' : 'Inspired? Book a complimentary consultation.'}</p>
           <Link href={`/${locale}/contact`} className="btn-gold">{isCn ? '预约咨询' : 'Book Consultation'}</Link>
         </div>
       </section>

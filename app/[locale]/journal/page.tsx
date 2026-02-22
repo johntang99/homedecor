@@ -74,7 +74,7 @@ export default function JournalPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-32 pb-12 md:pt-40 md:pb-16" style={{ background: 'var(--backdrop-primary)' }}>
+      <section className="hero-pad-compact" style={{ background: 'var(--backdrop-primary)' }}>
         <div className="container-custom">
           <h1 className="font-serif text-4xl md:text-5xl font-semibold mb-3" style={{ color: 'var(--primary)' }}>
             {tx(pageData.hero?.headline, pageData.hero?.headlineCn) || (isCn ? '日志' : 'Journal')}
@@ -90,9 +90,15 @@ export default function JournalPage() {
         <section className="bg-white border-b border-[var(--border)]">
           <div className="container-custom py-12">
             <Link href={`/${locale}/journal/${featuredPost.slug}`} className="group grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-              <div className="relative aspect-[4/3] overflow-hidden bg-[var(--primary-50)]">
+              <div className="relative aspect-[4/3] image-frame bg-[var(--primary-50)]">
                 {featuredPost.coverImage ? <Image src={featuredPost.coverImage} alt={tx(featuredPost.title, featuredPost.titleCn)} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width:768px) 100vw, 50vw" /> : <div className="w-full h-full" />}
-                {featuredPost.type === 'video' && <div className="absolute inset-0 flex items-center justify-center"><div className="w-16 h-16 rounded-full bg-white/80 flex items-center justify-center"><Play className="w-6 h-6 ml-1" style={{ color: 'var(--primary)' }} /></div></div>}
+                {featuredPost.type === 'video' && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="play-badge-lg rounded-full flex items-center justify-center" style={{ background: 'rgb(var(--on-dark-rgb, 250 248 245) / 0.8)' }}>
+                      <Play className="play-icon-lg ml-1" style={{ color: 'var(--primary)' }} />
+                    </div>
+                  </div>
+                )}
               </div>
               <div>
                 <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--secondary)' }}>{isCn ? '精选' : 'Featured'} · {featuredPost.category}</span>
@@ -106,11 +112,14 @@ export default function JournalPage() {
       )}
 
       {/* Category filters */}
-      <div className="sticky top-16 md:top-20 z-30 border-b border-[var(--border)] bg-white/90 backdrop-blur-sm">
-        <div className="container-custom py-3 flex gap-2 overflow-x-auto hide-scrollbar">
+      <div
+        className="sticky-page-filter z-30 border-b border-[var(--border)] backdrop-blur-sm"
+        style={{ background: 'rgb(var(--backdrop-primary-rgb, 250 248 245) / 0.9)' }}
+      >
+        <div className="container-custom filter-bar-row flex gap-2 overflow-x-auto hide-scrollbar">
           {categories.map(cat => (
             <button key={cat.value} onClick={() => { setActiveCategory(cat.value); setVisibleCount(9); }}
-              className={`flex-shrink-0 px-4 py-1.5 text-sm font-medium rounded-full border transition-colors ${activeCategory === cat.value ? 'border-[var(--secondary)] text-[var(--primary)]' : 'border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--primary)]'}`}
+              className={`flex-shrink-0 filter-chip text-sm font-medium border transition-colors ${activeCategory === cat.value ? 'border-[var(--secondary)] text-[var(--primary)]' : 'border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--primary)]'}`}
               style={activeCategory === cat.value ? { background: 'var(--secondary-50)' } : {}}>
               {isCn ? (cat.labelCn || cat.label) : cat.label}
             </button>
@@ -130,12 +139,12 @@ export default function JournalPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
                 {displayed.map(post => (
                   <Link key={post.slug} href={`/${locale}/journal/${post.slug}`} className="group bg-white">
-                    <div className="relative aspect-[4/3] overflow-hidden bg-[var(--primary-50)]">
+                    <div className="relative aspect-[4/3] image-frame bg-[var(--primary-50)]">
                       {post.coverImage ? <Image src={post.coverImage} alt={tx(post.title, post.titleCn)} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width:768px) 100vw, 33vw" /> : <div className="w-full h-full" />}
                       {post.type === 'video' && (
                         <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="w-12 h-12 rounded-full bg-white/80 flex items-center justify-center">
-                            <Play className="w-4 h-4 ml-0.5" style={{ color: 'var(--primary)' }} />
+                          <div className="play-badge-md rounded-full flex items-center justify-center" style={{ background: 'rgb(var(--on-dark-rgb, 250 248 245) / 0.8)' }}>
+                            <Play className="play-icon-md ml-0.5" style={{ color: 'var(--primary)' }} />
                           </div>
                         </div>
                       )}
@@ -151,7 +160,7 @@ export default function JournalPage() {
               {displayed.length < gridPosts.length && (
                 <div className="text-center mt-12">
                   <button onClick={() => setVisibleCount(v => v + 9)}
-                    className="px-8 py-3 border border-[var(--primary)] text-sm font-semibold text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition-colors">
+                    className="btn-load-more border border-[var(--primary)] text-sm font-semibold text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition-colors">
                     {tx(pageData.grid?.loadMoreLabel, pageData.grid?.loadMoreLabelCn) || (isCn ? '加载更多' : 'Load More')}
                   </button>
                 </div>

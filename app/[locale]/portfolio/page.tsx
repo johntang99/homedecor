@@ -10,6 +10,7 @@ interface PortfolioItem {
   title?: string;
   titleCn?: string;
   coverImage?: string;
+  image?: string;
   category?: string;
   style?: string;
   location?: string;
@@ -79,7 +80,7 @@ export default function PortfolioPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-32 pb-16 md:pt-40 md:pb-24" style={{ background: 'var(--backdrop-primary)' }}>
+      <section className="relative hero-pad-feature" style={{ background: 'var(--backdrop-primary)' }}>
         <div className="container-custom text-center">
           <h1 className="font-serif text-4xl md:text-6xl font-semibold mb-4" style={{ color: 'var(--primary)' }}>
             {tx(pageData.hero?.headline, pageData.hero?.headlineCn) || (isCn ? '我们的作品' : 'Our Work')}
@@ -91,13 +92,16 @@ export default function PortfolioPage() {
       </section>
 
       {/* Filters */}
-      <div className="sticky top-16 md:top-20 z-30 border-b border-[var(--border)] bg-white/90 backdrop-blur-sm">
-        <div className="container-custom py-3 flex gap-2 overflow-x-auto hide-scrollbar">
+      <div
+        className="sticky-page-filter z-30 border-b border-[var(--border)] backdrop-blur-sm"
+        style={{ background: 'rgb(var(--backdrop-primary-rgb, 250 248 245) / 0.9)' }}
+      >
+        <div className="container-custom filter-bar-row flex gap-2 overflow-x-auto hide-scrollbar">
           {categories.map(cat => (
             <button
               key={cat.value}
               onClick={() => { setActiveCategory(cat.value); setVisibleCount(12); }}
-              className={`flex-shrink-0 px-4 py-1.5 text-sm font-medium rounded-full border transition-colors ${
+              className={`flex-shrink-0 filter-chip text-sm font-medium border transition-colors ${
                 activeCategory === cat.value
                   ? 'border-[var(--secondary)] text-[var(--primary)]'
                   : 'border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--primary)]'
@@ -122,16 +126,18 @@ export default function PortfolioPage() {
           ) : (
             <>
               <div className="columns-1 md:columns-2 lg:columns-3 gap-4">
-                {displayed.map(project => (
+                {displayed.map(project => {
+                  const projectImage = project.coverImage || project.image;
+                  return (
                   <Link
                     key={project.slug}
                     href={`/${locale}/portfolio/${project.slug}`}
-                    className="group block mb-4 overflow-hidden break-inside-avoid relative"
+                    className="group block mb-4 break-inside-avoid relative"
                   >
-                    <div className="relative overflow-hidden aspect-[4/3]">
-                      {project.coverImage ? (
+                    <div className="relative image-frame aspect-[4/3]">
+                      {projectImage ? (
                         <Image
-                          src={project.coverImage}
+                          src={projectImage}
                           alt={tx(project.title, project.titleCn) || ''}
                           fill
                           className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -140,12 +146,19 @@ export default function PortfolioPage() {
                       ) : (
                         <div className="w-full h-full" style={{ background: 'var(--primary-50)' }} />
                       )}
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
-                      <div className="absolute bottom-0 left-0 right-0 p-5 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0" style={{ background: 'linear-gradient(transparent, rgba(26,26,26,0.75))' }}>
+                      <div
+                        className="absolute inset-0 transition-colors duration-300"
+                        style={{ background: 'rgb(var(--hero-overlay-rgb, 26 26 26) / 0)' }}
+                      />
+                      <div
+                        className="absolute inset-0 transition-colors duration-300 opacity-0 group-hover:opacity-100"
+                        style={{ background: 'rgb(var(--hero-overlay-rgb, 26 26 26) / var(--card-hover-overlay, 0.2))' }}
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 p-5 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0" style={{ background: 'linear-gradient(transparent, rgb(var(--hero-overlay-rgb, 26 26 26) / var(--card-bottom-gradient, 0.7)))' }}>
                         <p className="text-white font-serif font-medium">{tx(project.title, project.titleCn)}</p>
                         <div className="flex items-center gap-3 mt-1">
-                          <span className="text-white/60 text-xs uppercase tracking-widest">{project.category}</span>
-                          {project.location && <span className="text-white/40 text-xs">{project.location}</span>}
+                          <span className="text-xs uppercase tracking-widest" style={{ color: 'var(--on-dark-medium, rgb(var(--on-dark-rgb, 250 248 245) / 0.6))' }}>{project.category}</span>
+                          {project.location && <span className="text-xs" style={{ color: 'var(--on-dark-low, rgb(var(--on-dark-rgb, 250 248 245) / 0.4))' }}>{project.location}</span>}
                         </div>
                       </div>
                     </div>
@@ -155,7 +168,8 @@ export default function PortfolioPage() {
                       <p className="text-xs mt-0.5 uppercase tracking-widest" style={{ color: 'var(--text-secondary)' }}>{project.category}</p>
                     </div>
                   </Link>
-                ))}
+                  );
+                })}
               </div>
 
               {/* Load More */}
@@ -163,7 +177,7 @@ export default function PortfolioPage() {
                 <div className="text-center mt-12">
                   <button
                     onClick={() => setVisibleCount(v => v + 12)}
-                    className="px-8 py-3 border border-[var(--primary)] text-sm font-semibold text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition-colors"
+                    className="btn-load-more border border-[var(--primary)] text-sm font-semibold text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition-colors"
                   >
                     {isCn ? (pageData.grid?.loadMoreLabelCn || '加载更多项目') : (pageData.grid?.loadMoreLabel || 'Load More Projects')}
                   </button>

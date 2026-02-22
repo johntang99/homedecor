@@ -13,7 +13,8 @@ git commit -m "Update: describe your changes"
 git push
 
 
-curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_djRlq5PsWfKq75nViJDtyg3gzsBH/nWJg1rsYkt
+curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_Z6Fc1vftwzUQX3DzGKXuJkWrnJ7Z/cau6JgocUZ
+
 
 
 

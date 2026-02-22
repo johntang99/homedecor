@@ -6,7 +6,9 @@
     "showImage": false
   },
   "navigation": [
+    { "label": "Home", "labelCn": "首页", "href": "/" },
     { "label": "Portfolio", "labelCn": "作品集", "href": "/portfolio" },
+    { "label": "Collections", "labelCn": "系列", "href": "/collections" },
     { "label": "Services", "labelCn": "服务", "href": "/services" },
     { "label": "Shop", "labelCn": "商店", "href": "/shop" },
     { "label": "Journal", "labelCn": "日志", "href": "/journal" },

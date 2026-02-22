@@ -1,115 +1,150 @@
 {
   "hero": {
-    "variant": "slideshow",
     "slides": [
-      { "image": "", "alt": "Luxury living room designed by Julia Studio", "altCn": "Julia Studio 设计的豪华客厅" },
-      { "image": "", "alt": "Modern kitchen interior by Julia Studio", "altCn": "Julia Studio 设计的现代厨房" },
-      { "image": "", "alt": "Elegant bedroom designed by Julia Studio", "altCn": "Julia Studio 设计的优雅卧室" }
+      {
+        "alt": "Luxury living room designed by Julia Studio",
+        "altCn": "Julia Studio 设计的豪华客厅",
+        "image": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771732304131-photo-1583847268964-b28dc8f51f92.jpg"
+      },
+      {
+        "alt": "Modern kitchen interior by Julia Studio",
+        "altCn": "Julia Studio 设计的现代厨房",
+        "image": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771734741902-ed-pelham-1021-2-min.webp"
+      },
+      {
+        "alt": "Elegant bedroom designed by Julia Studio",
+        "altCn": "Julia Studio 设计的优雅卧室",
+        "image": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771734781534-nbi-book-nov23-shot-47-009-v2-min.webp"
+      }
     ],
-    "logoOverlay": true,
     "tagline": "25 Years of Timeless Design",
+    "variant": "gallery-background",
     "taglineCn": "25年匠心设计",
-    "scrollIndicator": true
+    "logoOverlay": true,
+    "scrollIndicator": true,
+    "overlayMode": "focus-text"
+  },
+  "aboutTeaser": {
+    "body": "25 years. 1,000+ projects. One vision: timeless design.",
+    "image": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771733401930-photo-1555475693-6e207bee0737.jpg",
+    "bodyCn": "25年。1,000+项目。一个愿景：永恒的设计。",
+    "ctaHref": "/about",
+    "variant": "portrait-text",
+    "ctaLabel": "Our Story",
+    "headline": "Meet Julia",
+    "imageAlt": "Julia, Founder & Creative Director",
+    "ctaLabelCn": "我们的故事",
+    "headlineCn": "认识 Julia"
+  },
+  "shopPreview": {
+    "image1": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771740111684-photo-1617638717732-a3ef01769ff2.jpg",
+    "ctaHref": "/shop",
+    "variant": "product-row",
+    "ctaLabel": "Shop All",
+    "headline": "Shop Julia Studio",
+    "itemName1": "Whole wood table",
+    "ctaLabelCn": "查看全部商品",
+    "headlineCn": "选购 Julia Studio",
+    "itemPrice1": "1850",
+    "productSlugs": [
+      "marin-console-table",
+      "aria-pendant-light",
+      "woven-throw-blanket",
+      "ceramic-vase-set",
+      "abstract-wall-art"
+    ]
   },
   "introduction": {
-    "variant": "text-image",
-    "headline": "Spaces That Transcend Trends",
-    "headlineCn": "超越潮流的空间设计",
     "body": "Julia Studio creates spaces that transcend trends. For 25 years, we've designed homes, offices, and exhibitions that reflect the unique vision of each client.",
+    "image": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771733184346-photo-1489171078254-c3365d6e359f.jpg",
     "bodyCn": "Julia Studio 创造超越潮流的空间。25年来，我们为住宅、办公空间和展览设计了体现每位客户独特愿景的空间。",
-    "image": "",
-    "imageAlt": "Julia Studio design philosophy",
+    "ctaHref": "/about",
+    "variant": "centered",
     "ctaLabel": "Our Story",
+    "headline": "Spaces That Transcend Trends",
+    "imageAlt": "Julia Studio design philosophy",
     "ctaLabelCn": "我们的故事",
-    "ctaHref": "/about"
+    "headlineCn": "超越潮流的空间设计"
+  },
+  "journalPreview": {
+    "ctaHref": "/journal",
+    "variant": "three-cards",
+    "ctaLabel": "Read More",
+    "headline": "From the Journal",
+    "postCount": 3,
+    "ctaLabelCn": "阅读更多",
+    "headlineCn": "设计日志"
+  },
+  "consultationCta": {
+    "ctaHref": "/contact",
+    "subline": "Book a complimentary consultation to discuss your project.",
+    "variant": "full-width-elegant",
+    "ctaLabel": "Book Consultation",
+    "headline": "Begin Your Design Journey",
+    "sublineCn": "预约免费咨询，讨论您的项目。",
+    "ctaLabelCn": "预约咨询",
+    "headlineCn": "开启您的设计之旅",
+    "backgroundImage": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771734323297-photo-1616046229478-9901c5536a45.jpg"
   },
   "portfolioPreview": {
+    "image1": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771737349189-photo-1762979790868-3bf9153b84cc.jpg",
+    "image2": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771737562901-photo-1615389000209-2837a2e5f939.jpg",
+    "image3": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771737643399-photo-1603750003385-3342231a1ff1.jpg",
+    "image4": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771737695059-photo-1649560065937-8405481a53d8.jpg",
+    "image5": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771737780224-photo-1613643043796-a370ee99ecbe.jpg",
+    "image6": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771738862555-photo-1524758631624-e2822e304c36.jpg",
+    "ctaHref": "/portfolio",
     "variant": "grid-featured",
-    "headline": "Selected Work",
-    "headlineCn": "精选作品",
-    "projectSlugs": ["the-greenwich-estate", "hudson-yards-office", "soho-gallery-exhibition", "brooklyn-brownstone", "midtown-penthouse"],
     "ctaLabel": "View All Projects",
+    "headline": "Selected Work",
     "ctaLabelCn": "查看全部项目",
-    "ctaHref": "/portfolio"
+    "headlineCn": "精选作品",
+    "projectSlugs": [
+      "the-greenwich-estate",
+      "hudson-yards-office",
+      "soho-gallery-exhibition",
+      "brooklyn-brownstone",
+      "midtown-penthouse"
+    ]
   },
   "servicesOverview": {
     "variant": "three-cards",
     "headline": "What We Do",
-    "headlineCn": "我们的服务",
     "services": [
       {
+        "href": "/services",
         "icon": "palette",
         "title": "Interior Design",
         "titleCn": "室内设计",
         "description": "From concept to completion — residential, commercial, and exhibition spaces.",
-        "descriptionCn": "从概念到完工——住宅、商业和展览空间。",
-        "href": "/services"
+        "descriptionCn": "从概念到完工——住宅、商业和展览空间。"
       },
       {
+        "href": "/services",
         "icon": "hammer",
         "title": "Construction & Installation",
         "titleCn": "施工与安装",
         "description": "Precision craftsmanship from our in-house team.",
-        "descriptionCn": "我们内部团队的精湛工艺。",
-        "href": "/services"
+        "descriptionCn": "我们内部团队的精湛工艺。"
       },
       {
+        "href": "/shop",
         "icon": "sofa",
         "title": "Furniture & Décor",
         "titleCn": "家具与装饰",
         "description": "Curated pieces at competitive prices, sourced worldwide.",
-        "descriptionCn": "精心挑选的全球家具，价格极具竞争力。",
-        "href": "/shop"
+        "descriptionCn": "精心挑选的全球家具，价格极具竞争力。"
       }
-    ]
+    ],
+    "headlineCn": "我们的服务"
   },
   "featuredCollection": {
+    "image": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771737053093-photo-1507452786732-f2dc0a2e7b7f.jpg",
     "variant": "hero-card",
-    "headline": "Featured Collection",
-    "headlineCn": "精选系列",
-    "collectionSlug": "modern-minimalist",
     "ctaLabel": "Explore Collection",
-    "ctaLabelCn": "探索系列"
-  },
-  "shopPreview": {
-    "variant": "product-row",
-    "headline": "Shop Julia Studio",
-    "headlineCn": "选购 Julia Studio",
-    "productSlugs": ["marin-console-table", "aria-pendant-light", "woven-throw-blanket", "ceramic-vase-set", "abstract-wall-art"],
-    "ctaLabel": "Shop All",
-    "ctaLabelCn": "查看全部商品",
-    "ctaHref": "/shop"
-  },
-  "journalPreview": {
-    "variant": "three-cards",
-    "headline": "From the Journal",
-    "headlineCn": "设计日志",
-    "postCount": 3,
-    "ctaLabel": "Read More",
-    "ctaLabelCn": "阅读更多",
-    "ctaHref": "/journal"
-  },
-  "aboutTeaser": {
-    "variant": "portrait-text",
-    "image": "",
-    "imageAlt": "Julia, Founder & Creative Director",
-    "headline": "Meet Julia",
-    "headlineCn": "认识 Julia",
-    "body": "25 years. 1,000+ projects. One vision: timeless design.",
-    "bodyCn": "25年。1,000+项目。一个愿景：永恒的设计。",
-    "ctaLabel": "Our Story",
-    "ctaLabelCn": "我们的故事",
-    "ctaHref": "/about"
-  },
-  "consultationCta": {
-    "variant": "full-width-elegant",
-    "headline": "Begin Your Design Journey",
-    "headlineCn": "开启您的设计之旅",
-    "subline": "Book a complimentary consultation to discuss your project.",
-    "sublineCn": "预约免费咨询，讨论您的项目。",
-    "ctaLabel": "Book Consultation",
-    "ctaLabelCn": "预约咨询",
-    "ctaHref": "/contact",
-    "backgroundImage": ""
+    "headline": "Featured Collection",
+    "ctaLabelCn": "探索系列",
+    "headlineCn": "精选系列",
+    "collectionSlug": "modern-minimalist"
   }
 }

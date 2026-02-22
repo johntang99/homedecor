@@ -1,1 +1,35 @@
-{"slug":"5-rules-mixing-patterns","title":"5 Rules for Mixing Patterns Like a Designer","titleCn":"设计师混搭图案的5条法则","type":"article","category":"design-tips","date":"2026-02-10","author":"Julia","featured":true,"coverImage":"","coverImageAlt":"Patterns in interior design","excerpt":"Pattern mixing is one of the most powerful tools in a designer's arsenal — and one of the most misunderstood. Here's how to do it with confidence.","excerptCn":"图案混搭是设计师最强大的工具之一——也是最常被误解的工具之一。以下是如何自信地运用它。","body":"## 1. Vary the Scale\n\nThe most common mistake is mixing patterns of similar size. When patterns compete at the same scale, the eye doesn't know where to rest. Instead, pair a large-scale pattern (like a bold geometric rug) with a medium-scale pattern (like a textured pillow) and a small-scale pattern (like a subtle stripe on curtains).\n\n## 2. Anchor with a Solid\n\nNot every element needs a pattern. Solids give the eye a place to breathe. If you have three patterned items in a room, make sure there are at least two solid pieces — a sofa, a wall, a rug — to balance the composition.\n\n## 3. Connect Through Color\n\nSuccessful pattern mixing isn't random — there's always a color thread running through. Pull one or two colors from your dominant pattern and make sure they appear in your secondary patterns, even if just as accents.\n\n## 4. Mix Pattern Types\n\nDon't mix five florals. Instead, vary the type: a geometric with a floral, a stripe with an abstract, an organic print with a structured grid. Contrast in pattern type creates visual interest without chaos.\n\n## 5. Trust Your Eye\n\nThe final rule is intuition. Lay your samples out together. If they feel harmonious, they probably are. Design is ultimately about how a space feels — not how it follows rules.","bodyCn":"## 1. 变化尺度\n\n最常见的错误是混搭相似大小的图案。当图案以相同比例竞争时，眼睛不知道该停留在哪里。相反，将大尺度图案（如大胆几何地毯）与中等尺度图案（如纹理枕头）和小尺度图案（如窗帘上的细条纹）搭配。\n\n## 2. 用纯色锚定\n\n并非每个元素都需要图案。纯色给眼睛提供喘息的空间。如果房间里有三件带图案的物品，确保至少有两件纯色物品——沙发、墙壁、地毯——来平衡构图。","videoUrl":"","videoDuration":"","tags":["patterns","styling","how-to","design-tips"],"relatedPosts":["greenwich-estate-tour"],"relatedProducts":["woven-throw-blanket"],"seo":{"title":"5 Rules for Mixing Patterns Like a Designer — Julia Studio Journal","description":"Learn the designer rules for mixing patterns in interior design. From scale to color coordination, confidence through technique.","keywords":"mixing patterns interior design, pattern mixing rules, interior design tips"}}
+{
+  "seo": {
+    "title": "5 Rules for Mixing Patterns Like a Designer — Julia Studio Journal",
+    "keywords": "mixing patterns interior design, pattern mixing rules, interior design tips",
+    "description": "Learn the designer rules for mixing patterns in interior design. From scale to color coordination, confidence through technique."
+  },
+  "body": "## 1. Vary the Scale\n\nThe most common mistake is mixing patterns of similar size. When patterns compete at the same scale, the eye doesn't know where to rest. Instead, pair a large-scale pattern (like a bold geometric rug) with a medium-scale pattern (like a textured pillow) and a small-scale pattern (like a subtle stripe on curtains).\n\n## 2. Anchor with a Solid\n\nNot every element needs a pattern. Solids give the eye a place to breathe. If you have three patterned items in a room, make sure there are at least two solid pieces — a sofa, a wall, a rug — to balance the composition.\n\n## 3. Connect Through Color\n\nSuccessful pattern mixing isn't random — there's always a color thread running through. Pull one or two colors from your dominant pattern and make sure they appear in your secondary patterns, even if just as accents.\n\n## 4. Mix Pattern Types\n\nDon't mix five florals. Instead, vary the type: a geometric with a floral, a stripe with an abstract, an organic print with a structured grid. Contrast in pattern type creates visual interest without chaos.\n\n## 5. Trust Your Eye\n\nThe final rule is intuition. Lay your samples out together. If they feel harmonious, they probably are. Design is ultimately about how a space feels — not how it follows rules.",
+  "date": "2026-02-10",
+  "slug": "5-rules-mixing-patterns",
+  "tags": [
+    "patterns",
+    "styling",
+    "how-to",
+    "design-tips"
+  ],
+  "type": "article",
+  "title": "5 Rules for Mixing Patterns Like a Designer",
+  "author": "Julia",
+  "bodyCn": "## 1. 变化尺度\n\n最常见的错误是混搭相似大小的图案。当图案以相同比例竞争时，眼睛不知道该停留在哪里。相反，将大尺度图案（如大胆几何地毯）与中等尺度图案（如纹理枕头）和小尺度图案（如窗帘上的细条纹）搭配。\n\n## 2. 用纯色锚定\n\n并非每个元素都需要图案。纯色给眼睛提供喘息的空间。如果房间里有三件带图案的物品，确保至少有两件纯色物品——沙发、墙壁、地毯——来平衡构图。",
+  "excerpt": "Pattern mixing is one of the most powerful tools in a designer's arsenal — and one of the most misunderstood. Here's how to do it with confidence.",
+  "titleCn": "设计师混搭图案的5条法则",
+  "category": "design-tips",
+  "featured": true,
+  "videoUrl": "",
+  "excerptCn": "图案混搭是设计师最强大的工具之一——也是最常被误解的工具之一。以下是如何自信地运用它。",
+  "coverImage": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771755551559-photo-1541506618330-7c369fc759b5.jpg",
+  "relatedPosts": [
+    "greenwich-estate-tour"
+  ],
+  "coverImageAlt": "Patterns in interior design",
+  "videoDuration": "",
+  "relatedProducts": [
+    "woven-throw-blanket"
+  ]
+}

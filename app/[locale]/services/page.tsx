@@ -43,16 +43,26 @@ export default async function ServicesPage({ params }: PageProps) {
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-32 pb-20 md:pt-44 md:pb-28 overflow-hidden" style={{ background: 'var(--primary)' }}>
+      <section className="relative hero-pad-services overflow-hidden" style={{ background: 'var(--primary)' }}>
         {data.hero?.backgroundImage && (
           <>
-            <div className="absolute inset-0"><Image src={data.hero.backgroundImage} alt="" fill className="object-cover opacity-30" sizes="100vw" priority /></div>
-            <div className="absolute inset-0 bg-[var(--primary)]/60" />
+            <div className="absolute inset-0">
+              <Image
+                src={data.hero.backgroundImage}
+                alt=""
+                fill
+                className="object-cover"
+                style={{ opacity: 'var(--media-dim-medium, 0.3)' }}
+                sizes="100vw"
+                priority
+              />
+            </div>
+            <div className="absolute inset-0" style={{ background: 'rgb(var(--hero-overlay-rgb, 26 26 26) / var(--overlay-medium, 0.6))' }} />
           </>
         )}
         <div className="relative z-10 container-custom max-w-2xl">
-          <h1 className="font-serif text-4xl md:text-6xl font-semibold text-white mb-5">{tx(data.hero?.headline, data.hero?.headlineCn, locale) || (isCn?'我们的服务':'Our Services')}</h1>
-          <p className="text-lg text-white/70">{tx(data.hero?.subline, data.hero?.sublineCn, locale)}</p>
+          <h1 className="font-serif text-4xl md:text-6xl font-semibold mb-5" style={{ color: 'var(--text-on-dark, #FAF8F5)' }}>{tx(data.hero?.headline, data.hero?.headlineCn, locale) || (isCn?'我们的服务':'Our Services')}</h1>
+          <p className="text-lg" style={{ color: 'var(--on-dark-medium, rgb(var(--on-dark-rgb, 250 248 245) / 0.6))' }}>{tx(data.hero?.subline, data.hero?.sublineCn, locale)}</p>
         </div>
       </section>
 
@@ -64,7 +74,7 @@ export default async function ServicesPage({ params }: PageProps) {
               <h2 className="font-serif text-2xl md:text-3xl font-semibold mb-5" style={{ color: 'var(--primary)' }}>{tx(item.title, item.titleCn, locale)}</h2>
               <p className="text-base leading-loose" style={{ color: 'var(--text-secondary)' }}>{tx(item.description, item.descriptionCn, locale)}</p>
             </div>
-            <div className={`relative aspect-[4/3] overflow-hidden ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
+            <div className={`relative aspect-[4/3] image-frame ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
               {item.image ? <Image src={item.image} alt={tx(item.title, item.titleCn, locale)} fill className="object-cover" sizes="(max-width:1024px) 100vw, 50vw" /> : <div className="w-full h-full bg-[var(--primary-50)]" />}
             </div>
           </div>
@@ -116,10 +126,24 @@ export default async function ServicesPage({ params }: PageProps) {
 
       {/* CTA */}
       <section className="relative section-padding overflow-hidden" style={{ background: 'var(--primary)' }}>
-        {data.cta?.backgroundImage && <><div className="absolute inset-0"><Image src={data.cta.backgroundImage} alt="" fill className="object-cover opacity-25" sizes="100vw" /></div><div className="absolute inset-0 bg-[var(--primary)]/70" /></>}
+        {data.cta?.backgroundImage && (
+          <>
+            <div className="absolute inset-0">
+              <Image
+                src={data.cta.backgroundImage}
+                alt=""
+                fill
+                className="object-cover"
+                style={{ opacity: 'var(--media-dim-light, 0.25)' }}
+                sizes="100vw"
+              />
+            </div>
+            <div className="absolute inset-0" style={{ background: 'rgb(var(--hero-overlay-rgb, 26 26 26) / var(--overlay-strong, 0.7))' }} />
+          </>
+        )}
         <div className="relative z-10 container-custom text-center">
-          <p className="font-serif text-3xl md:text-4xl text-white mb-8 max-w-xl mx-auto">{tx(data.cta?.headline, data.cta?.headlineCn, locale)}</p>
-          <Link href={`/${locale}${data.cta?.ctaHref || '/contact'}`} className="btn-gold text-base px-10 py-4">
+          <p className="font-serif text-3xl md:text-4xl mb-8 max-w-xl mx-auto" style={{ color: 'var(--text-on-dark, #FAF8F5)' }}>{tx(data.cta?.headline, data.cta?.headlineCn, locale)}</p>
+          <Link href={`/${locale}${data.cta?.ctaHref || '/contact'}`} className="btn-gold btn-gold-lg text-base">
             {tx(data.cta?.ctaLabel, data.cta?.ctaLabelCn, locale) || (isCn?'预约免费咨询':'Book Your Free Consultation')}
           </Link>
         </div>

@@ -7,7 +7,7 @@ export const size = {
 
 export const contentType = 'image/png';
 
-const PRIMARY_COLOR = '#8b1d1d';
+const PRIMARY_COLOR = '#2c2c2c';
 
 export default function Icon() {
   return new ImageResponse(
@@ -32,13 +32,16 @@ export default function Icon() {
             alignItems: 'center',
             justifyContent: 'center',
             color: PRIMARY_COLOR,
-            fontSize: 18,
-            fontWeight: 800,
+            fontSize: 14,
+            fontWeight: 900,
             lineHeight: 1,
-            fontFamily: 'Georgia, serif',
+            fontFamily: 'Impact, "Arial Black", Arial, sans-serif',
+            letterSpacing: '0px',
+            textShadow:
+              '0.5px 0 currentColor, -0.5px 0 currentColor, 0 0.5px currentColor, 0 -0.5px currentColor',
           }}
         >
-          H
+          J
         </div>
       </div>
     ),

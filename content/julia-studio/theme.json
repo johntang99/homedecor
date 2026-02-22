@@ -50,5 +50,140 @@
     "small": "2px",
     "medium": "4px",
     "large": "8px"
+  },
+  "opacity": {
+    "onDark": {
+      "high": "0.9",
+      "medium": "0.6",
+      "low": "0.4",
+      "subtle": "0.3"
+    }
+  },
+  "layout": {
+    "stickyFilter": {
+      "topMobile": "4rem",
+      "topDesktop": "5rem",
+      "paddingY": "0.75rem"
+    },
+    "heroSpacing": {
+      "compact": {
+        "top": "8rem",
+        "bottom": "3rem",
+        "topDesktop": "10rem",
+        "bottomDesktop": "4rem"
+      },
+      "feature": {
+        "top": "8rem",
+        "bottom": "4rem",
+        "topDesktop": "10rem",
+        "bottomDesktop": "6rem"
+      },
+      "services": {
+        "top": "8rem",
+        "bottom": "5rem",
+        "topDesktop": "11rem",
+        "bottomDesktop": "7rem"
+      },
+      "aboutContentBottom": "3rem",
+      "aboutHeroMinHeight": "400px"
+    },
+    "detailPages": {
+      "backBarTop": "5rem",
+      "backBarRowY": "0.75rem",
+      "stickyInfoTop": "6rem",
+      "portfolioHeroMinHeight": "500px",
+      "collectionHeroMinHeight": "350px",
+      "heroContentBottom": "2.5rem",
+      "galleryBottomPadding": "4rem",
+      "articleHeaderTop": "2.5rem",
+      "articleHeaderBottom": "1.5rem",
+      "articleMediaBottom": "2.5rem",
+      "rhythm": {
+        "hairline": "0.125rem",
+        "xxs": "0.25rem",
+        "xs": "0.5rem",
+        "sm": "0.75rem",
+        "md": "1rem",
+        "lg": "1.25rem",
+        "xl": "1.5rem",
+        "xxl": "2rem",
+        "hero": "2.5rem"
+      },
+      "gaps": {
+        "backLink": "0.375rem",
+        "heroMeta": "1.25rem",
+        "mainColumns": "3.5rem",
+        "specRow": "1rem",
+        "chipGroup": "0.25rem",
+        "thumbGrid": "0.5rem",
+        "galleryPair": "1rem",
+        "hScrollCards": "1.5rem",
+        "relatedGridMedium": "1.25rem",
+        "relatedGridLarge": "1.75rem",
+        "moodGrid": "1rem"
+      }
+    }
+  },
+  "components": {
+    "filterChip": {
+      "paddingX": "1rem",
+      "paddingY": "0.375rem",
+      "radius": "9999px"
+    },
+    "buttons": {
+      "loadMore": {
+        "paddingX": "2rem",
+        "paddingY": "0.75rem"
+      },
+      "ctaLarge": {
+        "paddingX": "2.5rem",
+        "paddingY": "1rem"
+      }
+    },
+    "media": {
+      "playBadgeLarge": "4rem",
+      "playBadgeMedium": "3rem",
+      "playIconLarge": "1.5rem",
+      "playIconMedium": "1rem"
+    },
+    "detailCards": {
+      "shopLookWidth": "14rem",
+      "storyProductWidth": "13rem"
+    }
+  },
+  "effects": {
+    "overlay": {
+      "light": "0.5",
+      "medium": "0.6",
+      "strong": "0.7"
+    },
+    "media": {
+      "dimLight": "0.25",
+      "dimMedium": "0.3",
+      "dimHeavy": "0.5"
+    },
+    "hero": {
+      "baseBg": "#1A1A1A",
+      "overlayRgb": "26 26 26",
+      "softFull": {
+        "from": "0.45",
+        "mid": "0.16",
+        "to": "0.06"
+      },
+      "focusText": {
+        "from": "0.14",
+        "mid": "0.04"
+      },
+      "textPanel": {
+        "bg": "0.10",
+        "shadow": "0 10px 30px rgba(0,0,0,0.22)"
+      },
+      "titleShadow": "0 2px 10px rgba(0,0,0,0.35)",
+      "linkShadow": "0 1px 8px rgba(0,0,0,0.28)"
+    },
+    "cards": {
+      "hoverOverlay": "0.2",
+      "bottomGradient": "0.7"
+    }
   }
 }

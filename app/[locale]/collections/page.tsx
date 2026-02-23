@@ -14,17 +14,14 @@ export default function CollectionsPage() {
   useEffect(() => {
     const loc = window.location.pathname.startsWith('/zh') ? 'zh' : 'en';
     setLocale(loc);
-    const siteId = 'julia-studio';
-    fetch(`/api/admin/content/files?siteId=${siteId}&locale=${loc}`)
+    fetch(`/api/content/items?locale=${loc}&directory=collections`)
       .then(r => r.json())
       .then(async (d) => {
-        const files = (d.files || []).filter((f: { path: string }) => f.path.startsWith('collections/'));
-        const items = await Promise.all(files.map(async (f: { path: string }) => {
-          const r = await fetch(`/api/admin/content/file?siteId=${siteId}&locale=${loc}&path=${encodeURIComponent(f.path)}`);
-          const data = await r.json();
-          try { return JSON.parse(data.content || 'null'); } catch { return null; }
-        }));
-        setCollections(items.filter(Boolean).sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0)));
+        const items = Array.isArray(d.items) ? d.items : [];
+        const parsedCollections = items.filter(Boolean) as Collection[];
+        setCollections(
+          parsedCollections.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0))
+        );
         setLoading(false);
       }).catch(() => setLoading(false));
   }, []);

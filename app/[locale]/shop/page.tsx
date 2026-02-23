@@ -35,21 +35,13 @@ export default function ShopPage() {
     const path = window.location.pathname;
     const loc = path.startsWith('/zh') ? 'zh' : 'en';
     setLocale(loc);
-    const siteId = 'julia-studio';
 
     Promise.all([
-      fetch(`/api/admin/content/file?siteId=${siteId}&locale=${loc}&path=pages/shop.json`).then(r => r.json()),
-      fetch(`/api/admin/content/files?siteId=${siteId}&locale=${loc}`).then(r => r.json()),
-    ]).then(async ([pageRes, filesRes]) => {
+      fetch(`/api/content/file?locale=${loc}&path=pages/shop.json`).then(r => r.json()),
+      fetch(`/api/content/items?locale=${loc}&directory=shop-products`).then(r => r.json()),
+    ]).then(([pageRes, itemsRes]) => {
       try { setPageData(JSON.parse(pageRes.content || '{}')); } catch {}
-      const shopFiles = (filesRes.files || []).filter((f: { path: string }) => f.path.startsWith('shop-products/'));
-      const items = await Promise.all(
-        shopFiles.map(async (f: { path: string }) => {
-          const r = await fetch(`/api/admin/content/file?siteId=${siteId}&locale=${loc}&path=${encodeURIComponent(f.path)}`);
-          const d = await r.json();
-          try { return JSON.parse(d.content || 'null'); } catch { return null; }
-        })
-      );
+      const items = Array.isArray(itemsRes.items) ? itemsRes.items : [];
       setProducts(items.filter(Boolean));
       setLoading(false);
     }).catch(() => setLoading(false));

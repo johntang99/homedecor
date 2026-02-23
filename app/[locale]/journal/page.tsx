@@ -34,22 +34,15 @@ export default function JournalPage() {
   useEffect(() => {
     const loc = window.location.pathname.startsWith('/zh') ? 'zh' : 'en';
     setLocale(loc);
-    const siteId = 'julia-studio';
 
     Promise.all([
-      fetch(`/api/admin/content/file?siteId=${siteId}&locale=${loc}&path=pages/journal.json`).then(r => r.json()),
-      fetch(`/api/admin/content/files?siteId=${siteId}&locale=${loc}`).then(r => r.json()),
-    ]).then(async ([pageRes, filesRes]) => {
+      fetch(`/api/content/file?locale=${loc}&path=pages/journal.json`).then(r => r.json()),
+      fetch(`/api/content/items?locale=${loc}&directory=journal`).then(r => r.json()),
+    ]).then(([pageRes, itemsRes]) => {
       try { setPageData(JSON.parse(pageRes.content || '{}')); } catch {}
-      const journalFiles = (filesRes.files || []).filter((f: { path: string }) => f.path.startsWith('journal/'));
-      const items = await Promise.all(
-        journalFiles.map(async (f: { path: string }) => {
-          const r = await fetch(`/api/admin/content/file?siteId=${siteId}&locale=${loc}&path=${encodeURIComponent(f.path)}`);
-          const d = await r.json();
-          try { return JSON.parse(d.content || 'null'); } catch { return null; }
-        })
-      );
-      setPosts(items.filter(Boolean).sort((a, b) => (b.date || '').localeCompare(a.date || '')));
+      const items = Array.isArray(itemsRes.items) ? itemsRes.items : [];
+      const parsedPosts = items.filter(Boolean) as JournalPost[];
+      setPosts(parsedPosts.sort((a, b) => (b.date || '').localeCompare(a.date || '')));
       setLoading(false);
     }).catch(() => setLoading(false));
   }, []);

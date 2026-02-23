@@ -174,7 +174,7 @@ export default function Footer({ locale, footer }: FooterProps) {
       {/* Bottom bar */}
       <div className="border-t" style={{ borderColor: 'rgb(var(--on-dark-rgb, 250 248 245) / 0.10)' }}>
         <div className="container-custom py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs" style={{ color: 'var(--on-dark-subtle, rgba(250,248,245,0.3))' }}>{copyright}</p>
+          <p className="text-xs" style={{ color: 'var(--text-on-dark, #FAF8F5)' }}>{copyright}</p>
           <div className="flex gap-5 text-xs" style={{ color: 'var(--on-dark-subtle, rgba(250,248,245,0.3))' }}>
             {data.legal?.privacyHref && (
               <Link href={`/${locale}${data.legal.privacyHref}`} className="transition-colors hover:opacity-90">

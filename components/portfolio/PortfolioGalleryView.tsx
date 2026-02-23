@@ -34,7 +34,7 @@ export default function PortfolioGalleryView({ locale, gallery }: PortfolioGalle
       const item = gallery[i];
       if (item.layout === 'full' || i === gallery.length - 1) {
         result.push(
-          <div key={`full-${i}`} className="relative w-full aspect-[16/9] image-frame">
+          <div key={`full-${i}`} className="relative w-full aspect-[16/9] image-frame photo-shadow-lg">
             {item.image ? (
               <Image
                 src={item.image}
@@ -54,7 +54,7 @@ export default function PortfolioGalleryView({ locale, gallery }: PortfolioGalle
         result.push(
           <div key={`half-${i}`} className="grid grid-cols-2 detail-gap-gallery-pair">
             {[item, next].map((img, j) => (
-              <div key={j} className="relative aspect-[4/3] image-frame">
+              <div key={j} className="relative aspect-[4/3] image-frame photo-shadow-sm">
                 {img?.image ? (
                   <Image
                     src={img.image}
@@ -111,7 +111,7 @@ export default function PortfolioGalleryView({ locale, gallery }: PortfolioGalle
           <div className="detail-space-y-md">{listingBlocks}</div>
         ) : (
           <div className="relative">
-            <div className="relative h-[460px] md:h-[600px] w-full image-frame bg-[var(--primary-50)]">
+            <div className="relative h-[460px] md:h-[600px] w-full image-frame photo-shadow-lg bg-[var(--primary-50)]">
               {slides[activeIndex]?.image ? (
                 <Image
                   src={slides[activeIndex].image || ''}

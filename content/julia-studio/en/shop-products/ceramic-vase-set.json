@@ -1,1 +1,46 @@
-{"slug":"ceramic-vase-set","title":"Studio Ceramic Vase Set","titleCn":"工作室陶瓷花瓶套装","category":"accessories","room":"living","price":320,"currency":"USD","status":"in-stock","featured":false,"images":[{"src":"","alt":"Ceramic vase set on shelf"},{"src":"","alt":"Vase set detail texture"}],"description":"A set of three hand-thrown ceramic vases in graduated sizes. Each piece is unique — slight variations in glaze create depth and character. Sold as a set of three.","descriptionCn":"一套三件手工陶制花瓶，尺寸渐变。每件作品都是独一无二的——釉面的细微变化创造出深度和个性。套装三件出售。","specifications":{"dimensions":"Small: 4\"H, Medium: 8\"H, Large: 12\"H","material":"Stoneware clay, matte glaze","materialCn":"炻器粘土，哑光釉","finish":"Matte earth tones","finishCn":"哑光大地色调","leadTime":"2-4 weeks","leadTimeCn":"2-4周"},"seenInProjects":["midtown-penthouse","hudson-yards-office"],"relatedProducts":["abstract-wall-art","woven-throw-blanket"],"seo":{"title":"Studio Ceramic Vase Set — Julia Studio Shop","description":"Hand-thrown ceramic vase set, three graduated sizes. Each piece unique with subtle glaze variations."}}
+{
+  "seo": {
+    "title": "Studio Ceramic Vase Set — Julia Studio Shop",
+    "description": "Hand-thrown ceramic vase set, three graduated sizes. Each piece unique with subtle glaze variations."
+  },
+  "room": "living",
+  "slug": "ceramic-vase-set",
+  "price": 320,
+  "title": "Studio Ceramic Vase Set",
+  "images": [
+    {
+      "alt": "Ceramic vase set on shelf",
+      "src": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771809735504-photo-1660721671073-e139688fa3cf.jpg",
+      "title": "Ceramic vase"
+    },
+    {
+      "alt": "Vase set detail texture",
+      "src": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771809840287-photo-1723110872079-542167449ec5.jpg",
+      "title": "Ceramic vase"
+    }
+  ],
+  "status": "in-stock",
+  "titleCn": "工作室陶瓷花瓶套装",
+  "category": "accessories",
+  "currency": "USD",
+  "featured": false,
+  "description": "A set of three hand-thrown ceramic vases in graduated sizes. Each piece is unique — slight variations in glaze create depth and character. Sold as a set of three.",
+  "descriptionCn": "一套三件手工陶制花瓶，尺寸渐变。每件作品都是独一无二的——釉面的细微变化创造出深度和个性。套装三件出售。",
+  "seenInProjects": [
+    "midtown-penthouse",
+    "hudson-yards-office"
+  ],
+  "specifications": {
+    "finish": "Matte earth tones",
+    "finishCn": "哑光大地色调",
+    "leadTime": "2-4 weeks",
+    "material": "Stoneware clay, matte glaze",
+    "dimensions": "Small: 4\"H, Medium: 8\"H, Large: 12\"H",
+    "leadTimeCn": "2-4周",
+    "materialCn": "炻器粘土，哑光釉"
+  },
+  "relatedProducts": [
+    "abstract-wall-art",
+    "woven-throw-blanket"
+  ]
+}

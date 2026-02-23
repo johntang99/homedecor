@@ -1,1 +1,45 @@
-{"slug":"abstract-wall-art","title":"Abstract Oil Study No. 7","titleCn":"抽象油画习作七号","category":"art","room":"living","price":1800,"currency":"USD","status":"in-stock","featured":false,"images":[{"src":"","alt":"Abstract oil painting on wall"},{"src":"","alt":"Painting texture detail"}],"description":"An original oil painting from our curated art collection. Bold gestural strokes in warm ochre, cream, and charcoal — a statement piece that works equally well in modern and transitional interiors.","descriptionCn":"来自我们精选艺术系列的原创油画。以温暖赭石、乳白和炭灰的大胆笔触——一件在现代和过渡风格室内同样出色的声明作品。","specifications":{"dimensions":"36\" × 48\"","material":"Oil on stretched canvas","materialCn":"布面油画","finish":"Unframed (custom framing available)","finishCn":"无框（可定制装裱）","leadTime":"Ships in 1 week","leadTimeCn":"1周内发货"},"seenInProjects":["soho-gallery-exhibition"],"relatedProducts":["ceramic-vase-set","marin-console-table"],"seo":{"title":"Abstract Oil Study No. 7 — Julia Studio Shop","description":"Original oil painting in warm ochre, cream, and charcoal. Statement piece for modern and transitional interiors."}}
+{
+  "seo": {
+    "title": "Abstract Oil Study No. 7 — Julia Studio Shop",
+    "description": "Original oil painting in warm ochre, cream, and charcoal. Statement piece for modern and transitional interiors."
+  },
+  "room": "living",
+  "slug": "abstract-wall-art",
+  "price": 1800,
+  "title": "Abstract Oil Study No. 7",
+  "images": [
+    {
+      "alt": "Abstract oil painting on wall",
+      "src": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771809476570-photo-1618748274531-74442d558432.jpg",
+      "title": "Abstract oil painting on wall"
+    },
+    {
+      "alt": "Painting texture detail",
+      "src": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771809558137-photo-1632127257185-5d1261e46d93.jpg",
+      "title": "oil painting"
+    }
+  ],
+  "status": "in-stock",
+  "titleCn": "抽象油画习作七号",
+  "category": "art",
+  "currency": "USD",
+  "featured": false,
+  "description": "An original oil painting from our curated art collection. Bold gestural strokes in warm ochre, cream, and charcoal — a statement piece that works equally well in modern and transitional interiors.",
+  "descriptionCn": "来自我们精选艺术系列的原创油画。以温暖赭石、乳白和炭灰的大胆笔触——一件在现代和过渡风格室内同样出色的声明作品。",
+  "seenInProjects": [
+    "soho-gallery-exhibition"
+  ],
+  "specifications": {
+    "finish": "Unframed (custom framing available)",
+    "finishCn": "无框（可定制装裱）",
+    "leadTime": "Ships in 1 week",
+    "material": "Oil on stretched canvas",
+    "dimensions": "36\" × 48\"",
+    "leadTimeCn": "1周内发货",
+    "materialCn": "布面油画"
+  },
+  "relatedProducts": [
+    "ceramic-vase-set",
+    "marin-console-table"
+  ]
+}

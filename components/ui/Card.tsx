@@ -15,11 +15,12 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       hover = false,
       padding = 'md',
       children,
+      style,
       ...props
     },
     ref
   ) => {
-    const baseStyles = 'rounded-xl transition-all duration-200';
+    const baseStyles = 'card-frame transition-all duration-200';
     
     const variants = {
       default: 'bg-white shadow-md',
@@ -47,6 +48,10 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
           hoverEffect,
           className
         )}
+        style={{
+          borderRadius: 'var(--card-radius, 6px)',
+          ...style,
+        }}
         {...props}
       >
         {children}

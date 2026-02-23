@@ -22,6 +22,42 @@ interface RelatedProduct { slug: string; title?: string; titleCn?: string; image
 
 function tx(en?: string, cn?: string, locale?: Locale) { return (locale === 'zh' && cn) ? cn : (en || ''); }
 
+function toEmbedVideoUrl(raw?: string) {
+  if (!raw) return '';
+  const input = raw.trim();
+  if (!input) return '';
+  try {
+    const url = new URL(input.startsWith('http') ? input : `https://${input}`);
+    const host = url.hostname.replace(/^www\./, '');
+
+    const youtubeHosts = new Set(['youtube.com', 'm.youtube.com', 'youtu.be']);
+    if (youtubeHosts.has(host)) {
+      let id = '';
+      if (host === 'youtu.be') {
+        id = url.pathname.replace('/', '').split('/')[0];
+      } else if (url.pathname.startsWith('/watch')) {
+        id = url.searchParams.get('v') || '';
+      } else if (url.pathname.startsWith('/shorts/')) {
+        id = url.pathname.split('/')[2] || '';
+      } else if (url.pathname.startsWith('/embed/')) {
+        id = url.pathname.split('/')[2] || '';
+      }
+      if (id) return `https://www.youtube.com/embed/${id}`;
+    }
+
+    const vimeoHosts = new Set(['vimeo.com', 'player.vimeo.com']);
+    if (vimeoHosts.has(host)) {
+      const parts = url.pathname.split('/').filter(Boolean);
+      const id = parts[parts.length - 1];
+      if (id && /^\d+$/.test(id)) return `https://player.vimeo.com/video/${id}`;
+    }
+
+    return input;
+  } catch {
+    return input;
+  }
+}
+
 export async function generateStaticParams() { return []; }
 
 export default async function JournalPostPage({ params }: PageProps) {
@@ -41,6 +77,7 @@ export default async function JournalPostPage({ params }: PageProps) {
 
   const isCn = locale === 'zh';
   const body = tx(post.body, post.bodyCn, locale);
+  const embedVideoUrl = toEmbedVideoUrl(post.videoUrl);
 
   // Simple markdown → HTML (headers, bold, paragraphs)
   function renderMarkdown(md: string) {
@@ -80,12 +117,12 @@ export default async function JournalPostPage({ params }: PageProps) {
       {/* Cover image or video */}
       <div className="bg-white" style={{ paddingBottom: 'var(--detail-article-media-pb, 2.5rem)' }}>
         <div className="container-custom max-w-3xl mx-auto">
-          {post.type === 'video' && post.videoUrl ? (
-            <div className="relative aspect-video image-frame detail-mb-xxl">
-              <iframe src={post.videoUrl} className="w-full h-full" allowFullScreen title={post.title} />
+          {post.type === 'video' && embedVideoUrl ? (
+            <div className="relative aspect-video image-frame photo-shadow-lg detail-mb-xxl">
+              <iframe src={embedVideoUrl} className="w-full h-full" allowFullScreen title={post.title} />
             </div>
           ) : post.coverImage ? (
-            <div className="relative aspect-[16/9] image-frame detail-mb-hero">
+            <div className="relative aspect-[16/9] image-frame photo-shadow-lg detail-mb-hero">
               <Image src={post.coverImage} alt={tx(post.title, post.titleCn, locale)} fill className="object-cover" priority sizes="100vw" />
             </div>
           ) : null}
@@ -110,7 +147,7 @@ export default async function JournalPostPage({ params }: PageProps) {
             <div className="flex detail-gap-hscroll-cards overflow-x-auto hide-scrollbar detail-pb-xs">
               {relatedProducts.map(p => (
                 <Link key={p.slug} href={`/${locale}/shop/${p.slug}`} className="group flex-shrink-0 detail-card-md">
-                  <div className="relative aspect-square image-frame detail-card-media bg-[var(--primary-50)]">
+                  <div className="relative aspect-square image-frame photo-shadow-sm detail-card-media bg-[var(--primary-50)]">
                     {p.images?.[0]?.src && <Image src={p.images[0].src} alt={tx(p.title, p.titleCn, locale)} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="208px" />}
                   </div>
                   <p className="detail-card-title">{tx(p.title, p.titleCn, locale)}</p>
@@ -132,7 +169,7 @@ export default async function JournalPostPage({ params }: PageProps) {
             <div className="grid grid-cols-1 md:grid-cols-3 detail-gap-related-lg">
               {relatedPosts.map(p => (
                 <Link key={p.slug} href={`/${locale}/journal/${p.slug}`} className="group">
-                  <div className="relative aspect-[4/3] image-frame detail-card-media bg-[var(--primary-50)]">
+                  <div className="relative aspect-[4/3] image-frame photo-shadow-sm detail-card-media bg-[var(--primary-50)]">
                     {p.coverImage && <Image src={p.coverImage} alt={tx(p.title, p.titleCn, locale)} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="33vw" />}
                   </div>
                   <p className="detail-card-title group-hover:opacity-70 transition-opacity">{tx(p.title, p.titleCn, locale)}</p>

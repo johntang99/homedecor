@@ -1,1 +1,11 @@
-{ "sections": ["hero", "designServices", "constructionServices", "furnishingServices", "process", "specialties", "cta"] }
+{
+  "sections": [
+    "hero",
+    "designServices",
+    "constructionServices",
+    "furnishingServices",
+    "process",
+    "specialties",
+    "cta"
+  ]
+}

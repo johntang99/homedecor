@@ -1,26 +1,55 @@
 {
   "hero": {
+    "subline": "Julia Studio in the press.",
     "variant": "minimal-text",
     "headline": "Press & Awards",
-    "headlineCn": "媒体与奖项",
-    "subline": "Julia Studio in the press.",
-    "sublineCn": "媒体报道中的 Julia Studio。"
-  },
-  "awards": {
-    "headline": "Awards",
-    "headlineCn": "奖项",
-    "items": [
-      { "name": "Interior Design Excellence Award", "organization": "ASID", "year": "2024", "logo": "" },
-      { "name": "Best Residential Design", "organization": "New York Design Council", "year": "2023", "logo": "" },
-      { "name": "Top Exhibition Designer", "organization": "Event Design Awards", "year": "2022", "logo": "" }
-    ]
+    "sublineCn": "媒体报道中的 Julia Studio。",
+    "headlineCn": "媒体与奖项"
   },
   "press": {
-    "headline": "Featured In",
-    "headlineCn": "媒体报道",
     "items": [
-      { "publication": "Architectural Digest", "title": "25 Design Studios Redefining Modern Interiors", "titleCn": "重新定义现代室内设计的25家工作室", "date": "2024-03", "url": "", "logo": "" },
-      { "publication": "Elle Decor", "title": "The Power of Restraint: Julia Studio's Minimalist Vision", "titleCn": "克制的力量：Julia Studio的极简愿景", "date": "2023-11", "url": "", "logo": "" }
-    ]
+      {
+        "url": "",
+        "date": "2024-03",
+        "logo": "",
+        "title": "25 Design Studios Redefining Modern Interiors",
+        "titleCn": "重新定义现代室内设计的25家工作室",
+        "publication": "Architectural Digest"
+      },
+      {
+        "url": "",
+        "date": "2023-11",
+        "logo": "",
+        "title": "The Power of Restraint: Julia Studio's Minimalist Vision",
+        "titleCn": "克制的力量：Julia Studio的极简愿景",
+        "publication": "Elle Decor"
+      }
+    ],
+    "headline": "Featured In",
+    "headlineCn": "媒体报道"
+  },
+  "awards": {
+    "items": [
+      {
+        "logo": "",
+        "name": "Interior Design Excellence Award",
+        "year": "2024",
+        "organization": "ASID"
+      },
+      {
+        "logo": "",
+        "name": "Best Residential Design",
+        "year": "2023",
+        "organization": "New York Design Council"
+      },
+      {
+        "logo": "",
+        "name": "Top Exhibition Designer",
+        "year": "2022",
+        "organization": "Event Design Awards"
+      }
+    ],
+    "headline": "Awards",
+    "headlineCn": "奖项"
   }
 }

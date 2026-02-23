@@ -1,79 +1,79 @@
 {
+  "cta": {
+    "ctaHref": "/contact",
+    "variant": "centered",
+    "ctaLabel": "Contact Us",
+    "headline": "Still have questions?",
+    "ctaLabelCn": "联系我们",
+    "headlineCn": "还有疑问？"
+  },
   "hero": {
+    "subline": "Everything you need to know about working with Julia Studio.",
     "variant": "minimal-text",
     "headline": "Frequently Asked Questions",
-    "headlineCn": "常见问题",
-    "subline": "Everything you need to know about working with Julia Studio.",
-    "sublineCn": "关于与 Julia Studio 合作，您需要了解的一切。"
+    "sublineCn": "关于与 Julia Studio 合作，您需要了解的一切。",
+    "headlineCn": "常见问题"
   },
   "categories": [
     {
       "name": "Design Process",
-      "nameCn": "设计流程",
       "items": [
         {
-          "question": "What is the design process like?",
-          "questionCn": "设计流程是怎样的？",
           "answer": "Our process begins with a complimentary consultation. We then develop concepts, refine designs, source materials, and manage the entire installation — from start to reveal.",
-          "answerCn": "我们的流程从免费咨询开始。然后我们制定概念、完善设计、采购材料并管理整个安装过程——从开始到揭幕。"
+          "answerCn": "我们的流程从免费咨询开始。然后我们制定概念、完善设计、采购材料并管理整个安装过程——从开始到揭幕。",
+          "question": "What is the design process like?",
+          "questionCn": "设计流程是怎样的？"
         },
         {
-          "question": "How long does a full design project take?",
-          "questionCn": "完整设计项目需要多长时间？",
           "answer": "Timelines vary by scope. A room refresh can take 4-6 weeks. A full home redesign typically takes 4-8 months from concept to installation.",
-          "answerCn": "时间表因范围而异。空间焕新可能需要4-6周。全屋重新设计从概念到安装通常需要4-8个月。"
+          "answerCn": "时间表因范围而异。空间焕新可能需要4-6周。全屋重新设计从概念到安装通常需要4-8个月。",
+          "question": "How long does a full design project take?",
+          "questionCn": "完整设计项目需要多长时间？"
         }
-      ]
+      ],
+      "nameCn": "设计流程"
     },
     {
       "name": "Pricing & Budget",
-      "nameCn": "价格与预算",
       "items": [
         {
-          "question": "How does pricing work?",
-          "questionCn": "如何收费？",
           "answer": "Design fees are typically 10-15% of the overall project budget for full-service design. We provide a detailed estimate after our initial consultation.",
-          "answerCn": "全案设计费用通常为项目总预算的10-15%。初次咨询后，我们将提供详细报价。"
+          "answerCn": "全案设计费用通常为项目总预算的10-15%。初次咨询后，我们将提供详细报价。",
+          "question": "How does pricing work?",
+          "questionCn": "如何收费？"
         },
         {
-          "question": "Do you offer virtual design services?",
-          "questionCn": "你们提供线上设计服务吗？",
           "answer": "Yes — our virtual design service includes mood boards, space plans, and curated shopping lists. It's perfect for clients outside New York or those with smaller budgets.",
-          "answerCn": "是的——我们的线上设计服务包括情绪板、空间规划和精选购物清单。非常适合纽约以外的客户或预算较小的客户。"
+          "answerCn": "是的——我们的线上设计服务包括情绪板、空间规划和精选购物清单。非常适合纽约以外的客户或预算较小的客户。",
+          "question": "Do you offer virtual design services?",
+          "questionCn": "你们提供线上设计服务吗？"
         }
-      ]
+      ],
+      "nameCn": "价格与预算"
     },
     {
       "name": "Shop & Products",
-      "nameCn": "商店与产品",
       "items": [
         {
-          "question": "Can I purchase individual items from the shop?",
-          "questionCn": "我可以从商店单独购买商品吗？",
           "answer": "Absolutely. Our shop is open to all customers. You can inquire about any item and we'll guide you through availability, pricing, and lead times.",
-          "answerCn": "当然可以。我们的商店对所有客户开放。您可以查询任何商品，我们将为您提供库存、价格和交货时间方面的指导。"
+          "answerCn": "当然可以。我们的商店对所有客户开放。您可以查询任何商品，我们将为您提供库存、价格和交货时间方面的指导。",
+          "question": "Can I purchase individual items from the shop?",
+          "questionCn": "我可以从商店单独购买商品吗？"
         }
-      ]
+      ],
+      "nameCn": "商店与产品"
     },
     {
       "name": "Bilingual Service",
-      "nameCn": "双语服务",
       "items": [
         {
-          "question": "Do you offer services in Chinese?",
-          "questionCn": "你们提供中文服务吗？",
           "answer": "Yes — Julia Studio offers complete bilingual service in English and Chinese. All consultations, contracts, and communications can be conducted in your preferred language.",
-          "answerCn": "是的——Julia Studio 提供完整的中英双语服务。所有咨询、合同和沟通均可以您偏好的语言进行。"
+          "answerCn": "是的——Julia Studio 提供完整的中英双语服务。所有咨询、合同和沟通均可以您偏好的语言进行。",
+          "question": "Do you offer services in Chinese?",
+          "questionCn": "你们提供中文服务吗？"
         }
-      ]
+      ],
+      "nameCn": "双语服务"
     }
-  ],
-  "cta": {
-    "variant": "centered",
-    "headline": "Still have questions?",
-    "headlineCn": "还有疑问？",
-    "ctaLabel": "Contact Us",
-    "ctaLabelCn": "联系我们",
-    "ctaHref": "/contact"
-  }
+  ]
 }

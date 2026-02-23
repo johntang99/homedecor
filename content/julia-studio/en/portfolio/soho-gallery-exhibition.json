@@ -1,44 +1,83 @@
 {
+  "seo": {
+    "title": "SoHo Art Gallery Installation — Julia Studio",
+    "description": "Exhibition design for emerging artist's debut solo show in SoHo, New York. Contemporary space design enhancing the artwork narrative."
+  },
   "slug": "soho-gallery-exhibition",
+  "year": "2024",
+  "style": "contemporary",
   "title": "SoHo Art Gallery Installation",
+  "details": {
+    "rooms": [
+      "Main Gallery",
+      "Transition Space",
+      "Artist Corner",
+      "Reception"
+    ],
+    "scope": "Exhibition Design",
+    "roomsCn": [
+      "主画廊",
+      "过渡空间",
+      "艺术家角落",
+      "接待区"
+    ],
+    "scopeCn": "展览设计",
+    "duration": "3 months",
+    "durationCn": "3个月",
+    "keyMaterials": [
+      "Raw concrete panels",
+      "Adjustable track lighting",
+      "Natural linen partitions",
+      "Hand-poured resin floors"
+    ],
+    "keyMaterialsCn": [
+      "原始混凝土板",
+      "可调节轨道灯",
+      "天然亚麻隔断",
+      "手浇树脂地板"
+    ]
+  },
+  "gallery": [
+    {
+      "alt": "Gallery main corridor",
+      "altCn": "画廊主走廊",
+      "image": "",
+      "layout": "full"
+    },
+    {
+      "alt": "Artwork installation detail",
+      "altCn": "艺术品安装细节",
+      "image": "",
+      "layout": "half"
+    },
+    {
+      "alt": "Reception and entrance",
+      "altCn": "接待区和入口",
+      "image": "",
+      "layout": "half"
+    }
+  ],
   "titleCn": "SoHo艺术画廊装置",
   "category": "exhibition",
-  "style": "contemporary",
-  "location": "SoHo, New York",
-  "year": "2024",
   "featured": false,
-  "coverImage": "",
-  "coverImageAlt": "SoHo art gallery main space",
-  "coverImageAltCn": "SoHo艺术画廊主空间",
+  "location": "SoHo, New York",
   "overview": {
     "body": "A temporary exhibition design for an emerging artist's debut solo show. The brief: create a space that enhances the artwork without competing with it — guiding visitors through a narrative experience.",
     "bodyCn": "一位新兴艺术家首次个展的临时展览设计。设计要求：创造一个增强艺术品效果而不与之竞争的空间——引导观众经历叙事体验。"
   },
-  "details": {
-    "scope": "Exhibition Design",
-    "scopeCn": "展览设计",
-    "duration": "3 months",
-    "durationCn": "3个月",
-    "rooms": ["Main Gallery", "Transition Space", "Artist Corner", "Reception"],
-    "roomsCn": ["主画廊", "过渡空间", "艺术家角落", "接待区"],
-    "keyMaterials": ["Raw concrete panels", "Adjustable track lighting", "Natural linen partitions", "Hand-poured resin floors"],
-    "keyMaterialsCn": ["原始混凝土板", "可调节轨道灯", "天然亚麻隔断", "手浇树脂地板"]
-  },
-  "gallery": [
-    { "image": "", "alt": "Gallery main corridor", "altCn": "画廊主走廊", "layout": "full" },
-    { "image": "", "alt": "Artwork installation detail", "altCn": "艺术品安装细节", "layout": "half" },
-    { "image": "", "alt": "Reception and entrance", "altCn": "接待区和入口", "layout": "half" }
-  ],
-  "shopThisLook": ["abstract-wall-art"],
+  "coverImage": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771737643399-photo-1603750003385-3342231a1ff1.jpg",
   "testimonial": {
     "quote": "The space Julia designed didn't just display the art — it elevated it. Visitors told me they felt they were inside the paintings.",
-    "quoteCn": "Julia设计的空间不仅仅展示了艺术——它提升了艺术。参观者告诉我，他们感觉自己置身于画中。",
     "author": "Elena Vasquez, Artist",
-    "project": "SoHo Art Gallery Installation"
+    "project": "SoHo Art Gallery Installation",
+    "quoteCn": "Julia设计的空间不仅仅展示了艺术——它提升了艺术。参观者告诉我，他们感觉自己置身于画中。"
   },
-  "relatedProjects": ["hudson-yards-office"],
-  "seo": {
-    "title": "SoHo Art Gallery Installation — Julia Studio",
-    "description": "Exhibition design for emerging artist's debut solo show in SoHo, New York. Contemporary space design enhancing the artwork narrative."
-  }
+  "shopThisLook": [
+    "abstract-wall-art"
+  ],
+  "coverImageAlt": "SoHo art gallery main space",
+  "coverImageAltCn": "SoHo艺术画廊主空间",
+  "relatedProjects": [
+    "hudson-yards-office"
+  ]
 }

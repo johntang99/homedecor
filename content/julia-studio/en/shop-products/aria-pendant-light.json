@@ -1,1 +1,46 @@
-{"slug":"aria-pendant-light","title":"Aria Pendant Light","titleCn":"Aria吊灯","category":"lighting","room":"dining","price":680,"currency":"USD","status":"in-stock","featured":true,"images":[{"src":"","alt":"Aria Pendant Light hung"},{"src":"","alt":"Aria Pendant Light detail"}],"description":"A sculptural pendant light in hand-blown glass with a warm amber interior. Casts a beautiful warm glow — ideal over dining tables or in entryways.","descriptionCn":"手工吹制玻璃雕塑吊灯，内部呈温暖琥珀色。散发美丽的温暖光芒——理想的餐桌上方或玄关灯具。","specifications":{"dimensions":"14\"W × 18\"H, cord length adjustable to 72\"","material":"Hand-blown glass, brushed brass","materialCn":"手工吹制玻璃，拉丝黄铜","finish":"Warm amber glass / Brushed brass","finishCn":"温暖琥珀玻璃/拉丝黄铜","leadTime":"3-5 weeks","leadTimeCn":"3-5周"},"seenInProjects":["the-greenwich-estate"],"relatedProducts":["marin-console-table","ceramic-vase-set"],"seo":{"title":"Aria Pendant Light — Julia Studio Shop","description":"Hand-blown glass pendant light with warm amber interior and brushed brass hardware."}}
+{
+  "seo": {
+    "title": "Aria Pendant Light — Julia Studio Shop",
+    "description": "Hand-blown glass pendant light with warm amber interior and brushed brass hardware."
+  },
+  "room": "dining",
+  "slug": "aria-pendant-light",
+  "price": 680,
+  "title": "Aria Pendant Light",
+  "images": [
+    {
+      "alt": "Aria Pendant Light hung",
+      "src": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771784521413-photo-1546632577-7e9b43eddf4d.jpg",
+      "title": "Pendant Light hung",
+      "featured": true
+    },
+    {
+      "alt": "Aria Pendant Light detail",
+      "src": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771784615400-photo-1765878108610-1797ff4d5fef.jpg",
+      "title": "Pendant Light detail"
+    }
+  ],
+  "status": "in-stock",
+  "titleCn": "Aria吊灯",
+  "category": "lighting",
+  "currency": "USD",
+  "featured": true,
+  "description": "A sculptural pendant light in hand-blown glass with a warm amber interior. Casts a beautiful warm glow — ideal over dining tables or in entryways.",
+  "descriptionCn": "手工吹制玻璃雕塑吊灯，内部呈温暖琥珀色。散发美丽的温暖光芒——理想的餐桌上方或玄关灯具。",
+  "seenInProjects": [
+    "the-greenwich-estate"
+  ],
+  "specifications": {
+    "finish": "Warm amber glass / Brushed brass",
+    "finishCn": "温暖琥珀玻璃/拉丝黄铜",
+    "leadTime": "3-5 weeks",
+    "material": "Hand-blown glass, brushed brass",
+    "dimensions": "14\"W × 18\"H, cord length adjustable to 72\"",
+    "leadTimeCn": "3-5周",
+    "materialCn": "手工吹制玻璃，拉丝黄铜"
+  },
+  "relatedProducts": [
+    "marin-console-table",
+    "ceramic-vase-set"
+  ]
+}

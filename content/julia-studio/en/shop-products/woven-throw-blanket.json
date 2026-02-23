@@ -1,1 +1,43 @@
-{"slug":"woven-throw-blanket","title":"Hand-Woven Wool Throw","titleCn":"手工编织羊毛毯","category":"textiles","room":"bedroom","price":285,"currency":"USD","status":"in-stock","featured":false,"images":[{"src":"","alt":"Woven throw on sofa"},{"src":"","alt":"Throw blanket texture detail"}],"description":"Ethically sourced merino wool, hand-woven in small batches. Generous size for draping over a sofa or layering on a bed. Available in three colorways: Natural, Sage, and Charcoal.","descriptionCn":"道德采购美利奴羊毛，小批量手工编织。尺寸宽大，适合搭在沙发上或叠加在床上。提供三种颜色：自然色、鼠尾草绿和炭灰色。","specifications":{"dimensions":"54\" × 72\"","material":"100% Merino wool","materialCn":"100%美利奴羊毛","finish":"Woven, fringe edge","finishCn":"编织，流苏边","leadTime":"1-2 weeks","leadTimeCn":"1-2周"},"seenInProjects":["brooklyn-brownstone"],"relatedProducts":["marin-console-table"],"seo":{"title":"Hand-Woven Wool Throw — Julia Studio Shop","description":"Ethically sourced merino wool throw, hand-woven in small batches. Available in Natural, Sage, and Charcoal."}}
+{
+  "seo": {
+    "title": "Hand-Woven Wool Throw — Julia Studio Shop",
+    "description": "Ethically sourced merino wool throw, hand-woven in small batches. Available in Natural, Sage, and Charcoal."
+  },
+  "room": "bedroom",
+  "slug": "woven-throw-blanket",
+  "price": 285,
+  "title": "Hand-Woven Wool Throw",
+  "images": [
+    {
+      "alt": "Woven throw on sofa",
+      "src": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771810703553-photo-1591144984044-009a102ace51.jpg",
+      "title": "Woven throw"
+    },
+    {
+      "alt": "Throw blanket texture detail",
+      "src": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771809691098-photo-1591144910264-e512a90bce77.jpg"
+    }
+  ],
+  "status": "in-stock",
+  "titleCn": "手工编织羊毛毯",
+  "category": "textiles",
+  "currency": "USD",
+  "featured": false,
+  "description": "Ethically sourced merino wool, hand-woven in small batches. Generous size for draping over a sofa or layering on a bed. Available in three colorways: Natural, Sage, and Charcoal.",
+  "descriptionCn": "道德采购美利奴羊毛，小批量手工编织。尺寸宽大，适合搭在沙发上或叠加在床上。提供三种颜色：自然色、鼠尾草绿和炭灰色。",
+  "seenInProjects": [
+    "brooklyn-brownstone"
+  ],
+  "specifications": {
+    "finish": "Woven, fringe edge",
+    "finishCn": "编织，流苏边",
+    "leadTime": "1-2 weeks",
+    "material": "100% Merino wool",
+    "dimensions": "54\" × 72\"",
+    "leadTimeCn": "1-2周",
+    "materialCn": "100%美利奴羊毛"
+  },
+  "relatedProducts": [
+    "marin-console-table"
+  ]
+}

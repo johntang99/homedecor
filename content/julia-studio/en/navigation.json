@@ -1,12 +1,44 @@
 {
   "items": [
-    { "label": "Home", "labelCn": "首页", "href": "/" },
-    { "label": "Portfolio", "labelCn": "作品集", "href": "/portfolio" },
-    { "label": "Collections", "labelCn": "系列", "href": "/collections" },
-    { "label": "Services", "labelCn": "服务", "href": "/services" },
-    { "label": "Shop", "labelCn": "商店", "href": "/shop" },
-    { "label": "Journal", "labelCn": "日志", "href": "/journal" },
-    { "label": "About", "labelCn": "关于", "href": "/about" },
-    { "label": "Contact", "labelCn": "联系", "href": "/contact" }
+    {
+      "href": "/",
+      "label": "Home",
+      "labelCn": "首页"
+    },
+    {
+      "href": "/portfolio",
+      "label": "Portfolio",
+      "labelCn": "作品集"
+    },
+    {
+      "href": "/collections",
+      "label": "Collections",
+      "labelCn": "系列"
+    },
+    {
+      "href": "/services",
+      "label": "Services",
+      "labelCn": "服务"
+    },
+    {
+      "href": "/shop",
+      "label": "Shop",
+      "labelCn": "商店"
+    },
+    {
+      "href": "/journal",
+      "label": "Journal",
+      "labelCn": "日志"
+    },
+    {
+      "href": "/about",
+      "label": "About",
+      "labelCn": "关于"
+    },
+    {
+      "href": "/contact",
+      "label": "Contact",
+      "labelCn": "联系"
+    }
   ]
 }

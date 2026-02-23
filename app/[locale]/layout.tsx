@@ -190,6 +190,17 @@ export default async function LocaleLayout({
     --play-badge-size-md: ${cm?.media?.playBadgeMedium || '3rem'};
     --play-icon-size-lg: ${cm?.media?.playIconLarge || '1.5rem'};
     --play-icon-size-md: ${cm?.media?.playIconMedium || '1rem'};
+    --photo-radius: ${cm?.media?.photoRadius || r?.medium || '6px'};
+    --image-radius: ${cm?.media?.photoRadius || r?.medium || '6px'};
+    --card-radius: ${cm?.cards?.radius || r?.large || '6px'};
+    --photo-shadow: ${fx?.surface?.photoShadow || '0 10px 24px rgba(31, 26, 22, 0.14)'};
+    --photo-shadow-sm: ${fx?.surface?.photoShadowSmall || '0 1px 2px rgba(31, 26, 22, 0.03)'};
+    --photo-shadow-lg: ${fx?.surface?.photoShadowLarge || fx?.surface?.photoShadow || '0 12px 28px rgba(31, 26, 22, 0.16)'};
+    --card-shadow: ${fx?.cards?.shadow || '0 6px 16px rgba(31, 26, 22, 0.09)'};
+    --card-shadow-hover: ${fx?.cards?.shadowHover || '0 12px 26px rgba(31, 26, 22, 0.14)'};
+    --btn-gold-fill: ${t.secondary?.DEFAULT || '#BFA261'};
+    --btn-gold-fill-hover: ${t.secondary?.dark || '#A88C4D'};
+    --btn-gold-text: ${t.text?.onGold || '#FFFDF8'};
     --detail-card-w-lg: ${cm?.detailCards?.shopLookWidth || '14rem'};
     --detail-card-w-md: ${cm?.detailCards?.storyProductWidth || '13rem'};
     --card-hover-overlay: ${fx?.cards?.hoverOverlay || '0.2'};
@@ -197,7 +208,7 @@ export default async function LocaleLayout({
     --radius-small: ${r?.small || '2px'};
     --radius-medium: ${r?.medium || '4px'};
     --radius-large: ${r?.large || '8px'};
-    --image-radius: ${r?.medium || '4px'};
+    --image-radius: ${cm?.media?.photoRadius || r?.medium || '5px'};
     --text-display: ${ty?.display || '3.75rem'};
     --text-heading: ${ty?.heading || '2.5rem'};
     --text-subheading: ${ty?.subheading || '1.5rem'};

@@ -1,1 +1,7 @@
-{ "sections": ["hero", "awards", "press"] }
+{
+  "sections": [
+    "hero",
+    "awards",
+    "press"
+  ]
+}

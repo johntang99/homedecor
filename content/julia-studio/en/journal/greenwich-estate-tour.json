@@ -1,1 +1,35 @@
-{"slug":"greenwich-estate-tour","title":"Inside the Greenwich Estate: A Project Tour","titleCn":"走进格林威治庄园：项目巡览","type":"article","category":"project-stories","date":"2026-01-20","author":"Julia","featured":false,"coverImage":"","coverImageAlt":"Greenwich Estate living room","excerpt":"How we transformed a 5,000 sq ft Connecticut estate into a family home that balances grandeur with everyday warmth.","excerptCn":"我们如何将一座5,000平方英尺的康涅狄格州庄园改造成一个平衡宏伟与日常温馨的家庭住所。","body":"## The Brief\n\nWhen the Henderson family first contacted us, they had a clear vision: a home that could host formal dinners for 20 and also survive a Tuesday morning with three children and a dog. That's the design challenge that energizes us most — spaces that are genuinely livable.\n\n## The Architecture\n\nThe house itself is a 1920s Colonial Revival — generous proportions, original moldings, and excellent bones. Our job was not to modernize it, but to refresh it. We stripped layers of dated renovation work and restored the home to its structural honesty, then built from there.\n\n## Material Palette\n\nWhite oak floors throughout. Italian Calacatta marble in the kitchen and primary bath. Custom millwork painted in a warm off-white (not stark white — there's a difference). Brass hardware, aged to a softer tone.\n\n## The Result\n\nThe Hendersons moved in eight months after we began. They sent us a photo from the first morning: children at the kitchen table, coffee on the counter, morning light through the windows they'd always dreamed of. That's the work.","bodyCn":"## 设计要求\n\n当Henderson一家第一次联系我们时，他们有一个清晰的愿景：一个可以举办20人正式晚宴、同时也能在周二早晨容纳三个孩子和一只狗的家。这是最激励我们的设计挑战——真正宜居的空间。","videoUrl":"","videoDuration":"","tags":["project-tour","residential","greenwich","transitional"],"relatedPosts":["5-rules-mixing-patterns"],"relatedProducts":["marin-console-table","aria-pendant-light"],"seo":{"title":"Inside the Greenwich Estate: A Project Tour — Julia Studio Journal","description":"A behind-the-scenes look at our Greenwich Estate project — how we balanced grandeur with family-friendly warmth."}}
+{
+  "seo": {
+    "title": "Inside the Greenwich Estate: A Project Tour — Julia Studio Journal",
+    "description": "A behind-the-scenes look at our Greenwich Estate project — how we balanced grandeur with family-friendly warmth."
+  },
+  "body": "## The Brief\n\nWhen the Henderson family first contacted us, they had a clear vision: a home that could host formal dinners for 20 and also survive a Tuesday morning with three children and a dog. That's the design challenge that energizes us most — spaces that are genuinely livable.\n\n## The Architecture\n\nThe house itself is a 1920s Colonial Revival — generous proportions, original moldings, and excellent bones. Our job was not to modernize it, but to refresh it. We stripped layers of dated renovation work and restored the home to its structural honesty, then built from there.\n\n## Material Palette\n\nWhite oak floors throughout. Italian Calacatta marble in the kitchen and primary bath. Custom millwork painted in a warm off-white (not stark white — there's a difference). Brass hardware, aged to a softer tone.\n\n## The Result\n\nThe Hendersons moved in eight months after we began. They sent us a photo from the first morning: children at the kitchen table, coffee on the counter, morning light through the windows they'd always dreamed of. That's the work.",
+  "date": "2026-01-20",
+  "slug": "greenwich-estate-tour",
+  "tags": [
+    "project-tour",
+    "residential",
+    "greenwich",
+    "transitional"
+  ],
+  "type": "article",
+  "title": "Inside the Greenwich Estate: A Project Tour",
+  "author": "Julia",
+  "bodyCn": "## 设计要求\n\n当Henderson一家第一次联系我们时，他们有一个清晰的愿景：一个可以举办20人正式晚宴、同时也能在周二早晨容纳三个孩子和一只狗的家。这是最激励我们的设计挑战——真正宜居的空间。",
+  "excerpt": "How we transformed a 5,000 sq ft Connecticut estate into a family home that balances grandeur with everyday warmth.",
+  "titleCn": "走进格林威治庄园：项目巡览",
+  "category": "project-stories",
+  "featured": false,
+  "videoUrl": "",
+  "excerptCn": "我们如何将一座5,000平方英尺的康涅狄格州庄园改造成一个平衡宏伟与日常温馨的家庭住所。",
+  "coverImage": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771811249315-photo-1573400443130-c66603869cd7.jpg",
+  "relatedPosts": [
+    "5-rules-mixing-patterns"
+  ],
+  "coverImageAlt": "Greenwich Estate living room",
+  "videoDuration": "",
+  "relatedProducts": [
+    "marin-console-table",
+    "aria-pendant-light"
+  ]
+}

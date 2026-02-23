@@ -1,69 +1,73 @@
 {
   "colors": {
-    "primary": {
-      "DEFAULT": "#2C2C2C",
-      "light": "#4A4A4A",
-      "dark": "#1A1A1A",
-      "50": "#F5F5F5",
-      "100": "#EBEBEB"
-    },
-    "secondary": {
-      "DEFAULT": "#C4A265",
-      "light": "#D4B87A",
-      "dark": "#A88B50",
-      "50": "#FDF8F0"
-    },
-    "accent": {
-      "DEFAULT": "#8B9D83",
-      "light": "#A3B39B",
-      "dark": "#6D7F66"
-    },
-    "backdrop": {
-      "primary": "#FAF8F5",
-      "secondary": "#1A1A1A"
-    },
     "text": {
-      "primary": "#2C2C2C",
-      "secondary": "#6B6B6B",
       "onDark": "#FAF8F5",
-      "onGold": "#1A1A1A"
+      "onGold": "#FFFDF8",
+      "primary": "#2F2A24",
+      "secondary": "#6F685F"
+    },
+    "error": "#C45B5B",
+    "accent": {
+      "dark": "#6D7F66",
+      "light": "#A3B39B",
+      "DEFAULT": "#8B9D83"
     },
     "border": "#E5E2DD",
+    "primary": {
+      "50": "#F5F5F5",
+      "100": "#EBEBEB",
+      "dark": "#1F1A16",
+      "light": "#504A43",
+      "DEFAULT": "#2F2A24"
+    },
     "success": "#8B9D83",
-    "error": "#C45B5B"
-  },
-  "typography": {
-    "display": "3.75rem",
-    "heading": "2.5rem",
-    "subheading": "1.5rem",
-    "body": "1rem",
-    "small": "0.875rem",
-    "fonts": {
-      "display": "var(--font-heading)",
-      "heading": "var(--font-heading)",
-      "subheading": "var(--font-heading)",
-      "body": "var(--font-body)",
-      "small": "var(--font-body)"
-    }
-  },
-  "borderRadius": {
-    "small": "2px",
-    "medium": "4px",
-    "large": "8px"
-  },
-  "opacity": {
-    "onDark": {
-      "high": "0.9",
-      "medium": "0.6",
-      "low": "0.4",
-      "subtle": "0.3"
+    "backdrop": {
+      "primary": "#F7F5F1",
+      "secondary": "#1A1A1A"
+    },
+    "secondary": {
+      "50": "#F7F2E7",
+      "dark": "#A88C4D",
+      "light": "#CFB879",
+      "DEFAULT": "#e1af41"
     }
   },
   "layout": {
-    "stickyFilter": {
-      "topMobile": "4rem",
-      "topDesktop": "5rem",
-      "paddingY": "0.75rem"
+    "detailPages": {
+      "gaps": {
+        "specRow": "1rem",
+        "backLink": "0.375rem",
+        "heroMeta": "1.25rem",
+        "moodGrid": "1rem",
+        "chipGroup": "0.25rem",
+        "thumbGrid": "0.5rem",
+        "galleryPair": "1rem",
+        "mainColumns": "3.5rem",
+        "hScrollCards": "1.5rem",
+        "relatedGridLarge": "1.75rem",
+        "relatedGridMedium": "1.25rem"
+      },
+      "rhythm": {
+        "lg": "1.25rem",
+        "md": "1rem",
+        "sm": "0.75rem",
+        "xl": "1.5rem",
+        "xs": "0.5rem",
+        "xxl": "2rem",
+        "xxs": "0.25rem",
+        "hero": "2.5rem",
+        "hairline": "0.125rem"
+      },
+      "backBarTop": "5rem",
+      "backBarRowY": "0.75rem",
+      "stickyInfoTop": "6rem",
+      "articleHeaderTop": "2.5rem",
+      "heroContentBottom": "2.5rem",
+      "articleMediaBottom": "2.5rem",
+      "articleHeaderBottom": "1.5rem",
+      "galleryBottomPadding": "4rem",
+      "portfolioHeroMinHeight": "500px",
+      "collectionHeroMinHeight": "350px"
     },
     "heroSpacing": {
       "compact": {
@@ -87,103 +91,110 @@
       "aboutContentBottom": "3rem",
       "aboutHeroMinHeight": "400px"
     },
-    "detailPages": {
-      "backBarTop": "5rem",
-      "backBarRowY": "0.75rem",
-      "stickyInfoTop": "6rem",
-      "portfolioHeroMinHeight": "500px",
-      "collectionHeroMinHeight": "350px",
-      "heroContentBottom": "2.5rem",
-      "galleryBottomPadding": "4rem",
-      "articleHeaderTop": "2.5rem",
-      "articleHeaderBottom": "1.5rem",
-      "articleMediaBottom": "2.5rem",
-      "rhythm": {
-        "hairline": "0.125rem",
-        "xxs": "0.25rem",
-        "xs": "0.5rem",
-        "sm": "0.75rem",
-        "md": "1rem",
-        "lg": "1.25rem",
-        "xl": "1.5rem",
-        "xxl": "2rem",
-        "hero": "2.5rem"
+    "stickyFilter": {
+      "paddingY": "0.75rem",
+      "topMobile": "4rem",
+      "topDesktop": "5rem"
+    }
+  },
+  "effects": {
+    "hero": {
+      "baseBg": "#1A1A1A",
+      "softFull": {
+        "to": "0.06",
+        "mid": "0.16",
+        "from": "0.45"
       },
-      "gaps": {
-        "backLink": "0.375rem",
-        "heroMeta": "1.25rem",
-        "mainColumns": "3.5rem",
-        "specRow": "1rem",
-        "chipGroup": "0.25rem",
-        "thumbGrid": "0.5rem",
-        "galleryPair": "1rem",
-        "hScrollCards": "1.5rem",
-        "relatedGridMedium": "1.25rem",
-        "relatedGridLarge": "1.75rem",
-        "moodGrid": "1rem"
-      }
+      "focusText": {
+        "mid": "0.04",
+        "from": "0.14"
+      },
+      "textPanel": {
+        "bg": "0.10",
+        "shadow": "0 10px 30px rgba(0,0,0,0.22)"
+      },
+      "linkShadow": "0 1px 8px rgba(0,0,0,0.28)",
+      "overlayRgb": "26 26 26",
+      "titleShadow": "0 2px 10px rgba(0,0,0,0.35)"
+    },
+    "cards": {
+      "shadow": "0 6px 16px rgba(31, 26, 22, 0.09)",
+      "shadowHover": "0 12px 26px rgba(31, 26, 22, 0.14)",
+      "hoverOverlay": "0.2",
+      "bottomGradient": "0.7"
+    },
+    "media": {
+      "dimHeavy": "0.5",
+      "dimLight": "0.25",
+      "dimMedium": "0.3"
+    },
+    "overlay": {
+      "light": "0.5",
+      "medium": "0.6",
+      "strong": "0.7"
+    },
+    "surface": {
+      "photoShadow": "0 12px 26px rgba(31, 26, 22, 0.18)",
+      "photoShadowLarge": "0 16px 34px rgba(31, 26, 22, 0.22)",
+      "photoShadowSmall": "0 10px 22px rgba(31, 26, 22, 0.16)"
+    }
+  },
+  "opacity": {
+    "onDark": {
+      "low": "0.4",
+      "high": "0.9",
+      "medium": "0.6",
+      "subtle": "0.3"
     }
   },
   "components": {
-    "filterChip": {
-      "paddingX": "1rem",
-      "paddingY": "0.375rem",
-      "radius": "9999px"
+    "cards": {
+      "radius": "6px"
+    },
+    "media": {
+      "photoRadius": "6px",
+      "playIconLarge": "1.5rem",
+      "playBadgeLarge": "4rem",
+      "playIconMedium": "1rem",
+      "playBadgeMedium": "3rem"
     },
     "buttons": {
-      "loadMore": {
-        "paddingX": "2rem",
-        "paddingY": "0.75rem"
-      },
       "ctaLarge": {
         "paddingX": "2.5rem",
         "paddingY": "1rem"
+      },
+      "loadMore": {
+        "paddingX": "2rem",
+        "paddingY": "0.75rem"
       }
     },
-    "media": {
-      "playBadgeLarge": "4rem",
-      "playBadgeMedium": "3rem",
-      "playIconLarge": "1.5rem",
-      "playIconMedium": "1rem"
+    "filterChip": {
+      "radius": "9999px",
+      "paddingX": "1rem",
+      "paddingY": "0.375rem"
     },
     "detailCards": {
       "shopLookWidth": "14rem",
       "storyProductWidth": "13rem"
     }
   },
-  "effects": {
-    "overlay": {
-      "light": "0.5",
-      "medium": "0.6",
-      "strong": "0.7"
+  "typography": {
+    "body": "1rem",
+    "fonts": {
+      "body": "'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "small": "'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "display": "'Playfair Display', Georgia, serif",
+      "heading": "'Playfair Display', Georgia, serif",
+      "subheading": "'Playfair Display', Georgia, serif"
     },
-    "media": {
-      "dimLight": "0.25",
-      "dimMedium": "0.3",
-      "dimHeavy": "0.5"
-    },
-    "hero": {
-      "baseBg": "#1A1A1A",
-      "overlayRgb": "26 26 26",
-      "softFull": {
-        "from": "0.45",
-        "mid": "0.16",
-        "to": "0.06"
-      },
-      "focusText": {
-        "from": "0.14",
-        "mid": "0.04"
-      },
-      "textPanel": {
-        "bg": "0.10",
-        "shadow": "0 10px 30px rgba(0,0,0,0.22)"
-      },
-      "titleShadow": "0 2px 10px rgba(0,0,0,0.35)",
-      "linkShadow": "0 1px 8px rgba(0,0,0,0.28)"
-    },
-    "cards": {
-      "hoverOverlay": "0.2",
-      "bottomGradient": "0.7"
-    }
+    "small": "0.875rem",
+    "display": "3.75rem",
+    "heading": "2.5rem",
+    "subheading": "1.5rem"
+  },
+  "borderRadius": {
+    "large": "8px",
+    "small": "2px",
+    "medium": "4px"
   }
 }

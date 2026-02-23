@@ -1,1 +1,34 @@
-{"slug":"fabric-selection-process","title":"The Art of Fabric Selection: Behind the Scenes","titleCn":"面料选择的艺术：幕后花絮","type":"video","category":"behind-the-scenes","date":"2026-02-01","author":"Julia","featured":false,"coverImage":"","coverImageAlt":"Fabric samples spread on table","excerpt":"Join Julia as she walks through the fabric selection process for a residential project — from first samples to final decisions.","excerptCn":"跟随Julia了解住宅项目的面料选择过程——从第一批样品到最终决策。","body":"In this video, Julia walks through the showroom with the design team, explaining how she evaluates texture, light behavior, durability, and how each fabric will age over time.\n\nKey decisions covered:\n- Why she always tests fabrics in the actual project lighting\n- The difference between residential and contract-grade fabrics\n- How to build a fabric story across a whole room\n- When to splurge and when to save\n\nFilmed at the D&D Building, New York.","bodyCn":"在这个视频中，Julia带着设计团队走过陈列室，解释她如何评估质地、光线表现、耐用性以及每种面料随时间的变化。","videoUrl":"https://www.youtube.com/embed/PLACEHOLDER","videoDuration":"12:47","tags":["video","fabric","behind-the-scenes","process"],"relatedPosts":["5-rules-mixing-patterns"],"relatedProducts":["woven-throw-blanket"],"seo":{"title":"The Art of Fabric Selection: Behind the Scenes — Julia Studio Journal","description":"Video tour of Julia's fabric selection process — from texture evaluation to final decisions for a residential project."}}
+{
+  "seo": {
+    "title": "The Art of Fabric Selection: Behind the Scenes — Julia Studio Journal",
+    "description": "Video tour of Julia's fabric selection process — from texture evaluation to final decisions for a residential project."
+  },
+  "body": "In this video, Julia walks through the showroom with the design team, explaining how she evaluates texture, light behavior, durability, and how each fabric will age over time.\n\nKey decisions covered:\n- Why she always tests fabrics in the actual project lighting\n- The difference between residential and contract-grade fabrics\n- How to build a fabric story across a whole room\n- When to splurge and when to save\n\nFilmed at the D&D Building, New York.",
+  "date": "2026-02-01",
+  "slug": "fabric-selection-process",
+  "tags": [
+    "video",
+    "fabric",
+    "behind-the-scenes",
+    "process"
+  ],
+  "type": "video",
+  "title": "The Art of Fabric Selection: Behind the Scenes",
+  "author": "Julia",
+  "bodyCn": "在这个视频中，Julia带着设计团队走过陈列室，解释她如何评估质地、光线表现、耐用性以及每种面料随时间的变化。",
+  "excerpt": "Join Julia as she walks through the fabric selection process for a residential project — from first samples to final decisions.",
+  "titleCn": "面料选择的艺术：幕后花絮",
+  "category": "behind-the-scenes",
+  "featured": false,
+  "videoUrl": "https://www.youtube.com/watch?v=iMV0K89rbSg",
+  "excerptCn": "跟随Julia了解住宅项目的面料选择过程——从第一批样品到最终决策。",
+  "coverImage": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771811291726-photo-1630920501459-f3e99320c4a5.jpg",
+  "relatedPosts": [
+    "5-rules-mixing-patterns"
+  ],
+  "coverImageAlt": "Fabric samples spread on table",
+  "videoDuration": "12:47",
+  "relatedProducts": [
+    "woven-throw-blanket"
+  ]
+}

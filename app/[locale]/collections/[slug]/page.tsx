@@ -57,7 +57,7 @@ export default async function CollectionDetailPage({ params }: PageProps) {
         <section className="section-padding bg-white">
           <div className="container-custom grid grid-cols-3 detail-gap-mood-grid">
             {col.moodImages.filter(Boolean).map((img, i) => (
-              <div key={i} className="relative aspect-square image-frame bg-[var(--primary-50)]">
+              <div key={i} className="relative aspect-square image-frame photo-shadow-sm bg-[var(--primary-50)]">
                 <Image src={img} alt="" fill className="object-cover" sizes="33vw" />
               </div>
             ))}
@@ -73,7 +73,7 @@ export default async function CollectionDetailPage({ params }: PageProps) {
             <div className="grid grid-cols-1 md:grid-cols-3 detail-gap-related-md">
               {projects.map(p => (
                 <Link key={p.slug} href={`/${locale}/portfolio/${p.slug}`} className="group">
-                  <div className="relative aspect-[4/3] image-frame detail-card-media bg-[var(--primary-50)]">
+                  <div className="relative aspect-[4/3] image-frame photo-shadow-sm detail-card-media bg-[var(--primary-50)]">
                     {p.coverImage && <Image src={p.coverImage} alt={tx(p.title, p.titleCn, locale)} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="33vw" />}
                   </div>
                   <p className="detail-card-title">{tx(p.title, p.titleCn, locale)}</p>
@@ -92,7 +92,7 @@ export default async function CollectionDetailPage({ params }: PageProps) {
             <div className="grid grid-cols-2 md:grid-cols-4 detail-gap-related-md">
               {products.map(p => (
                 <Link key={p.slug} href={`/${locale}/shop/${p.slug}`} className="group">
-                  <div className="relative aspect-square image-frame detail-card-media bg-[var(--primary-50)]">
+                  <div className="relative aspect-square image-frame photo-shadow-sm detail-card-media bg-[var(--primary-50)]">
                     {p.images?.[0]?.src && <Image src={p.images[0].src} alt={tx(p.title, p.titleCn, locale)} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="25vw" />}
                   </div>
                   <p className="detail-card-title">{tx(p.title, p.titleCn, locale)}</p>

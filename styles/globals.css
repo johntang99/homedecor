@@ -47,8 +47,18 @@
   --text-secondary: #6B6B6B;
   --radius-small: 2px;
   --radius-medium: 4px;
-  --radius-large: 8px;
-  --image-radius: var(--radius-medium);
+  --radius-large: 5px;
+  --photo-radius: 6px;
+  --image-radius: var(--photo-radius);
+  --card-radius: 6px;
+  --photo-shadow: 0 12px 26px rgba(31, 26, 22, 0.18);
+  --photo-shadow-sm: 0 10px 22px rgba(31, 26, 22, 0.16);
+  --photo-shadow-lg: 0 16px 34px rgba(31, 26, 22, 0.22);
+  --card-shadow: 0 6px 16px rgba(31, 26, 22, 0.09);
+  --card-shadow-hover: 0 12px 26px rgba(31, 26, 22, 0.14);
+  --btn-gold-fill: var(--secondary, #BFA261);
+  --btn-gold-fill-hover: var(--secondary-dark, #A88C4D);
+  --btn-gold-text: var(--text-on-gold, #FFFDF8);
   --on-dark-rgb: 250 248 245;
   --backdrop-primary-rgb: 250 248 245;
   --on-dark-high: rgb(var(--on-dark-rgb) / 0.9);
@@ -182,7 +192,7 @@ html {
     font-family: var(--font-heading, 'Playfair Display', Georgia, serif);
     color: var(--text-primary, #2C2C2C);
     line-height: 1.2;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   a {
@@ -232,7 +242,25 @@ html {
 
   .image-frame {
     overflow: hidden;
-    border-radius: var(--image-radius, 4px);
+    border-radius: var(--photo-radius, var(--image-radius, 6px));
+  }
+
+  .photo-shadow-sm {
+    box-shadow: var(--photo-shadow-sm, 0 10px 22px rgba(31, 26, 22, 0.16));
+  }
+
+  .photo-shadow-lg {
+    box-shadow: var(--photo-shadow-lg, var(--photo-shadow, 0 16px 34px rgba(31, 26, 22, 0.22)));
+  }
+
+  .card-frame {
+    border-radius: var(--card-radius, 6px);
+    box-shadow: var(--card-shadow, 0 6px 16px rgba(31, 26, 22, 0.09));
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .card-frame:hover {
+    box-shadow: var(--card-shadow-hover, 0 12px 26px rgba(31, 26, 22, 0.14));
   }
 
   .hero-pad-compact {
@@ -433,11 +461,11 @@ html {
 
   /* Gold CTA button */
   .btn-gold {
-    background-color: var(--secondary, #C4A265);
-    color: var(--primary-dark, #1A1A1A);
+    background-color: var(--btn-gold-fill, var(--secondary, #BFA261));
+    color: var(--btn-gold-text, #FFFDF8);
     padding: 0.75rem 2rem;
     font-weight: 600;
-    border-radius: 2px;
+    border-radius: max(var(--radius-small, 2px), 3px);
     transition: opacity 0.2s ease, background-color 0.2s ease;
     display: inline-flex;
     align-items: center;
@@ -445,9 +473,9 @@ html {
   }
 
   .btn-gold:hover {
-    background-color: var(--secondary-dark, #A88B50);
+    background-color: var(--btn-gold-fill-hover, var(--secondary-dark, #A88C4D));
     opacity: 1;
-    color: #FAF8F5;
+    color: var(--btn-gold-text, #FFFDF8);
   }
 
   /* Thin input style (bottom border only) */

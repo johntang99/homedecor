@@ -46,7 +46,7 @@ export default async function TestimonialsPage({ params }: PageProps) {
         <section className="section-padding bg-white">
           <div className="container-custom grid grid-cols-1 md:grid-cols-2 gap-8">
             {featured.map((t, i) => (
-              <div key={t.id || i} className="p-8 border border-[var(--border)]">
+              <div key={t.id || i} className="card-frame bg-white p-8 border border-[var(--border)]">
                 <div className="flex gap-1 mb-5">
                   {Array(t.rating || 5).fill(0).map((_, j) => <Star key={j} className="w-4 h-4 fill-[var(--secondary)] text-[var(--secondary)]" />)}
                 </div>
@@ -66,7 +66,7 @@ export default async function TestimonialsPage({ params }: PageProps) {
         <section className="section-padding" style={{ background: 'var(--backdrop-primary)' }}>
           <div className="container-custom columns-1 md:columns-2 lg:columns-3 gap-6">
             {rest.map((t, i) => (
-              <div key={t.id || i} className="break-inside-avoid mb-6 p-6 bg-white border border-[var(--border)]">
+              <div key={t.id || i} className="card-frame break-inside-avoid mb-6 p-6 bg-white border border-[var(--border)]">
                 <div className="flex gap-1 mb-4">
                   {Array(t.rating || 5).fill(0).map((_, j) => <Star key={j} className="w-3.5 h-3.5 fill-[var(--secondary)] text-[var(--secondary)]" />)}
                 </div>

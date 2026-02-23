@@ -1,44 +1,89 @@
 {
+  "seo": {
+    "title": "The Greenwich Estate — Julia Studio",
+    "description": "Complete renovation of a 5,000 sq ft Connecticut estate. Transitional design blending traditional architecture with contemporary interiors."
+  },
   "slug": "the-greenwich-estate",
+  "year": "2024",
+  "style": "transitional",
   "title": "The Greenwich Estate",
+  "details": {
+    "rooms": [
+      "Living Room",
+      "Kitchen",
+      "Master Bedroom",
+      "2 Bathrooms",
+      "Study",
+      "Dining Room"
+    ],
+    "scope": "Full Home Redesign",
+    "roomsCn": [
+      "客厅",
+      "厨房",
+      "主卧",
+      "2间浴室",
+      "书房",
+      "餐厅"
+    ],
+    "scopeCn": "全屋重新设计",
+    "duration": "8 months",
+    "durationCn": "8个月",
+    "keyMaterials": [
+      "White oak flooring",
+      "Italian marble",
+      "Custom millwork",
+      "Brass hardware"
+    ],
+    "keyMaterialsCn": [
+      "白橡木地板",
+      "意大利大理石",
+      "定制木工",
+      "黄铜五金"
+    ]
+  },
+  "gallery": [
+    {
+      "alt": "Living room with custom built-ins",
+      "altCn": "带定制内嵌柜的客厅",
+      "image": "",
+      "layout": "full"
+    },
+    {
+      "alt": "Kitchen detail",
+      "altCn": "厨房细节",
+      "image": "",
+      "layout": "half"
+    },
+    {
+      "alt": "Master bedroom",
+      "altCn": "主卧",
+      "image": "",
+      "layout": "half"
+    }
+  ],
   "titleCn": "格林威治庄园",
   "category": "residential",
-  "style": "transitional",
-  "location": "Greenwich, CT",
-  "year": "2024",
   "featured": true,
-  "coverImage": "",
-  "coverImageAlt": "The Greenwich Estate living room",
-  "coverImageAltCn": "格林威治庄园客厅",
+  "location": "Greenwich, CT",
   "overview": {
     "body": "A complete renovation of a 5,000 sq ft estate, blending traditional architecture with contemporary interiors. The client wanted spaces that felt both timeless and lived-in — a home for a growing family that would age gracefully.",
     "bodyCn": "对一座5,000平方英尺庄园的全面翻新，将传统建筑与当代室内设计融为一体。客户希望空间既永恒又有生活气息——一个能够优雅老去的成长家庭之家。"
   },
-  "details": {
-    "scope": "Full Home Redesign",
-    "scopeCn": "全屋重新设计",
-    "duration": "8 months",
-    "durationCn": "8个月",
-    "rooms": ["Living Room", "Kitchen", "Master Bedroom", "2 Bathrooms", "Study", "Dining Room"],
-    "roomsCn": ["客厅", "厨房", "主卧", "2间浴室", "书房", "餐厅"],
-    "keyMaterials": ["White oak flooring", "Italian marble", "Custom millwork", "Brass hardware"],
-    "keyMaterialsCn": ["白橡木地板", "意大利大理石", "定制木工", "黄铜五金"]
-  },
-  "gallery": [
-    { "image": "", "alt": "Living room with custom built-ins", "altCn": "带定制内嵌柜的客厅", "layout": "full" },
-    { "image": "", "alt": "Kitchen detail", "altCn": "厨房细节", "layout": "half" },
-    { "image": "", "alt": "Master bedroom", "altCn": "主卧", "layout": "half" }
-  ],
-  "shopThisLook": ["marin-console-table", "aria-pendant-light"],
+  "coverImage": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771737349189-photo-1762979790868-3bf9153b84cc.jpg",
   "testimonial": {
     "quote": "Julia understood our vision from the very first meeting. The result exceeded every expectation — our home feels both grand and deeply personal.",
-    "quoteCn": "Julia 从第一次会面就理解了我们的愿景。结果超出了所有期望——我们的家既宏伟又极具个性。",
     "author": "The Henderson Family",
-    "project": "The Greenwich Estate"
+    "project": "The Greenwich Estate",
+    "quoteCn": "Julia 从第一次会面就理解了我们的愿景。结果超出了所有期望——我们的家既宏伟又极具个性。"
   },
-  "relatedProjects": ["brooklyn-brownstone", "midtown-penthouse"],
-  "seo": {
-    "title": "The Greenwich Estate — Julia Studio",
-    "description": "Complete renovation of a 5,000 sq ft Connecticut estate. Transitional design blending traditional architecture with contemporary interiors."
-  }
+  "shopThisLook": [
+    "marin-console-table",
+    "aria-pendant-light"
+  ],
+  "coverImageAlt": "The Greenwich Estate living room",
+  "coverImageAltCn": "格林威治庄园客厅",
+  "relatedProjects": [
+    "brooklyn-brownstone",
+    "midtown-penthouse"
+  ]
 }

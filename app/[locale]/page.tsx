@@ -81,6 +81,26 @@ interface HomeContent {
   };
 }
 
+interface ServicesPageContent {
+  designServices?: {
+    items?: Array<{
+      image?: string;
+      title?: string;
+      titleCn?: string;
+    }>;
+  };
+  constructionServices?: {
+    image?: string;
+    headline?: string;
+    headlineCn?: string;
+  };
+  furnishingServices?: {
+    image?: string;
+    headline?: string;
+    headlineCn?: string;
+  };
+}
+
 interface PortfolioItem { slug: string; title?: string; titleCn?: string; coverImage?: string; category?: string }
 interface ShopItem { slug: string; title?: string; titleCn?: string; images?: Array<{ src?: string }>; price?: number }
 interface JournalItem { slug: string; title?: string; titleCn?: string; coverImage?: string; type?: string; date?: string; category?: string }
@@ -124,13 +144,14 @@ export default async function HomePage({ params }: PageProps) {
   const { locale } = params;
   const siteId = await getRequestSiteId();
 
-  const [content, portfolioItems, shopItems, journalItems, collectionsItems, testimonialsData] = await Promise.all([
+  const [content, portfolioItems, shopItems, journalItems, collectionsItems, testimonialsData, servicesPageData] = await Promise.all([
     loadPageContent<HomeContent>('home', locale, siteId),
     loadAllItems<PortfolioItem>(siteId, locale, 'portfolio'),
     loadAllItems<ShopItem>(siteId, locale, 'shop-products'),
     loadAllItems<JournalItem>(siteId, locale, 'journal'),
     loadAllItems<CollectionItem>(siteId, locale, 'collections'),
     loadItemBySlug<TestimonialsFile>(siteId, locale, '', 'testimonials'),
+    loadPageContent<ServicesPageContent>('services', locale, siteId),
   ]);
 
   if (!content) notFound();
@@ -198,6 +219,40 @@ export default async function HomePage({ params }: PageProps) {
       const parsed = Number(normalized);
       if (Number.isFinite(parsed)) return parsed;
     }
+    return undefined;
+  };
+
+  const getServiceImageFromServicesPage = (svc: any, index: number): string | undefined => {
+    const serviceItems = servicesPageData?.designServices?.items || [];
+    const normalizedTitle = String(tx(svc?.title, svc?.titleCn, locale) || '').toLowerCase();
+
+    // Map Home "What We Do" cards to the matching sections in services page.
+    // 1) Interior Design -> designServices first item (or title match fallback)
+    // 2) Construction & Installation -> constructionServices.image
+    // 3) Furniture & Decor -> furnishingServices.image
+    if (normalizedTitle.includes('construction') || normalizedTitle.includes('施工')) {
+      const img = servicesPageData?.constructionServices?.image;
+      if (typeof img === 'string' && img.trim()) return img;
+    }
+    if (
+      normalizedTitle.includes('furniture') ||
+      normalizedTitle.includes('decor') ||
+      normalizedTitle.includes('裝飾') ||
+      normalizedTitle.includes('装饰')
+    ) {
+      const img = servicesPageData?.furnishingServices?.image;
+      if (typeof img === 'string' && img.trim()) return img;
+    }
+
+    // Interior/default mapping uses designServices content.
+    const byIndex = serviceItems[index]?.image || serviceItems[0]?.image;
+    if (typeof byIndex === 'string' && byIndex.trim()) return byIndex;
+    const matched = serviceItems.find(
+      (item) =>
+        (item?.title && svc?.title && item.title.trim() === String(svc.title).trim()) ||
+        (item?.titleCn && svc?.titleCn && item.titleCn.trim() === String(svc.titleCn).trim())
+    );
+    if (matched?.image && matched.image.trim()) return matched.image;
     return undefined;
   };
 
@@ -296,7 +351,7 @@ export default async function HomePage({ params }: PageProps) {
                 </Link>
               )}
             </div>
-            <div className="relative aspect-[4/3] image-frame">
+            <div className="relative aspect-[4/3] image-frame photo-shadow-lg">
               {intro.image ? (
                 <Image src={intro.image} alt="Julia Studio" fill className="object-cover" sizes="(max-width:1024px) 100vw, 50vw" />
               ) : (
@@ -313,7 +368,7 @@ export default async function HomePage({ params }: PageProps) {
           <div className="flex items-end justify-between mb-10">
             <div>
               <h2 className="font-serif text-3xl md:text-4xl font-semibold" style={{ color: 'var(--primary)' }}>
-                {tx(content.portfolioPreview?.headline, content.portfolioPreview?.headlineCn, locale) || 'Selected Work'}
+                {tx(content.portfolioPreview?.headline, content.portfolioPreview?.headlineCn, locale) || 'Portfolio Highlights'}
               </h2>
               <p className="mt-3 text-sm md:text-base max-w-2xl" style={{ color: 'var(--text-secondary)' }}>
                 {tx(
@@ -321,8 +376,8 @@ export default async function HomePage({ params }: PageProps) {
                   content.portfolioPreview?.sublineCn,
                   locale
                 ) || (locale === 'zh'
-                  ? '精选项目故事，呈现我们在住宅、商业与展览空间中的设计语言。'
-                  : 'A curated selection of completed projects across residential, commercial, and exhibition spaces.')}
+                  ? '甄选自我们的作品集，展示已完成的住宅、商业与展览项目。'
+                  : 'A curated selection from our portfolio, showcasing completed residential, commercial, and exhibition projects.')}
               </p>
             </div>
             <Link href={`/${locale}${content.portfolioPreview?.ctaHref || '/portfolio'}`}
@@ -338,7 +393,7 @@ export default async function HomePage({ params }: PageProps) {
                 href={`/${locale}/portfolio/${project.slug}`}
                 className={`group relative block ${i === 0 ? 'md:col-span-2 lg:col-span-2' : ''}`}
               >
-                <div className={`relative image-frame ${i === 0 ? 'aspect-[4/3]' : 'aspect-[4/3]'}`}>
+                <div className={`relative image-frame ${i === 0 ? 'photo-shadow-lg' : 'photo-shadow-sm'} ${i === 0 ? 'aspect-[4/3]' : 'aspect-[4/3]'}`}>
                   {getSlotImage(content.portfolioPreview as Record<string, unknown> | undefined, i) || project.coverImage ? (
                     <Image
                       src={getSlotImage(content.portfolioPreview as Record<string, unknown> | undefined, i) || project.coverImage || ''}
@@ -354,8 +409,14 @@ export default async function HomePage({ params }: PageProps) {
                     className="absolute inset-0 transition-colors duration-300"
                     style={{ background: 'rgb(var(--hero-overlay-rgb, 26 26 26) / 0)' }}
                   />
-                  <div className="absolute inset-0 transition-colors duration-300 group-hover:opacity-100 opacity-0" style={{ background: 'rgb(var(--hero-overlay-rgb, 26 26 26) / var(--card-hover-overlay, 0.2))' }} />
-                  <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300" style={{ background: 'linear-gradient(transparent, rgb(var(--hero-overlay-rgb, 26 26 26) / var(--card-bottom-gradient, 0.7)))' }}>
+                  <div
+                    className="absolute inset-0 transition-colors duration-300"
+                    style={{ background: 'rgb(var(--hero-overlay-rgb, 26 26 26) / 0.10)' }}
+                  />
+                  <div
+                    className="absolute bottom-0 left-0 right-0 p-5 translate-y-0 opacity-100 transition-all duration-300"
+                    style={{ background: 'linear-gradient(transparent, rgb(var(--hero-overlay-rgb, 26 26 26) / var(--card-bottom-gradient, 0.7)))' }}
+                  >
                     <p className="text-white font-serif text-lg font-medium">{tx(project.title, project.titleCn, locale)}</p>
                     <p className="text-xs uppercase tracking-widest mt-1" style={{ color: 'var(--on-dark-medium, rgba(250,248,245,0.6))' }}>{project.category}</p>
                   </div>
@@ -387,12 +448,12 @@ export default async function HomePage({ params }: PageProps) {
               <Link
                 key={i}
                 href={`/${locale}${svc.href || '/services'}`}
-                className="group p-8 border border-[var(--border)] hover:border-[var(--secondary)] transition-colors bg-white"
+                className="group card-frame p-8 border border-[var(--border)] hover:border-[var(--secondary)] transition-colors bg-white"
               >
-                {svc.image && (
-                  <div className="relative aspect-[4/3] image-frame mb-5">
+                {(svc.image || getServiceImageFromServicesPage(svc, i)) && (
+                  <div className="relative aspect-[4/3] image-frame photo-shadow-sm mb-5">
                     <Image
-                      src={svc.image}
+                      src={svc.image || getServiceImageFromServicesPage(svc, i) || ''}
                       alt={tx(svc.title, svc.titleCn, locale) || 'Service image'}
                       fill
                       className="object-cover"
@@ -400,9 +461,6 @@ export default async function HomePage({ params }: PageProps) {
                     />
                   </div>
                 )}
-                <div className="mb-5 text-[var(--secondary)]">
-                  <ServiceIcon icon={svc.icon} />
-                </div>
                 <h3 className="font-serif text-xl font-semibold mb-3" style={{ color: 'var(--primary)' }}>
                   {tx(svc.title, svc.titleCn, locale)}
                 </h3>
@@ -443,7 +501,7 @@ export default async function HomePage({ params }: PageProps) {
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
-          <div className="relative image-frame aspect-[21/9]">
+          <div className="relative image-frame photo-shadow-lg aspect-[21/9]">
             {featuredCollectionImage ? (
               <Image
                 src={featuredCollectionImage}
@@ -471,20 +529,43 @@ export default async function HomePage({ params }: PageProps) {
 
       {/* ── SHOP PREVIEW ─────────────────────────────────────────────────────── */}
       {displayProducts.length > 0 && (
-        <section className="section-padding bg-white">
-          <div className="container-custom">
+        <section
+          className="relative section-padding overflow-hidden"
+          style={{
+            background:
+              'linear-gradient(125deg, var(--primary-dark, #1A1A1A) 0%, color-mix(in srgb, var(--primary, #2C2C2C) 82%, black) 48%, color-mix(in srgb, var(--primary-dark, #1A1A1A) 72%, var(--secondary, #BFA261) 28%) 100%)',
+          }}
+        >
+          <div className="absolute inset-0 pointer-events-none">
+            <div
+              className="absolute -top-28 -right-20 h-80 w-80 rounded-full blur-3xl"
+              style={{ background: 'rgb(191 162 97 / 0.20)' }}
+            />
+            <div
+              className="absolute -bottom-24 left-8 h-72 w-72 rounded-full blur-3xl"
+              style={{ background: 'rgb(250 248 245 / 0.10)' }}
+            />
+          </div>
+          <div className="container-custom relative z-10">
             <div className="flex items-end justify-between mb-10">
               <div>
-                <h2 className="font-serif text-3xl md:text-4xl font-semibold" style={{ color: 'var(--primary)' }}>
+                <h2 className="font-serif text-3xl md:text-4xl font-semibold" style={{ color: 'var(--text-on-dark, #FAF8F5)' }}>
                   {tx(shop.headline, shop.headlineCn, locale) || 'Shop Julia Studio'}
                 </h2>
-                <p className="mt-3 text-sm md:text-base max-w-2xl" style={{ color: 'var(--text-secondary)' }}>
+                <p
+                  className="mt-3 text-sm md:text-base max-w-2xl"
+                  style={{ color: 'var(--on-dark-medium, rgb(var(--on-dark-rgb, 250 248 245) / 0.6))' }}
+                >
                   {tx(shop.subline, shop.sublineCn, locale) || (locale === 'zh'
                     ? '精选家具与家居单品，呈现 Julia Studio 一贯的审美与质感。'
                     : 'Curated furniture and decor pieces selected to reflect Julia Studio’s signature aesthetic.')}
                 </p>
               </div>
-              <Link href={`/${locale}${shop.ctaHref || '/shop'}`} className="hidden md:flex items-center gap-1.5 text-sm font-semibold group" style={{ color: 'var(--secondary)' }}>
+              <Link
+                href={`/${locale}${shop.ctaHref || '/shop'}`}
+                className="hidden md:flex items-center gap-1.5 text-sm font-semibold group"
+                style={{ color: 'var(--secondary-light, #CFB879)' }}
+              >
                 {tx(shop.ctaLabel, shop.ctaLabelCn, locale) || 'Shop All'} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
@@ -493,20 +574,20 @@ export default async function HomePage({ params }: PageProps) {
                 <Link
                   key={product.slug}
                   href={`/${locale}/shop/${product.slug}`}
-                  className="group flex-shrink-0 w-60"
+                  className="group flex-shrink-0 w-60 rounded-md border border-white/15 bg-white/5 p-2 backdrop-blur-[2px] transition-colors hover:bg-white/10"
                 >
-                  <div className="relative aspect-square image-frame mb-3 bg-[var(--primary-50)]">
+                  <div className="relative aspect-square image-frame photo-shadow-sm mb-3 bg-white/10">
                     {getSlotImage(content.shopPreview as Record<string, unknown> | undefined, index) || product.images?.[0]?.src ? (
                       <Image src={getSlotImage(content.shopPreview as Record<string, unknown> | undefined, index) || product.images?.[0]?.src || ''} alt={tx(product.title, product.titleCn, locale) || ''} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="240px" />
                     ) : (
-                      <div className="w-full h-full bg-[var(--primary-50)]" />
+                      <div className="w-full h-full bg-white/10" />
                     )}
                   </div>
-                  <p className="font-serif text-sm font-medium" style={{ color: 'var(--primary)' }}>
+                  <p className="font-serif text-sm font-medium" style={{ color: 'var(--text-on-dark, #FAF8F5)' }}>
                     {getSlotText(content.shopPreview as Record<string, unknown> | undefined, 'itemName', index) || tx(product.title, product.titleCn, locale)}
                   </p>
                   {(getSlotPrice(content.shopPreview as Record<string, unknown> | undefined, index) || product.price) && (
-                    <p className="text-sm mt-0.5" style={{ color: 'var(--text-secondary)' }}>
+                    <p className="text-sm mt-0.5" style={{ color: 'var(--secondary-light, #CFB879)' }}>
                       ${(getSlotPrice(content.shopPreview as Record<string, unknown> | undefined, index) || product.price || 0).toLocaleString()}
                     </p>
                   )}
@@ -539,7 +620,7 @@ export default async function HomePage({ params }: PageProps) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
               {displayJournal.map((post, index) => (
                 <Link key={post.slug} href={`/${locale}/journal/${post.slug}`} className="group">
-                  <div className="relative aspect-[4/3] image-frame mb-4 bg-[var(--primary-50)]">
+                  <div className="relative aspect-[4/3] image-frame photo-shadow-sm mb-4 bg-[var(--primary-50)]">
                     {getSlotImage(content.journalPreview as Record<string, unknown> | undefined, index) || post.coverImage ? (
                       <Image src={getSlotImage(content.journalPreview as Record<string, unknown> | undefined, index) || post.coverImage || ''} alt={tx(post.title, post.titleCn, locale) || ''} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width:768px) 100vw, 33vw" />
                     ) : (
@@ -569,7 +650,7 @@ export default async function HomePage({ params }: PageProps) {
       <section className="section-padding bg-white">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="relative aspect-[3/4] image-frame max-w-sm mx-auto lg:mx-0">
+            <div className="relative aspect-[3/4] image-frame photo-shadow-lg max-w-sm mx-auto lg:mx-0">
               {about.image ? (
                 <Image src={about.image} alt="Julia" fill className="object-cover" sizes="(max-width:1024px) 100vw, 400px" />
               ) : (
@@ -613,7 +694,7 @@ export default async function HomePage({ params }: PageProps) {
               {homeTestimonials.map((item, index) => (
                 <article
                   key={item.id || index}
-                  className="bg-white border border-[var(--border)] p-6 md:p-7 flex flex-col"
+                  className="card-frame bg-white border border-[var(--border)] p-6 md:p-7 flex flex-col"
                 >
                   <div className="flex gap-1 mb-5" style={{ color: 'var(--secondary)' }}>
                     {Array(item.rating || 5)

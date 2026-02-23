@@ -3,11 +3,11 @@
     "title": "Brooklyn Brownstone Renovation — Julia Studio",
     "description": "Historic 1880s brownstone renovation in Brooklyn Heights. Classic design preserving Victorian character with modern family living."
   },
-  "slug": "brooklyn-brownstone",
+  "slug": "los-angeles-building",
   "year": "2023",
   "image": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771737695059-photo-1649560065937-8405481a53d8.jpg",
   "style": "classic",
-  "title": "Los Angeles Renovation",
+  "title": "Los Angeles House",
   "author": "Jack Smith",
   "details": {
     "rooms": [
@@ -77,7 +77,7 @@
     "body": "A four-story 1880s brownstone restored to its historic grandeur while incorporating modern conveniences. The challenge was to honor the building's Victorian bones — original moldings, pocket doors, and fireplaces — while creating a home for contemporary family life.",
     "bodyCn": "一栋四层19世纪80年代的褐石建筑，在融入现代便利设施的同时恢复了其历史风采。挑战在于尊重建筑的维多利亚式骨架——原始装饰线条、推拉门和壁炉——同时为当代家庭生活创造一个家。"
   },
-  "coverImage": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771737695059-photo-1649560065937-8405481a53d8.jpg",
+  "coverImage": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771813000899-photo-1643826469054-abd14cf7a644.jpg",
   "publishDate": "2025-11-22",
   "testimonial": {
     "quote": "Julia managed to give us both: a home that respects the history of this beautiful building and works for our busy modern family.",

@@ -1,1 +1,7 @@
-{ "sections": ["hero", "categories", "cta"] }
+{
+  "sections": [
+    "hero",
+    "categories",
+    "cta"
+  ]
+}

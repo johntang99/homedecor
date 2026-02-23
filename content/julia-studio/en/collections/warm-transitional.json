@@ -1,1 +1,23 @@
-{"slug":"warm-transitional","title":"Warm Transitional","titleCn":"温暖过渡","description":"The sweet spot between traditional and contemporary. Warm wood tones, layered textiles, and refined classic forms updated for modern living. Spaces that feel collected over time — comfortable, personal, and quietly sophisticated.","descriptionCn":"传统与当代之间的甜蜜点。温暖的木质色调、层次丰富的纺织品和精致的经典形式为现代生活更新。感觉随时间积累的空间——舒适、个性化，静静地散发着精致气息。","coverImage":"","moodImages":["","",""],"portfolioProjects":["the-greenwich-estate","brooklyn-brownstone"],"shopProducts":["marin-console-table","aria-pendant-light","woven-throw-blanket"],"featured":false}
+{
+  "slug": "warm-transitional",
+  "title": "Warm Transitional",
+  "titleCn": "温暖过渡",
+  "featured": false,
+  "coverImage": "",
+  "moodImages": [
+    "",
+    "",
+    ""
+  ],
+  "description": "The sweet spot between traditional and contemporary. Warm wood tones, layered textiles, and refined classic forms updated for modern living. Spaces that feel collected over time — comfortable, personal, and quietly sophisticated.",
+  "shopProducts": [
+    "marin-console-table",
+    "aria-pendant-light",
+    "woven-throw-blanket"
+  ],
+  "descriptionCn": "传统与当代之间的甜蜜点。温暖的木质色调、层次丰富的纺织品和精致的经典形式为现代生活更新。感觉随时间积累的空间——舒适、个性化，静静地散发着精致气息。",
+  "portfolioProjects": [
+    "the-greenwich-estate",
+    "brooklyn-brownstone"
+  ]
+}

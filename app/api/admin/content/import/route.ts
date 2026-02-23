@@ -85,15 +85,25 @@ async function collectImportCandidates(siteId: string, locale: string): Promise<
     // ignore missing pages dir
   }
 
-  // Blog posts
-  const blogDir = path.join(localeRoot, 'blog');
-  try {
-    const blogFiles = await fs.readdir(blogDir);
-    for (const file of blogFiles.filter((item) => item.endsWith('.json'))) {
-      await addCandidate(locale, `blog/${file}`, path.join(blogDir, file));
+  // Collection directories
+  const collectionDirs = [
+    'blog',
+    'portfolio',
+    'shop-products',
+    'journal',
+    'collections',
+    'testimonials',
+  ];
+  for (const dir of collectionDirs) {
+    const fullDir = path.join(localeRoot, dir);
+    try {
+      const files = await fs.readdir(fullDir);
+      for (const file of files.filter((item) => item.endsWith('.json'))) {
+        await addCandidate(locale, `${dir}/${file}`, path.join(fullDir, file));
+      }
+    } catch {
+      // ignore missing collection dir
     }
-  } catch {
-    // ignore missing blog dir
   }
 
   // Theme (site scope) - mirrored to all locales

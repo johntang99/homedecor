@@ -1,1 +1,8 @@
-{ "sections": ["hero", "filters", "grid", "cta"] }
+{
+  "sections": [
+    "hero",
+    "filters",
+    "grid",
+    "cta"
+  ]
+}

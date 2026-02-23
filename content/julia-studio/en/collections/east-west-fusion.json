@@ -1,1 +1,22 @@
-{"slug":"east-west-fusion","title":"East-West Fusion","titleCn":"东西融合","description":"A dialogue between Eastern philosophy and Western design. This collection pairs classical Chinese proportions and natural materials with contemporary Western furniture forms — creating spaces that feel both deeply rooted and thoroughly modern.","descriptionCn":"东方哲学与西方设计的对话。该系列将中国古典比例和天然材料与当代西方家具形式相结合——创造出既根植于传统又彻底现代的空间。","coverImage":"","moodImages":["","",""],"portfolioProjects":["the-greenwich-estate","brooklyn-brownstone"],"shopProducts":["ceramic-vase-set","woven-throw-blanket"],"featured":true}
+{
+  "slug": "east-west-fusion",
+  "title": "East-West Fusion",
+  "titleCn": "东西融合",
+  "featured": true,
+  "coverImage": "",
+  "moodImages": [
+    "",
+    "",
+    ""
+  ],
+  "description": "A dialogue between Eastern philosophy and Western design. This collection pairs classical Chinese proportions and natural materials with contemporary Western furniture forms — creating spaces that feel both deeply rooted and thoroughly modern.",
+  "shopProducts": [
+    "ceramic-vase-set",
+    "woven-throw-blanket"
+  ],
+  "descriptionCn": "东方哲学与西方设计的对话。该系列将中国古典比例和天然材料与当代西方家具形式相结合——创造出既根植于传统又彻底现代的空间。",
+  "portfolioProjects": [
+    "the-greenwich-estate",
+    "brooklyn-brownstone"
+  ]
+}

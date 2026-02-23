@@ -17,8 +17,8 @@ interface SpecialtyItem { icon?: string; label?: string; labelCn?: string }
 interface ServicesData {
   hero?: { headline?: string; headlineCn?: string; subline?: string; sublineCn?: string; backgroundImage?: string };
   designServices?: { headline?: string; headlineCn?: string; items?: ServiceItem[] };
-  constructionServices?: { headline?: string; headlineCn?: string; body?: string; bodyCn?: string; image?: string; capabilities?: Array<{ label?: string; labelCn?: string }> };
-  furnishingServices?: { headline?: string; headlineCn?: string; body?: string; bodyCn?: string; image?: string; ctaLabel?: string; ctaLabelCn?: string; ctaHref?: string };
+  constructionServices?: { variant?: string; headline?: string; headlineCn?: string; body?: string; bodyCn?: string; image?: string; capabilities?: Array<{ label?: string; labelCn?: string }> };
+  furnishingServices?: { variant?: string; headline?: string; headlineCn?: string; body?: string; bodyCn?: string; image?: string; ctaLabel?: string; ctaLabelCn?: string; ctaHref?: string };
   process?: { headline?: string; headlineCn?: string; steps?: ProcessStep[]; variant?: string };
   specialties?: { headline?: string; headlineCn?: string; items?: SpecialtyItem[] };
   cta?: { headline?: string; headlineCn?: string; ctaLabel?: string; ctaLabelCn?: string; ctaHref?: string; backgroundImage?: string };
@@ -43,7 +43,10 @@ export default async function ServicesPage({ params }: PageProps) {
   return (
     <>
       {/* Hero */}
-      <section className="relative hero-pad-services overflow-hidden" style={{ background: 'var(--primary)' }}>
+      <section
+        className="relative hero-pad-services min-h-[62vh] md:min-h-[78vh] overflow-hidden flex items-end"
+        style={{ background: 'var(--primary)' }}
+      >
         {data.hero?.backgroundImage && (
           <>
             <div className="absolute inset-0">
@@ -52,12 +55,18 @@ export default async function ServicesPage({ params }: PageProps) {
                 alt=""
                 fill
                 className="object-cover"
-                style={{ opacity: 'var(--media-dim-medium, 0.3)' }}
+                style={{
+                  opacity: 0.9,
+                  objectPosition: 'center 20%',
+                }}
                 sizes="100vw"
                 priority
               />
             </div>
-            <div className="absolute inset-0" style={{ background: 'rgb(var(--hero-overlay-rgb, 26 26 26) / var(--overlay-medium, 0.6))' }} />
+            <div
+              className="absolute inset-0"
+              style={{ background: 'rgb(var(--hero-overlay-rgb, 26 26 26) / 0.25)' }}
+            />
           </>
         )}
         <div className="relative z-10 container-custom max-w-2xl">
@@ -80,6 +89,105 @@ export default async function ServicesPage({ params }: PageProps) {
           </div>
         </section>
       ))}
+
+      {/* Construction Services */}
+      {data.constructionServices && (
+        <section className="section-padding" style={{ background: 'var(--backdrop-primary)' }}>
+          <div className="container-custom grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+            <div
+              className={
+                data.constructionServices.variant === 'image-text'
+                  ? 'lg:order-2'
+                  : ''
+              }
+            >
+              <h2 className="font-serif text-2xl md:text-3xl font-semibold mb-5" style={{ color: 'var(--primary)' }}>
+                {tx(data.constructionServices.headline, data.constructionServices.headlineCn, locale) || (isCn ? '施工与安装' : 'Construction & Installation')}
+              </h2>
+              <p className="text-base leading-loose" style={{ color: 'var(--text-secondary)' }}>
+                {tx(data.constructionServices.body, data.constructionServices.bodyCn, locale)}
+              </p>
+              {data.constructionServices.capabilities?.length ? (
+                <ul className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-2">
+                  {data.constructionServices.capabilities.map((item, i) => (
+                    <li
+                      key={i}
+                      className="text-sm border border-[var(--border)] px-3 py-2 bg-white"
+                      style={{ color: 'var(--primary)' }}
+                    >
+                      {tx(item.label, item.labelCn, locale)}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+            <div
+              className={`relative aspect-[4/3] image-frame ${
+                data.constructionServices.variant === 'image-text' ? 'lg:order-1' : ''
+              }`}
+            >
+              {data.constructionServices.image ? (
+                <Image
+                  src={data.constructionServices.image}
+                  alt={tx(data.constructionServices.headline, data.constructionServices.headlineCn, locale)}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width:1024px) 100vw, 50vw"
+                />
+              ) : (
+                <div className="w-full h-full bg-[var(--primary-50)]" />
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Furnishing Services */}
+      {data.furnishingServices && (
+        <section className="section-padding bg-white">
+          <div className="container-custom grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+            <div
+              className={
+                data.furnishingServices.variant === 'image-text'
+                  ? 'lg:order-2'
+                  : ''
+              }
+            >
+              <h2 className="font-serif text-2xl md:text-3xl font-semibold mb-5" style={{ color: 'var(--primary)' }}>
+                {tx(data.furnishingServices.headline, data.furnishingServices.headlineCn, locale) || (isCn ? '家具与装饰' : 'Furniture & Decor')}
+              </h2>
+              <p className="text-base leading-loose" style={{ color: 'var(--text-secondary)' }}>
+                {tx(data.furnishingServices.body, data.furnishingServices.bodyCn, locale)}
+              </p>
+              {data.furnishingServices.ctaHref && (
+                <div className="mt-6">
+                  <Link href={`/${locale}${data.furnishingServices.ctaHref}`} className="inline-flex items-center gap-2 text-sm font-semibold group" style={{ color: 'var(--secondary)' }}>
+                    {tx(data.furnishingServices.ctaLabel, data.furnishingServices.ctaLabelCn, locale) || (isCn ? '选购我们的系列' : 'Shop Our Collection')}
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+              )}
+            </div>
+            <div
+              className={`relative aspect-[4/3] image-frame ${
+                data.furnishingServices.variant === 'image-text' ? 'lg:order-1' : ''
+              }`}
+            >
+              {data.furnishingServices.image ? (
+                <Image
+                  src={data.furnishingServices.image}
+                  alt={tx(data.furnishingServices.headline, data.furnishingServices.headlineCn, locale)}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width:1024px) 100vw, 50vw"
+                />
+              ) : (
+                <div className="w-full h-full bg-[var(--primary-50)]" />
+              )}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Process */}
       {data.process?.steps && (

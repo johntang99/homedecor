@@ -1,1 +1,23 @@
-{"slug":"modern-minimalist","title":"Modern Minimalist","titleCn":"现代极简","description":"Clean lines, natural materials, and purposeful spaces. Our Modern Minimalist collection celebrates the beauty of restraint — where every object earns its place.","descriptionCn":"简洁线条、天然材料和有目的的空间。我们的现代极简系列歌颂克制之美——每件物品都要有其存在的价值。","coverImage":"","moodImages":["","",""],"portfolioProjects":["midtown-penthouse","hudson-yards-office"],"shopProducts":["marin-console-table","ceramic-vase-set","abstract-wall-art"],"featured":true}
+{
+  "slug": "modern-minimalist",
+  "title": "Modern Minimalist",
+  "titleCn": "现代极简",
+  "featured": true,
+  "coverImage": "",
+  "moodImages": [
+    "",
+    "",
+    ""
+  ],
+  "description": "Clean lines, natural materials, and purposeful spaces. Our Modern Minimalist collection celebrates the beauty of restraint — where every object earns its place.",
+  "shopProducts": [
+    "marin-console-table",
+    "ceramic-vase-set",
+    "abstract-wall-art"
+  ],
+  "descriptionCn": "简洁线条、天然材料和有目的的空间。我们的现代极简系列歌颂克制之美——每件物品都要有其存在的价值。",
+  "portfolioProjects": [
+    "midtown-penthouse",
+    "hudson-yards-office"
+  ]
+}

@@ -1,1 +1,8 @@
-{ "sections": ["hero", "form", "directContact", "socialLinks"] }
+{
+  "sections": [
+    "hero",
+    "form",
+    "directContact",
+    "socialLinks"
+  ]
+}

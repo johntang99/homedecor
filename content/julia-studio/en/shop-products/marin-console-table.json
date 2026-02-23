@@ -1,1 +1,50 @@
-{"slug":"marin-console-table","title":"Marin Console Table","titleCn":"马林玄关桌","category":"furniture","room":"living","price":1200,"currency":"USD","status":"in-stock","featured":true,"images":[{"src":"","alt":"Marin Console Table front view"},{"src":"","alt":"Marin Console Table detail"},{"src":"","alt":"Marin Console Table in room"}],"description":"Clean lines meet warm materials in this solid white oak console table. Perfect for entryways, living rooms, or behind a sofa.","descriptionCn":"这款实心白橡木玄关桌将简洁线条与温暖材料完美融合。适用于玄关、客厅或沙发背后。","specifications":{"dimensions":"60\"W × 16\"D × 32\"H","material":"Solid white oak, brass hardware","materialCn":"实心白橡木，黄铜五金","finish":"Natural matte","finishCn":"天然哑光","leadTime":"4-6 weeks","leadTimeCn":"4-6周"},"seenInProjects":["the-greenwich-estate","midtown-penthouse"],"relatedProducts":["aria-pendant-light","ceramic-vase-set"],"seo":{"title":"Marin Console Table — Julia Studio Shop","description":"Solid white oak console table with brass hardware. Clean-lined design perfect for entryways and living rooms."}}
+{
+  "seo": {
+    "title": "Marin Console Table — Julia Studio Shop",
+    "description": "Solid white oak console table with brass hardware. Clean-lined design perfect for entryways and living rooms."
+  },
+  "room": "living",
+  "slug": "marin-console-table",
+  "price": 1200,
+  "title": "Marin Console Table",
+  "images": [
+    {
+      "alt": "Marin Console Table front view",
+      "src": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771809917042-photo-1617638924751-cc232f82ecf9.jpg",
+      "title": "Wood table"
+    },
+    {
+      "alt": "Marin Console Table detail",
+      "src": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771810080606-photo-1589863089941-51eddece5107.jpg",
+      "title": "Wood table"
+    },
+    {
+      "alt": "Marin Console Table in room",
+      "src": ""
+    }
+  ],
+  "status": "in-stock",
+  "titleCn": "马林玄关桌",
+  "category": "furniture",
+  "currency": "USD",
+  "featured": true,
+  "description": "Clean lines meet warm materials in this solid white oak console table. Perfect for entryways, living rooms, or behind a sofa.",
+  "descriptionCn": "这款实心白橡木玄关桌将简洁线条与温暖材料完美融合。适用于玄关、客厅或沙发背后。",
+  "seenInProjects": [
+    "the-greenwich-estate",
+    "midtown-penthouse"
+  ],
+  "specifications": {
+    "finish": "Natural matte",
+    "finishCn": "天然哑光",
+    "leadTime": "4-6 weeks",
+    "material": "Solid white oak, brass hardware",
+    "dimensions": "60\"W × 16\"D × 32\"H",
+    "leadTimeCn": "4-6周",
+    "materialCn": "实心白橡木，黄铜五金"
+  },
+  "relatedProducts": [
+    "aria-pendant-light",
+    "ceramic-vase-set"
+  ]
+}

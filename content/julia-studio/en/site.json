@@ -1,23 +1,23 @@
 {
-  "name": "Julia Studio",
-  "businessName": "Julia Studio",
-  "tagline": "25 Years of Timeless Design",
-  "description": "Julia Studio creates timeless interior spaces for homes, offices, and exhibitions. 25 years of design excellence, 1,000+ projects completed.",
-  "phone": "(XXX) XXX-XXXX",
-  "email": "hello@studio-julia.com",
-  "address": "XXX Main Street, Suite XXX",
-  "city": "New York",
-  "state": "NY",
   "zip": "XXXXX",
+  "city": "New York",
+  "name": "Julia Studio",
+  "email": "hello@studio-julia.com",
+  "phone": "(XXX) XXX-XXXX",
+  "state": "NY",
+  "stats": {
+    "happyClients": 500,
+    "yearsExperience": 25,
+    "projectsCompleted": 1000
+  },
   "social": {
+    "wechatId": "JuliaStudioDesign",
     "instagram": "https://instagram.com/juliastudio",
     "pinterest": "https://pinterest.com/juliastudio",
-    "wechatId": "JuliaStudioDesign",
     "xiaohongshu": "https://www.xiaohongshu.com/user/juliastudio"
   },
-  "stats": {
-    "yearsExperience": 25,
-    "projectsCompleted": 1000,
-    "happyClients": 500
-  }
+  "address": "XXX Main Street, Suite XXX",
+  "tagline": "25 Years of Timeless Design",
+  "description": "Julia Studio creates timeless interior spaces for homes, offices, and exhibitions. 25 years of design excellence, 1,000+ projects completed.",
+  "businessName": "Julia Studio"
 }

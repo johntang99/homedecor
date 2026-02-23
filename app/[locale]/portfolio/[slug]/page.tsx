@@ -147,7 +147,7 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
             <div className="flex detail-gap-hscroll-cards overflow-x-auto hide-scrollbar detail-pb-xs">
               {shopProducts.map(product => (
                 <Link key={product.slug} href={`/${locale}/shop/${product.slug}`} className="group flex-shrink-0 detail-card-lg">
-                  <div className="relative aspect-square image-frame detail-card-media bg-[var(--primary-50)]">
+                  <div className="relative aspect-square image-frame photo-shadow-sm detail-card-media bg-[var(--primary-50)]">
                     {product.images?.[0]?.src && <Image src={product.images[0].src} alt={tx(product.title, product.titleCn, locale)} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="224px" />}
                   </div>
                   <p className="detail-card-title">{tx(product.title, product.titleCn, locale)}</p>
@@ -182,7 +182,7 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
             <div className="grid grid-cols-1 md:grid-cols-3 detail-gap-hscroll-cards">
               {relatedProjects.map(p => (
                 <Link key={p.slug} href={`/${locale}/portfolio/${p.slug}`} className="group">
-                  <div className="relative aspect-[4/3] image-frame detail-card-media">
+                  <div className="relative aspect-[4/3] image-frame photo-shadow-sm detail-card-media">
                     {p.coverImage ? <Image src={p.coverImage} alt={tx(p.title, p.titleCn, locale)} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="33vw" /> : <div className="w-full h-full bg-[var(--primary-50)]" />}
                   </div>
                   <p className="detail-card-title">{tx(p.title, p.titleCn, locale)}</p>

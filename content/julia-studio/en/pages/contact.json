@@ -1,86 +1,210 @@
 {
-  "hero": {
-    "variant": "minimal-text",
-    "headline": "Begin Your Design Journey",
-    "headlineCn": "开启您的设计之旅",
-    "subline": "We'd love to hear about your project.",
-    "sublineCn": "我们期待了解您的项目。"
-  },
   "form": {
     "fields": {
-      "name": { "label": "Full Name", "labelCn": "姓名", "type": "text", "required": true },
-      "email": { "label": "Email", "labelCn": "邮箱", "type": "email", "required": true },
-      "phone": { "label": "Phone", "labelCn": "电话", "type": "tel", "required": false },
-      "projectType": {
-        "label": "Project Type", "labelCn": "项目类型", "type": "select", "required": true,
-        "options": [
-          { "value": "residential", "label": "Residential", "labelCn": "住宅" },
-          { "value": "commercial", "label": "Commercial / Office", "labelCn": "商业/办公" },
-          { "value": "exhibition", "label": "Exhibition / Event", "labelCn": "展览/活动" },
-          { "value": "furniture", "label": "Furniture Only", "labelCn": "仅家具" },
-          { "value": "other", "label": "Other", "labelCn": "其他" }
-        ]
+      "name": {
+        "type": "text",
+        "label": "Full Name",
+        "labelCn": "姓名",
+        "required": true
+      },
+      "email": {
+        "type": "email",
+        "label": "Email",
+        "labelCn": "邮箱",
+        "required": true
+      },
+      "phone": {
+        "type": "tel",
+        "label": "Phone",
+        "labelCn": "电话",
+        "required": false
       },
       "scope": {
-        "label": "Project Scope", "labelCn": "项目范围", "type": "select", "required": true,
+        "type": "select",
+        "label": "Project Scope",
+        "labelCn": "项目范围",
         "options": [
-          { "value": "full-design", "label": "Full-Service Design", "labelCn": "全案设计" },
-          { "value": "room-refresh", "label": "Room Refresh", "labelCn": "空间焕新" },
-          { "value": "virtual", "label": "Virtual Design", "labelCn": "线上设计" },
-          { "value": "consultation", "label": "Consultation Only", "labelCn": "仅咨询" }
-        ]
+          {
+            "label": "Full-Service Design",
+            "value": "full-design",
+            "labelCn": "全案设计"
+          },
+          {
+            "label": "Room Refresh",
+            "value": "room-refresh",
+            "labelCn": "空间焕新"
+          },
+          {
+            "label": "Virtual Design",
+            "value": "virtual",
+            "labelCn": "线上设计"
+          },
+          {
+            "label": "Consultation Only",
+            "value": "consultation",
+            "labelCn": "仅咨询"
+          }
+        ],
+        "required": true
       },
       "budget": {
-        "label": "Budget Range", "labelCn": "预算范围", "type": "select", "required": false,
+        "type": "select",
+        "label": "Budget Range",
+        "labelCn": "预算范围",
         "options": [
-          { "value": "under-25k", "label": "Under $25,000", "labelCn": "$25,000以下" },
-          { "value": "25k-75k", "label": "$25,000 – $75,000", "labelCn": "$25,000 – $75,000" },
-          { "value": "75k-200k", "label": "$75,000 – $200,000", "labelCn": "$75,000 – $200,000" },
-          { "value": "200k-plus", "label": "$200,000+", "labelCn": "$200,000以上" }
-        ]
+          {
+            "label": "Under $25,000",
+            "value": "under-25k",
+            "labelCn": "$25,000以下"
+          },
+          {
+            "label": "$25,000 – $75,000",
+            "value": "25k-75k",
+            "labelCn": "$25,000 – $75,000"
+          },
+          {
+            "label": "$75,000 – $200,000",
+            "value": "75k-200k",
+            "labelCn": "$75,000 – $200,000"
+          },
+          {
+            "label": "$200,000+",
+            "value": "200k-plus",
+            "labelCn": "$200,000以上"
+          }
+        ],
+        "required": false
       },
-      "location": { "label": "Project Location", "labelCn": "项目地址", "type": "text", "required": false },
+      "message": {
+        "type": "textarea",
+        "label": "Tell us about your vision",
+        "labelCn": "告诉我们您的愿景",
+        "required": true
+      },
+      "location": {
+        "type": "text",
+        "label": "Project Location",
+        "labelCn": "项目地址",
+        "required": false
+      },
       "referral": {
-        "label": "How did you hear about us?", "labelCn": "您如何得知我们？", "type": "select", "required": false,
+        "type": "select",
+        "label": "How did you hear about us?",
+        "labelCn": "您如何得知我们？",
         "options": [
-          { "value": "instagram", "label": "Instagram", "labelCn": "Instagram" },
-          { "value": "pinterest", "label": "Pinterest", "labelCn": "Pinterest" },
-          { "value": "google", "label": "Google Search", "labelCn": "谷歌搜索" },
-          { "value": "wechat", "label": "WeChat", "labelCn": "微信" },
-          { "value": "referral", "label": "Friend / Referral", "labelCn": "朋友推荐" },
-          { "value": "other", "label": "Other", "labelCn": "其他" }
-        ]
+          {
+            "label": "Instagram",
+            "value": "instagram",
+            "labelCn": "Instagram"
+          },
+          {
+            "label": "Pinterest",
+            "value": "pinterest",
+            "labelCn": "Pinterest"
+          },
+          {
+            "label": "Google Search",
+            "value": "google",
+            "labelCn": "谷歌搜索"
+          },
+          {
+            "label": "WeChat",
+            "value": "wechat",
+            "labelCn": "微信"
+          },
+          {
+            "label": "Friend / Referral",
+            "value": "referral",
+            "labelCn": "朋友推荐"
+          },
+          {
+            "label": "Other",
+            "value": "other",
+            "labelCn": "其他"
+          }
+        ],
+        "required": false
+      },
+      "projectType": {
+        "type": "select",
+        "label": "Project Type",
+        "labelCn": "项目类型",
+        "options": [
+          {
+            "label": "Residential",
+            "value": "residential",
+            "labelCn": "住宅"
+          },
+          {
+            "label": "Commercial / Office",
+            "value": "commercial",
+            "labelCn": "商业/办公"
+          },
+          {
+            "label": "Exhibition / Event",
+            "value": "exhibition",
+            "labelCn": "展览/活动"
+          },
+          {
+            "label": "Furniture Only",
+            "value": "furniture",
+            "labelCn": "仅家具"
+          },
+          {
+            "label": "Other",
+            "value": "other",
+            "labelCn": "其他"
+          }
+        ],
+        "required": true
       },
       "preferredLanguage": {
-        "label": "Preferred Language", "labelCn": "首选语言", "type": "select", "required": false,
+        "type": "select",
+        "label": "Preferred Language",
+        "labelCn": "首选语言",
         "options": [
-          { "value": "en", "label": "English", "labelCn": "English" },
-          { "value": "zh", "label": "中文", "labelCn": "中文" }
-        ]
-      },
-      "message": { "label": "Tell us about your vision", "labelCn": "告诉我们您的愿景", "type": "textarea", "required": true }
+          {
+            "label": "English",
+            "value": "en",
+            "labelCn": "English"
+          },
+          {
+            "label": "中文",
+            "value": "zh",
+            "labelCn": "中文"
+          }
+        ],
+        "required": false
+      }
     },
     "submitLabel": "Request Consultation",
     "submitLabelCn": "提交咨询请求",
     "successMessage": "Thank you! We'll be in touch within 24 hours.",
     "successMessageCn": "感谢您！我们将在24小时内联系您。"
   },
-  "directContact": {
-    "headline": "Or reach us directly",
-    "headlineCn": "或直接联系我们",
-    "showPhone": true,
-    "showEmail": true,
-    "showAddress": true,
-    "showHours": true,
-    "hours": "Monday – Friday, 9AM – 6PM EST",
-    "hoursCn": "周一至周五，上午9点 – 下午6点（东部时间）"
+  "hero": {
+    "subline": "We'd love to hear about your project.",
+    "variant": "minimal-text",
+    "headline": "Begin Your Design Journey",
+    "sublineCn": "我们期待了解您的项目。",
+    "headlineCn": "开启您的设计之旅"
   },
   "socialLinks": {
     "headline": "Follow Along",
     "headlineCn": "关注我们",
+    "showWechatQr": true,
     "showInstagram": true,
     "showPinterest": true,
-    "showWechatQr": true,
     "showXiaohongshu": true
+  },
+  "directContact": {
+    "hours": "Monday – Friday, 9AM – 6PM EST",
+    "hoursCn": "周一至周五，上午9点 – 下午6点（东部时间）",
+    "headline": "Or reach us directly",
+    "showEmail": true,
+    "showHours": true,
+    "showPhone": true,
+    "headlineCn": "或直接联系我们",
+    "showAddress": true
   }
 }

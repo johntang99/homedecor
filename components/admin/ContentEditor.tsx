@@ -3,10 +3,33 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { Locale, SiteConfig } from '@/lib/types';
-import ReactMarkdown from 'react-markdown';
 import { Button } from '@/components/ui';
 import { CONTENT_TEMPLATES } from '@/lib/admin/templates';
 import { ImagePickerModal } from '@/components/admin/ImagePickerModal';
+import { ShopProductItemPanel } from '@/components/admin/panels/ShopProductItemPanel';
+import { CollectionItemPanel } from '@/components/admin/panels/CollectionItemPanel';
+import { PortfolioItemPanel } from '@/components/admin/panels/PortfolioItemPanel';
+import { JournalItemPanel } from '@/components/admin/panels/JournalItemPanel';
+import { BlogPostItemPanel } from '@/components/admin/panels/BlogPostItemPanel';
+import { SeoPanel } from '@/components/admin/panels/SeoPanel';
+import { HeaderPanel } from '@/components/admin/panels/HeaderPanel';
+import { ThemePanel } from '@/components/admin/panels/ThemePanel';
+import { SectionVariantsPanel } from '@/components/admin/panels/SectionVariantsPanel';
+import { HomeSectionPhotosPanel } from '@/components/admin/panels/HomeSectionPhotosPanel';
+import { HomeSectionVisualsPanel } from '@/components/admin/panels/HomeSectionVisualsPanel';
+import { ProfilePanel } from '@/components/admin/panels/ProfilePanel';
+import { IntroductionPanel } from '@/components/admin/panels/IntroductionPanel';
+import { HeroPanel } from '@/components/admin/panels/HeroPanel';
+import { GalleryPhotosPanel } from '@/components/admin/panels/GalleryPhotosPanel';
+import { CtaPanel } from '@/components/admin/panels/CtaPanel';
+import { ServicesPanel } from '@/components/admin/panels/ServicesPanel';
+import { ConditionsPanel } from '@/components/admin/panels/ConditionsPanel';
+import { CaseStudiesPanel } from '@/components/admin/panels/CaseStudiesPanel';
+import { ServicesListPanel } from '@/components/admin/panels/ServicesListPanel';
+import { FeaturedPostPanel } from '@/components/admin/panels/FeaturedPostPanel';
+import { PostsPanel } from '@/components/admin/panels/PostsPanel';
+import { TestimonialsPanel } from '@/components/admin/panels/TestimonialsPanel';
+import { ServicesPagePanel } from '@/components/admin/panels/ServicesPagePanel';
 
 interface ContentFileItem {
   id: string;
@@ -40,7 +63,12 @@ const SECTION_VARIANT_OPTIONS: Record<string, string[]> = {
   howItWorks: ['horizontal', 'vertical', 'cards', 'vertical-image-right'],
   conditions: ['grid-cards', 'categories-tabs', 'list-detailed', 'icon-grid'],
   services: ['grid-cards-2x', 'grid-cards-3x', 'featured-large', 'list-horizontal', 'accordion', 'tabs', 'detail-alternating', 'detail-image-right'],
+  designServices: ['detailed-list', 'grid-cards-2x', 'grid-cards-3x', 'list-horizontal'],
+  constructionServices: ['text-image', 'image-text', 'centered'],
+  furnishingServices: ['text-image', 'image-text', 'centered'],
   servicesList: ['grid-cards-2x', 'grid-cards-3x', 'featured-large', 'list-horizontal', 'accordion', 'tabs', 'detail-alternating', 'detail-image-right'],
+  process: ['horizontal', 'vertical', 'cards', 'vertical-image-right'],
+  specialties: ['icon-grid', 'grid', 'list'],
   overview: ['centered', 'left'],
   blog: ['cards-grid', 'featured-side', 'list-detailed', 'carousel'],
   gallery: ['grid-masonry', 'grid-uniform', 'carousel', 'lightbox-grid'],
@@ -120,6 +148,15 @@ export function ContentEditor({
     Array<{ value: string; label: string; labelCn?: string }>
   >([]);
   const [journalCategoryOptions, setJournalCategoryOptions] = useState<
+    Array<{ value: string; label: string; labelCn?: string }>
+  >([]);
+  const [shopCategoryOptions, setShopCategoryOptions] = useState<
+    Array<{ value: string; label: string; labelCn?: string }>
+  >([]);
+  const [shopRoomOptions, setShopRoomOptions] = useState<
+    Array<{ value: string; label: string; labelCn?: string }>
+  >([]);
+  const [testimonialCategoryOptions, setTestimonialCategoryOptions] = useState<
     Array<{ value: string; label: string; labelCn?: string }>
   >([]);
   const COLLECTION_PREFIXES: Record<string, string> = {
@@ -261,6 +298,12 @@ export function ContentEditor({
     if (activeFile.path.startsWith('journal/')) {
       loadJournalFilterOptions();
     }
+    if (activeFile.path.startsWith('shop-products/')) {
+      loadShopFilterOptions();
+    }
+    if (activeFile.path === 'testimonials.json' || activeFile.path.startsWith('testimonials/')) {
+      loadTestimonialCategoryOptions();
+    }
   }, [activeFile, siteId, locale]);
 
   const handleSave = async () => {
@@ -387,6 +430,27 @@ export function ContentEditor({
 
     const allDifferentPaths = Array.from(new Set([...updatePaths, ...createPaths, ...conflictPaths]));
     const preview = allDifferentPaths.slice(0, 20).join('\n');
+    const folderOrder = [
+      'pages',
+      'blog',
+      'portfolio',
+      'shop-products',
+      'journal',
+      'collections',
+      'testimonials',
+      'root',
+    ];
+    const byFolder = new Map<string, number>(folderOrder.map((folder) => [folder, 0]));
+    allDifferentPaths.forEach((entryPath) => {
+      const rawPath = String(entryPath).includes(':')
+        ? String(entryPath).split(':').slice(1).join(':')
+        : String(entryPath);
+      const folder = rawPath.includes('/') ? rawPath.split('/')[0] : 'root';
+      byFolder.set(folder, (byFolder.get(folder) || 0) + 1);
+    });
+    const folderBreakdown = folderOrder
+      .map((folder) => `${folder}: ${byFolder.get(folder) || 0}`)
+      .join('\n');
 
     window.alert(
       `Check Update From DB\n\n` +
@@ -394,6 +458,7 @@ export function ContentEditor({
         `Create: ${createPaths.length}\n` +
         `Update: ${updatePaths.length}\n` +
         `DB newer conflicts: ${conflicts.length}\n\n` +
+        `By folder:\n${folderBreakdown}\n\n` +
         `${allDifferentPaths.length > 0 ? `Paths:\n${preview}${allDifferentPaths.length > 20 ? '\n...' : ''}` : 'No differences found.'}`
     );
 
@@ -767,6 +832,79 @@ export function ContentEditor({
     }
   };
 
+  const loadShopFilterOptions = async () => {
+    if (!siteId || !locale) return;
+    try {
+      const response = await fetch(
+        `/api/admin/content/file?siteId=${siteId}&locale=${locale}&path=${encodeURIComponent(
+          'pages/shop.json'
+        )}`
+      );
+      if (!response.ok) {
+        setShopCategoryOptions([]);
+        setShopRoomOptions([]);
+        return;
+      }
+      const payload = await response.json();
+      const parsed = payload?.content ? JSON.parse(payload.content) : {};
+
+      const categories = Array.isArray(parsed?.filters?.categories)
+        ? parsed.filters.categories
+            .map((item: any) => ({
+              value: String(item?.value || ''),
+              label: String(item?.label || item?.value || ''),
+              labelCn: typeof item?.labelCn === 'string' ? item.labelCn : undefined,
+            }))
+            .filter((item: any) => item.value)
+        : [];
+
+      const rooms = Array.isArray(parsed?.filters?.rooms)
+        ? parsed.filters.rooms
+            .map((item: any) => ({
+              value: String(item?.value || ''),
+              label: String(item?.label || item?.value || ''),
+              labelCn: typeof item?.labelCn === 'string' ? item.labelCn : undefined,
+            }))
+            .filter((item: any) => item.value)
+        : [];
+
+      setShopCategoryOptions(categories);
+      setShopRoomOptions(rooms);
+    } catch {
+      setShopCategoryOptions([]);
+      setShopRoomOptions([]);
+    }
+  };
+
+  const loadTestimonialCategoryOptions = async () => {
+    if (!siteId || !locale) return;
+    try {
+      const response = await fetch(
+        `/api/admin/content/file?siteId=${siteId}&locale=${locale}&path=${encodeURIComponent(
+          'pages/testimonials.json'
+        )}`
+      );
+      if (!response.ok) {
+        setTestimonialCategoryOptions([]);
+        return;
+      }
+      const payload = await response.json();
+      const parsed = payload?.content ? JSON.parse(payload.content) : {};
+      const categories = Array.isArray(parsed?.display?.categories)
+        ? parsed.display.categories
+            .map((item: any) => ({
+              value: String(item?.value || ''),
+              label: String(item?.label || item?.value || ''),
+              labelCn: typeof item?.labelCn === 'string' ? item.labelCn : undefined,
+            }))
+            .filter((item: any) => item.value && item.value !== 'all')
+        : [];
+      setTestimonialCategoryOptions(categories);
+    } catch {
+      setTestimonialCategoryOptions([]);
+    }
+  };
+
   const getPreviewPath = () => {
     if (!activeFile) return `/${locale}`;
     if (activeFile.path.startsWith('pages/')) {
@@ -838,38 +976,29 @@ export function ContentEditor({
   const getPathValue = (path: string[]) =>
     path.reduce<any>((acc, key) => acc?.[key], formData);
 
-  const renderColorField = (label: string, path: string[]) => {
-    const value = String(getPathValue(path) || '');
-    return (
-      <div className="grid gap-2 md:grid-cols-[1fr_auto] items-center">
-        <div>
-          <label className="block text-xs text-gray-500">{label}</label>
-          <input
-            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-            value={value}
-            onChange={(event) => updateFormValue(path, event.target.value)}
-            placeholder="#000000"
-          />
-        </div>
-        <input
-          type="color"
-          className="mt-6 h-10 w-10 rounded-md border border-gray-200"
-          value={value || '#000000'}
-          onChange={(event) => updateFormValue(path, event.target.value)}
-          aria-label={`${label} color`}
-        />
-      </div>
-    );
-  };
-
   const isSeoFile = activeFile?.path === 'seo.json';
   const isBlogPostFile = activeFile?.path.startsWith('blog/');
   const isPortfolioItemFile = activeFile?.path.startsWith('portfolio/');
   const isJournalItemFile = activeFile?.path.startsWith('journal/');
+  const isShopProductItemFile = activeFile?.path.startsWith('shop-products/');
   const isCollectionItemFile = activeFile?.path.startsWith('collections/');
+  const isTestimonialsFile =
+    activeFile?.path === 'testimonials.json' || activeFile?.path.startsWith('testimonials/');
+  const canDeleteActiveFile = Boolean(
+    activeFile &&
+      (
+        activeFile.path.startsWith('pages/') ||
+        activeFile.path.startsWith('blog/') ||
+        activeFile.path.startsWith('portfolio/') ||
+        activeFile.path.startsWith('shop-products/') ||
+        activeFile.path.startsWith('journal/') ||
+        activeFile.path.startsWith('collections/')
+      )
+  );
   const isHeaderFile = activeFile?.path === 'header.json';
   const isThemeFile = activeFile?.path === 'theme.json';
   const isHomePageFile = activeFile?.path === 'pages/home.json';
+  const isServicesPageFile = activeFile?.path === 'pages/services.json';
   const allowCreateOrDuplicate = fileFilter !== 'siteSettings' && fileFilter !== 'testimonials';
   const variantSections = formData
     ? Object.entries(SECTION_VARIANT_OPTIONS).filter(
@@ -1091,6 +1220,33 @@ export function ContentEditor({
     const moodImages = [...formData.moodImages];
     moodImages.splice(index, 1);
     updateFormValue(['moodImages'], moodImages);
+  };
+
+  const addTestimonialItem = () => {
+    if (!formData) return;
+    const items = Array.isArray(formData.items) ? [...formData.items] : [];
+    items.push({
+      id: `t-${Date.now()}`,
+      quote: '',
+      quoteCn: '',
+      author: '',
+      authorCn: '',
+      title: '',
+      titleCn: '',
+      category: '',
+      projectSlug: '',
+      rating: 5,
+      featured: false,
+      date: '',
+    });
+    updateFormValue(['items'], items);
+  };
+
+  const removeTestimonialItem = (index: number) => {
+    if (!formData || !Array.isArray(formData.items)) return;
+    const items = [...formData.items];
+    items.splice(index, 1);
+    updateFormValue(['items'], items);
   };
 
   const addHeaderMenuItem = () => {
@@ -1366,9 +1522,7 @@ export function ContentEditor({
           >
             Format
           </button>
-          {activeFile &&
-            (activeFile.path.startsWith('pages/') ||
-              activeFile.path.startsWith('blog/')) && (
+          {canDeleteActiveFile && (
               <button
                 type="button"
                 onClick={handleDelete}
@@ -1423,2595 +1577,235 @@ export function ContentEditor({
               )}
 
               {isSeoFile && formData && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="text-xs font-semibold text-gray-500 uppercase">
-                      SEO
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <button
-                        type="button"
-                        onClick={populateSeoFromHeroes}
-                        disabled={seoPopulating}
-                        className="px-3 py-1.5 rounded-md border border-gray-200 text-xs text-gray-700 hover:bg-gray-50 disabled:opacity-50"
-                      >
-                        {seoPopulating ? 'Populating…' : 'Auto-populate'}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={addSeoPage}
-                        className="px-3 py-1.5 rounded-md border border-gray-200 text-xs text-gray-700 hover:bg-gray-50"
-                      >
-                        Add Page SEO
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="grid gap-3 md:grid-cols-2">
-                    <div>
-                      <label className="block text-xs text-gray-500">Default Title</label>
-                      <input
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.title || ''}
-                        onChange={(event) => updateFormValue(['title'], event.target.value)}
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs text-gray-500">Default Description</label>
-                      <input
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.description || ''}
-                        onChange={(event) =>
-                          updateFormValue(['description'], event.target.value)
-                        }
-                      />
-                    </div>
-                    <div className="md:col-span-2">
-                      <label className="block text-xs text-gray-500">Open Graph Image</label>
-                      <div className="mt-1 flex gap-2">
-                        <input
-                          className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          value={formData.ogImage || ''}
-                          onChange={(event) =>
-                            updateFormValue(['ogImage'], event.target.value)
-                          }
-                        />
-                        <button
-                          type="button"
-                          onClick={() => openImagePicker(['ogImage'])}
-                          className="px-3 rounded-md border border-gray-200 text-xs"
-                        >
-                          Choose
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 border-t border-gray-100 pt-4">
-                    <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                      Home Page SEO
-                    </div>
-                    <div className="grid gap-3 md:grid-cols-2">
-                      <div>
-                        <label className="block text-xs text-gray-500">Home Title</label>
-                        <input
-                          className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          value={formData.home?.title || ''}
-                          onChange={(event) =>
-                            updateFormValue(['home', 'title'], event.target.value)
-                          }
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-xs text-gray-500">Home Description</label>
-                        <input
-                          className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          value={formData.home?.description || ''}
-                          onChange={(event) =>
-                            updateFormValue(['home', 'description'], event.target.value)
-                          }
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 border-t border-gray-100 pt-4">
-                    <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                      Page SEO
-                    </div>
-                    {formData.pages && typeof formData.pages === 'object' ? (
-                      <div className="space-y-3">
-                        {Object.entries(formData.pages as Record<string, any>).map(
-                          ([slug, values]) => (
-                            <div
-                              key={slug}
-                              className="border border-gray-200 rounded-lg p-3"
-                            >
-                              <div className="flex items-center justify-between mb-2">
-                                <div className="text-xs font-semibold text-gray-700">
-                                  {slug}
-                                </div>
-                                <button
-                                  type="button"
-                                  onClick={() => removeSeoPage(slug)}
-                                  className="text-xs text-red-600 hover:text-red-700"
-                                >
-                                  Remove
-                                </button>
-                              </div>
-                              <div className="grid gap-3 md:grid-cols-2">
-                                <div>
-                                  <label className="block text-xs text-gray-500">
-                                    Title
-                                  </label>
-                                  <input
-                                    className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                                    value={values?.title || ''}
-                                    onChange={(event) =>
-                                      updateFormValue(
-                                        ['pages', slug, 'title'],
-                                        event.target.value
-                                      )
-                                    }
-                                  />
-                                </div>
-                                <div>
-                                  <label className="block text-xs text-gray-500">
-                                    Description
-                                  </label>
-                                  <input
-                                    className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                                    value={values?.description || ''}
-                                    onChange={(event) =>
-                                      updateFormValue(
-                                        ['pages', slug, 'description'],
-                                        event.target.value
-                                      )
-                                    }
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                          )
-                        )}
-                        {Object.keys(formData.pages).length === 0 && (
-                          <div className="text-xs text-gray-500">
-                            No page-specific SEO entries yet.
-                          </div>
-                        )}
-                      </div>
-                    ) : (
-                      <div className="text-xs text-gray-500">
-                        No page-specific SEO entries yet.
-                      </div>
-                    )}
-                  </div>
-                </div>
+                <SeoPanel
+                  formData={formData}
+                  seoPopulating={seoPopulating}
+                  updateFormValue={updateFormValue}
+                  openImagePicker={openImagePicker}
+                  populateSeoFromHeroes={populateSeoFromHeroes}
+                  addSeoPage={addSeoPage}
+                  removeSeoPage={removeSeoPage}
+                />
               )}
 
               {isHeaderFile && formData && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Header
-                  </div>
-
-                  <div className="space-y-4">
-                    <div>
-                      <div className="text-xs font-semibold text-gray-500 uppercase mb-2">
-                        Topbar
-                      </div>
-                      <div className="grid gap-3 md:grid-cols-2">
-                        <div>
-                          <label className="block text-xs text-gray-500">Phone</label>
-                          <input
-                            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={formData.topbar?.phone || ''}
-                            onChange={(event) =>
-                              updateFormValue(['topbar', 'phone'], event.target.value)
-                            }
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-xs text-gray-500">Phone Href</label>
-                          <input
-                            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={formData.topbar?.phoneHref || ''}
-                            onChange={(event) =>
-                              updateFormValue(['topbar', 'phoneHref'], event.target.value)
-                            }
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-xs text-gray-500">Address</label>
-                          <input
-                            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={formData.topbar?.address || ''}
-                            onChange={(event) =>
-                              updateFormValue(['topbar', 'address'], event.target.value)
-                            }
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-xs text-gray-500">Address Href</label>
-                          <input
-                            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={formData.topbar?.addressHref || ''}
-                            onChange={(event) =>
-                              updateFormValue(['topbar', 'addressHref'], event.target.value)
-                            }
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-xs text-gray-500">Hours</label>
-                          <input
-                            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={formData.topbar?.hours || ''}
-                            onChange={(event) =>
-                              updateFormValue(['topbar', 'hours'], event.target.value)
-                            }
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-xs text-gray-500">Badge</label>
-                          <input
-                            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={formData.topbar?.badge || ''}
-                            onChange={(event) =>
-                              updateFormValue(['topbar', 'badge'], event.target.value)
-                            }
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="text-xs font-semibold text-gray-500 uppercase mb-2">
-                        Logo
-                      </div>
-                      <div className="mb-3">
-                        <label className="block text-xs text-gray-500">Menu Variant</label>
-                        <select
-                          className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          value={formData.menu?.variant || 'default'}
-                          onChange={(event) =>
-                            updateFormValue(['menu', 'variant'], event.target.value)
-                          }
-                        >
-                          <option value="default">Default</option>
-                          <option value="centered">Centered</option>
-                          <option value="transparent">Transparent</option>
-                          <option value="stacked">Stacked</option>
-                        </select>
-                      </div>
-                      <div className="mb-3">
-                        <label className="block text-xs text-gray-500">Menu Font Weight</label>
-                        <select
-                          className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          value={formData.menu?.fontWeight || 'semibold'}
-                          onChange={(event) =>
-                            updateFormValue(['menu', 'fontWeight'], event.target.value)
-                          }
-                        >
-                          <option value="regular">Regular</option>
-                          <option value="semibold">Semibold</option>
-                        </select>
-                      </div>
-                      <div className="grid gap-3 md:grid-cols-3">
-                        <div>
-                          <label className="block text-xs text-gray-500">Emoji</label>
-                          <input
-                            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={formData.menu?.logo?.emoji || ''}
-                            onChange={(event) =>
-                              updateFormValue(['menu', 'logo', 'emoji'], event.target.value)
-                            }
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-xs text-gray-500">Text</label>
-                          <input
-                            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={formData.menu?.logo?.text || ''}
-                            onChange={(event) =>
-                              updateFormValue(['menu', 'logo', 'text'], event.target.value)
-                            }
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-xs text-gray-500">Subtext</label>
-                          <input
-                            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={formData.menu?.logo?.subtext || ''}
-                            onChange={(event) =>
-                              updateFormValue(['menu', 'logo', 'subtext'], event.target.value)
-                            }
-                          />
-                        </div>
-                      </div>
-                      <div className="mt-3 grid gap-3 md:grid-cols-2">
-                        <div>
-                          <label className="block text-xs text-gray-500">Logo Image</label>
-                          <div className="mt-1 flex gap-2">
-                            <input
-                              className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              value={formData.menu?.logo?.image?.src || ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['menu', 'logo', 'image', 'src'],
-                                  event.target.value
-                                )
-                              }
-                            />
-                            <button
-                              type="button"
-                              onClick={() => openImagePicker(['menu', 'logo', 'image', 'src'])}
-                              className="px-3 rounded-md border border-gray-200 text-xs"
-                            >
-                              Choose
-                            </button>
-                          </div>
-                        </div>
-                        <div>
-                          <label className="block text-xs text-gray-500">Logo Alt</label>
-                          <input
-                            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={formData.menu?.logo?.image?.alt || ''}
-                            onChange={(event) =>
-                              updateFormValue(
-                                ['menu', 'logo', 'image', 'alt'],
-                                event.target.value
-                              )
-                            }
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="text-xs font-semibold text-gray-500 uppercase">
-                          Menu Items
-                        </div>
-                        <button
-                          type="button"
-                          onClick={addHeaderMenuItem}
-                          className="px-3 py-1.5 rounded-md border border-gray-200 text-xs text-gray-700 hover:bg-gray-50"
-                        >
-                          Add Item
-                        </button>
-                      </div>
-                      <div className="space-y-3">
-                        {(Array.isArray(formData.menu?.items)
-                          ? formData.menu.items
-                          : []
-                        ).map((item: any, index: number) => (
-                          <div
-                            key={`header-item-${index}`}
-                            className="grid gap-3 md:grid-cols-[1fr_1fr_auto] items-end"
-                          >
-                            <div>
-                              <label className="block text-xs text-gray-500">Text</label>
-                              <input
-                                className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                                value={item?.text || ''}
-                                onChange={(event) =>
-                                  updateFormValue(
-                                    ['menu', 'items', `${index}`, 'text'],
-                                    event.target.value
-                                  )
-                                }
-                              />
-                            </div>
-                            <div>
-                              <label className="block text-xs text-gray-500">URL</label>
-                              <input
-                                className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                                value={item?.url || ''}
-                                onChange={(event) =>
-                                  updateFormValue(
-                                    ['menu', 'items', `${index}`, 'url'],
-                                    event.target.value
-                                  )
-                                }
-                              />
-                            </div>
-                            <button
-                              type="button"
-                              onClick={() => removeHeaderMenuItem(index)}
-                              className="text-xs text-red-600 hover:text-red-700"
-                            >
-                              Remove
-                            </button>
-                          </div>
-                        ))}
-                        {!Array.isArray(formData.menu?.items) ||
-                        formData.menu.items.length === 0 ? (
-                          <div className="text-xs text-gray-500">
-                            No menu items yet.
-                          </div>
-                        ) : null}
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="text-xs font-semibold text-gray-500 uppercase">
-                          Languages
-                        </div>
-                        <button
-                          type="button"
-                          onClick={addHeaderLanguage}
-                          className="px-3 py-1.5 rounded-md border border-gray-200 text-xs text-gray-700 hover:bg-gray-50"
-                        >
-                          Add Language
-                        </button>
-                      </div>
-                      <div className="space-y-3">
-                        {(Array.isArray(formData.languages)
-                          ? formData.languages
-                          : []
-                        ).map((item: any, index: number) => (
-                          <div
-                            key={`header-language-${index}`}
-                            className="grid gap-3 md:grid-cols-[1fr_1fr_1fr_auto] items-end"
-                          >
-                            <div>
-                              <label className="block text-xs text-gray-500">Label</label>
-                              <input
-                                className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                                value={item?.label || ''}
-                                onChange={(event) =>
-                                  updateFormValue(
-                                    ['languages', `${index}`, 'label'],
-                                    event.target.value
-                                  )
-                                }
-                              />
-                            </div>
-                            <div>
-                              <label className="block text-xs text-gray-500">Locale</label>
-                              <input
-                                className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                                value={item?.locale || ''}
-                                onChange={(event) =>
-                                  updateFormValue(
-                                    ['languages', `${index}`, 'locale'],
-                                    event.target.value
-                                  )
-                                }
-                              />
-                            </div>
-                            <div>
-                              <label className="block text-xs text-gray-500">URL</label>
-                              <input
-                                className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                                value={item?.url || ''}
-                                onChange={(event) =>
-                                  updateFormValue(
-                                    ['languages', `${index}`, 'url'],
-                                    event.target.value
-                                  )
-                                }
-                              />
-                            </div>
-                            <button
-                              type="button"
-                              onClick={() => removeHeaderLanguage(index)}
-                              className="text-xs text-red-600 hover:text-red-700"
-                            >
-                              Remove
-                            </button>
-                          </div>
-                        ))}
-                        {!Array.isArray(formData.languages) ||
-                        formData.languages.length === 0 ? (
-                          <div className="text-xs text-gray-500">
-                            No languages yet.
-                          </div>
-                        ) : null}
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="text-xs font-semibold text-gray-500 uppercase mb-2">
-                        CTA
-                      </div>
-                      <div className="grid gap-3 md:grid-cols-2">
-                        <div>
-                          <label className="block text-xs text-gray-500">Text</label>
-                          <input
-                            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={formData.cta?.text || ''}
-                            onChange={(event) =>
-                              updateFormValue(['cta', 'text'], event.target.value)
-                            }
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-xs text-gray-500">Link</label>
-                          <input
-                            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={formData.cta?.link || ''}
-                            onChange={(event) =>
-                              updateFormValue(['cta', 'link'], event.target.value)
-                            }
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <HeaderPanel
+                  formData={formData}
+                  updateFormValue={updateFormValue}
+                  openImagePicker={openImagePicker}
+                  addHeaderMenuItem={addHeaderMenuItem}
+                  removeHeaderMenuItem={removeHeaderMenuItem}
+                  addHeaderLanguage={addHeaderLanguage}
+                  removeHeaderLanguage={removeHeaderLanguage}
+                />
               )}
 
               {isThemeFile && formData && (
-                <div className="border border-gray-200 rounded-lg p-4 space-y-6">
-                  <div className="text-xs font-semibold text-gray-500 uppercase">
-                    Theme
-                  </div>
-
-                  <div className="grid gap-6 md:grid-cols-2">
-                    <div className="space-y-3">
-                      <div className="text-xs font-semibold text-gray-500 uppercase">
-                        Typography Sizes
-                      </div>
-                      {(['display', 'heading', 'subheading', 'body', 'small'] as const).map(
-                        (key) => (
-                          <div key={`type-${key}`}>
-                            <label className="block text-xs text-gray-500">
-                              {key}
-                            </label>
-                            <input
-                              className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              value={String(getPathValue(['typography', key]) || '')}
-                              onChange={(event) =>
-                                updateFormValue(['typography', key], event.target.value)
-                              }
-                              placeholder="e.g. 2rem"
-                            />
-                          </div>
-                        )
-                      )}
-                    </div>
-
-                    <div className="space-y-3">
-                      <div className="text-xs font-semibold text-gray-500 uppercase">
-                        Typography Fonts
-                      </div>
-                      {(['display', 'heading', 'subheading', 'body', 'small'] as const).map(
-                        (key) => (
-                          <div key={`font-${key}`}>
-                            <label className="block text-xs text-gray-500">
-                              {key}
-                            </label>
-                            <input
-                              className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              value={String(
-                                getPathValue(['typography', 'fonts', key]) || ''
-                              )}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['typography', 'fonts', key],
-                                  event.target.value
-                                )
-                              }
-                              placeholder="e.g. Inter, sans-serif"
-                            />
-                          </div>
-                        )
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="grid gap-6 md:grid-cols-3">
-                    <div className="space-y-3">
-                      <div className="text-xs font-semibold text-gray-500 uppercase">
-                        Primary Colors
-                      </div>
-                      {renderColorField('Primary', ['colors', 'primary', 'DEFAULT'])}
-                      {renderColorField('Primary Dark', ['colors', 'primary', 'dark'])}
-                      {renderColorField('Primary Light', ['colors', 'primary', 'light'])}
-                      {renderColorField('Primary 50', ['colors', 'primary', '50'])}
-                      {renderColorField('Primary 100', ['colors', 'primary', '100'])}
-                    </div>
-                    <div className="space-y-3">
-                      <div className="text-xs font-semibold text-gray-500 uppercase">
-                        Secondary Colors
-                      </div>
-                      {renderColorField('Secondary', ['colors', 'secondary', 'DEFAULT'])}
-                      {renderColorField('Secondary Dark', ['colors', 'secondary', 'dark'])}
-                      {renderColorField('Secondary Light', ['colors', 'secondary', 'light'])}
-                      {renderColorField('Secondary 50', ['colors', 'secondary', '50'])}
-                    </div>
-                    <div className="space-y-3">
-                      <div className="text-xs font-semibold text-gray-500 uppercase">
-                        Backdrop Colors
-                      </div>
-                      {renderColorField('Backdrop Primary', [
-                        'colors',
-                        'backdrop',
-                        'primary',
-                      ])}
-                      {renderColorField('Backdrop Secondary', [
-                        'colors',
-                        'backdrop',
-                        'secondary',
-                      ])}
-                    </div>
-                  </div>
-                </div>
+                <ThemePanel
+                  getPathValue={getPathValue}
+                  updateFormValue={updateFormValue}
+                />
               )}
 
               {formData && variantSections.length > 0 && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Section Variants
-                  </div>
-                  <div className="grid gap-3 md:grid-cols-2">
-                    {variantSections.map(([sectionKey, options]) => (
-                      <div key={`variant-${sectionKey}`}>
-                        <label className="block text-xs text-gray-500">
-                          {toTitleCase(sectionKey)} Variant
-                        </label>
-                        <select
-                          className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm bg-white"
-                          value={String(getPathValue([sectionKey, 'variant']) || '')}
-                          onChange={(event) =>
-                            updateFormValue([sectionKey, 'variant'], event.target.value)
-                          }
-                        >
-                          <option value="">Default</option>
-                          {options.map((option) => (
-                            <option key={`${sectionKey}-${option}`} value={option}>
-                              {option}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <SectionVariantsPanel
+                  variantSections={variantSections}
+                  getPathValue={getPathValue}
+                  updateFormValue={updateFormValue}
+                  toTitleCase={toTitleCase}
+                />
               )}
 
               {isHomePageFile && homePhotoFields.length > 0 && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Home Section Photos
-                  </div>
-                  <div className="space-y-3">
-                    {homePhotoFields.map((field) => (
-                      <div
-                        key={field.path.join('.')}
-                        className="grid gap-2 md:grid-cols-[220px_72px_1fr_auto_auto] items-center"
-                      >
-                        <label className="text-xs text-gray-600">{field.label}</label>
-                        {String(getPathValue(field.path) || '').trim() ? (
-                          <img
-                            src={String(getPathValue(field.path) || '')}
-                            alt={`${field.label} preview`}
-                            className="h-12 w-12 rounded border border-gray-200 object-cover bg-gray-50"
-                            loading="lazy"
-                          />
-                        ) : (
-                          <div className="h-12 w-12 rounded border border-dashed border-gray-200 bg-gray-50" />
-                        )}
-                        <input
-                          className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          value={String(getPathValue(field.path) || '')}
-                          onChange={(event) =>
-                            updateFormValue(field.path, event.target.value)
-                          }
-                          placeholder="/uploads/..."
-                        />
-                        <button
-                          type="button"
-                          onClick={() => openImagePicker(field.path)}
-                          className="px-3 py-2 rounded-md border border-gray-200 text-xs"
-                        >
-                          Choose
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => updateFormValue(field.path, '')}
-                          className="px-3 py-2 rounded-md border border-gray-200 text-xs"
-                        >
-                          Clear
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <HomeSectionPhotosPanel
+                  homePhotoFields={homePhotoFields}
+                  getPathValue={getPathValue}
+                  updateFormValue={updateFormValue}
+                  openImagePicker={openImagePicker}
+                />
               )}
 
               {isHomePageFile && homeSectionImageFields.length > 0 && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Home Section Visuals
-                  </div>
-                  <div className="space-y-3">
-                    {homeSectionImageFields.map((field) => (
-                      (() => {
-                        const lastKey = field.path[field.path.length - 1] || '';
-                        const isShopPreviewSlot =
-                          field.path[0] === 'shopPreview' && /^image\d+$/.test(lastKey);
-                        const slotMatch = lastKey.match(/^image(\d+)$/);
-                        const slot = slotMatch ? Number(slotMatch[1]) : 0;
-                        const itemNamePath = ['shopPreview', `itemName${slot}`];
-                        const itemPricePath = ['shopPreview', `itemPrice${slot}`];
+                <HomeSectionVisualsPanel
+                  homeSectionImageFields={homeSectionImageFields}
+                  getPathValue={getPathValue}
+                  updateFormValue={updateFormValue}
+                  openImagePicker={openImagePicker}
+                />
+              )}
 
-                        return (
-                      <div
-                        key={field.path.join('.')}
-                        className={
-                          isShopPreviewSlot
-                            ? 'grid gap-2 md:grid-cols-[260px_72px_1fr_180px_120px_auto_auto] items-center'
-                            : 'grid gap-2 md:grid-cols-[260px_72px_1fr_auto_auto] items-center'
-                        }
-                      >
-                        <label className="text-xs text-gray-600">{field.label}</label>
-                        {String(getPathValue(field.path) || '').trim() ? (
-                          <img
-                            src={String(getPathValue(field.path) || '')}
-                            alt={`${field.label} preview`}
-                            className="h-12 w-12 rounded border border-gray-200 object-cover bg-gray-50"
-                            loading="lazy"
-                          />
-                        ) : (
-                          <div className="h-12 w-12 rounded border border-dashed border-gray-200 bg-gray-50" />
-                        )}
-                        <input
-                          className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          value={String(getPathValue(field.path) || '')}
-                          onChange={(event) =>
-                            updateFormValue(field.path, event.target.value)
-                          }
-                          placeholder="/uploads/..."
-                        />
-                        {isShopPreviewSlot && (
-                          <input
-                            className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={String(getPathValue(itemNamePath) || '')}
-                            onChange={(event) => updateFormValue(itemNamePath, event.target.value)}
-                            placeholder="Item name"
-                          />
-                        )}
-                        {isShopPreviewSlot && (
-                          <input
-                            className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={String(getPathValue(itemPricePath) || '')}
-                            onChange={(event) => updateFormValue(itemPricePath, event.target.value)}
-                            placeholder="Price"
-                          />
-                        )}
-                        <button
-                          type="button"
-                          onClick={() => openImagePicker(field.path)}
-                          className="px-3 py-2 rounded-md border border-gray-200 text-xs"
-                        >
-                          Choose
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => updateFormValue(field.path, '')}
-                          className="px-3 py-2 rounded-md border border-gray-200 text-xs"
-                        >
-                          Clear
-                        </button>
-                      </div>
-                        );
-                      })()
-                    ))}
-                  </div>
-                </div>
+              {isServicesPageFile && formData && (
+                <ServicesPagePanel
+                  formData={formData}
+                  updateFormValue={updateFormValue}
+                  openImagePicker={openImagePicker}
+                />
               )}
 
               {formData?.hero && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Hero
-                  </div>
-                  {'title' in formData.hero && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Title</label>
-                      <input
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.hero.title || ''}
-                        onChange={(event) =>
-                          updateFormValue(['hero', 'title'], event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                  {'subtitle' in formData.hero && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Subtitle</label>
-                      <input
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.hero.subtitle || ''}
-                        onChange={(event) =>
-                          updateFormValue(['hero', 'subtitle'], event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                  {('businessName' in formData.hero || 'clinicName' in formData.hero) && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Business Name</label>
-                      <input
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.hero.businessName || formData.hero.clinicName || ''}
-                        onChange={(event) =>
-                          updateFormValue(
-                            ['hero', 'businessName' in formData.hero ? 'businessName' : 'clinicName'],
-                            event.target.value
-                          )
-                        }
-                      />
-                    </div>
-                  )}
-                  {'tagline' in formData.hero && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Tagline</label>
-                      <input
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.hero.tagline || ''}
-                        onChange={(event) =>
-                          updateFormValue(['hero', 'tagline'], event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                  {isHomePageFile && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Overlay Mode</label>
-                      <select
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm bg-white"
-                        value={String(formData.hero.overlayMode || 'focus-text')}
-                        onChange={(event) =>
-                          updateFormValue(['hero', 'overlayMode'], event.target.value)
-                        }
-                      >
-                        <option value="focus-text">Focus Text (images stay bright)</option>
-                        <option value="soft-full">Soft Full Overlay (slightly dark)</option>
-                      </select>
-                    </div>
-                  )}
-                  {'description' in formData.hero && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">
-                        Description
-                      </label>
-                      <textarea
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.hero.description || ''}
-                        onChange={(event) =>
-                          updateFormValue(
-                            ['hero', 'description'],
-                            event.target.value
-                          )
-                        }
-                      />
-                    </div>
-                  )}
-                  {'backgroundImage' in formData.hero && (
-                    <div>
-                      <label className="block text-xs text-gray-500">
-                        Background Image
-                      </label>
-                      <div className="mt-1 flex gap-2">
-                        <input
-                          className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          value={formData.hero.backgroundImage || ''}
-                          onChange={(event) =>
-                            updateFormValue(
-                              ['hero', 'backgroundImage'],
-                              event.target.value
-                            )
-                          }
-                        />
-                        <button
-                          type="button"
-                          onClick={() => openImagePicker(['hero', 'backgroundImage'])}
-                          className="px-3 rounded-md border border-gray-200 text-xs"
-                        >
-                          Choose
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                  {'image' in formData.hero && (
-                    <div className="mt-3">
-                      <label className="block text-xs text-gray-500">Image</label>
-                      <div className="mt-1 flex gap-2">
-                        <input
-                          className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          value={formData.hero.image || ''}
-                          onChange={(event) =>
-                            updateFormValue(['hero', 'image'], event.target.value)
-                          }
-                        />
-                        <button
-                          type="button"
-                          onClick={() => openImagePicker(['hero', 'image'])}
-                          className="px-3 rounded-md border border-gray-200 text-xs"
-                        >
-                          Choose
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </div>
+                <HeroPanel
+                  formData={formData}
+                  isHomePageFile={isHomePageFile}
+                  updateFormValue={updateFormValue}
+                  openImagePicker={openImagePicker}
+                />
               )}
 
               {formData?.profile && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Profile
-                  </div>
-                  {'name' in formData.profile && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Name</label>
-                      <input
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.profile.name || ''}
-                        onChange={(event) =>
-                          updateFormValue(['profile', 'name'], event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                  {'title' in formData.profile && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Title</label>
-                      <input
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.profile.title || ''}
-                        onChange={(event) =>
-                          updateFormValue(['profile', 'title'], event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                  {'bio' in formData.profile && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Bio</label>
-                      <textarea
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.profile.bio || ''}
-                        onChange={(event) =>
-                          updateFormValue(['profile', 'bio'], event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                  {'quote' in formData.profile && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Quote</label>
-                      <textarea
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.profile.quote || ''}
-                        onChange={(event) =>
-                          updateFormValue(['profile', 'quote'], event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                  {'image' in formData.profile && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Profile Photo</label>
-                      <div className="mt-1 flex gap-2">
-                        <input
-                          className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          value={formData.profile.image || ''}
-                          onChange={(event) =>
-                            updateFormValue(['profile', 'image'], event.target.value)
-                          }
-                        />
-                        <button
-                          type="button"
-                          onClick={() => openImagePicker(['profile', 'image'])}
-                          className="px-3 rounded-md border border-gray-200 text-xs"
-                        >
-                          Choose
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                  {'signature' in formData.profile && (
-                    <div>
-                      <label className="block text-xs text-gray-500">Signature Image</label>
-                      <div className="mt-1 flex gap-2">
-                        <input
-                          className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          value={formData.profile.signature || ''}
-                          onChange={(event) =>
-                            updateFormValue(['profile', 'signature'], event.target.value)
-                          }
-                        />
-                        <button
-                          type="button"
-                          onClick={() => openImagePicker(['profile', 'signature'])}
-                          className="px-3 rounded-md border border-gray-200 text-xs"
-                        >
-                          Choose
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </div>
+                <ProfilePanel
+                  formData={formData}
+                  updateFormValue={updateFormValue}
+                  openImagePicker={openImagePicker}
+                />
               )}
 
               {formData?.introduction && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Introduction
-                  </div>
-                  {'headline' in formData.introduction && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Headline</label>
-                      <input
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.introduction.headline || ''}
-                        onChange={(event) =>
-                          updateFormValue(['introduction', 'headline'], event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                  {'headlineCn' in formData.introduction && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Headline (Chinese)</label>
-                      <input
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.introduction.headlineCn || ''}
-                        onChange={(event) =>
-                          updateFormValue(['introduction', 'headlineCn'], event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                  {'body' in formData.introduction && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Body</label>
-                      <textarea
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.introduction.body || ''}
-                        onChange={(event) =>
-                          updateFormValue(['introduction', 'body'], event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                  {'bodyCn' in formData.introduction && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Body (Chinese)</label>
-                      <textarea
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.introduction.bodyCn || ''}
-                        onChange={(event) =>
-                          updateFormValue(['introduction', 'bodyCn'], event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                  {'ctaLabel' in formData.introduction && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">CTA Label</label>
-                      <input
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.introduction.ctaLabel || ''}
-                        onChange={(event) =>
-                          updateFormValue(['introduction', 'ctaLabel'], event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                  {'ctaLabelCn' in formData.introduction && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">CTA Label (Chinese)</label>
-                      <input
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.introduction.ctaLabelCn || ''}
-                        onChange={(event) =>
-                          updateFormValue(['introduction', 'ctaLabelCn'], event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                  {'ctaHref' in formData.introduction && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">CTA Link</label>
-                      <input
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.introduction.ctaHref || ''}
-                        onChange={(event) =>
-                          updateFormValue(['introduction', 'ctaHref'], event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                  {'image' in formData.introduction && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Image</label>
-                      <div className="mt-1 grid gap-2 md:grid-cols-[72px_1fr_auto_auto] items-center">
-                        {String(formData.introduction.image || '').trim() ? (
-                          <img
-                            src={String(formData.introduction.image || '')}
-                            alt="Introduction image preview"
-                            className="h-12 w-12 rounded border border-gray-200 object-cover bg-gray-50"
-                            loading="lazy"
-                          />
-                        ) : (
-                          <div className="h-12 w-12 rounded border border-dashed border-gray-200 bg-gray-50" />
-                        )}
-                        <input
-                          className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          value={formData.introduction.image || ''}
-                          onChange={(event) =>
-                            updateFormValue(['introduction', 'image'], event.target.value)
-                          }
-                          placeholder="/uploads/..."
-                        />
-                        <button
-                          type="button"
-                          onClick={() => openImagePicker(['introduction', 'image'])}
-                          className="px-3 py-2 rounded-md border border-gray-200 text-xs"
-                        >
-                          Choose
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => updateFormValue(['introduction', 'image'], '')}
-                          className="px-3 py-2 rounded-md border border-gray-200 text-xs"
-                        >
-                          Clear
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                  {'text' in formData.introduction && (
-                    <div>
-                      <label className="block text-xs text-gray-500">Text</label>
-                      <textarea
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.introduction.text || ''}
-                        onChange={(event) =>
-                          updateFormValue(['introduction', 'text'], event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                </div>
+                <IntroductionPanel
+                  formData={formData}
+                  updateFormValue={updateFormValue}
+                  openImagePicker={openImagePicker}
+                />
               )}
 
               {Array.isArray(formData?.images) && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="text-xs font-semibold text-gray-500 uppercase">
-                      Gallery Photos
-                    </div>
-                    <button
-                      type="button"
-                      onClick={addGalleryImage}
-                      className="px-3 py-1 rounded-md border border-gray-200 text-xs"
-                    >
-                      Add Photo
-                    </button>
-                  </div>
-                  <div className="space-y-4">
-                    {formData.images.map((image: any, index: number) => (
-                      <div
-                        key={image.id || index}
-                        className="border border-gray-100 rounded-lg p-4"
-                      >
-                        <div className="flex items-center justify-between mb-3">
-                          <div className="text-xs font-semibold text-gray-500">
-                            Photo {index + 1}
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => removeGalleryImage(index)}
-                            className="text-xs text-red-600 hover:text-red-700"
-                          >
-                            Remove
-                          </button>
-                        </div>
-                        <div className="grid gap-3 md:grid-cols-2">
-                          <div>
-                            <label className="block text-xs text-gray-500">Title</label>
-                            <input
-                              className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              value={image.title || ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['images', index, 'title'] as string[],
-                                  event.target.value
-                                )
-                              }
-                            />
-                          </div>
-                          <div>
-                            <label className="block text-xs text-gray-500">Category</label>
-                            {galleryCategories.length > 0 ? (
-                              <select
-                                className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm bg-white"
-                                value={image.category || ''}
-                                onChange={(event) =>
-                                  updateFormValue(
-                                    ['images', index, 'category'] as string[],
-                                    event.target.value
-                                  )
-                                }
-                              >
-                                <option value="">Select category</option>
-                                {galleryCategories.map((category: any) => (
-                                  <option key={category.id} value={category.id}>
-                                    {category.name}
-                                  </option>
-                                ))}
-                              </select>
-                            ) : (
-                              <input
-                                className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                                value={image.category || ''}
-                                onChange={(event) =>
-                                  updateFormValue(
-                                    ['images', index, 'category'] as string[],
-                                    event.target.value
-                                  )
-                                }
-                              />
-                            )}
-                          </div>
-                          <div>
-                            <label className="block text-xs text-gray-500">Source</label>
-                            <div className="mt-1 flex gap-2">
-                              <input
-                                readOnly
-                                className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm bg-gray-50"
-                                value={image.src || ''}
-                              />
-                              <button
-                                type="button"
-                                onClick={() =>
-                                  openImagePicker(['images', index, 'src'] as string[])
-                                }
-                                className="px-3 rounded-md border border-gray-200 text-xs"
-                              >
-                                Choose
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() =>
-                                  updateFormValue(['images', index, 'src'] as string[], '')
-                                }
-                                className="px-3 rounded-md border border-gray-200 text-xs"
-                              >
-                                Clear
-                              </button>
-                            </div>
-                          </div>
-                          <div>
-                            <label className="block text-xs text-gray-500">Alt</label>
-                            <input
-                              className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              value={image.alt || ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['images', index, 'alt'] as string[],
-                                  event.target.value
-                                )
-                              }
-                            />
-                          </div>
-                          <div>
-                            <label className="block text-xs text-gray-500">Order</label>
-                            <input
-                              type="number"
-                              className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              value={image.order ?? ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['images', index, 'order'] as string[],
-                                  event.target.value === '' ? '' : Number(event.target.value)
-                                )
-                              }
-                            />
-                          </div>
-                          <div className="flex items-center gap-2 mt-6">
-                            <input
-                              type="checkbox"
-                              checked={Boolean(image.featured)}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['images', index, 'featured'] as string[],
-                                  event.target.checked
-                                )
-                              }
-                            />
-                            <span className="text-xs text-gray-600">Featured</span>
-                          </div>
-                          <div className="md:col-span-2">
-                            <label className="block text-xs text-gray-500">
-                              Description
-                            </label>
-                            <textarea
-                              className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              value={image.description || ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['images', index, 'description'] as string[],
-                                  event.target.value
-                                )
-                              }
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <GalleryPhotosPanel
+                  images={formData.images}
+                  galleryCategories={galleryCategories}
+                  addGalleryImage={addGalleryImage}
+                  removeGalleryImage={removeGalleryImage}
+                  updateFormValue={updateFormValue}
+                  openImagePicker={openImagePicker}
+                />
               )}
 
               {formData?.cta && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    CTA
-                  </div>
-                  {'title' in formData.cta && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">Title</label>
-                      <input
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.cta.title || ''}
-                        onChange={(event) =>
-                          updateFormValue(['cta', 'title'], event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                  {'description' in formData.cta && (
-                    <div className="mb-3">
-                      <label className="block text-xs text-gray-500">
-                        Description
-                      </label>
-                      <textarea
-                        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        value={formData.cta.description || ''}
-                        onChange={(event) =>
-                          updateFormValue(
-                            ['cta', 'description'],
-                            event.target.value
-                          )
-                        }
-                      />
-                    </div>
-                  )}
-                  {formData.cta?.primaryCta && (
-                    <div className="mb-3">
-                      <div className="text-xs text-gray-500 mb-1">Primary CTA</div>
-                      <input
-                        className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        placeholder="Text"
-                        value={formData.cta.primaryCta.text || ''}
-                        onChange={(event) =>
-                          updateFormValue(
-                            ['cta', 'primaryCta', 'text'],
-                            event.target.value
-                          )
-                        }
-                      />
-                      <input
-                        className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        placeholder="Link"
-                        value={formData.cta.primaryCta.link || ''}
-                        onChange={(event) =>
-                          updateFormValue(
-                            ['cta', 'primaryCta', 'link'],
-                            event.target.value
-                          )
-                        }
-                      />
-                    </div>
-                  )}
-                  {formData.cta?.secondaryCta && (
-                    <div>
-                      <div className="text-xs text-gray-500 mb-1">Secondary CTA</div>
-                      <input
-                        className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        placeholder="Text"
-                        value={formData.cta.secondaryCta.text || ''}
-                        onChange={(event) =>
-                          updateFormValue(
-                            ['cta', 'secondaryCta', 'text'],
-                            event.target.value
-                          )
-                        }
-                      />
-                      <input
-                        className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        placeholder="Link"
-                        value={formData.cta.secondaryCta.link || ''}
-                        onChange={(event) =>
-                          updateFormValue(
-                            ['cta', 'secondaryCta', 'link'],
-                            event.target.value
-                          )
-                        }
-                      />
-                    </div>
-                  )}
-                </div>
+                <CtaPanel
+                  formData={formData}
+                  updateFormValue={updateFormValue}
+                />
               )}
 
               {Array.isArray(formData?.services) && !formData?.servicesList && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Services
-                  </div>
-                  <div className="space-y-4">
-                    {formData.services.map((service: any, index: number) => (
-                      <div key={service.id || index} className="border rounded-md p-3">
-                        <div className="text-xs text-gray-500 mb-2">
-                          {service.title || `Service ${index + 1}`}
-                        </div>
-                        <input
-                          className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          placeholder="Title"
-                          value={service.title || ''}
-                          onChange={(event) =>
-                            updateFormValue(
-                              ['services', String(index), 'title'],
-                              event.target.value
-                            )
-                          }
-                        />
-                        <textarea
-                          className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          placeholder="Short description"
-                          value={service.shortDescription || ''}
-                          onChange={(event) =>
-                            updateFormValue(
-                              ['services', String(index), 'shortDescription'],
-                              event.target.value
-                            )
-                          }
-                        />
-                        <div className="flex gap-2">
-                          <input
-                            className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            placeholder="Image"
-                            value={service.image || ''}
-                            onChange={(event) =>
-                              updateFormValue(
-                                ['services', String(index), 'image'],
-                                event.target.value
-                              )
-                            }
-                          />
-                          <button
-                            type="button"
-                            onClick={() =>
-                              openImagePicker(['services', String(index), 'image'])
-                            }
-                            className="px-3 rounded-md border border-gray-200 text-xs"
-                          >
-                            Choose
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <ServicesPanel
+                  services={formData.services}
+                  updateFormValue={updateFormValue}
+                  openImagePicker={openImagePicker}
+                />
               )}
 
               {formData?.servicesList && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Services List
-                  </div>
-                  {Array.isArray(formData.servicesList.items) && (
-                    <div className="space-y-4 mt-4">
-                      {formData.servicesList.items.map((service: any, index: number) => (
-                        <div key={service.id || index} className="border rounded-md p-3 bg-white">
-                          <div className="text-xs text-gray-500 mb-2">
-                            {service.title || `Service ${index + 1}`}
-                          </div>
-                          <input
-                            className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            placeholder="Title"
-                            value={service.title || ''}
-                            onChange={(event) =>
-                              updateFormValue(
-                                ['servicesList', 'items', String(index), 'title'],
-                                event.target.value
-                              )
-                            }
-                          />
-                          <textarea
-                            className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            placeholder="Short description"
-                            value={service.shortDescription || ''}
-                            onChange={(event) =>
-                              updateFormValue(
-                                ['servicesList', 'items', String(index), 'shortDescription'],
-                                event.target.value
-                              )
-                            }
-                          />
-                          <div className="grid grid-cols-2 gap-2 mb-2">
-                            <input
-                              className="rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              placeholder="Price"
-                              value={service.price || ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['servicesList', 'items', String(index), 'price'],
-                                  event.target.value
-                                )
-                              }
-                            />
-                            <input
-                              className="rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              placeholder="Duration (min)"
-                              type="number"
-                              value={service.durationMinutes || ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['servicesList', 'items', String(index), 'durationMinutes'],
-                                  parseInt(event.target.value) || 0
-                                )
-                              }
-                            />
-                          </div>
-                          <div className="flex gap-2 mb-2">
-                            <input
-                              className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              placeholder="Image"
-                              value={service.image || ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['servicesList', 'items', String(index), 'image'],
-                                  event.target.value
-                                )
-                              }
-                            />
-                            <button
-                              type="button"
-                              onClick={() =>
-                                openImagePicker(['servicesList', 'items', String(index), 'image'])
-                              }
-                              className="px-3 rounded-md border border-gray-200 text-xs"
-                            >
-                              Choose
-                            </button>
-                          </div>
-                          <label className="flex items-center gap-2 text-sm">
-                            <input
-                              type="checkbox"
-                              checked={Boolean(service.featured)}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['servicesList', 'items', String(index), 'featured'],
-                                  event.target.checked
-                                )
-                              }
-                              className="rounded border-gray-300"
-                            />
-                            <span className="text-gray-700">Featured (for featured-large variant)</span>
-                          </label>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                <ServicesListPanel
+                  servicesList={formData.servicesList}
+                  updateFormValue={updateFormValue}
+                  openImagePicker={openImagePicker}
+                />
               )}
 
               {Array.isArray(formData?.conditions) && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Conditions
-                  </div>
-                  <div className="space-y-4">
-                    {formData.conditions.map((condition: any, index: number) => (
-                      <div key={condition.id || index} className="border rounded-md p-3">
-                        <div className="text-xs text-gray-500 mb-2">
-                          {condition.title || `Condition ${index + 1}`}
-                        </div>
-                        <input
-                          className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          placeholder="Title"
-                          value={condition.title || ''}
-                          onChange={(event) =>
-                            updateFormValue(
-                              ['conditions', String(index), 'title'],
-                              event.target.value
-                            )
-                          }
-                        />
-                        <textarea
-                          className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          placeholder="Description"
-                          value={condition.description || ''}
-                          onChange={(event) =>
-                            updateFormValue(
-                              ['conditions', String(index), 'description'],
-                              event.target.value
-                            )
-                          }
-                        />
-                        <div className="flex gap-2">
-                          <input
-                            className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            placeholder="Image"
-                            value={condition.image || ''}
-                            onChange={(event) =>
-                              updateFormValue(
-                                ['conditions', String(index), 'image'],
-                                event.target.value
-                              )
-                            }
-                          />
-                          <button
-                            type="button"
-                            onClick={() =>
-                              openImagePicker(['conditions', String(index), 'image'])
-                            }
-                            className="px-3 rounded-md border border-gray-200 text-xs"
-                          >
-                            Choose
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <ConditionsPanel
+                  conditions={formData.conditions}
+                  updateFormValue={updateFormValue}
+                  openImagePicker={openImagePicker}
+                />
               )}
 
               {Array.isArray(formData?.caseStudies) && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Case Studies
-                  </div>
-                  <div className="space-y-4">
-                    {formData.caseStudies.map((item: any, index: number) => (
-                      <div key={item.id || index} className="border rounded-md p-3">
-                        <div className="text-xs text-gray-500 mb-2">
-                          {item.condition || `Case ${index + 1}`}
-                        </div>
-                        <input
-                          className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          placeholder="Condition"
-                          value={item.condition || ''}
-                          onChange={(event) =>
-                            updateFormValue(
-                              ['caseStudies', String(index), 'condition'],
-                              event.target.value
-                            )
-                          }
-                        />
-                      <div className="mb-2">
-                        <label className="block text-xs text-gray-500 mb-1">Category</label>
-                        <select
-                          className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          value={item.category || ''}
-                          onChange={(event) =>
-                            updateFormValue(
-                              ['caseStudies', String(index), 'category'],
-                              event.target.value
-                            )
-                          }
-                        >
-                          <option value="">Select category</option>
-                          {caseStudyCategories.map((category: any) => (
-                            <option key={category.id} value={category.id}>
-                              {category.name}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs text-gray-500">Summary (Markdown)</span>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            toggleMarkdownPreview(`caseStudies-${index}-summary`)
-                          }
-                          className="text-xs text-gray-600 hover:text-gray-900"
-                        >
-                          {markdownPreview[`caseStudies-${index}-summary`]
-                            ? 'Edit'
-                            : 'Preview'}
-                        </button>
-                      </div>
-                      {markdownPreview[`caseStudies-${index}-summary`] ? (
-                        <div className="prose prose-sm max-w-none rounded-md border border-gray-200 px-3 py-2">
-                          <ReactMarkdown
-                            components={{
-                              ul: (props) => <ul className="list-disc pl-5" {...props} />,
-                              ol: (props) => (
-                                <ol className="list-decimal pl-5" {...props} />
-                              ),
-                              li: (props) => <li className="mb-1" {...props} />,
-                            }}
-                          >
-                            {normalizeMarkdown(item.summary || '')}
-                          </ReactMarkdown>
-                        </div>
-                      ) : (
-                        <textarea
-                          className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          placeholder="Summary (Markdown supported)"
-                          value={item.summary || ''}
-                          onChange={(event) =>
-                            updateFormValue(
-                              ['caseStudies', String(index), 'summary'],
-                              event.target.value
-                            )
-                          }
-                        />
-                      )}
-                        <div className="grid gap-2 md:grid-cols-3">
-                          <div className="flex gap-2">
-                            <input
-                              className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              placeholder="Image"
-                              value={item.image || ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['caseStudies', String(index), 'image'],
-                                  event.target.value
-                                )
-                              }
-                            />
-                            <button
-                              type="button"
-                              onClick={() =>
-                                openImagePicker(['caseStudies', String(index), 'image'])
-                              }
-                              className="px-3 rounded-md border border-gray-200 text-xs"
-                            >
-                              Choose
-                            </button>
-                          </div>
-                          <div className="flex gap-2">
-                            <input
-                              className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              placeholder="Before image"
-                              value={item.beforeImage || ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['caseStudies', String(index), 'beforeImage'],
-                                  event.target.value
-                                )
-                              }
-                            />
-                            <button
-                              type="button"
-                              onClick={() =>
-                                openImagePicker([
-                                  'caseStudies',
-                                  String(index),
-                                  'beforeImage',
-                                ])
-                              }
-                              className="px-3 rounded-md border border-gray-200 text-xs"
-                            >
-                              Choose
-                            </button>
-                          </div>
-                          <div className="flex gap-2">
-                            <input
-                              className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              placeholder="After image"
-                              value={item.afterImage || ''}
-                              onChange={(event) =>
-                                updateFormValue(
-                                  ['caseStudies', String(index), 'afterImage'],
-                                  event.target.value
-                                )
-                              }
-                            />
-                            <button
-                              type="button"
-                              onClick={() =>
-                                openImagePicker([
-                                  'caseStudies',
-                                  String(index),
-                                  'afterImage',
-                                ])
-                              }
-                              className="px-3 rounded-md border border-gray-200 text-xs"
-                            >
-                              Choose
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <CaseStudiesPanel
+                  caseStudies={formData.caseStudies}
+                  caseStudyCategories={caseStudyCategories}
+                  markdownPreview={markdownPreview}
+                  updateFormValue={updateFormValue}
+                  openImagePicker={openImagePicker}
+                  toggleMarkdownPreview={toggleMarkdownPreview}
+                  normalizeMarkdown={normalizeMarkdown}
+                />
               )}
 
               {formData?.featuredPost && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Featured Post
-                  </div>
-                  <input
-                    className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                    placeholder="Title"
-                    value={formData.featuredPost.title || ''}
-                    onChange={(event) =>
-                      updateFormValue(['featuredPost', 'title'], event.target.value)
-                    }
-                  />
-                  <textarea
-                    className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                    placeholder="Excerpt"
-                    value={formData.featuredPost.excerpt || ''}
-                    onChange={(event) =>
-                      updateFormValue(['featuredPost', 'excerpt'], event.target.value)
-                    }
-                  />
-                  <div className="flex gap-2">
-                    <input
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Image"
-                      value={formData.featuredPost.image || ''}
-                      onChange={(event) =>
-                        updateFormValue(['featuredPost', 'image'], event.target.value)
-                      }
-                    />
-                    <button
-                      type="button"
-                      onClick={() => openImagePicker(['featuredPost', 'image'])}
-                      className="px-3 rounded-md border border-gray-200 text-xs"
-                    >
-                      Choose
-                    </button>
-                  </div>
-                </div>
+                <FeaturedPostPanel
+                  featuredPost={formData.featuredPost}
+                  updateFormValue={updateFormValue}
+                  openImagePicker={openImagePicker}
+                />
               )}
 
               {Array.isArray(formData?.posts) && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Blog Posts
-                  </div>
-                  <div className="space-y-4">
-                    {formData.posts.map((post: any, index: number) => (
-                      <div key={post.slug || index} className="border rounded-md p-3">
-                        <div className="text-xs text-gray-500 mb-2">
-                          {post.title || `Post ${index + 1}`}
-                        </div>
-                        <input
-                          className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          placeholder="Title"
-                          value={post.title || ''}
-                          onChange={(event) =>
-                            updateFormValue(
-                              ['posts', String(index), 'title'],
-                              event.target.value
-                            )
-                          }
-                        />
-                        <textarea
-                          className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                          placeholder="Excerpt"
-                          value={post.excerpt || ''}
-                          onChange={(event) =>
-                            updateFormValue(
-                              ['posts', String(index), 'excerpt'],
-                              event.target.value
-                            )
-                          }
-                        />
-                        <div className="flex gap-2">
-                          <input
-                            className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            placeholder="Image"
-                            value={post.image || ''}
-                            onChange={(event) =>
-                              updateFormValue(
-                                ['posts', String(index), 'image'],
-                                event.target.value
-                              )
-                            }
-                          />
-                          <button
-                            type="button"
-                            onClick={() =>
-                              openImagePicker(['posts', String(index), 'image'])
-                            }
-                            className="px-3 rounded-md border border-gray-200 text-xs"
-                          >
-                            Choose
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <PostsPanel
+                  posts={formData.posts}
+                  updateFormValue={updateFormValue}
+                  openImagePicker={openImagePicker}
+                />
+              )}
+
+              {isShopProductItemFile && formData && (
+                <ShopProductItemPanel
+                  formData={formData}
+                  locale={locale}
+                  shopCategoryOptions={shopCategoryOptions}
+                  shopRoomOptions={shopRoomOptions}
+                  updateFormValue={updateFormValue}
+                />
               )}
 
               {isBlogPostFile && formData?.slug && (
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
-                    Blog Article
-                  </div>
-                  <input
-                    className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                    placeholder="Title"
-                    value={formData.title || ''}
-                    onChange={(event) => updateFormValue(['title'], event.target.value)}
-                  />
-                  <textarea
-                    className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                    placeholder="Excerpt"
-                    value={formData.excerpt || ''}
-                    onChange={(event) => updateFormValue(['excerpt'], event.target.value)}
-                  />
-                  <div className="flex gap-2 mb-2">
-                    <input
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Image"
-                      value={formData.image || ''}
-                      onChange={(event) => updateFormValue(['image'], event.target.value)}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => openImagePicker(['image'])}
-                      className="px-3 rounded-md border border-gray-200 text-xs"
-                    >
-                      Choose
-                    </button>
-                  </div>
-                  <div className="grid gap-2 md:grid-cols-3">
-                    <input
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Author"
-                      value={formData.author || ''}
-                      onChange={(event) => updateFormValue(['author'], event.target.value)}
-                    />
-                    <input
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Publish Date (YYYY-MM-DD)"
-                      value={formData.publishDate || ''}
-                      onChange={(event) =>
-                        updateFormValue(['publishDate'], event.target.value)
-                      }
-                    />
-                  </div>
-                  <input
-                    className="mt-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                    placeholder="Category"
-                    value={formData.category || ''}
-                    onChange={(event) => updateFormValue(['category'], event.target.value)}
-                  />
-                  <div className="mt-3 flex items-center gap-2">
-                    <input
-                      id="featured"
-                      type="checkbox"
-                      className="h-4 w-4 rounded border-gray-300"
-                      checked={Boolean(formData.featured)}
-                      onChange={(event) =>
-                        updateFormValue(['featured'], event.target.checked)
-                      }
-                    />
-                    <label htmlFor="featured" className="text-sm text-gray-700">
-                      Featured article
-                    </label>
-                  </div>
-                  {isBlogPostFile && (
-                    <div className="mt-4 grid gap-4 md:grid-cols-2">
-                      <div className="rounded-md border border-gray-200 p-3">
-                        <div className="text-xs font-semibold text-gray-500 uppercase mb-2">
-                          Related Services
-                        </div>
-                        {blogServiceOptions.length === 0 && (
-                          <p className="text-xs text-gray-500">No services found.</p>
-                        )}
-                        <div className="space-y-2">
-                          {blogServiceOptions.map((service) => (
-                            <label
-                              key={service.id}
-                              className="flex items-center gap-2 text-sm text-gray-700"
-                            >
-                              <input
-                                type="checkbox"
-                                className="h-4 w-4 rounded border-gray-300"
-                                checked={Array.isArray(formData.relatedServices)
-                                  ? formData.relatedServices.includes(service.id)
-                                  : false}
-                                onChange={() =>
-                                  toggleSelection(['relatedServices'], service.id)
-                                }
-                              />
-                              {service.title}
-                            </label>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="rounded-md border border-gray-200 p-3">
-                        <div className="text-xs font-semibold text-gray-500 uppercase mb-2">
-                          Related Conditions
-                        </div>
-                        {blogConditionOptions.length === 0 && (
-                          <p className="text-xs text-gray-500">No conditions found.</p>
-                        )}
-                        <div className="space-y-2">
-                          {blogConditionOptions.map((condition) => (
-                            <label
-                              key={condition.id}
-                              className="flex items-center gap-2 text-sm text-gray-700"
-                            >
-                              <input
-                                type="checkbox"
-                                className="h-4 w-4 rounded border-gray-300"
-                                checked={Array.isArray(formData.relatedConditions)
-                                  ? formData.relatedConditions.includes(condition.id)
-                                  : false}
-                                onChange={() =>
-                                  toggleSelection(['relatedConditions'], condition.id)
-                                }
-                              />
-                              {condition.title}
-                            </label>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  <div className="mt-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs text-gray-500">Body (Markdown)</span>
-                      <button
-                        type="button"
-                        onClick={() => toggleMarkdownPreview('blog-article-body')}
-                        className="text-xs text-gray-600 hover:text-gray-900"
-                      >
-                        {markdownPreview['blog-article-body'] ? 'Edit' : 'Preview'}
-                      </button>
-                    </div>
-                    {markdownPreview['blog-article-body'] ? (
-                      <div className="prose prose-sm max-w-none rounded-md border border-gray-200 px-3 py-2">
-                        <ReactMarkdown
-                          components={{
-                            ul: (props) => <ul className="list-disc pl-5" {...props} />,
-                            ol: (props) => (
-                              <ol className="list-decimal pl-5" {...props} />
-                            ),
-                            li: (props) => <li className="mb-1" {...props} />,
-                          }}
-                        >
-                          {normalizeMarkdown(formData.contentMarkdown || '')}
-                        </ReactMarkdown>
-                      </div>
-                    ) : (
-                      <textarea
-                        className="w-full min-h-[220px] rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        placeholder="Write the article body in Markdown"
-                        value={formData.contentMarkdown || ''}
-                        onChange={(event) =>
-                          updateFormValue(['contentMarkdown'], event.target.value)
-                        }
-                      />
-                    )}
-                  </div>
-                </div>
+                <BlogPostItemPanel
+                  formData={formData}
+                  blogServiceOptions={blogServiceOptions}
+                  blogConditionOptions={blogConditionOptions}
+                  markdownPreview={markdownPreview}
+                  updateFormValue={updateFormValue}
+                  openImagePicker={openImagePicker}
+                  toggleSelection={toggleSelection}
+                  toggleMarkdownPreview={toggleMarkdownPreview}
+                  normalizeMarkdown={normalizeMarkdown}
+                />
               )}
 
               {isPortfolioItemFile && formData && (
-                <div className="border border-gray-200 rounded-lg p-4 space-y-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase">
-                    Portfolio Project
-                  </div>
-
-                  <div className="grid gap-2 md:grid-cols-2">
-                    <input
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Title"
-                      value={formData.title || ''}
-                      onChange={(event) => updateFormValue(['title'], event.target.value)}
-                    />
-                    <input
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Title (Chinese)"
-                      value={formData.titleCn || ''}
-                      onChange={(event) => updateFormValue(['titleCn'], event.target.value)}
-                    />
-                  </div>
-
-                  <div className="grid gap-2 md:grid-cols-4">
-                    <select
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      value={formData.category || ''}
-                      onChange={(event) => updateFormValue(['category'], event.target.value)}
-                    >
-                      <option value="">Select category</option>
-                      {formData.category && !portfolioCategoryOptions.some((item) => item.value === formData.category) && (
-                        <option value={formData.category}>{formData.category}</option>
-                      )}
-                      {portfolioCategoryOptions.map((item) => (
-                        <option key={item.value} value={item.value}>
-                          {locale === 'zh' ? (item.labelCn || item.label) : item.label}
-                        </option>
-                      ))}
-                    </select>
-                    <select
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      value={formData.style || ''}
-                      onChange={(event) => updateFormValue(['style'], event.target.value)}
-                    >
-                      <option value="">Select style</option>
-                      {formData.style && !portfolioStyleOptions.some((item) => item.value === formData.style) && (
-                        <option value={formData.style}>{formData.style}</option>
-                      )}
-                      {portfolioStyleOptions.map((item) => (
-                        <option key={item.value} value={item.value}>
-                          {locale === 'zh' ? (item.labelCn || item.label) : item.label}
-                        </option>
-                      ))}
-                    </select>
-                    <input
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Location"
-                      value={formData.location || ''}
-                      onChange={(event) => updateFormValue(['location'], event.target.value)}
-                    />
-                    <input
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Year"
-                      value={formData.year || ''}
-                      onChange={(event) => updateFormValue(['year'], event.target.value)}
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="block text-xs text-gray-500">Hero / Cover Image</label>
-                    <div className="flex gap-2">
-                      <input
-                        className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        placeholder="Cover image URL"
-                        value={formData.coverImage || ''}
-                        onChange={(event) => updateFormValue(['coverImage'], event.target.value)}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => openImagePicker(['coverImage'])}
-                        className="px-3 rounded-md border border-gray-200 text-xs"
-                      >
-                        Choose
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="block text-xs text-gray-500">Overview (EN)</label>
-                    <textarea
-                      className="w-full min-h-[90px] rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      value={formData.overview?.body || ''}
-                      onChange={(event) => updateFormValue(['overview', 'body'], event.target.value)}
-                    />
-                    <label className="block text-xs text-gray-500">Overview (ZH)</label>
-                    <textarea
-                      className="w-full min-h-[90px] rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      value={formData.overview?.bodyCn || ''}
-                      onChange={(event) => updateFormValue(['overview', 'bodyCn'], event.target.value)}
-                    />
-                  </div>
-
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-semibold text-gray-500 uppercase">Gallery Images</span>
-                      <button
-                        type="button"
-                        onClick={addPortfolioGalleryItem}
-                        className="px-3 py-1.5 rounded-md border border-gray-200 text-xs text-gray-700 hover:bg-gray-50"
-                      >
-                        Add Image
-                      </button>
-                    </div>
-
-                    {(Array.isArray(formData.gallery) ? formData.gallery : []).map((item: any, index: number) => (
-                      <div key={index} className="rounded-md border border-gray-200 p-3 space-y-2">
-                        <div className="flex gap-2">
-                          <input
-                            className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            placeholder="Image URL"
-                            value={item?.image || ''}
-                            onChange={(event) =>
-                              updateFormValue(['gallery', String(index), 'image'], event.target.value)
-                            }
-                          />
-                          <button
-                            type="button"
-                            onClick={() => openImagePicker(['gallery', String(index), 'image'])}
-                            className="px-3 rounded-md border border-gray-200 text-xs"
-                          >
-                            Choose
-                          </button>
-                        </div>
-
-                        <div className="grid gap-2 md:grid-cols-3">
-                          <input
-                            className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            placeholder="Alt (EN)"
-                            value={item?.alt || ''}
-                            onChange={(event) =>
-                              updateFormValue(['gallery', String(index), 'alt'], event.target.value)
-                            }
-                          />
-                          <input
-                            className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            placeholder="Alt (ZH)"
-                            value={item?.altCn || ''}
-                            onChange={(event) =>
-                              updateFormValue(['gallery', String(index), 'altCn'], event.target.value)
-                            }
-                          />
-                          <select
-                            className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                            value={item?.layout || 'full'}
-                            onChange={(event) =>
-                              updateFormValue(['gallery', String(index), 'layout'], event.target.value)
-                            }
-                          >
-                            <option value="full">Full Width</option>
-                            <option value="half">Half Width</option>
-                          </select>
-                        </div>
-
-                        <div>
-                          <button
-                            type="button"
-                            onClick={() => removePortfolioGalleryItem(index)}
-                            className="px-3 py-1.5 rounded-md border border-red-200 text-xs text-red-600 hover:bg-red-50"
-                          >
-                            Remove
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <PortfolioItemPanel
+                  formData={formData}
+                  locale={locale}
+                  portfolioCategoryOptions={portfolioCategoryOptions}
+                  portfolioStyleOptions={portfolioStyleOptions}
+                  updateFormValue={updateFormValue}
+                  openImagePicker={openImagePicker}
+                  addPortfolioGalleryItem={addPortfolioGalleryItem}
+                  removePortfolioGalleryItem={removePortfolioGalleryItem}
+                />
               )}
 
               {isJournalItemFile && formData && (
-                <div className="border border-gray-200 rounded-lg p-4 space-y-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase">
-                    Journal Post
-                  </div>
-
-                  <div className="grid gap-2 md:grid-cols-2">
-                    <input
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Title"
-                      value={formData.title || ''}
-                      onChange={(event) => updateFormValue(['title'], event.target.value)}
-                    />
-                    <input
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Title (Chinese)"
-                      value={formData.titleCn || ''}
-                      onChange={(event) => updateFormValue(['titleCn'], event.target.value)}
-                    />
-                  </div>
-
-                  <div className="grid gap-2 md:grid-cols-2">
-                    <textarea
-                      className="w-full min-h-[80px] rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Excerpt (EN)"
-                      value={formData.excerpt || ''}
-                      onChange={(event) => updateFormValue(['excerpt'], event.target.value)}
-                    />
-                    <textarea
-                      className="w-full min-h-[80px] rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Excerpt (ZH)"
-                      value={formData.excerptCn || ''}
-                      onChange={(event) => updateFormValue(['excerptCn'], event.target.value)}
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="block text-xs text-gray-500">Cover Image</label>
-                    <div className="flex gap-2">
-                      <input
-                        className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        placeholder="Cover image URL"
-                        value={formData.coverImage || ''}
-                        onChange={(event) => updateFormValue(['coverImage'], event.target.value)}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => openImagePicker(['coverImage'])}
-                        className="px-3 rounded-md border border-gray-200 text-xs"
-                      >
-                        Choose
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="grid gap-2 md:grid-cols-5">
-                    <input
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Author"
-                      value={formData.author || ''}
-                      onChange={(event) => updateFormValue(['author'], event.target.value)}
-                    />
-                    <input
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Date (YYYY-MM-DD)"
-                      value={formData.date || ''}
-                      onChange={(event) => updateFormValue(['date'], event.target.value)}
-                    />
-                    <select
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      value={formData.category || ''}
-                      onChange={(event) => updateFormValue(['category'], event.target.value)}
-                    >
-                      <option value="">Select category</option>
-                      {formData.category && !journalCategoryOptions.some((item) => item.value === formData.category) && (
-                        <option value={formData.category}>{formData.category}</option>
-                      )}
-                      {journalCategoryOptions.map((item) => (
-                        <option key={item.value} value={item.value}>
-                          {locale === 'zh' ? (item.labelCn || item.label) : item.label}
-                        </option>
-                      ))}
-                    </select>
-                    <select
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      value={formData.type || 'article'}
-                      onChange={(event) => updateFormValue(['type'], event.target.value)}
-                    >
-                      <option value="article">article</option>
-                      <option value="video">video</option>
-                    </select>
-                    <div className="flex items-center gap-2 px-2">
-                      <input
-                        id="journal-featured"
-                        type="checkbox"
-                        className="h-4 w-4 rounded border-gray-300"
-                        checked={Boolean(formData.featured)}
-                        onChange={(event) => updateFormValue(['featured'], event.target.checked)}
-                      />
-                      <label htmlFor="journal-featured" className="text-sm text-gray-700">
-                        Featured
-                      </label>
-                    </div>
-                  </div>
-
-                  <div className="grid gap-2 md:grid-cols-2">
-                    <input
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Video URL (optional)"
-                      value={formData.videoUrl || ''}
-                      onChange={(event) => updateFormValue(['videoUrl'], event.target.value)}
-                    />
-                    <input
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Video Duration (optional)"
-                      value={formData.videoDuration || ''}
-                      onChange={(event) => updateFormValue(['videoDuration'], event.target.value)}
-                    />
-                  </div>
-
-                  <div className="grid gap-2 md:grid-cols-2">
-                    <textarea
-                      className="w-full min-h-[90px] rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Body (EN, Markdown supported)"
-                      value={formData.body || ''}
-                      onChange={(event) => updateFormValue(['body'], event.target.value)}
-                    />
-                    <textarea
-                      className="w-full min-h-[90px] rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Body (ZH, Markdown supported)"
-                      value={formData.bodyCn || ''}
-                      onChange={(event) => updateFormValue(['bodyCn'], event.target.value)}
-                    />
-                  </div>
-
-                  <div className="grid gap-2 md:grid-cols-2">
-                    <textarea
-                      className="w-full min-h-[72px] rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Related Post Slugs (one per line)"
-                      value={Array.isArray(formData.relatedPosts) ? formData.relatedPosts.join('\n') : ''}
-                      onChange={(event) =>
-                        updateFormValue(
-                          ['relatedPosts'],
-                          event.target.value
-                            .split('\n')
-                            .map((s) => s.trim())
-                            .filter(Boolean)
-                        )
-                      }
-                    />
-                    <textarea
-                      className="w-full min-h-[72px] rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Related Product Slugs (one per line)"
-                      value={Array.isArray(formData.relatedProducts) ? formData.relatedProducts.join('\n') : ''}
-                      onChange={(event) =>
-                        updateFormValue(
-                          ['relatedProducts'],
-                          event.target.value
-                            .split('\n')
-                            .map((s) => s.trim())
-                            .filter(Boolean)
-                        )
-                      }
-                    />
-                  </div>
-                </div>
+                <JournalItemPanel
+                  formData={formData}
+                  locale={locale}
+                  journalCategoryOptions={journalCategoryOptions}
+                  updateFormValue={updateFormValue}
+                  openImagePicker={openImagePicker}
+                />
               )}
 
               {isCollectionItemFile && formData && (
-                <div className="border border-gray-200 rounded-lg p-4 space-y-4">
-                  <div className="text-xs font-semibold text-gray-500 uppercase">
-                    Collection
-                  </div>
-
-                  <div className="grid gap-2 md:grid-cols-2">
-                    <input
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Slug"
-                      value={formData.slug || ''}
-                      onChange={(event) => updateFormValue(['slug'], event.target.value)}
-                    />
-                    <div className="flex items-center gap-2 px-2">
-                      <input
-                        id="collection-featured"
-                        type="checkbox"
-                        className="h-4 w-4 rounded border-gray-300"
-                        checked={Boolean(formData.featured)}
-                        onChange={(event) => updateFormValue(['featured'], event.target.checked)}
-                      />
-                      <label htmlFor="collection-featured" className="text-sm text-gray-700">
-                        Featured
-                      </label>
-                    </div>
-                  </div>
-
-                  <div className="grid gap-2 md:grid-cols-2">
-                    <input
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Title"
-                      value={formData.title || ''}
-                      onChange={(event) => updateFormValue(['title'], event.target.value)}
-                    />
-                    <input
-                      className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Title (Chinese)"
-                      value={formData.titleCn || ''}
-                      onChange={(event) => updateFormValue(['titleCn'], event.target.value)}
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="block text-xs text-gray-500">Cover Image</label>
-                    <div className="flex gap-2">
-                      <input
-                        className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                        placeholder="Cover image URL"
-                        value={formData.coverImage || ''}
-                        onChange={(event) => updateFormValue(['coverImage'], event.target.value)}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => openImagePicker(['coverImage'])}
-                        className="px-3 rounded-md border border-gray-200 text-xs"
-                      >
-                        Choose
-                      </button>
-                    </div>
-                    {formData.coverImage && (
-                      <img
-                        src={formData.coverImage}
-                        alt={formData.title || 'Collection cover'}
-                        className="h-32 w-full rounded-md object-cover border border-gray-200"
-                      />
-                    )}
-                  </div>
-
-                  <div className="grid gap-2 md:grid-cols-2">
-                    <textarea
-                      className="w-full min-h-[90px] rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Description (EN)"
-                      value={formData.description || ''}
-                      onChange={(event) => updateFormValue(['description'], event.target.value)}
-                    />
-                    <textarea
-                      className="w-full min-h-[90px] rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Description (ZH)"
-                      value={formData.descriptionCn || ''}
-                      onChange={(event) => updateFormValue(['descriptionCn'], event.target.value)}
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <label className="block text-xs text-gray-500">Mood Images</label>
-                      <button
-                        type="button"
-                        onClick={addCollectionMoodImage}
-                        className="px-2.5 py-1 rounded-md border border-gray-200 text-xs hover:bg-gray-50"
-                      >
-                        Add Mood Image
-                      </button>
-                    </div>
-                    <div className="space-y-3">
-                      {(Array.isArray(formData.moodImages) ? formData.moodImages : []).map((image: string, index: number) => (
-                        <div key={`mood-image-${index}`} className="rounded-md border border-gray-200 p-3 space-y-2">
-                          <div className="flex gap-2">
-                            <input
-                              className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
-                              placeholder={`Mood image URL #${index + 1}`}
-                              value={image || ''}
-                              onChange={(event) =>
-                                updateFormValue(['moodImages', String(index)], event.target.value)
-                              }
-                            />
-                            <button
-                              type="button"
-                              onClick={() => openImagePicker(['moodImages', String(index)])}
-                              className="px-3 rounded-md border border-gray-200 text-xs"
-                            >
-                              Choose
-                            </button>
-                          </div>
-                          {image && (
-                            <img
-                              src={image}
-                              alt={`Mood ${index + 1}`}
-                              className="h-24 w-full rounded-md object-cover border border-gray-200"
-                            />
-                          )}
-                          <button
-                            type="button"
-                            onClick={() => removeCollectionMoodImage(index)}
-                            className="px-3 py-1.5 rounded-md border border-red-200 text-xs text-red-600 hover:bg-red-50"
-                          >
-                            Remove
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="grid gap-2 md:grid-cols-2">
-                    <textarea
-                      className="w-full min-h-[72px] rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Portfolio Project Slugs (one per line)"
-                      value={Array.isArray(formData.portfolioProjects) ? formData.portfolioProjects.join('\n') : ''}
-                      onChange={(event) =>
-                        updateFormValue(
-                          ['portfolioProjects'],
-                          event.target.value
-                            .split('\n')
-                            .map((s) => s.trim())
-                            .filter(Boolean)
-                        )
-                      }
-                    />
-                    <textarea
-                      className="w-full min-h-[72px] rounded-md border border-gray-200 px-3 py-2 text-sm"
-                      placeholder="Shop Product Slugs (one per line)"
-                      value={Array.isArray(formData.shopProducts) ? formData.shopProducts.join('\n') : ''}
-                      onChange={(event) =>
-                        updateFormValue(
-                          ['shopProducts'],
-                          event.target.value
-                            .split('\n')
-                            .map((s) => s.trim())
-                            .filter(Boolean)
-                        )
-                      }
-                    />
-                  </div>
-                </div>
+                <CollectionItemPanel
+                  formData={formData}
+                  updateFormValue={updateFormValue}
+                  openImagePicker={openImagePicker}
+                  addCollectionMoodImage={addCollectionMoodImage}
+                  removeCollectionMoodImage={removeCollectionMoodImage}
+                />
               )}
 
-              {formData && !formData.hero && !formData.introduction && !formData.cta && !isBlogPostFile && !isPortfolioItemFile && !isJournalItemFile && !isCollectionItemFile && (
+              {isTestimonialsFile && formData && (
+                <TestimonialsPanel
+                  items={Array.isArray(formData.items) ? formData.items : []}
+                  locale={locale}
+                  categoryOptions={testimonialCategoryOptions}
+                  updateFormValue={updateFormValue}
+                  addTestimonialItem={addTestimonialItem}
+                  removeTestimonialItem={removeTestimonialItem}
+                />
+              )}
+
+              {formData && !formData.hero && !formData.introduction && !formData.cta && !isBlogPostFile && !isPortfolioItemFile && !isJournalItemFile && !isShopProductItemFile && !isCollectionItemFile && !isTestimonialsFile && (
                 <div className="text-sm text-gray-500">
                   No schema panels available for this file yet. Use the JSON tab.
                 </div>

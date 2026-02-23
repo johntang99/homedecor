@@ -1,43 +1,91 @@
 {
-  "hero": {
-    "variant": "minimal-text",
-    "headline": "Shop Julia Studio",
-    "headlineCn": "选购 Julia Studio",
-    "subline": "Furniture and décor curated by Julia — at competitive prices.",
-    "sublineCn": "Julia 精心挑选的家具与装饰——价格极具竞争力。"
-  },
-  "filters": {
-    "categories": [
-      { "value": "all", "label": "All", "labelCn": "全部" },
-      { "value": "furniture", "label": "Furniture", "labelCn": "家具" },
-      { "value": "lighting", "label": "Lighting", "labelCn": "灯具" },
-      { "value": "textiles", "label": "Textiles", "labelCn": "纺织品" },
-      { "value": "art", "label": "Art & Décor", "labelCn": "艺术与装饰" },
-      { "value": "accessories", "label": "Accessories", "labelCn": "配饰" }
-    ],
-    "rooms": [
-      { "value": "all", "label": "All Rooms", "labelCn": "全部空间" },
-      { "value": "living", "label": "Living Room", "labelCn": "客厅" },
-      { "value": "bedroom", "label": "Bedroom", "labelCn": "卧室" },
-      { "value": "dining", "label": "Dining", "labelCn": "餐厅" },
-      { "value": "office", "label": "Office", "labelCn": "办公室" },
-      { "value": "outdoor", "label": "Outdoor", "labelCn": "户外" }
-    ]
-  },
   "grid": {
     "variant": "grid-4",
     "itemsPerPage": 16,
     "loadMoreLabel": "Load More",
     "loadMoreLabelCn": "加载更多"
   },
+  "hero": {
+    "subline": "Furniture and décor curated by Julia — at competitive prices.",
+    "variant": "minimal-text",
+    "headline": "Shop Julia Studio",
+    "sublineCn": "Julia 精心挑选的家具与装饰——价格极具竞争力。",
+    "headlineCn": "选购 Julia Studio"
+  },
+  "filters": {
+    "rooms": [
+      {
+        "label": "All Rooms",
+        "value": "all",
+        "labelCn": "全部空间"
+      },
+      {
+        "label": "Living Room",
+        "value": "living",
+        "labelCn": "客厅"
+      },
+      {
+        "label": "Bedroom",
+        "value": "bedroom",
+        "labelCn": "卧室"
+      },
+      {
+        "label": "Dining",
+        "value": "dining",
+        "labelCn": "餐厅"
+      },
+      {
+        "label": "Office",
+        "value": "office",
+        "labelCn": "办公室"
+      },
+      {
+        "label": "Outdoor",
+        "value": "outdoor",
+        "labelCn": "户外"
+      }
+    ],
+    "categories": [
+      {
+        "label": "All",
+        "value": "all",
+        "labelCn": "全部"
+      },
+      {
+        "label": "Furniture",
+        "value": "furniture",
+        "labelCn": "家具"
+      },
+      {
+        "label": "Lighting",
+        "value": "lighting",
+        "labelCn": "灯具"
+      },
+      {
+        "label": "Textiles",
+        "value": "textiles",
+        "labelCn": "纺织品"
+      },
+      {
+        "label": "Art & Décor",
+        "value": "art",
+        "labelCn": "艺术与装饰"
+      },
+      {
+        "label": "Accessories",
+        "value": "accessories",
+        "labelCn": "配饰"
+      }
+    ]
+  },
   "tradeProgram": {
-    "enabled": true,
-    "headline": "Trade Program",
-    "headlineCn": "设计师采购计划",
     "body": "Interior designers and trade professionals: access exclusive pricing on our full collection.",
     "bodyCn": "室内设计师和行业专业人士：享受我们全系列产品的独家价格。",
+    "ctaHref": "/contact?subject=trade",
+    "enabled": true,
     "ctaLabel": "Apply for Trade Pricing",
+    "headline": "Trade Program",
     "ctaLabelCn": "申请行业价格",
-    "ctaHref": "/contact?subject=trade"
+    "headlineCn": "设计师采购计划"
   }
 }

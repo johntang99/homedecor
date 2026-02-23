@@ -1,98 +1,170 @@
 {
-  "hero": {
-    "variant": "single-image",
-    "headline": "Our Services",
-    "headlineCn": "我们的服务",
-    "subline": "From concept to completion — a seamless design experience.",
-    "sublineCn": "从概念到完工——无缝的设计体验。",
+  "cta": {
+    "ctaHref": "/contact",
+    "variant": "full-width-elegant",
+    "ctaLabel": "Book Your Free Consultation",
+    "headline": "Every great space starts with a conversation.",
+    "ctaLabelCn": "预约免费咨询",
+    "headlineCn": "每一个精彩的空间，始于一次对话。",
     "backgroundImage": ""
   },
-  "designServices": {
-    "variant": "detailed-list",
-    "headline": "Design Services",
-    "headlineCn": "设计服务",
+  "hero": {
+    "subline": "From concept to completion — a seamless design experience.",
+    "variant": "photo-background",
+    "headline": "Our Services",
+    "sublineCn": "从概念到完工——无缝的设计体验。",
+    "headlineCn": "我们的服务",
+    "backgroundImage": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771783471869-nate-berkus-antique-mantel-vignette-eclectic-interior-jpg.jpg"
+  },
+  "process": {
+    "steps": [
+      {
+        "title": "Consultation",
+        "number": 1,
+        "titleCn": "咨询",
+        "description": "We listen to your vision, understand your lifestyle, and discuss your budget.",
+        "descriptionCn": "我们倾听您的愿景，了解您的生活方式，讨论您的预算。"
+      },
+      {
+        "title": "Design Concept",
+        "number": 2,
+        "titleCn": "设计概念",
+        "description": "Mood boards, space plans, and material palettes bring your vision to life.",
+        "descriptionCn": "情绪板、空间规划和材料色板让您的愿景成为现实。"
+      },
+      {
+        "title": "Development",
+        "number": 3,
+        "titleCn": "深化设计",
+        "description": "Detailed drawings, specifications, and selections finalized.",
+        "descriptionCn": "详细图纸、规格和选材定稿。"
+      },
+      {
+        "title": "Procurement",
+        "number": 4,
+        "titleCn": "采购",
+        "description": "Furniture, materials, and fixtures ordered at competitive prices.",
+        "descriptionCn": "家具、材料和灯具以极具竞争力的价格订购。"
+      },
+      {
+        "title": "Installation",
+        "number": 5,
+        "titleCn": "施工安装",
+        "description": "Our construction team brings the design to life with precision.",
+        "descriptionCn": "我们的施工团队精准地将设计变为现实。"
+      },
+      {
+        "title": "Reveal",
+        "number": 6,
+        "titleCn": "揭幕",
+        "description": "Your new space — styled, photographed, and ready to enjoy.",
+        "descriptionCn": "您的新空间——造型完成、拍摄记录，等待享受。"
+      }
+    ],
+    "variant": "horizontal",
+    "headline": "Our Process",
+    "headlineCn": "我们的流程"
+  },
+  "specialties": {
     "items": [
       {
+        "icon": "home",
+        "label": "Residential",
+        "labelCn": "住宅"
+      },
+      {
+        "icon": "building",
+        "label": "Commercial & Office",
+        "labelCn": "商业与办公"
+      },
+      {
+        "icon": "frame",
+        "label": "Exhibition & Events",
+        "labelCn": "展览与活动"
+      },
+      {
+        "icon": "palette",
+        "label": "Art Installations",
+        "labelCn": "艺术装置"
+      },
+      {
+        "icon": "store",
+        "label": "Retail & Hospitality",
+        "labelCn": "零售与酒店"
+      },
+      {
+        "icon": "armchair",
+        "label": "Custom Furniture",
+        "labelCn": "定制家具"
+      }
+    ],
+    "variant": "icon-grid",
+    "headline": "Specialties",
+    "headlineCn": "专业领域"
+  },
+  "designServices": {
+    "items": [
+      {
+        "image": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771820229346-photo-1537726235470-8504e3beef77.jpg",
         "title": "Full-Service Interior Design",
         "titleCn": "全案室内设计",
         "description": "Comprehensive design from initial concept through installation. Space planning, material selection, custom furnishings, and project management — all handled by our team.",
-        "descriptionCn": "从初步概念到安装的全面设计。空间规划、材料选择、定制家具和项目管理——全部由我们的团队负责。",
-        "image": ""
+        "descriptionCn": "从初步概念到安装的全面设计。空间规划、材料选择、定制家具和项目管理——全部由我们的团队负责。"
       },
       {
+        "image": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771820299872-photo-1667450799167-09e7dd903e59.jpg",
         "title": "Virtual Design",
         "titleCn": "线上设计",
         "description": "Remote design consultations with mood boards, space plans, and curated shopping lists — perfect for clients anywhere in the world.",
-        "descriptionCn": "远程设计咨询，提供情绪板、空间规划和精选购物清单——适合世界各地的客户。",
-        "image": ""
+        "descriptionCn": "远程设计咨询，提供情绪板、空间规划和精选购物清单——适合世界各地的客户。"
       },
       {
+        "image": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771751480230-photo-1633330948542-0b3bdeefcdb3.jpg",
         "title": "Room Refresh",
         "titleCn": "空间焕新",
         "description": "Targeted updates for a single room — new furniture, accessories, and styling to transform your space quickly.",
-        "descriptionCn": "针对单个房间的更新——新家具、配饰和造型，快速改变您的空间。",
-        "image": ""
+        "descriptionCn": "针对单个房间的更新——新家具、配饰和造型，快速改变您的空间。"
       }
-    ]
+    ],
+    "variant": "detailed-list",
+    "headline": "Design Services",
+    "headlineCn": "设计服务"
+  },
+  "furnishingServices": {
+    "body": "Access trade-only suppliers and competitive pricing through our purchasing program. We source furniture, lighting, textiles, and accessories — or shop our curated collection.",
+    "image": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771783471869-nate-berkus-antique-mantel-vignette-eclectic-interior-jpg.jpg",
+    "bodyCn": "通过我们的采购计划，享受行业独家供应商和极具竞争力的价格。我们采购家具、灯具、纺织品和配饰——或选购我们的精选系列。",
+    "ctaHref": "/shop",
+    "variant": "text-image",
+    "ctaLabel": "Shop Our Collection",
+    "headline": "Furniture & Décor",
+    "ctaLabelCn": "选购我们的系列",
+    "headlineCn": "家具与装饰"
   },
   "constructionServices": {
+    "body": "Our in-house construction team ensures design integrity from plan to reality. Custom millwork, cabinetry, renovation management, and furniture assembly — all executed with precision.",
+    "image": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771820524255-photo-1646324554833-f0b6a479fa5d.jpg",
+    "bodyCn": "我们的内部施工团队确保设计从图纸到现实的完整性。定制木工、橱柜、翻新管理和家具组装——全部精准执行。",
     "variant": "text-image",
     "headline": "Construction & Installation",
     "headlineCn": "施工与安装",
-    "body": "Our in-house construction team ensures design integrity from plan to reality. Custom millwork, cabinetry, renovation management, and furniture assembly — all executed with precision.",
-    "bodyCn": "我们的内部施工团队确保设计从图纸到现实的完整性。定制木工、橱柜、翻新管理和家具组装——全部精准执行。",
-    "image": "",
     "capabilities": [
-      { "label": "Custom Millwork & Cabinetry", "labelCn": "定制木工与橱柜" },
-      { "label": "Renovation Management", "labelCn": "翻新管理" },
-      { "label": "Furniture Assembly & Installation", "labelCn": "家具组装与安装" },
-      { "label": "Lighting & Fixture Installation", "labelCn": "灯具安装" }
+      {
+        "label": "Custom Millwork & Cabinetry",
+        "labelCn": "定制木工与橱柜"
+      },
+      {
+        "label": "Renovation Management",
+        "labelCn": "翻新管理"
+      },
+      {
+        "label": "Furniture Assembly & Installation",
+        "labelCn": "家具组装与安装"
+      },
+      {
+        "label": "Lighting & Fixture Installation",
+        "labelCn": "灯具安装"
+      }
     ]
-  },
-  "furnishingServices": {
-    "variant": "text-image",
-    "headline": "Furniture & Décor",
-    "headlineCn": "家具与装饰",
-    "body": "Access trade-only suppliers and competitive pricing through our purchasing program. We source furniture, lighting, textiles, and accessories — or shop our curated collection.",
-    "bodyCn": "通过我们的采购计划，享受行业独家供应商和极具竞争力的价格。我们采购家具、灯具、纺织品和配饰——或选购我们的精选系列。",
-    "image": "",
-    "ctaLabel": "Shop Our Collection",
-    "ctaLabelCn": "选购我们的系列",
-    "ctaHref": "/shop"
-  },
-  "process": {
-    "variant": "horizontal",
-    "headline": "Our Process",
-    "headlineCn": "我们的流程",
-    "steps": [
-      { "number": 1, "title": "Consultation", "titleCn": "咨询", "description": "We listen to your vision, understand your lifestyle, and discuss your budget.", "descriptionCn": "我们倾听您的愿景，了解您的生活方式，讨论您的预算。" },
-      { "number": 2, "title": "Design Concept", "titleCn": "设计概念", "description": "Mood boards, space plans, and material palettes bring your vision to life.", "descriptionCn": "情绪板、空间规划和材料色板让您的愿景成为现实。" },
-      { "number": 3, "title": "Development", "titleCn": "深化设计", "description": "Detailed drawings, specifications, and selections finalized.", "descriptionCn": "详细图纸、规格和选材定稿。" },
-      { "number": 4, "title": "Procurement", "titleCn": "采购", "description": "Furniture, materials, and fixtures ordered at competitive prices.", "descriptionCn": "家具、材料和灯具以极具竞争力的价格订购。" },
-      { "number": 5, "title": "Installation", "titleCn": "施工安装", "description": "Our construction team brings the design to life with precision.", "descriptionCn": "我们的施工团队精准地将设计变为现实。" },
-      { "number": 6, "title": "Reveal", "titleCn": "揭幕", "description": "Your new space — styled, photographed, and ready to enjoy.", "descriptionCn": "您的新空间——造型完成、拍摄记录，等待享受。" }
-    ]
-  },
-  "specialties": {
-    "variant": "icon-grid",
-    "headline": "Specialties",
-    "headlineCn": "专业领域",
-    "items": [
-      { "icon": "home", "label": "Residential", "labelCn": "住宅" },
-      { "icon": "building", "label": "Commercial & Office", "labelCn": "商业与办公" },
-      { "icon": "frame", "label": "Exhibition & Events", "labelCn": "展览与活动" },
-      { "icon": "palette", "label": "Art Installations", "labelCn": "艺术装置" },
-      { "icon": "store", "label": "Retail & Hospitality", "labelCn": "零售与酒店" },
-      { "icon": "armchair", "label": "Custom Furniture", "labelCn": "定制家具" }
-    ]
-  },
-  "cta": {
-    "variant": "full-width-elegant",
-    "headline": "Every great space starts with a conversation.",
-    "headlineCn": "每一个精彩的空间，始于一次对话。",
-    "ctaLabel": "Book Your Free Consultation",
-    "ctaLabelCn": "预约免费咨询",
-    "ctaHref": "/contact",
-    "backgroundImage": ""
   }
 }

@@ -1,0 +1,183 @@
+import ReactMarkdown from 'react-markdown';
+
+interface LinkOption {
+  id: string;
+  title: string;
+}
+
+interface BlogPostItemPanelProps {
+  formData: Record<string, any>;
+  blogServiceOptions: LinkOption[];
+  blogConditionOptions: LinkOption[];
+  markdownPreview: Record<string, boolean>;
+  updateFormValue: (path: string[], value: any) => void;
+  openImagePicker: (path: string[]) => void;
+  toggleSelection: (path: string[], value: string) => void;
+  toggleMarkdownPreview: (key: string) => void;
+  normalizeMarkdown: (value: string) => string;
+}
+
+export function BlogPostItemPanel({
+  formData,
+  blogServiceOptions,
+  blogConditionOptions,
+  markdownPreview,
+  updateFormValue,
+  openImagePicker,
+  toggleSelection,
+  toggleMarkdownPreview,
+  normalizeMarkdown,
+}: BlogPostItemPanelProps) {
+  return (
+    <div className="border border-gray-200 rounded-lg p-4">
+      <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
+        Blog Article
+      </div>
+      <input
+        className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+        placeholder="Title"
+        value={formData.title || ''}
+        onChange={(event) => updateFormValue(['title'], event.target.value)}
+      />
+      <textarea
+        className="mb-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+        placeholder="Excerpt"
+        value={formData.excerpt || ''}
+        onChange={(event) => updateFormValue(['excerpt'], event.target.value)}
+      />
+      <div className="flex gap-2 mb-2">
+        <input
+          className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+          placeholder="Image"
+          value={formData.image || ''}
+          onChange={(event) => updateFormValue(['image'], event.target.value)}
+        />
+        <button
+          type="button"
+          onClick={() => openImagePicker(['image'])}
+          className="px-3 rounded-md border border-gray-200 text-xs"
+        >
+          Choose
+        </button>
+      </div>
+      <div className="grid gap-2 md:grid-cols-3">
+        <input
+          className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+          placeholder="Author"
+          value={formData.author || ''}
+          onChange={(event) => updateFormValue(['author'], event.target.value)}
+        />
+        <input
+          className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+          placeholder="Publish Date (YYYY-MM-DD)"
+          value={formData.publishDate || ''}
+          onChange={(event) => updateFormValue(['publishDate'], event.target.value)}
+        />
+      </div>
+      <input
+        className="mt-2 w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+        placeholder="Category"
+        value={formData.category || ''}
+        onChange={(event) => updateFormValue(['category'], event.target.value)}
+      />
+      <div className="mt-3 flex items-center gap-2">
+        <input
+          id="featured"
+          type="checkbox"
+          className="h-4 w-4 rounded border-gray-300"
+          checked={Boolean(formData.featured)}
+          onChange={(event) => updateFormValue(['featured'], event.target.checked)}
+        />
+        <label htmlFor="featured" className="text-sm text-gray-700">
+          Featured article
+        </label>
+      </div>
+      <div className="mt-4 grid gap-4 md:grid-cols-2">
+        <div className="rounded-md border border-gray-200 p-3">
+          <div className="text-xs font-semibold text-gray-500 uppercase mb-2">
+            Related Services
+          </div>
+          {blogServiceOptions.length === 0 && (
+            <p className="text-xs text-gray-500">No services found.</p>
+          )}
+          <div className="space-y-2">
+            {blogServiceOptions.map((service) => (
+              <label
+                key={service.id}
+                className="flex items-center gap-2 text-sm text-gray-700"
+              >
+                <input
+                  type="checkbox"
+                  className="h-4 w-4 rounded border-gray-300"
+                  checked={Array.isArray(formData.relatedServices)
+                    ? formData.relatedServices.includes(service.id)
+                    : false}
+                  onChange={() => toggleSelection(['relatedServices'], service.id)}
+                />
+                {service.title}
+              </label>
+            ))}
+          </div>
+        </div>
+        <div className="rounded-md border border-gray-200 p-3">
+          <div className="text-xs font-semibold text-gray-500 uppercase mb-2">
+            Related Conditions
+          </div>
+          {blogConditionOptions.length === 0 && (
+            <p className="text-xs text-gray-500">No conditions found.</p>
+          )}
+          <div className="space-y-2">
+            {blogConditionOptions.map((condition) => (
+              <label
+                key={condition.id}
+                className="flex items-center gap-2 text-sm text-gray-700"
+              >
+                <input
+                  type="checkbox"
+                  className="h-4 w-4 rounded border-gray-300"
+                  checked={Array.isArray(formData.relatedConditions)
+                    ? formData.relatedConditions.includes(condition.id)
+                    : false}
+                  onChange={() => toggleSelection(['relatedConditions'], condition.id)}
+                />
+                {condition.title}
+              </label>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="mt-4">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-xs text-gray-500">Body (Markdown)</span>
+          <button
+            type="button"
+            onClick={() => toggleMarkdownPreview('blog-article-body')}
+            className="text-xs text-gray-600 hover:text-gray-900"
+          >
+            {markdownPreview['blog-article-body'] ? 'Edit' : 'Preview'}
+          </button>
+        </div>
+        {markdownPreview['blog-article-body'] ? (
+          <div className="prose prose-sm max-w-none rounded-md border border-gray-200 px-3 py-2">
+            <ReactMarkdown
+              components={{
+                ul: (props) => <ul className="list-disc pl-5" {...props} />,
+                ol: (props) => <ol className="list-decimal pl-5" {...props} />,
+                li: (props) => <li className="mb-1" {...props} />,
+              }}
+            >
+              {normalizeMarkdown(formData.contentMarkdown || '')}
+            </ReactMarkdown>
+          </div>
+        ) : (
+          <textarea
+            className="w-full min-h-[220px] rounded-md border border-gray-200 px-3 py-2 text-sm"
+            placeholder="Write the article body in Markdown"
+            value={formData.contentMarkdown || ''}
+            onChange={(event) => updateFormValue(['contentMarkdown'], event.target.value)}
+          />
+        )}
+      </div>
+    </div>
+  );
+}

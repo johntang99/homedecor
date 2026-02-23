@@ -1,28 +1,44 @@
 {
+  "cta": {
+    "ctaHref": "/contact",
+    "variant": "centered",
+    "ctaLabel": "Book Consultation",
+    "headline": "Ready to join them?",
+    "ctaLabelCn": "预约咨询",
+    "headlineCn": "准备好加入他们了吗？"
+  },
   "hero": {
+    "subline": "What our clients say about working with Julia Studio.",
     "variant": "minimal-text",
     "headline": "Client Stories",
-    "headlineCn": "客户故事",
-    "subline": "What our clients say about working with Julia Studio.",
-    "sublineCn": "客户对与 Julia Studio 合作的评价。"
+    "sublineCn": "客户对与 Julia Studio 合作的评价。",
+    "headlineCn": "客户故事"
   },
   "display": {
     "variant": "masonry-cards",
-    "showFilters": true,
-    "filterByCategory": true,
     "categories": [
-      { "value": "all", "label": "All", "labelCn": "全部" },
-      { "value": "residential", "label": "Residential", "labelCn": "住宅" },
-      { "value": "commercial", "label": "Commercial", "labelCn": "商业" },
-      { "value": "exhibition", "label": "Exhibition", "labelCn": "展览" }
-    ]
-  },
-  "cta": {
-    "variant": "centered",
-    "headline": "Ready to join them?",
-    "headlineCn": "准备好加入他们了吗？",
-    "ctaLabel": "Book Consultation",
-    "ctaLabelCn": "预约咨询",
-    "ctaHref": "/contact"
+      {
+        "label": "All",
+        "value": "all",
+        "labelCn": "全部"
+      },
+      {
+        "label": "Residential",
+        "value": "residential",
+        "labelCn": "住宅"
+      },
+      {
+        "label": "Commercial",
+        "value": "commercial",
+        "labelCn": "商业"
+      },
+      {
+        "label": "Exhibition",
+        "value": "exhibition",
+        "labelCn": "展览"
+      }
+    ],
+    "showFilters": true,
+    "filterByCategory": true
   }
 }

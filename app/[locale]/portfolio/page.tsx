@@ -134,7 +134,7 @@ export default function PortfolioPage() {
                     href={`/${locale}/portfolio/${project.slug}`}
                     className="group block mb-4 break-inside-avoid relative"
                   >
-                    <div className="relative image-frame aspect-[4/3]">
+                    <div className="relative image-frame photo-shadow-sm aspect-[4/3]">
                       {projectImage ? (
                         <Image
                           src={projectImage}

@@ -1,10 +1,13 @@
 {
+  "grid": {
+    "variant": "large-cards",
+    "itemsPerPage": 12
+  },
   "hero": {
+    "subline": "Curated collections inspired by our favorite design themes.",
     "variant": "minimal-text",
     "headline": "Design Collections",
-    "headlineCn": "设计系列",
-    "subline": "Curated collections inspired by our favorite design themes.",
-    "sublineCn": "以我们最喜爱的设计主题为灵感的精选系列。"
-  },
-  "grid": { "variant": "large-cards", "itemsPerPage": 12 }
+    "sublineCn": "以我们最喜爱的设计主题为灵感的精选系列。",
+    "headlineCn": "设计系列"
+  }
 }

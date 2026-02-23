@@ -90,7 +90,7 @@ export default function JournalPage() {
         <section className="bg-white border-b border-[var(--border)]">
           <div className="container-custom py-12">
             <Link href={`/${locale}/journal/${featuredPost.slug}`} className="group grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-              <div className="relative aspect-[4/3] image-frame bg-[var(--primary-50)]">
+              <div className="relative aspect-[4/3] image-frame photo-shadow-lg bg-[var(--primary-50)]">
                 {featuredPost.coverImage ? <Image src={featuredPost.coverImage} alt={tx(featuredPost.title, featuredPost.titleCn)} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width:768px) 100vw, 50vw" /> : <div className="w-full h-full" />}
                 {featuredPost.type === 'video' && (
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -139,7 +139,7 @@ export default function JournalPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
                 {displayed.map(post => (
                   <Link key={post.slug} href={`/${locale}/journal/${post.slug}`} className="group bg-white">
-                    <div className="relative aspect-[4/3] image-frame bg-[var(--primary-50)]">
+                    <div className="relative aspect-[4/3] image-frame photo-shadow-sm bg-[var(--primary-50)]">
                       {post.coverImage ? <Image src={post.coverImage} alt={tx(post.title, post.titleCn)} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width:768px) 100vw, 33vw" /> : <div className="w-full h-full" />}
                       {post.type === 'video' && (
                         <div className="absolute inset-0 flex items-center justify-center">

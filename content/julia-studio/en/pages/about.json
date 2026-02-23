@@ -1,104 +1,160 @@
 {
+  "cta": {
+    "ctaHref": "/contact",
+    "variant": "centered",
+    "ctaLabel": "Book Consultation",
+    "headline": "Let's create something beautiful together.",
+    "ctaLabelCn": "预约咨询",
+    "headlineCn": "让我们一起创造美好。"
+  },
   "hero": {
     "variant": "single-image",
     "headline": "About Julia Studio",
     "headlineCn": "关于 Julia Studio",
     "backgroundImage": ""
   },
+  "team": {
+    "members": [
+      {
+        "bio": "With 25 years of design experience spanning residential, commercial, and exhibition spaces, Julia brings an unparalleled eye for creating timeless interiors.",
+        "name": "Julia",
+        "bioCn": "拥有25年跨越住宅、商业和展览空间的设计经验，Julia 拥有创造永恒室内设计的无与伦比的眼光。",
+        "image": "",
+        "title": "Founder & Creative Director",
+        "titleCn": "创始人兼创意总监"
+      },
+      {
+        "bio": "Specializing in commercial and exhibition spaces, Alex brings a fresh perspective and meticulous attention to spatial planning.",
+        "name": "Alex Chen",
+        "bioCn": "专注于商业和展览空间，Alex 为空间规划带来全新视角和一丝不苟的关注。",
+        "image": "",
+        "title": "Design Director",
+        "titleCn": "设计总监"
+      },
+      {
+        "bio": "With 15 years of construction expertise, Marcus ensures every design detail is executed with precision and craft.",
+        "name": "Marcus Lee",
+        "bioCn": "拥有15年施工专业经验，Marcus 确保每个设计细节都以精准和工艺执行。",
+        "image": "",
+        "title": "Construction Manager",
+        "titleCn": "施工经理"
+      }
+    ],
+    "variant": "editorial",
+    "headline": "The Team",
+    "headlineCn": "团队"
+  },
+  "stats": {
+    "items": [
+      {
+        "label": "Years of Experience",
+        "value": "25",
+        "labelCn": "年设计经验"
+      },
+      {
+        "label": "Projects Completed",
+        "value": "1,000+",
+        "labelCn": "个项目完成"
+      },
+      {
+        "label": "Happy Clients",
+        "value": "500+",
+        "labelCn": "位满意客户"
+      },
+      {
+        "label": "Design Awards",
+        "value": "15+",
+        "labelCn": "项设计奖项"
+      }
+    ],
+    "variant": "quiet-numbers"
+  },
   "story": {
-    "variant": "text-image-alternating",
-    "headline": "Our Story",
-    "headlineCn": "我们的故事",
     "blocks": [
       {
         "body": "Founded in 2001, Julia Studio began with a simple belief: great design should feel effortless. Over 25 years, Julia has built a practice renowned for creating spaces that are beautiful, functional, and deeply personal.",
-        "bodyCn": "Julia Studio 成立于2001年，源于一个简单的信念：优秀的设计应该感觉毫不费力。25年来，Julia 打造了一个以创造美观、实用且极具个性化空间而闻名的设计工作室。",
-        "image": ""
+        "image": "",
+        "bodyCn": "Julia Studio 成立于2001年，源于一个简单的信念：优秀的设计应该感觉毫不费力。25年来，Julia 打造了一个以创造美观、实用且极具个性化空间而闻名的设计工作室。"
       },
       {
         "body": "With over 1,000 projects completed — spanning luxury homes, corporate offices, art exhibitions, and commercial spaces — our team brings depth of experience that few studios can match.",
-        "bodyCn": "完成超过1,000个项目——涵盖豪华住宅、企业办公室、艺术展览和商业空间——我们的团队拥有极少数工作室能比拟的丰富经验。",
-        "image": ""
+        "image": "",
+        "bodyCn": "完成超过1,000个项目——涵盖豪华住宅、企业办公室、艺术展览和商业空间——我们的团队拥有极少数工作室能比拟的丰富经验。"
       }
-    ]
+    ],
+    "variant": "text-image-alternating",
+    "headline": "Our Story",
+    "headlineCn": "我们的故事"
   },
-  "philosophy": {
-    "variant": "centered-text",
-    "headline": "Design Philosophy",
-    "headlineCn": "设计理念",
-    "body": "We believe that every space has a story waiting to be told. Our approach begins with listening — understanding how you live, work, and dream. From there, we craft environments that honor your vision while introducing elements of surprise and delight.",
-    "bodyCn": "我们相信每个空间都有一个等待被讲述的故事。我们的方法从倾听开始——了解您的生活方式、工作方式和梦想。在此基础上，我们打造尊重您愿景的环境，同时融入惊喜与愉悦的元素。"
-  },
-  "stats": {
-    "variant": "quiet-numbers",
+  "awards": {
     "items": [
-      { "value": "25", "label": "Years of Experience", "labelCn": "年设计经验" },
-      { "value": "1,000+", "label": "Projects Completed", "labelCn": "个项目完成" },
-      { "value": "500+", "label": "Happy Clients", "labelCn": "位满意客户" },
-      { "value": "15+", "label": "Design Awards", "labelCn": "项设计奖项" }
-    ]
-  },
-  "team": {
-    "variant": "editorial",
-    "headline": "The Team",
-    "headlineCn": "团队",
-    "members": [
       {
-        "name": "Julia",
-        "title": "Founder & Creative Director",
-        "titleCn": "创始人兼创意总监",
-        "bio": "With 25 years of design experience spanning residential, commercial, and exhibition spaces, Julia brings an unparalleled eye for creating timeless interiors.",
-        "bioCn": "拥有25年跨越住宅、商业和展览空间的设计经验，Julia 拥有创造永恒室内设计的无与伦比的眼光。",
-        "image": ""
+        "logo": "",
+        "name": "Interior Design Excellence Award",
+        "year": "2024"
       },
       {
-        "name": "Alex Chen",
-        "title": "Design Director",
-        "titleCn": "设计总监",
-        "bio": "Specializing in commercial and exhibition spaces, Alex brings a fresh perspective and meticulous attention to spatial planning.",
-        "bioCn": "专注于商业和展览空间，Alex 为空间规划带来全新视角和一丝不苟的关注。",
-        "image": ""
+        "logo": "",
+        "name": "Architectural Digest Feature",
+        "year": "2023"
       },
       {
-        "name": "Marcus Lee",
-        "title": "Construction Manager",
-        "titleCn": "施工经理",
-        "bio": "With 15 years of construction expertise, Marcus ensures every design detail is executed with precision and craft.",
-        "bioCn": "拥有15年施工专业经验，Marcus 确保每个设计细节都以精准和工艺执行。",
-        "image": ""
+        "logo": "",
+        "name": "Best Residential Design",
+        "year": "2022"
       }
-    ]
+    ],
+    "variant": "logo-grid",
+    "headline": "Awards & Press",
+    "headlineCn": "奖项与媒体"
   },
   "timeline": {
     "variant": "horizontal",
     "headline": "25 Years of Design",
     "headlineCn": "25年设计历程",
     "milestones": [
-      { "year": "2001", "event": "Julia Studio founded in New York", "eventCn": "Julia Studio 在纽约成立" },
-      { "year": "2005", "event": "100th project completed", "eventCn": "完成第100个项目" },
-      { "year": "2010", "event": "Expanded to commercial design", "eventCn": "拓展至商业设计" },
-      { "year": "2015", "event": "First exhibition design award", "eventCn": "首个展览设计奖项" },
-      { "year": "2018", "event": "500th project milestone", "eventCn": "第500个项目里程碑" },
-      { "year": "2022", "event": "Launched furniture collection", "eventCn": "推出家具系列" },
-      { "year": "2026", "event": "1,000+ projects and counting", "eventCn": "1,000+项目，持续增长" }
+      {
+        "year": "2001",
+        "event": "Julia Studio founded in New York",
+        "eventCn": "Julia Studio 在纽约成立"
+      },
+      {
+        "year": "2005",
+        "event": "100th project completed",
+        "eventCn": "完成第100个项目"
+      },
+      {
+        "year": "2010",
+        "event": "Expanded to commercial design",
+        "eventCn": "拓展至商业设计"
+      },
+      {
+        "year": "2015",
+        "event": "First exhibition design award",
+        "eventCn": "首个展览设计奖项"
+      },
+      {
+        "year": "2018",
+        "event": "500th project milestone",
+        "eventCn": "第500个项目里程碑"
+      },
+      {
+        "year": "2022",
+        "event": "Launched furniture collection",
+        "eventCn": "推出家具系列"
+      },
+      {
+        "year": "2026",
+        "event": "1,000+ projects and counting",
+        "eventCn": "1,000+项目，持续增长"
+      }
     ]
   },
-  "awards": {
-    "variant": "logo-grid",
-    "headline": "Awards & Press",
-    "headlineCn": "奖项与媒体",
-    "items": [
-      { "name": "Interior Design Excellence Award", "logo": "", "year": "2024" },
-      { "name": "Architectural Digest Feature", "logo": "", "year": "2023" },
-      { "name": "Best Residential Design", "logo": "", "year": "2022" }
-    ]
-  },
-  "cta": {
-    "variant": "centered",
-    "headline": "Let's create something beautiful together.",
-    "headlineCn": "让我们一起创造美好。",
-    "ctaLabel": "Book Consultation",
-    "ctaLabelCn": "预约咨询",
-    "ctaHref": "/contact"
+  "philosophy": {
+    "body": "We believe that every space has a story waiting to be told. Our approach begins with listening — understanding how you live, work, and dream. From there, we craft environments that honor your vision while introducing elements of surprise and delight.",
+    "bodyCn": "我们相信每个空间都有一个等待被讲述的故事。我们的方法从倾听开始——了解您的生活方式、工作方式和梦想。在此基础上，我们打造尊重您愿景的环境，同时融入惊喜与愉悦的元素。",
+    "variant": "centered-text",
+    "headline": "Design Philosophy",
+    "headlineCn": "设计理念"
   }
 }

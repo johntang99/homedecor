@@ -27,6 +27,17 @@ const ALLOWED_TARGET_DIRS = [
 
 type TargetDir = (typeof ALLOWED_TARGET_DIRS)[number];
 
+function syncSlugWithPath(filePath: string, data: any): any {
+  if (!data || typeof data !== 'object' || Array.isArray(data)) return data;
+  const [dir, fileName] = filePath.split('/');
+  if (!dir || !fileName) return data;
+  if (!['blog', 'portfolio', 'shop-products', 'journal', 'collections'].includes(dir)) {
+    return data;
+  }
+  const slug = fileName.replace(/\.json$/i, '').trim().toLowerCase();
+  return { ...data, slug };
+}
+
 function isEmptyHeaderPayload(filePath: string, data: any): boolean {
   if (filePath !== 'header.json' || !data || typeof data !== 'object') return false;
   const topbar = data.topbar || {};
@@ -161,7 +172,8 @@ export async function PUT(request: NextRequest) {
   } catch (error) {
     return NextResponse.json({ message: 'Invalid JSON' }, { status: 400 });
   }
-  const normalizedParsed = normalizeMediaUrlsInData(parsed, siteId);
+  const slugSyncedParsed = syncSlugWithPath(filePath, parsed);
+  const normalizedParsed = normalizeMediaUrlsInData(slugSyncedParsed, siteId);
   const normalizedContent = JSON.stringify(normalizedParsed, null, 2);
 
   if (canUseContentDb()) {
@@ -298,7 +310,7 @@ export async function POST(request: NextRequest) {
     const initialContent = payload.initialContent && typeof payload.initialContent === 'object'
       ? payload.initialContent
       : null;
-    const contentToCreate = initialContent || template.content;
+    const contentToCreate = syncSlugWithPath(filePath, initialContent || template.content);
     if (canUseContentDb()) {
       const existing = await fetchContentEntry(siteId, locale, filePath);
       if (existing) {
@@ -371,7 +383,9 @@ export async function POST(request: NextRequest) {
     }
 
     let nextContent = content;
-    if (resolvedSourceDir === 'blog') {
+    const shouldSyncSlug = ['blog', 'portfolio', 'shop-products', 'journal', 'collections']
+      .includes(resolvedSourceDir);
+    if (shouldSyncSlug) {
       try {
         const parsed = JSON.parse(content);
         parsed.slug = normalized;
@@ -441,6 +455,13 @@ export async function DELETE(request: NextRequest) {
 
   if (canUseContentDb()) {
     await deleteContentEntry({ siteId, locale, path: filePath });
+    try {
+      await fs.unlink(resolved);
+    } catch (error: any) {
+      if (error?.code !== 'ENOENT') {
+        throw error;
+      }
+    }
     return NextResponse.json({ success: true });
   }
 

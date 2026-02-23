@@ -1,7 +1,7 @@
 {
   "title": "Julia Studio — 25 Years of Timeless Interior Design",
-  "description": "Julia Studio creates timeless interior spaces for homes, offices, and exhibitions. 25 years of design excellence, 1,000+ projects completed.",
   "ogImage": "/media/og-default.jpg",
-  "twitterHandle": "@juliastudio",
-  "titleTemplate": "%s | Julia Studio — Interior Design"
+  "description": "Julia Studio creates timeless interior spaces for homes, offices, and exhibitions. 25 years of design excellence, 1,000+ projects completed.",
+  "titleTemplate": "%s | Julia Studio — Interior Design",
+  "twitterHandle": "@juliastudio"
 }

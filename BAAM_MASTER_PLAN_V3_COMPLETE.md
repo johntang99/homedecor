@@ -560,6 +560,8 @@ For EVERY section type used across the site:
 
 Exact JSON shape for: site.json, header.json, footer.json, seo.json, theme.json, navigation.json.
 
+Implementation note: for clone-friendly admin scaling, follow [18.7 Site-Clone Ready Method (ContentEditor Modular Pattern)](#187-site-clone-ready-method-contenteditor-modular-pattern).
+
 ### 11.4 Seed Baseline Content (Prompt 0D)
 
 1. Create ALL JSON files with realistic placeholder content matching contracts
@@ -740,6 +742,7 @@ Run through every public route and check:
 | ... | | | | | | | | |
 
 Fix any gaps found. Target: 100% coverage.
+When closing admin gaps, keep/extend the modular editor pattern from [18.7 Site-Clone Ready Method (ContentEditor Modular Pattern)](#187-site-clone-ready-method-contenteditor-modular-pattern).
 
 ### 14.2 Programmatic SEO Pages
 
@@ -1138,6 +1141,45 @@ In the BAAM phase template, Phase 0 should now include:
 - Plan collection editor UI in content architecture step
 - In Phase 1-2, build collection editors alongside the pages that use them
 - Content Editor file list should never show collection-managed entries
+
+### 18.7 Site-Clone Ready Method (ContentEditor Modular Pattern)
+
+When duplicating BAAM for a new site, keep the refactored `ContentEditor` architecture and only swap site contracts/options. Do **not** return to a monolithic editor file.
+
+**Required structure (recommended baseline):**
+
+```
+components/admin/
+├── ContentEditor.tsx                    # Orchestrator only (load/save/list/routing)
+└── panels/
+    ├── SeoPanel.tsx
+    ├── HeaderPanel.tsx
+    ├── ThemePanel.tsx
+    ├── BlogPostItemPanel.tsx
+    ├── PortfolioItemPanel.tsx
+    ├── ShopProductItemPanel.tsx
+    ├── JournalItemPanel.tsx
+    └── CollectionItemPanel.tsx
+```
+
+**Rules for all future site clones:**
+- `ContentEditor.tsx` handles orchestration only: file list, active file, save/delete/duplicate, mode switch, shared callbacks.
+- Each panel owns only its own UI fields and receives all state/actions via props.
+- Site-specific differences are configured through content contracts + option sources (for example: `pages/portfolio.json`, `pages/shop.json`, `pages/journal.json`).
+- Keep shared action APIs stable (`updateFormValue`, `openImagePicker`, `toggleSelection`, etc.) so panels are portable.
+- Add new panel files for new collection types instead of adding large inline blocks.
+
+**Clone workflow (fast and safe):**
+1. Copy the admin panel structure as-is.
+2. Update content contracts for the new industry/site.
+3. Update option loaders (category/style/room sources) to new contract paths.
+4. Enable/disable panel routes by file path prefix mapping.
+5. Run Admin Done-Gate: create/edit/duplicate/delete + preview + JSON roundtrip for every enabled panel.
+
+**Acceptance target for maintainability:**
+- `ContentEditor.tsx` should remain an orchestrator (roughly under 1000 lines target).
+- Complex forms should be extracted to `components/admin/panels/*`.
+- New site customization should mostly touch panel files and contract config, not core orchestration flow.
 
 ---
 

@@ -1,44 +1,89 @@
 {
+  "seo": {
+    "title": "Midtown Manhattan Penthouse — Julia Studio",
+    "description": "3,200 sq ft penthouse with panoramic Manhattan views. Minimalist design where the city becomes the primary artwork."
+  },
   "slug": "midtown-penthouse",
+  "year": "2024",
+  "style": "minimalist",
   "title": "Midtown Manhattan Penthouse",
+  "details": {
+    "rooms": [
+      "Open Living / Dining",
+      "Master Suite",
+      "Guest Bedroom",
+      "2 Bathrooms",
+      "Chef's Kitchen",
+      "Terrace"
+    ],
+    "scope": "Full Penthouse Design",
+    "roomsCn": [
+      "开放客餐厅",
+      "主卧套房",
+      "客卧",
+      "2间浴室",
+      "主厨厨房",
+      "露台"
+    ],
+    "scopeCn": "全套顶层公寓设计",
+    "duration": "5 months",
+    "durationCn": "5个月",
+    "keyMaterials": [
+      "Honed Calacatta marble",
+      "Smoked glass",
+      "Invisible storage",
+      "Matte black fixtures"
+    ],
+    "keyMaterialsCn": [
+      "哑光卡拉卡塔大理石",
+      "烟色玻璃",
+      "隐形储物",
+      "哑光黑色五金"
+    ]
+  },
+  "gallery": [
+    {
+      "alt": "Living room with panoramic city views",
+      "altCn": "带全景城市景观的客厅",
+      "image": "",
+      "layout": "full"
+    },
+    {
+      "alt": "Minimalist kitchen",
+      "altCn": "极简厨房",
+      "image": "",
+      "layout": "half"
+    },
+    {
+      "alt": "Master bedroom sanctuary",
+      "altCn": "主卧静所",
+      "image": "",
+      "layout": "half"
+    }
+  ],
   "titleCn": "曼哈顿中城顶层公寓",
   "category": "residential",
-  "style": "minimalist",
-  "location": "Midtown, New York",
-  "year": "2024",
   "featured": false,
-  "coverImage": "",
-  "coverImageAlt": "Midtown penthouse living area with city views",
-  "coverImageAltCn": "带城市景观的曼哈顿顶层公寓客厅",
+  "location": "Midtown, New York",
   "overview": {
     "body": "A 3,200 sq ft penthouse with 270-degree Manhattan views, designed for a minimalist aesthetic where the city itself becomes the primary artwork. The client's brief: less is more — every object earns its place.",
     "bodyCn": "一套拥有270度曼哈顿全景的3,200平方英尺顶层公寓，以极简主义美学设计，城市本身成为主要艺术品。客户要求：少即是多——每件物品都要有其存在的价值。"
   },
-  "details": {
-    "scope": "Full Penthouse Design",
-    "scopeCn": "全套顶层公寓设计",
-    "duration": "5 months",
-    "durationCn": "5个月",
-    "rooms": ["Open Living / Dining", "Master Suite", "Guest Bedroom", "2 Bathrooms", "Chef's Kitchen", "Terrace"],
-    "roomsCn": ["开放客餐厅", "主卧套房", "客卧", "2间浴室", "主厨厨房", "露台"],
-    "keyMaterials": ["Honed Calacatta marble", "Smoked glass", "Invisible storage", "Matte black fixtures"],
-    "keyMaterialsCn": ["哑光卡拉卡塔大理石", "烟色玻璃", "隐形储物", "哑光黑色五金"]
-  },
-  "gallery": [
-    { "image": "", "alt": "Living room with panoramic city views", "altCn": "带全景城市景观的客厅", "layout": "full" },
-    { "image": "", "alt": "Minimalist kitchen", "altCn": "极简厨房", "layout": "half" },
-    { "image": "", "alt": "Master bedroom sanctuary", "altCn": "主卧静所", "layout": "half" }
-  ],
-  "shopThisLook": ["marin-console-table", "ceramic-vase-set"],
+  "coverImage": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771737780224-photo-1613643043796-a370ee99ecbe.jpg",
   "testimonial": {
     "quote": "I told Julia I wanted a home that felt like a deep breath. She delivered exactly that — and more.",
-    "quoteCn": "我告诉Julia，我想要一个感觉像深呼吸一样的家。她完全做到了——甚至超出了预期。",
     "author": "Private Client, Finance",
-    "project": "Midtown Manhattan Penthouse"
+    "project": "Midtown Manhattan Penthouse",
+    "quoteCn": "我告诉Julia，我想要一个感觉像深呼吸一样的家。她完全做到了——甚至超出了预期。"
   },
-  "relatedProjects": ["the-greenwich-estate", "brooklyn-brownstone"],
-  "seo": {
-    "title": "Midtown Manhattan Penthouse — Julia Studio",
-    "description": "3,200 sq ft penthouse with panoramic Manhattan views. Minimalist design where the city becomes the primary artwork."
-  }
+  "shopThisLook": [
+    "marin-console-table",
+    "ceramic-vase-set"
+  ],
+  "coverImageAlt": "Midtown penthouse living area with city views",
+  "coverImageAltCn": "带城市景观的曼哈顿顶层公寓客厅",
+  "relatedProjects": [
+    "the-greenwich-estate",
+    "brooklyn-brownstone"
+  ]
 }

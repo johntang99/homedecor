@@ -1,42 +1,90 @@
 {
-  "hero": {
-    "variant": "minimal-text",
-    "headline": "Our Work",
-    "headlineCn": "我们的作品",
-    "subline": "25 years. 1,000+ projects. Every space tells a story.",
-    "sublineCn": "25年。1,000+项目。每个空间都有故事。",
-    "backgroundImage": ""
-  },
-  "filters": {
-    "categories": [
-      { "value": "all", "label": "All", "labelCn": "全部" },
-      { "value": "residential", "label": "Residential", "labelCn": "住宅" },
-      { "value": "commercial", "label": "Commercial", "labelCn": "商业" },
-      { "value": "exhibition", "label": "Exhibition", "labelCn": "展览" },
-      { "value": "art-shows", "label": "Art & Shows", "labelCn": "艺术与展示" }
-    ],
-    "styles": [
-      { "value": "all", "label": "All Styles", "labelCn": "全部风格" },
-      { "value": "modern", "label": "Modern", "labelCn": "现代" },
-      { "value": "transitional", "label": "Transitional", "labelCn": "过渡" },
-      { "value": "contemporary", "label": "Contemporary", "labelCn": "当代" },
-      { "value": "minimalist", "label": "Minimalist", "labelCn": "极简" },
-      { "value": "east-west", "label": "East-West Fusion", "labelCn": "东西融合" },
-      { "value": "classic", "label": "Classic", "labelCn": "经典" }
-    ]
+  "cta": {
+    "ctaHref": "/contact",
+    "variant": "centered",
+    "ctaLabel": "Book Consultation",
+    "headline": "Inspired? Let's create something extraordinary.",
+    "ctaLabelCn": "预约咨询",
+    "headlineCn": "心动了？让我们一起创造非凡。"
   },
   "grid": {
     "variant": "masonry",
+    "itemsPerPage": 12,
     "loadMoreLabel": "Load More Projects",
-    "loadMoreLabelCn": "加载更多项目",
-    "itemsPerPage": 12
+    "loadMoreLabelCn": "加载更多项目"
   },
-  "cta": {
-    "variant": "centered",
-    "headline": "Inspired? Let's create something extraordinary.",
-    "headlineCn": "心动了？让我们一起创造非凡。",
-    "ctaLabel": "Book Consultation",
-    "ctaLabelCn": "预约咨询",
-    "ctaHref": "/contact"
+  "hero": {
+    "subline": "25 years. 1,000+ projects. Every space tells a story.",
+    "variant": "minimal-text",
+    "headline": "Our Work",
+    "sublineCn": "25年。1,000+项目。每个空间都有故事。",
+    "headlineCn": "我们的作品",
+    "backgroundImage": ""
+  },
+  "filters": {
+    "styles": [
+      {
+        "label": "All Styles",
+        "value": "all",
+        "labelCn": "全部风格"
+      },
+      {
+        "label": "Modern",
+        "value": "modern",
+        "labelCn": "现代"
+      },
+      {
+        "label": "Transitional",
+        "value": "transitional",
+        "labelCn": "过渡"
+      },
+      {
+        "label": "Contemporary",
+        "value": "contemporary",
+        "labelCn": "当代"
+      },
+      {
+        "label": "Minimalist",
+        "value": "minimalist",
+        "labelCn": "极简"
+      },
+      {
+        "label": "East-West Fusion",
+        "value": "east-west",
+        "labelCn": "东西融合"
+      },
+      {
+        "label": "Classic",
+        "value": "classic",
+        "labelCn": "经典"
+      }
+    ],
+    "categories": [
+      {
+        "label": "All",
+        "value": "all",
+        "labelCn": "全部"
+      },
+      {
+        "label": "Residential",
+        "value": "residential",
+        "labelCn": "住宅"
+      },
+      {
+        "label": "Commercial",
+        "value": "commercial",
+        "labelCn": "商业"
+      },
+      {
+        "label": "Exhibition",
+        "value": "exhibition",
+        "labelCn": "展览"
+      },
+      {
+        "label": "Art & Shows",
+        "value": "art-shows",
+        "labelCn": "艺术与展示"
+      }
+    ]
   }
 }

@@ -4,12 +4,12 @@
       {
         "alt": "Luxury living room designed by Julia Studio",
         "altCn": "Julia Studio 设计的豪华客厅",
-        "image": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771732304131-photo-1583847268964-b28dc8f51f92.jpg"
+        "image": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771734741902-ed-pelham-1021-2-min.webp"
       },
       {
         "alt": "Modern kitchen interior by Julia Studio",
         "altCn": "Julia Studio 设计的现代厨房",
-        "image": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771734741902-ed-pelham-1021-2-min.webp"
+        "image": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771734323297-photo-1616046229478-9901c5536a45.jpg"
       },
       {
         "alt": "Elegant bedroom designed by Julia Studio",
@@ -21,8 +21,8 @@
     "variant": "gallery-background",
     "taglineCn": "25年匠心设计",
     "logoOverlay": true,
-    "scrollIndicator": true,
-    "overlayMode": "focus-text"
+    "overlayMode": "focus-text",
+    "scrollIndicator": true
   },
   "aboutTeaser": {
     "body": "25 years. 1,000+ projects. One vision: timeless design.",
@@ -37,7 +37,7 @@
     "headlineCn": "认识 Julia"
   },
   "shopPreview": {
-    "image1": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771740111684-photo-1617638717732-a3ef01769ff2.jpg",
+    "image1": "",
     "ctaHref": "/shop",
     "variant": "product-row",
     "ctaLabel": "Shop All",
@@ -90,15 +90,17 @@
     "image1": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771737349189-photo-1762979790868-3bf9153b84cc.jpg",
     "image2": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771737562901-photo-1615389000209-2837a2e5f939.jpg",
     "image3": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771737643399-photo-1603750003385-3342231a1ff1.jpg",
-    "image4": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771737695059-photo-1649560065937-8405481a53d8.jpg",
+    "image4": "",
     "image5": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771737780224-photo-1613643043796-a370ee99ecbe.jpg",
     "image6": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771738862555-photo-1524758631624-e2822e304c36.jpg",
     "ctaHref": "/portfolio",
+    "subline": "A curated selection from our portfolio, showcasing completed residential, commercial, and exhibition projects.",
     "variant": "grid-featured",
     "ctaLabel": "View All Projects",
-    "headline": "Selected Work",
+    "headline": "Portfolio Highlights",
+    "sublineCn": "甄选自我们的作品集，展示已完成的住宅、商业与展览项目。",
     "ctaLabelCn": "查看全部项目",
-    "headlineCn": "精选作品",
+    "headlineCn": "作品集精选",
     "projectSlugs": [
       "the-greenwich-estate",
       "hudson-yards-office",
@@ -139,7 +141,7 @@
     "headlineCn": "我们的服务"
   },
   "featuredCollection": {
-    "image": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771737053093-photo-1507452786732-f2dc0a2e7b7f.jpg",
+    "image": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771777752125-photo-1637412816281-f80ec9948fea.jpg",
     "variant": "hero-card",
     "ctaLabel": "Explore Collection",
     "headline": "Featured Collection",

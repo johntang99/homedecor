@@ -1,44 +1,85 @@
 {
+  "seo": {
+    "title": "Hudson Yards Executive Offices — Julia Studio",
+    "description": "12,000 sq ft corporate headquarters in Hudson Yards. Modern design balancing executive gravitas with collaborative energy."
+  },
   "slug": "hudson-yards-office",
+  "year": "2023",
+  "style": "modern",
   "title": "Hudson Yards Executive Offices",
+  "details": {
+    "rooms": [
+      "Reception",
+      "Executive Suites",
+      "Conference Rooms",
+      "Open Workspace",
+      "Executive Lounge"
+    ],
+    "scope": "Full Commercial Design",
+    "roomsCn": [
+      "前台",
+      "行政套房",
+      "会议室",
+      "开放办公区",
+      "行政休息室"
+    ],
+    "scopeCn": "完整商业设计",
+    "duration": "6 months",
+    "durationCn": "6个月",
+    "keyMaterials": [
+      "Smoked glass",
+      "Walnut veneer",
+      "Polished concrete",
+      "Custom wool carpeting"
+    ],
+    "keyMaterialsCn": [
+      "烟色玻璃",
+      "胡桃木贴面",
+      "抛光混凝土",
+      "定制羊毛地毯"
+    ]
+  },
+  "gallery": [
+    {
+      "alt": "Reception with floating staircase",
+      "altCn": "带悬浮楼梯的前台",
+      "image": "",
+      "layout": "full"
+    },
+    {
+      "alt": "Executive conference room",
+      "altCn": "行政会议室",
+      "image": "",
+      "layout": "half"
+    },
+    {
+      "alt": "Open workspace with custom millwork",
+      "altCn": "带定制木工的开放办公区",
+      "image": "",
+      "layout": "half"
+    }
+  ],
   "titleCn": "哈德逊园区行政办公室",
   "category": "commercial",
-  "style": "modern",
-  "location": "Hudson Yards, New York",
-  "year": "2023",
   "featured": true,
-  "coverImage": "",
-  "coverImageAlt": "Hudson Yards office reception",
-  "coverImageAltCn": "哈德逊园区办公室前台",
+  "location": "Hudson Yards, New York",
   "overview": {
     "body": "A 12,000 sq ft corporate headquarters designed to communicate innovation and trust. The client — a leading financial firm — required spaces that balanced executive gravitas with collaborative energy.",
     "bodyCn": "一个12,000平方英尺的企业总部，旨在传达创新和信任。客户——一家领先的金融公司——需要平衡行政庄重感与协作活力的空间。"
   },
-  "details": {
-    "scope": "Full Commercial Design",
-    "scopeCn": "完整商业设计",
-    "duration": "6 months",
-    "durationCn": "6个月",
-    "rooms": ["Reception", "Executive Suites", "Conference Rooms", "Open Workspace", "Executive Lounge"],
-    "roomsCn": ["前台", "行政套房", "会议室", "开放办公区", "行政休息室"],
-    "keyMaterials": ["Smoked glass", "Walnut veneer", "Polished concrete", "Custom wool carpeting"],
-    "keyMaterialsCn": ["烟色玻璃", "胡桃木贴面", "抛光混凝土", "定制羊毛地毯"]
-  },
-  "gallery": [
-    { "image": "", "alt": "Reception with floating staircase", "altCn": "带悬浮楼梯的前台", "layout": "full" },
-    { "image": "", "alt": "Executive conference room", "altCn": "行政会议室", "layout": "half" },
-    { "image": "", "alt": "Open workspace with custom millwork", "altCn": "带定制木工的开放办公区", "layout": "half" }
-  ],
-  "shopThisLook": ["ceramic-vase-set"],
+  "coverImage": "https://neyofqtnquqygiusnfdu.supabase.co/storage/v1/object/public/media/julia-studio/general/1771737562901-photo-1615389000209-2837a2e5f939.jpg",
   "testimonial": {
     "quote": "Julia Studio transformed our office into a space that genuinely reflects who we are as a firm. Clients and staff alike are consistently impressed.",
-    "quoteCn": "Julia Studio 将我们的办公室改造成真正反映我们公司形象的空间。客户和员工都对此赞叹不已。",
     "author": "Managing Director, Financial Services Firm",
-    "project": "Hudson Yards Executive Offices"
+    "project": "Hudson Yards Executive Offices",
+    "quoteCn": "Julia Studio 将我们的办公室改造成真正反映我们公司形象的空间。客户和员工都对此赞叹不已。"
   },
-  "relatedProjects": ["soho-gallery-exhibition"],
-  "seo": {
-    "title": "Hudson Yards Executive Offices — Julia Studio",
-    "description": "12,000 sq ft corporate headquarters in Hudson Yards. Modern design balancing executive gravitas with collaborative energy."
-  }
+  "shopThisLook": [
+    "ceramic-vase-set"
+  ],
+  "coverImageAlt": "Hudson Yards office reception",
+  "coverImageAltCn": "哈德逊园区办公室前台",
+  "relatedProjects": [
+    "soho-gallery-exhibition"
+  ]
 }

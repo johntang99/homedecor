@@ -31,6 +31,14 @@ for (const hostname of supabaseHostnames) {
   })
 }
 
+// Production can fail with 500 when image hosts are not present in build-time env.
+// Keep a safe wildcard for Supabase public storage URLs.
+remotePatterns.push({
+  protocol: 'https',
+  hostname: '**.supabase.co',
+  pathname: '/storage/v1/object/public/**',
+})
+
 const nextConfig = {
   reactStrictMode: true,
   images: {

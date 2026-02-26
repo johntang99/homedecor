@@ -21,6 +21,13 @@ interface RelatedPost { slug: string; title?: string; titleCn?: string; coverIma
 interface RelatedProduct { slug: string; title?: string; titleCn?: string; images?: Array<{ src?: string }>; price?: number }
 
 function tx(en?: string, cn?: string, locale?: Locale) { return (locale === 'zh' && cn) ? cn : (en || ''); }
+function hasSlug(value: unknown): value is { slug: string } {
+  return (
+    value !== null &&
+    typeof value === 'object' &&
+    typeof (value as { slug?: unknown }).slug === 'string'
+  );
+}
 
 function toEmbedVideoUrl(raw?: string) {
   if (!raw) return '';
@@ -72,8 +79,14 @@ export default async function JournalPostPage({ params }: PageProps) {
 
   if (!post) notFound();
 
-  const relatedPosts = (post.relatedPosts || []).map(s => allPosts.find(p => p.slug === s)).filter(Boolean) as RelatedPost[];
-  const relatedProducts = (post.relatedProducts || []).map(s => allProducts.find(p => p.slug === s)).filter(Boolean) as RelatedProduct[];
+  const relatedPostSlugs = Array.isArray(post.relatedPosts) ? post.relatedPosts : [];
+  const relatedProductSlugs = Array.isArray(post.relatedProducts) ? post.relatedProducts : [];
+  const relatedPosts = relatedPostSlugs
+    .map((s) => allPosts.find((p) => hasSlug(p) && p.slug === s))
+    .filter(Boolean) as RelatedPost[];
+  const relatedProducts = relatedProductSlugs
+    .map((s) => allProducts.find((p) => hasSlug(p) && p.slug === s))
+    .filter(Boolean) as RelatedProduct[];
 
   const isCn = locale === 'zh';
   const body = tx(post.body, post.bodyCn, locale);

@@ -23,6 +23,14 @@ interface RelatedProduct { slug: string; title?: string; titleCn?: string; image
 
 function tx(en?: string, cn?: string, locale?: Locale) { return (locale === 'zh' && cn) ? cn : (en || ''); }
 
+function hasSlug(value: unknown): value is { slug: string } {
+  return (
+    value !== null &&
+    typeof value === 'object' &&
+    typeof (value as { slug?: unknown }).slug === 'string'
+  );
+}
+
 export async function generateStaticParams() { return []; }
 
 export async function generateMetadata({ params }: PageProps) {
@@ -45,10 +53,15 @@ export default async function ShopProductPage({ params }: PageProps) {
 
   if (!product) notFound();
 
-  const seenProjects = (product.seenInProjects || [])
-    .map(s => allProjects.find(p => p.slug === s)).filter(Boolean) as PortfolioItem[];
-  const related = (product.relatedProducts || [])
-    .map(s => allProducts.find(p => p.slug === s)).filter(Boolean) as RelatedProduct[];
+  const seenProjectSlugs = Array.isArray(product.seenInProjects) ? product.seenInProjects : [];
+  const relatedProductSlugs = Array.isArray(product.relatedProducts) ? product.relatedProducts : [];
+
+  const seenProjects = seenProjectSlugs
+    .map((s) => allProjects.find((p) => hasSlug(p) && p.slug === s))
+    .filter(Boolean) as PortfolioItem[];
+  const related = relatedProductSlugs
+    .map((s) => allProducts.find((p) => hasSlug(p) && p.slug === s))
+    .filter(Boolean) as RelatedProduct[];
 
   const isCn = locale === 'zh';
   const images = product.images?.filter(i => i.src) || [];

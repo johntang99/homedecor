@@ -11,6 +11,13 @@ interface PortfolioItem { slug: string; title?: string; titleCn?: string; coverI
 interface ShopProduct { slug: string; title?: string; titleCn?: string; images?: Array<{ src?: string }>; price?: number }
 
 function tx(en?: string, cn?: string, locale?: Locale) { return (locale === 'zh' && cn) ? cn : (en || ''); }
+function hasSlug(value: unknown): value is { slug: string } {
+  return (
+    value !== null &&
+    typeof value === 'object' &&
+    typeof (value as { slug?: unknown }).slug === 'string'
+  );
+}
 export async function generateStaticParams() { return []; }
 
 export default async function CollectionDetailPage({ params }: PageProps) {
@@ -22,8 +29,14 @@ export default async function CollectionDetailPage({ params }: PageProps) {
     loadAllItems<ShopProduct>(siteId, locale, 'shop-products'),
   ]);
   if (!col) notFound();
-  const projects = (col.portfolioProjects || []).map(s => allProjects.find(p => p.slug === s)).filter(Boolean) as PortfolioItem[];
-  const products = (col.shopProducts || []).map(s => allProducts.find(p => p.slug === s)).filter(Boolean) as ShopProduct[];
+  const portfolioProjectSlugs = Array.isArray(col.portfolioProjects) ? col.portfolioProjects : [];
+  const shopProductSlugs = Array.isArray(col.shopProducts) ? col.shopProducts : [];
+  const projects = portfolioProjectSlugs
+    .map((s) => allProjects.find((p) => hasSlug(p) && p.slug === s))
+    .filter(Boolean) as PortfolioItem[];
+  const products = shopProductSlugs
+    .map((s) => allProducts.find((p) => hasSlug(p) && p.slug === s))
+    .filter(Boolean) as ShopProduct[];
   const isCn = locale === 'zh';
 
   return (

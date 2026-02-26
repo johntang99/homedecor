@@ -6,6 +6,7 @@ import { type Locale } from '@/lib/i18n';
 import { getRequestSiteId, loadItemBySlug, loadAllItems } from '@/lib/content';
 import PortfolioGalleryView from '@/components/portfolio/PortfolioGalleryView';
 
+export const dynamic = 'force-dynamic';
 export const revalidate = 3600;
 
 interface PageProps { params: { locale: Locale; slug: string } }

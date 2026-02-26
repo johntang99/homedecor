@@ -5,6 +5,8 @@ import { ArrowLeft } from 'lucide-react';
 import { type Locale } from '@/lib/i18n';
 import { getRequestSiteId, loadItemBySlug, loadAllItems } from '@/lib/content';
 
+export const dynamic = 'force-dynamic';
+
 interface PageProps { params: { locale: Locale; slug: string } }
 
 interface PostData {

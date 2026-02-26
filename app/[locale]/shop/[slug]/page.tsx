@@ -6,6 +6,8 @@ import { type Locale } from '@/lib/i18n';
 import { getRequestSiteId, loadItemBySlug, loadAllItems } from '@/lib/content';
 import { buildPageMetadata } from '@/lib/seo';
 
+export const dynamic = 'force-dynamic';
+
 interface PageProps { params: { locale: Locale; slug: string } }
 
 interface PortfolioItem { slug: string; title?: string; titleCn?: string; coverImage?: string }

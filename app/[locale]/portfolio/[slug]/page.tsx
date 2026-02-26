@@ -38,6 +38,14 @@ function tx(en?: string, cn?: string, locale?: Locale): string {
   return (locale === 'zh' && cn) ? cn : (en || '');
 }
 
+function hasSlug(value: unknown): value is { slug: string } {
+  return (
+    value !== null &&
+    typeof value === 'object' &&
+    typeof (value as { slug?: unknown }).slug === 'string'
+  );
+}
+
 export async function generateStaticParams() {
   // Only called at build — dynamic in dev
   return [];
@@ -56,12 +64,15 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
   if (!project) notFound();
   const heroImage = project.coverImage || project.image;
 
-  const shopProducts = (project.shopThisLook || [])
-    .map(s => allProducts.find(p => p.slug === s))
+  const shopLookSlugs = Array.isArray(project.shopThisLook) ? project.shopThisLook : [];
+  const relatedProjectSlugs = Array.isArray(project.relatedProjects) ? project.relatedProjects : [];
+
+  const shopProducts = shopLookSlugs
+    .map(s => allProducts.find(p => hasSlug(p) && p.slug === s))
     .filter(Boolean) as ShopProduct[];
 
-  const relatedProjects = (project.relatedProjects || [])
-    .map(s => allProjects.find(p => p.slug === s))
+  const relatedProjects = relatedProjectSlugs
+    .map(s => allProjects.find(p => hasSlug(p) && p.slug === s))
     .filter(Boolean) as PortfolioItem[];
 
   return (

@@ -1,5 +1,17 @@
 # Julia Studio Site (BAAM Multi-Site Platform)
 
+
+lsof -ti:3040 | xargs kill -9
+rm -rf .next
+npm run dev
+
+npm run build
+
+git add .                    
+git commit -m "Update: describe your changes"
+git push   
+
+
 Production-ready bilingual (EN/ZH) studio website built on the BAAM platform.  
 It includes public pages, admin CMS, DB-first content storage, file fallback, media tools, and site/domain-aware routing.
 

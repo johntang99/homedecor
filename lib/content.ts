@@ -181,7 +181,11 @@ export async function loadAllItems<T>(
       locale,
       `${directory}/`
     );
-    return entries.map((entry) => entry.data as T);
+    return entries
+      .map((entry) => entry.data)
+      .filter((item) => item !== null && item !== undefined)
+      .filter((item) => typeof item === 'object')
+      .map((item) => item as T);
   }
 
   try {

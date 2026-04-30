@@ -88,13 +88,13 @@ export default function ContactForm({ locale, formConfig, siteId }: Props) {
       {/* Row: Name + Email */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
         <div>
-          <label className={labelClass} style={{ color: 'var(--primary)' }}>{tx(fieldDefs.name?.label, fieldDefs.name?.labelCn) || (isCn ? '姓名' : 'Full Name')} *</label>
-          <input type="text" value={form.name || ''} onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+          <label htmlFor="contact-name" className={labelClass} style={{ color: 'var(--primary)' }}>{tx(fieldDefs.name?.label, fieldDefs.name?.labelCn) || (isCn ? '姓名' : 'Full Name')} *</label>
+          <input id="contact-name" type="text" value={form.name || ''} onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
             placeholder={isCn ? '您的姓名' : 'Your name'} className={`${inputClass} ${errors.name ? 'border-red-400' : ''}`} />
         </div>
         <div>
-          <label className={labelClass} style={{ color: 'var(--primary)' }}>{tx(fieldDefs.email?.label, fieldDefs.email?.labelCn) || 'Email'} *</label>
-          <input type="email" value={form.email || ''} onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+          <label htmlFor="contact-email" className={labelClass} style={{ color: 'var(--primary)' }}>{tx(fieldDefs.email?.label, fieldDefs.email?.labelCn) || 'Email'} *</label>
+          <input id="contact-email" type="email" value={form.email || ''} onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
             placeholder={isCn ? '您的邮箱' : 'Your email'} className={`${inputClass} ${errors.email ? 'border-red-400' : ''}`} />
         </div>
       </div>
@@ -102,13 +102,13 @@ export default function ContactForm({ locale, formConfig, siteId }: Props) {
       {/* Row: Phone + Location */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
         <div>
-          <label className={labelClass} style={{ color: 'var(--primary)' }}>{tx(fieldDefs.phone?.label, fieldDefs.phone?.labelCn) || (isCn ? '电话' : 'Phone')}</label>
-          <input type="tel" value={form.phone || ''} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
+          <label htmlFor="contact-phone" className={labelClass} style={{ color: 'var(--primary)' }}>{tx(fieldDefs.phone?.label, fieldDefs.phone?.labelCn) || (isCn ? '电话' : 'Phone')}</label>
+          <input id="contact-phone" type="tel" value={form.phone || ''} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
             placeholder={isCn ? '您的电话' : 'Your phone (optional)'} className={inputClass} />
         </div>
         <div>
-          <label className={labelClass} style={{ color: 'var(--primary)' }}>{tx(fieldDefs.location?.label, fieldDefs.location?.labelCn) || (isCn ? '项目地址' : 'Project Location')}</label>
-          <input type="text" value={form.location || ''} onChange={e => setForm(f => ({ ...f, location: e.target.value }))}
+          <label htmlFor="contact-location" className={labelClass} style={{ color: 'var(--primary)' }}>{tx(fieldDefs.location?.label, fieldDefs.location?.labelCn) || (isCn ? '项目地址' : 'Project Location')}</label>
+          <input id="contact-location" type="text" value={form.location || ''} onChange={e => setForm(f => ({ ...f, location: e.target.value }))}
             placeholder={isCn ? '城市/州' : 'City, State'} className={inputClass} />
         </div>
       </div>
@@ -116,8 +116,8 @@ export default function ContactForm({ locale, formConfig, siteId }: Props) {
       {/* Row: Project Type + Scope */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
         <div>
-          <label className={labelClass} style={{ color: 'var(--primary)' }}>{tx(fieldDefs.projectType?.label, fieldDefs.projectType?.labelCn) || (isCn ? '项目类型' : 'Project Type')} *</label>
-          <select value={form.projectType || ''} onChange={e => setForm(f => ({ ...f, projectType: e.target.value }))}
+          <label htmlFor="contact-projectType" className={labelClass} style={{ color: 'var(--primary)' }}>{tx(fieldDefs.projectType?.label, fieldDefs.projectType?.labelCn) || (isCn ? '项目类型' : 'Project Type')} *</label>
+          <select id="contact-projectType" value={form.projectType || ''} onChange={e => setForm(f => ({ ...f, projectType: e.target.value }))}
             className={`${inputClass} appearance-none bg-transparent ${errors.projectType ? 'border-red-400' : ''}`}>
             <option value="">{isCn ? '请选择' : 'Select one'}</option>
             {(selectOptions('projectType').length ? selectOptions('projectType') : [
@@ -130,8 +130,8 @@ export default function ContactForm({ locale, formConfig, siteId }: Props) {
           </select>
         </div>
         <div>
-          <label className={labelClass} style={{ color: 'var(--primary)' }}>{tx(fieldDefs.scope?.label, fieldDefs.scope?.labelCn) || (isCn ? '项目范围' : 'Project Scope')} *</label>
-          <select value={form.scope || ''} onChange={e => setForm(f => ({ ...f, scope: e.target.value }))}
+          <label htmlFor="contact-scope" className={labelClass} style={{ color: 'var(--primary)' }}>{tx(fieldDefs.scope?.label, fieldDefs.scope?.labelCn) || (isCn ? '项目范围' : 'Project Scope')} *</label>
+          <select id="contact-scope" value={form.scope || ''} onChange={e => setForm(f => ({ ...f, scope: e.target.value }))}
             className={`${inputClass} appearance-none bg-transparent ${errors.scope ? 'border-red-400' : ''}`}>
             <option value="">{isCn ? '请选择' : 'Select one'}</option>
             {(selectOptions('scope').length ? selectOptions('scope') : [
@@ -147,8 +147,8 @@ export default function ContactForm({ locale, formConfig, siteId }: Props) {
       {/* Row: Budget + Referral */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
         <div>
-          <label className={labelClass} style={{ color: 'var(--primary)' }}>{tx(fieldDefs.budget?.label, fieldDefs.budget?.labelCn) || (isCn ? '预算范围' : 'Budget Range')}</label>
-          <select value={form.budget || ''} onChange={e => setForm(f => ({ ...f, budget: e.target.value }))}
+          <label htmlFor="contact-budget" className={labelClass} style={{ color: 'var(--primary)' }}>{tx(fieldDefs.budget?.label, fieldDefs.budget?.labelCn) || (isCn ? '预算范围' : 'Budget Range')}</label>
+          <select id="contact-budget" value={form.budget || ''} onChange={e => setForm(f => ({ ...f, budget: e.target.value }))}
             className={`${inputClass} appearance-none bg-transparent`}>
             <option value="">{isCn ? '请选择（可选）' : 'Select (optional)'}</option>
             {[
@@ -160,8 +160,8 @@ export default function ContactForm({ locale, formConfig, siteId }: Props) {
           </select>
         </div>
         <div>
-          <label className={labelClass} style={{ color: 'var(--primary)' }}>{tx(fieldDefs.preferredLanguage?.label, fieldDefs.preferredLanguage?.labelCn) || (isCn ? '首选语言' : 'Preferred Language')}</label>
-          <select value={form.preferredLanguage || ''} onChange={e => setForm(f => ({ ...f, preferredLanguage: e.target.value }))}
+          <label htmlFor="contact-language" className={labelClass} style={{ color: 'var(--primary)' }}>{tx(fieldDefs.preferredLanguage?.label, fieldDefs.preferredLanguage?.labelCn) || (isCn ? '首选语言' : 'Preferred Language')}</label>
+          <select id="contact-language" value={form.preferredLanguage || ''} onChange={e => setForm(f => ({ ...f, preferredLanguage: e.target.value }))}
             className={`${inputClass} appearance-none bg-transparent`}>
             <option value="en">English</option>
             <option value="zh">中文</option>
@@ -171,8 +171,8 @@ export default function ContactForm({ locale, formConfig, siteId }: Props) {
 
       {/* Message */}
       <div>
-        <label className={labelClass} style={{ color: 'var(--primary)' }}>{tx(fieldDefs.message?.label, fieldDefs.message?.labelCn) || (isCn ? '告诉我们您的愿景' : 'Tell us about your vision')} *</label>
-        <textarea rows={5} value={form.message || ''} onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
+        <label htmlFor="contact-message" className={labelClass} style={{ color: 'var(--primary)' }}>{tx(fieldDefs.message?.label, fieldDefs.message?.labelCn) || (isCn ? '告诉我们您的愿景' : 'Tell us about your vision')} *</label>
+        <textarea id="contact-message" rows={5} value={form.message || ''} onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
           placeholder={isCn ? '请描述您的项目和愿景...' : 'Describe your project, style, and vision...'}
           className={`${inputClass} resize-none ${errors.message ? 'border-red-400' : ''}`} />
       </div>

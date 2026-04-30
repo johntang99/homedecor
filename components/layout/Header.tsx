@@ -182,7 +182,7 @@ export default function Header({ locale, headerConfig }: HeaderProps) {
 
       {/* Mobile overlay */}
       {mobileOpen && (
-        <div className="lg:hidden fixed inset-0 top-16 z-40 flex flex-col" style={{ background: 'var(--backdrop-secondary, #1A1A1A)' }}>
+        <div className="lg:hidden fixed inset-0 top-16 md:top-20 z-40 flex flex-col" style={{ background: 'var(--backdrop-secondary, #1A1A1A)' }}>
           <div className="flex flex-col px-8 py-10 gap-6">
             {navItems.map(item => (
               <Link

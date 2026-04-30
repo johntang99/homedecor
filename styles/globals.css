@@ -478,6 +478,11 @@ html {
     color: var(--btn-gold-text, #FFFDF8);
   }
 
+  .btn-gold:focus-visible {
+    outline: 2px solid var(--secondary, #C4A265);
+    outline-offset: 2px;
+  }
+
   /* Thin input style (bottom border only) */
   .input-minimal {
     border: none;

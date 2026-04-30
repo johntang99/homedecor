@@ -155,6 +155,7 @@ export default function Footer({ locale, footer }: FooterProps) {
                 <input
                   type="email"
                   placeholder={newsletterPlaceholder}
+                  aria-label={newsletterPlaceholder}
                   className="flex-1 rounded-sm px-3 py-2 text-sm placeholder-white/30 outline-none focus:border-[var(--secondary)]"
                   style={{
                     background: 'rgb(var(--on-dark-rgb, 250 248 245) / 0.10)',

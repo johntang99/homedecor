@@ -169,8 +169,9 @@ export default function JournalPage() {
           <h2 className="font-serif text-2xl font-semibold mb-3" style={{ color: 'var(--primary)' }}>
             {tx(pageData.newsletter?.headline, pageData.newsletter?.headlineCn) || (isCn ? '每周设计灵感' : 'Design inspiration, delivered weekly.')}
           </h2>
-          <div className="flex gap-2 mt-6">
+          <div className="flex flex-col sm:flex-row gap-2 mt-6">
             <input type="email" placeholder={tx(pageData.newsletter?.placeholder, pageData.newsletter?.placeholderCn) || (isCn ? '您的邮箱' : 'Your email address')}
+              aria-label={isCn ? '您的邮箱' : 'Your email address'}
               className="flex-1 border border-[var(--border)] px-4 py-2.5 text-sm outline-none focus:border-[var(--secondary)] transition-colors" />
             <button className="btn-gold text-sm px-5">{tx(pageData.newsletter?.buttonLabel, pageData.newsletter?.buttonLabelCn) || (isCn ? '订阅' : 'Subscribe')}</button>
           </div>

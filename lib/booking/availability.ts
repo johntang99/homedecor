@@ -173,11 +173,17 @@ export function isDateWithinRange({
   settings: BookingSettings;
 }) {
   const nowUtc = getNowUtcForTimeZone(settings.timezone);
+  const nowParts = getTimeZoneParts(settings.timezone, new Date());
+  const todayStartUtc = buildUtcFromLocalParts({
+    year: nowParts.year,
+    month: nowParts.month,
+    day: nowParts.day,
+  });
   const dateUtc = buildUtcFromLocalParts({
     year: Number(date.slice(0, 4)),
     month: Number(date.slice(5, 7)),
     day: Number(date.slice(8, 10)),
   });
   const maxUtc = nowUtc + settings.maxDaysAhead * 24 * 60 * 60 * 1000;
-  return dateUtc >= nowUtc && dateUtc <= maxUtc;
+  return dateUtc >= todayStartUtc && dateUtc <= maxUtc;
 }

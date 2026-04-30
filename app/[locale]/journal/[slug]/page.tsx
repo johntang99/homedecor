@@ -95,17 +95,25 @@ export default async function JournalPostPage({ params }: PageProps) {
   const embedVideoUrl = toEmbedVideoUrl(post.videoUrl);
 
   // Simple markdown → HTML (headers, bold, paragraphs)
+  function escapeHtml(str: string) {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
   function renderMarkdown(md: string) {
     return md
       .split('\n\n')
       .map(para => {
-        if (para.startsWith('## ')) return `<h2 class="font-serif text-xl font-semibold detail-mt-hero detail-mb-md" style="color:var(--primary)">${para.replace('## ', '')}</h2>`;
-        if (para.startsWith('# ')) return `<h1 class="font-serif text-2xl font-semibold detail-mt-hero detail-mb-md" style="color:var(--primary)">${para.replace('# ', '')}</h1>`;
+        if (para.startsWith('## ')) return `<h2 class="font-serif text-xl font-semibold detail-mt-hero detail-mb-md" style="color:var(--primary)">${escapeHtml(para.replace('## ', ''))}</h2>`;
+        if (para.startsWith('# ')) return `<h1 class="font-serif text-2xl font-semibold detail-mt-hero detail-mb-md" style="color:var(--primary)">${escapeHtml(para.replace('# ', ''))}</h1>`;
         if (para.startsWith('- ')) {
-          const items = para.split('\n').map(l => `<li class="detail-mb-xxs">${l.replace('- ', '')}</li>`).join('');
+          const items = para.split('\n').map(l => `<li class="detail-mb-xxs">${escapeHtml(l.replace('- ', ''))}</li>`).join('');
           return `<ul class="list-disc pl-6 detail-my-md detail-space-y-xxs">${items}</ul>`;
         }
-        return `<p class="detail-mb-md leading-loose" style="color:var(--text-secondary)">${para.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')}</p>`;
+        return `<p class="detail-mb-md leading-loose" style="color:var(--text-secondary)">${escapeHtml(para).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')}</p>`;
       }).join('');
   }
 

@@ -110,6 +110,13 @@ export function PortfolioItemPanel({
             Choose
           </button>
         </div>
+        {formData.coverImage && (
+          <img
+            src={formData.coverImage}
+            alt={formData.title || 'Portfolio cover'}
+            className="h-auto w-1/4 rounded-md object-contain border border-gray-200"
+          />
+        )}
       </div>
 
       <div className="space-y-2">
@@ -159,6 +166,13 @@ export function PortfolioItemPanel({
                   Choose
                 </button>
               </div>
+              {item?.image && (
+                <img
+                  src={item.image}
+                  alt={item?.alt || `Gallery image ${index + 1}`}
+                  className="h-auto w-1/4 rounded-md object-contain border border-gray-200"
+                />
+              )}
 
               <div className="grid gap-2 md:grid-cols-3">
                 <input

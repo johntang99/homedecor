@@ -96,16 +96,20 @@ export function MediaManager({ sites, selectedSiteId }: MediaManagerProps) {
   const handleDelete = async (item: MediaItem) => {
     const confirmed = window.confirm(`Delete ${item.path}? This cannot be undone.`);
     if (!confirmed) return;
-    const response = await fetch(
-      `/api/admin/media/file?siteId=${siteId}&path=${encodeURIComponent(item.path)}`,
-      { method: 'DELETE' }
-    );
-    if (!response.ok) {
-      const message = await parseApiError(response, 'Delete failed');
-      setStatus(message);
-      return;
+    try {
+      const response = await fetch(
+        `/api/admin/media/file?siteId=${siteId}&path=${encodeURIComponent(item.path)}`,
+        { method: 'DELETE' }
+      );
+      if (!response.ok) {
+        const message = await parseApiError(response, 'Delete failed');
+        setStatus(message);
+        return;
+      }
+      await loadMedia();
+    } catch (error: unknown) {
+      setStatus(error instanceof Error ? error.message : 'Delete failed');
     }
-    await loadMedia();
   };
 
   const handleCopy = async (url: string) => {

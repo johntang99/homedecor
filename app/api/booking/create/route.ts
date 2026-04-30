@@ -151,19 +151,29 @@ export async function POST(request: NextRequest) {
   };
 
   await addBooking(siteId, booking);
-  await sendBookingEmails({
-    booking,
-    service,
-    subject: 'Your booking is confirmed',
-    message: 'Thank you for booking with us. Here are your appointment details:',
-    adminRecipients: settings.notificationEmails || [],
-  });
-  await sendBookingSms({
-    booking,
-    service,
-    message: 'Your booking is confirmed.',
-    adminRecipients: settings.notificationPhones || [],
-  });
+
+  try {
+    await sendBookingEmails({
+      booking,
+      service,
+      subject: 'Your booking is confirmed',
+      message: 'Thank you for booking with us. Here are your appointment details:',
+      adminRecipients: settings.notificationEmails || [],
+    });
+  } catch (emailError) {
+    console.error('Failed to send booking emails:', emailError);
+  }
+
+  try {
+    await sendBookingSms({
+      booking,
+      service,
+      message: 'Your booking is confirmed.',
+      adminRecipients: settings.notificationPhones || [],
+    });
+  } catch (smsError) {
+    console.error('Failed to send booking SMS:', smsError);
+  }
 
   return NextResponse.json({ booking });
 }

@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resendApiKey = process.env.RESEND_API_KEY;
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -92,14 +93,18 @@ export async function POST(request: NextRequest) {
     await saveToSupabase(payload).catch(console.error);
 
     // Send email notification
-    const from = process.env.RESEND_FROM || 'no-reply@baamplatform.com';
-    await resend.emails.send({
-      from,
-      to: [FALLBACK_EMAIL],
-      reply_to: payload.email,
-      subject: `New Consultation Request — ${payload.name}`,
-      html: buildEmailHtml(payload),
-    });
+    if (!resend) {
+      console.warn('RESEND_API_KEY not configured — skipping email notification');
+    } else {
+      const from = process.env.RESEND_FROM || 'no-reply@baamplatform.com';
+      await resend.emails.send({
+        from,
+        to: [FALLBACK_EMAIL],
+        reply_to: payload.email,
+        subject: `New Consultation Request — ${payload.name}`,
+        html: buildEmailHtml(payload),
+      });
+    }
 
     return NextResponse.json({ success: true });
   } catch (error: unknown) {

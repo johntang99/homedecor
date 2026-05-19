@@ -112,3 +112,17 @@ create table if not exists public.admin_audit_logs (
 insert into public.sites (id, name, domain, enabled, default_locale, supported_locales)
 values ('julia-studio', 'Julia Studio', 'studio-julia.com', true, 'en', array['en','zh']::text[])
 on conflict (id) do nothing;
+
+-- ================================================================
+-- Data API explicit grants (Supabase requirement)
+-- IMPORTANT: When adding new public tables, include explicit GRANTs.
+-- ================================================================
+grant usage on schema public to service_role;
+grant select, insert, update, delete on all tables in schema public to service_role;
+grant usage, select on all sequences in schema public to service_role;
+
+alter default privileges in schema public
+grant select, insert, update, delete on tables to service_role;
+
+alter default privileges in schema public
+grant usage, select on sequences to service_role;

@@ -144,6 +144,7 @@ export function ContentEditor({
   const [portfolioCategoryOptions, setPortfolioCategoryOptions] = useState<
     Array<{ value: string; label: string; labelCn?: string }>
   >([]);
+  const [activePortfolioCategoryIndex, setActivePortfolioCategoryIndex] = useState(-1);
   const [portfolioStyleOptions, setPortfolioStyleOptions] = useState<
     Array<{ value: string; label: string; labelCn?: string }>
   >([]);
@@ -174,6 +175,7 @@ export function ContentEditor({
     collections: 'collections',
     testimonials: 'testimonials',
   };
+  const PORTFOLIO_SETTINGS_PATH = 'pages/portfolio.json';
   const isCollectionFilter = fileFilter && fileFilter in COLLECTION_PREFIXES;
   const filesTitle =
     fileFilter === 'blog' ? 'Blog Posts'
@@ -305,6 +307,17 @@ export function ContentEditor({
       loadTestimonialCategoryOptions();
     }
   }, [activeFile, siteId, locale]);
+
+  useEffect(() => {
+    if (fileFilter !== 'portfolio') return;
+    loadPortfolioFilterOptions();
+  }, [fileFilter, siteId, locale]);
+
+  useEffect(() => {
+    if (activePortfolioCategoryIndex >= portfolioCategoryOptions.length) {
+      setActivePortfolioCategoryIndex(-1);
+    }
+  }, [activePortfolioCategoryIndex, portfolioCategoryOptions.length]);
 
   const handleSave = async () => {
     setStatus(null);
@@ -764,7 +777,7 @@ export function ContentEditor({
     try {
       const response = await fetch(
         `/api/admin/content/file?siteId=${siteId}&locale=${locale}&path=${encodeURIComponent(
-          'pages/portfolio.json'
+          PORTFOLIO_SETTINGS_PATH
         )}`
       );
       if (!response.ok) {
@@ -801,6 +814,173 @@ export function ContentEditor({
       setPortfolioCategoryOptions([]);
       setPortfolioStyleOptions([]);
     }
+  };
+
+  const updatePortfolioCategories = async (
+    updater: (
+      categories: Array<{ value: string; label: string; labelCn?: string }>
+    ) => Array<{ value: string; label: string; labelCn?: string }>,
+    successMessage: string
+  ) => {
+    if (!siteId || !locale) return;
+
+    try {
+      const response = await fetch(
+        `/api/admin/content/file?siteId=${siteId}&locale=${locale}&path=${encodeURIComponent(
+          PORTFOLIO_SETTINGS_PATH
+        )}`
+      );
+      if (!response.ok) {
+        const payload = await response.json();
+        throw new Error(payload.message || 'Failed to load portfolio settings');
+      }
+
+      const payload = await response.json();
+      const parsed = payload?.content ? JSON.parse(payload.content) : {};
+      const currentCategories = Array.isArray(parsed?.filters?.categories)
+        ? parsed.filters.categories
+            .map((item: any) => ({
+              value: String(item?.value || '').trim(),
+              label: String(item?.label || item?.value || '').trim(),
+              labelCn:
+                typeof item?.labelCn === 'string' && item.labelCn.trim()
+                  ? item.labelCn.trim()
+                  : undefined,
+            }))
+            .filter((item: any) => item.value)
+        : [];
+
+      const nextCategories = updater(currentCategories);
+      const nextFilters =
+        parsed?.filters && typeof parsed.filters === 'object' ? { ...parsed.filters } : {};
+      const nextParsed = {
+        ...parsed,
+        filters: {
+          ...nextFilters,
+          categories: nextCategories,
+        },
+      };
+      const nextContent = JSON.stringify(nextParsed, null, 2);
+
+      const saveResponse = await fetch('/api/admin/content/file', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          siteId,
+          locale,
+          path: PORTFOLIO_SETTINGS_PATH,
+          content: nextContent,
+        }),
+      });
+      if (!saveResponse.ok) {
+        const savePayload = await saveResponse.json();
+        throw new Error(savePayload.message || 'Failed to save portfolio categories');
+      }
+
+      setPortfolioCategoryOptions(nextCategories);
+      if (activeFile?.path === PORTFOLIO_SETTINGS_PATH) {
+        setFormData(nextParsed);
+        setContent(nextContent);
+      }
+      setStatus(successMessage);
+    } catch (error: any) {
+      setStatus(error?.message || 'Failed to update portfolio categories');
+    }
+  };
+
+  const addPortfolioCategory = async () => {
+    const labelInput = window.prompt('Category label (English)');
+    if (!labelInput) return;
+    const label = labelInput.trim();
+    if (!label) return;
+
+    const suggestedValue =
+      label
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '') || `category-${Date.now()}`;
+    const valueInput = window.prompt('Category value (slug)', suggestedValue);
+    if (!valueInput) return;
+    const value = valueInput.trim().toLowerCase();
+    if (!value) return;
+
+    const labelCnInput = window.prompt('Category label (Chinese, optional)', '');
+    const labelCn = labelCnInput?.trim() || '';
+
+    await updatePortfolioCategories((categories) => {
+      if (categories.some((item) => item.value === value)) {
+        throw new Error(`Category value "${value}" already exists.`);
+      }
+      return [...categories, { value, label, ...(labelCn ? { labelCn } : {}) }];
+    }, `Added category "${label}".`);
+  };
+
+  const editSelectedPortfolioCategory = async () => {
+    if (activePortfolioCategoryIndex < 0) return;
+    const selected = portfolioCategoryOptions[activePortfolioCategoryIndex];
+    if (!selected) return;
+
+    const labelInput = window.prompt('Category label (English)', selected.label || selected.value);
+    if (!labelInput) return;
+    const label = labelInput.trim();
+    if (!label) return;
+
+    const valueInput =
+      selected.value === 'all'
+        ? 'all'
+        : window.prompt('Category value (slug)', selected.value || '');
+    if (!valueInput) return;
+    const value = String(valueInput).trim().toLowerCase();
+    if (!value) return;
+
+    const labelCnInput = window.prompt(
+      'Category label (Chinese, optional)',
+      selected.labelCn || ''
+    );
+    if (labelCnInput === null) return;
+    const labelCn = labelCnInput.trim();
+
+    await updatePortfolioCategories((categories) => {
+      if (
+        categories.some(
+          (item, index) => index !== activePortfolioCategoryIndex && item.value === value
+        )
+      ) {
+        throw new Error(`Category value "${value}" already exists.`);
+      }
+      const next = [...categories];
+      if (!next[activePortfolioCategoryIndex]) {
+        throw new Error('Selected category no longer exists.');
+      }
+      next[activePortfolioCategoryIndex] = {
+        ...next[activePortfolioCategoryIndex],
+        value,
+        label,
+        ...(labelCn ? { labelCn } : {}),
+      };
+      return next;
+    }, `Updated category "${label}".`);
+  };
+
+  const deleteSelectedPortfolioCategory = async () => {
+    if (activePortfolioCategoryIndex < 0) return;
+    const selected = portfolioCategoryOptions[activePortfolioCategoryIndex];
+    if (!selected) return;
+    if (selected.value === 'all') {
+      setStatus('Cannot delete the "all" category.');
+      return;
+    }
+
+    const confirmed = window.confirm(
+      `Delete "${selected.label || selected.value}"?\n\nThis updates portfolio filter categories only.`
+    );
+    if (!confirmed) return;
+
+    await updatePortfolioCategories(
+      (categories) => categories.filter((_, index) => index !== activePortfolioCategoryIndex),
+      `Deleted category "${selected.label || selected.value}".`
+    );
+    setActivePortfolioCategoryIndex(-1);
   };
 
   const loadJournalFilterOptions = async () => {
@@ -1441,6 +1621,62 @@ export function ContentEditor({
           <div className="text-xs font-semibold text-gray-500 uppercase mb-3">
             {filesTitle}
           </div>
+          {fileFilter === 'portfolio' && (
+            <div className="mb-3 space-y-2 border-b border-gray-100 pb-3">
+              <div className="text-[11px] font-semibold text-gray-500 uppercase">Categories</div>
+              <button
+                type="button"
+                onClick={addPortfolioCategory}
+                className="w-full px-3 py-2 rounded-lg border border-gray-200 text-xs text-gray-700 hover:bg-gray-50"
+              >
+                Add Category
+              </button>
+              <button
+                type="button"
+                onClick={editSelectedPortfolioCategory}
+                disabled={activePortfolioCategoryIndex < 0}
+                className="w-full px-3 py-2 rounded-lg border border-gray-200 text-xs text-gray-700 hover:bg-gray-50 disabled:opacity-50"
+              >
+                Edit Selected Category
+              </button>
+              <button
+                type="button"
+                onClick={deleteSelectedPortfolioCategory}
+                disabled={activePortfolioCategoryIndex < 0}
+                className="w-full px-3 py-2 rounded-lg border border-red-200 text-xs text-red-600 hover:bg-red-50 disabled:opacity-50"
+              >
+                Delete Selected Category
+              </button>
+              <div className="space-y-1 max-h-44 overflow-auto pr-1">
+                {portfolioCategoryOptions.map((category, index) => (
+                  <button
+                    key={`${category.value}-${index}`}
+                    type="button"
+                    onClick={() => setActivePortfolioCategoryIndex(index)}
+                    className={`w-full text-left px-3 py-2 rounded-lg text-sm ${
+                      activePortfolioCategoryIndex === index
+                        ? 'bg-[var(--primary)] text-white'
+                        : 'hover:bg-gray-100 text-gray-700'
+                    }`}
+                  >
+                    <div className="font-medium">{category.label || category.value}</div>
+                    <div className="text-xs opacity-70">
+                      {category.value}
+                      {category.labelCn ? ` · ${category.labelCn}` : ''}
+                    </div>
+                  </button>
+                ))}
+                {portfolioCategoryOptions.length === 0 && (
+                  <div className="px-1 text-xs text-gray-500">
+                    No categories found in portfolio filters.
+                  </div>
+                )}
+              </div>
+              <div className="pt-1 text-[11px] font-semibold text-gray-500 uppercase">
+                Portfolio Projects
+              </div>
+            </div>
+          )}
           {loading && files.length === 0 ? (
             <div className="text-sm text-gray-500">Loading…</div>
           ) : (
@@ -1449,7 +1685,12 @@ export function ContentEditor({
                 <button
                   key={file.id}
                   type="button"
-                  onClick={() => setActiveFile(file)}
+                  onClick={() => {
+                    setActiveFile(file);
+                    if (fileFilter === 'portfolio') {
+                      setActivePortfolioCategoryIndex(-1);
+                    }
+                  }}
                   className={`w-full text-left px-3 py-2 rounded-lg text-sm ${
                     activeFile?.id === file.id
                       ? 'bg-[var(--primary)] text-white'
